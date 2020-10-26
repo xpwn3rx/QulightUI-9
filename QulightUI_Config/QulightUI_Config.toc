@@ -1,0 +1,24 @@
+## Interface: 90001
+## Title: QulightUI Config
+## Notes: In-game configuration for QulightUI
+## Author: Shestak - Modified by PWn3R
+## Version: 9.00
+## RequiredDeps: QulightUI
+## SavedVariables: QulightUIOptionsGlobal, QulightUIOptions
+## SavedVariablesPerCharacter: QulightUIOptionsPerChar
+
+## X-Website: https://www.wowinterface.com/downloads/info16324-QulightUI.html
+## X-Credits: Haleth, Solor, Qulight, Warrior, PWn3R
+## X-Thanks: Tryllemann, Wetxius
+
+Locales\English.lua
+Locales\Chinese.lua
+Locales\French.lua
+Locales\German.lua
+Locales\Italian.lua
+Locales\Russian.lua
+Locales\Spanish.lua
+Locales\Taiwan.lua
+
+Core.lua
+Options.lua
