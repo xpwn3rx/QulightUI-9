@@ -215,7 +215,7 @@ SpellList.makeSpellsList = function(_, db, double)
 			if not isFilger or isFilger and spell[2] == T.class then
 				local sp = (double or QulightUIOptionsPanelfilger:IsShown()) and spell[1] or spell
 				local name, _, icon = GetSpellInfo(sp)
-				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll)
+				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, "BackdropTemplate")
 
 				if i == 1 then
 					bf:SetPoint("TOPLEFT", scroll, "TOPLEFT", 10, -5)
@@ -1365,7 +1365,7 @@ do
 	local tot_debuffs = ns.CreateCheckBox(parent, "tot_debuffs", L_GUI_AURA_TOT_DEBUFFS)
 	tot_debuffs:SetPoint("TOPLEFT", pet_debuffs, "BOTTOMLEFT", 0, 0)
 
-	local boss_buffs = ns.CreateCheckBox(parent, "boss_buffs", L_GUI_AURA_BOSS_BUFFS)
+	local boss_buffs = ns.CreateCheckBox(parent, "boss_buffs")
 	boss_buffs:SetPoint("TOPLEFT", tot_debuffs, "BOTTOMLEFT", 0, 0)
 
 	local player_aura_only = ns.CreateCheckBox(parent, "player_aura_only", L_GUI_AURA_PLAYER_AURA_ONLY)
@@ -1517,11 +1517,8 @@ do
 	local who_targetting = ns.CreateCheckBox(parent, "who_targetting")
 	who_targetting:SetPoint("TOPLEFT", raid_icon, "BOTTOMLEFT", 0, 0)
 
-	local arena_experience = ns.CreateCheckBox(parent, "arena_experience")
-	arena_experience:SetPoint("TOPLEFT", who_targetting, "BOTTOMLEFT", 0, 0)
-
 	local spell_id = ns.CreateCheckBox(parent, "spell_id")
-	spell_id:SetPoint("TOPLEFT", arena_experience, "BOTTOMLEFT", 0, 0)
+	spell_id:SetPoint("TOPLEFT", who_targetting, "BOTTOMLEFT", 0, 0)
 
 	local item_count = ns.CreateCheckBox(parent, "item_count")
 	item_count:SetPoint("TOPLEFT", spell_id, "BOTTOMLEFT", 0, 0)

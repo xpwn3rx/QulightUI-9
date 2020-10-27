@@ -66,9 +66,11 @@ MiniMapWorldMapButton:Hide()
 
 -- Garrison icon
 if C.minimap.garrison_icon == true then
-	GarrisonLandingPageMinimapButton:ClearAllPoints()
-	GarrisonLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 2)
 	GarrisonLandingPageMinimapButton:SetSize(32, 32)
+	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", function(self)
+		self:ClearAllPoints()
+		self:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 2)
+	end)
 else
 	GarrisonLandingPageMinimapButton:SetScale(0.0001)
 	GarrisonLandingPageMinimapButton:SetAlpha(0)
@@ -180,13 +182,13 @@ local micromenu = {
 		if not PlayerTalentFrame then
 			TalentFrame_LoadUI()
 		end
-		if T.level >= SHOW_SPEC_LEVEL then
+		if T.level >= 10 then
 			ShowUIPanel(PlayerTalentFrame)
 		else
 			if C.general.error_filter ~= "WHITELIST" then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL), 1, 0.1, 0.1)
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
@@ -206,26 +208,24 @@ local micromenu = {
 		ToggleChannelFrame()
 	end},
 	{text = PLAYER_V_PLAYER, notCheckable = 1, func = function()
-		local SHOW_PVP_LEVEL = 10 -- FIXME
-		if T.level >= SHOW_PVP_LEVEL then
+		if T.level >= 10 then
 			TogglePVPUI()
 		else
 			if C.general.error_filter ~= "WHITELIST" then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_PVP_LEVEL), 1, 0.1, 0.1)
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_PVP_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
 	{text = DUNGEONS_BUTTON, notCheckable = 1, func = function()
-		local SHOW_LFD_LEVEL = 15 -- FIXME
-		if T.level >= SHOW_LFD_LEVEL then
+		if T.level >= 10 then
 			PVEFrame_ToggleFrame("GroupFinderFrame", nil)
 		else
 			if C.general.error_filter ~= "WHITELIST" then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_LFD_LEVEL), 1, 0.1, 0.1)
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_LFD_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
@@ -264,11 +264,26 @@ if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() the
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
 end
 
-if T.level > 99 then
-	tinsert(micromenu, {text = ORDER_HALL_LANDING_PAGE_TITLE, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
-elseif T.level > 89 then
-	tinsert(micromenu, {text = GARRISON_LANDING_PAGE_TITLE, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
-end
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("GARRISON_SHOW_LANDING_PAGE")
+frame:SetScript("OnEvent", function()
+	local textTitle
+	local garrisonType = C_Garrison.GetLandingPageGarrisonType()
+	if garrisonType == Enum.GarrisonType.Type_6_0 then
+		textTitle = GARRISON_LANDING_PAGE_TITLE
+	elseif garrisonType == Enum.GarrisonType.Type_7_0 then
+		textTitle = ORDER_HALL_LANDING_PAGE_TITLE
+	elseif garrisonType == Enum.GarrisonType.Type_8_0 then
+		textTitle = GARRISON_TYPE_8_0_LANDING_PAGE_TITLE
+	elseif garrisonType == Enum.GarrisonType.Type_9_0 then
+		textTitle = GARRISON_TYPE_9_0_LANDING_PAGE_TITLE
+	end
+
+	if textTitle then
+		tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
+	end
+	frame:UnregisterAllEvents()
+end)
 
 Minimap:SetScript("OnMouseUp", function(self, button)
 	local position = MinimapAnchor:GetPoint()

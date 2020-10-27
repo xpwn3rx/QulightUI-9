@@ -128,6 +128,7 @@
 	<Script file="Modules\Automation\Summon.lua"/>
 	<Script file="Modules\Automation\TabBinder.lua"/>
 
+	<Include file="Modules\Blizzard\TaintLess.xml"/>
 	<Script file="Modules\Blizzard\AlertFrames.lua"/>
 	<Script file="Modules\Blizzard\AltPowerBar.lua"/>
 	<Script file="Modules\Blizzard\Bags.lua"/>
@@ -185,7 +186,6 @@
 	<Script file="Modules\Quests\AutoAccept.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker.lua"/>
-	<Script file="Modules\Quests\QuestLog.lua"/>
 	<Script file="Modules\Quests\WowheadLink.lua"/>
 
 	<Include file="Modules\Skins\Blizzard\LoadFrames.xml"/>
@@ -225,7 +225,6 @@
 	<Script file="Modules\Tooltip\ItemLevel.lua"/>
 	<Script file="Modules\Tooltip\MountSource.lua"/>
 	<Script file="Modules\Tooltip\MultiItemRef.lua"/>
-	<Script file="Modules\Tooltip\PvPRating.lua"/>
 	<Script file="Modules\Tooltip\RuFix.lua"/>
 	<Script file="Modules\Tooltip\SpellID.lua"/>
 	<Script file="Modules\Tooltip\ItemCount.lua"/>

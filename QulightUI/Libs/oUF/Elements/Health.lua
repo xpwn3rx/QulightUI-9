@@ -22,7 +22,7 @@ local function UpdateColor(element, unit, cur, max)
 	elseif(element.colorReaction and UnitReaction(unit, 'player')) then
 		t = parent.colors.reaction[UnitReaction(unit, 'player')]
 	elseif(element.colorSmooth) then
-		r, g, b = parent:ColorGradient(cur, max, unpack(element.smoothGradient or parent.colors.smooth))
+		r, g, b = parent:ColorGradient(element.cur or 1, element.max or 1, unpack(element.smoothGradient or parent.colors.smooth))
 	elseif(element.colorHealth) then
 		t = parent.colors.health
 	end
@@ -106,38 +106,13 @@ local function ForceUpdate(element)
 	return Path(element.__owner, 'ForceUpdate', element.__owner.unit)
 end
 
---[[ Health:SetFrequentUpdates(state)
-Used to toggle frequent updates.
-
-* self  - the Health element
-* state - the desired state of frequent updates (boolean)
---]]
-local function SetFrequentUpdates(element, state)
-	if(element.frequentUpdates ~= state) then
-		element.frequentUpdates = state
-		if(element.frequentUpdates) then
-			element.__owner:UnregisterEvent('UNIT_HEALTH', Path)
-			element.__owner:RegisterEvent('UNIT_HEALTH', Path)
-		else
-			element.__owner:UnregisterEvent('UNIT_HEALTH', Path)
-			element.__owner:RegisterEvent('UNIT_HEALTH', Path)
-		end
-	end
-end
-
 local function Enable(self, unit)
 	local element = self.Health
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
-		element.SetFrequentUpdates = SetFrequentUpdates
 
-		if(element.frequentUpdates) then
-			self:RegisterEvent('UNIT_HEALTH', Path)
-		else
-			self:RegisterEvent('UNIT_HEALTH', Path)
-		end
-
+		self:RegisterEvent('UNIT_HEALTH', Path)
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 		self:RegisterEvent('UNIT_CONNECTION', Path)
 		self:RegisterEvent('UNIT_FACTION', Path) -- For tapping
@@ -162,7 +137,6 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		self:UnregisterEvent('UNIT_HEALTH', Path)
 		self:UnregisterEvent('UNIT_HEALTH', Path)
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
 		self:UnregisterEvent('UNIT_CONNECTION', Path)

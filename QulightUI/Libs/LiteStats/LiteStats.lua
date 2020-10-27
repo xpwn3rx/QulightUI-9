@@ -6,8 +6,6 @@ local T, C, L, _ = unpack(select(2, ...))
 local P = "player"
 local realm, char, class, layout = GetRealmName(), UnitName(P), select(2, UnitClass(P)), {}
 
-SHOW_SPEC_LEVEL = 15 --FIXME
-
 -- Tooltip text colors
 local tthead = {r = 0.40, g = 0.78, b = 1}	-- Headers
 local ttsubh = {r = 0.75, g = 0.90, b = 1}	-- Subheaders
@@ -82,9 +80,10 @@ local function GetPlayerMapPos(mapID)
 
 	local mapRect = mapRects[mapID]
 	if not mapRect then
-		mapRect = {
-			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))),
-			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1)))}
+		local _, pos1 = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))
+		local _, pos2 = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1))
+		if not pos1 or not pos2 then return end
+		mapRect = {pos1, pos2}
 		mapRect[2]:Subtract(mapRect[1])
 		mapRects[mapID] = mapRect
 	end
@@ -1418,7 +1417,7 @@ if talents.enabled then
 			RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
 		end,
 		OnEvent = function(self)
-			if UnitLevel(P) < SHOW_SPEC_LEVEL then
+			if UnitLevel(P) < 10 then
 				self.text:SetText(format("%s %s", NO, SPECIALIZATION))
 				return
 			end
@@ -1458,7 +1457,7 @@ if talents.enabled then
 		end,
 		OnEnter = function(self)
 			self.hovered = true
-			if UnitLevel(P) >= SHOW_SPEC_LEVEL then
+			if UnitLevel(P) < 10 then
 				GameTooltip:SetOwner(self, "ANCHOR_NONE")
 				GameTooltip:ClearAllPoints()
 				GameTooltip:SetPoint(modules.Talents.tip_anchor, modules.Talents.tip_frame, modules.Talents.tip_x, modules.Talents.tip_y)
@@ -1474,8 +1473,8 @@ if talents.enabled then
 			self.hovered = false
 		end,
 		OnClick = function(self, b)
-			if UnitLevel(P) < SHOW_SPEC_LEVEL then
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL).."|r")
+			if UnitLevel(P) < 10 then
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 				return
 			end
 			if b == "LeftButton" then
@@ -1635,7 +1634,8 @@ end
 if gold.enabled then
 	local titleName
 	local function Currency(id, weekly, capped)
-		local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
+		local info = C_CurrencyInfo.GetCurrencyInfo(id)
+		local name, amount, tex, week, weekmax, maxed, discovered = info.name, info.quantity, info.iconFileID, info.canEarnPerWeek, info.maxWeeklyQuantity, info.maxQuantity, info.discovered
 		if amount == 0 then return end
 		if titleName then
 			GameTooltip:AddLine(" ")

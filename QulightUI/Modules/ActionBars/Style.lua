@@ -52,6 +52,7 @@ local function StyleNormalButton(button)
 		local float = _G[name.."FloatingBG"]
 		local highlight = button.SpellHighlightTexture
 		local isExtraAction = name:match("ExtraAction")
+		local isFlyout = name:match("Flyout")
 
 		flash:SetTexture("")
 
@@ -110,7 +111,7 @@ local function StyleNormalButton(button)
 			hotkey:Kill()
 		end
 
-		if button:GetHeight() ~= C.actionbar.button_size and not InCombatLockdown() and not isExtraAction then
+		if not isFlyout and not isExtraAction then
 			button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 		end
 		button:SetTemplate("Transparent")
@@ -137,10 +138,14 @@ local function StyleNormalButton(button)
 			highlight:SetPoint("BOTTOMRIGHT", 4, -4)
 		end
 
-		if _G[name.."FlyoutArrow"] then
-			-- button.oborder:SetFrameLevel(button:GetFrameLevel())
-			-- button.iborder:SetFrameLevel(button:GetFrameLevel())
+		button.oborder:SetFrameLevel(button:GetFrameLevel())
+		button.iborder:SetFrameLevel(button:GetFrameLevel())
+
+		if button.QuickKeybindHighlightTexture then
+			button.QuickKeybindHighlightTexture:SetTexture("")
 		end
+
+		button:StyleButton()
 
 		button.isSkinned = true
 	end
@@ -207,6 +212,12 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 			normal:SetPoint("BOTTOMRIGHT")
 		end
 
+		if button.QuickKeybindHighlightTexture then
+			button.QuickKeybindHighlightTexture:SetTexture("")
+		end
+
+		button:StyleButton()
+
 		button.isSkinned = true
 	end
 end
@@ -242,13 +253,19 @@ local function SetupFlyoutButton()
 
 			if not button.IsSkinned then
 				StyleNormalButton(button)
-				button:StyleButton()
 
 				if C.actionbar.rightbars_mouseover == true then
 					SpellFlyout:HookScript("OnEnter", function() RightBarMouseOver(1) end)
 					SpellFlyout:HookScript("OnLeave", function() RightBarMouseOver(0) end)
 					button:HookScript("OnEnter", function() RightBarMouseOver(1) end)
 					button:HookScript("OnLeave", function() RightBarMouseOver(0) end)
+				end
+				
+				if C.actionbar.bottombars_mouseover == true then
+					SpellFlyout:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
+					SpellFlyout:HookScript("OnLeave", function() BottomBarMouseOver(0) end)
+					button:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
+					button:HookScript("OnLeave", function() BottomBarMouseOver(0) end)
 				end
 				button.IsSkinned = true
 			end
@@ -289,11 +306,6 @@ end
 
 do
 	for i = 1, 12 do
-		_G["ActionButton"..i]:StyleButton()
-		_G["MultiBarBottomLeftButton"..i]:StyleButton()
-		_G["MultiBarBottomRightButton"..i]:StyleButton()
-		_G["MultiBarLeftButton"..i]:StyleButton()
-		_G["MultiBarRightButton"..i]:StyleButton()
 		StyleNormalButton(_G["ActionButton"..i])
 		StyleNormalButton(_G["MultiBarBottomLeftButton"..i])
 		StyleNormalButton(_G["MultiBarBottomRightButton"..i])
@@ -301,10 +313,7 @@ do
 		StyleNormalButton(_G["MultiBarRightButton"..i])
 	end
 
-	for i = 1, 10 do
-		_G["StanceButton"..i]:StyleButton()
-		_G["PetActionButton"..i]:StyleButton()
-	end
+	StyleNormalButton(ExtraActionButton1)
 end
 
 hooksecurefunc("ActionButton_UpdateFlyout", StyleFlyoutButton)

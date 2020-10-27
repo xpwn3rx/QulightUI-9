@@ -338,6 +338,11 @@ function Filger:OnEvent(event, unit, _, castID)
 						timer.elapsed = (timer.elapsed or 0) + elapsed
 						if timer.elapsed < 0.1 then return end
 						timer.elapsed = 0
+						for spid in pairs(self.actives) do
+							if self.actives[spid].data.filter ~= "CD" and self.actives[spid].data.filter ~= "ICD" then
+								self.actives[spid] = nil
+							end
+						end
 						FindAuras(self, "player")
 						if UnitExists("target") then
 							FindAuras(self, "target")
@@ -437,10 +442,6 @@ if C["filger_spells"] and C["filger_spells"]["ALL"] then
 	end
 end
 
-if not T.CustomFilgerSpell then
-	T.CustomFilgerSpell = {}
-end
-
 for _, spell in pairs(C.filger.buff_spells_list) do
 	if spell[2] == T.class then
 		tinsert(T.CustomFilgerSpell, {"P_BUFF_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF"}})
@@ -471,20 +472,6 @@ for _, spell in pairs(C.filger.cd_spells_list) do
 	end
 end
 
-if T.CustomFilgerSpell then
-	for _, data in pairs(T.CustomFilgerSpell) do
-		for class, _ in pairs(C["filger_spells"]) do
-			if class == T.class then
-				for i = 1, #C["filger_spells"][class], 1 do
-					if C["filger_spells"][class][i]["Name"] == data[1] then
-						table.insert(C["filger_spells"][class][i], data[2])
-					end
-				end
-			end
-		end
-	end
-end
-
 local ignoreTable = {}
 for _, spell in pairs(C.filger.ignore_spells_list) do
 	if spell[2] == T.class then
@@ -505,6 +492,12 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 		local data = C["filger_spells"][T.class][i]
 		local group = {spells = {}}
 
+		for _, import in pairs(T.CustomFilgerSpell) do
+			if data.Name == import[1] then
+				tinsert(data, import[2])
+			end
+		end
+		
 		for j = 1, #data, 1 do
 			local name
 			if data[j].spellID then

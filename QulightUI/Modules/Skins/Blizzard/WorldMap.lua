@@ -41,31 +41,29 @@ local function LoadSkin()
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame:SetSize(259, 463)
 
-	local questHeader = {
-		QuestMapFrame.CampaignOverview.Header,
-		QuestScrollFrame.Contents.StoryHeader
-	}
+	local CampaignOverview = QuestMapFrame.CampaignOverview
+	CampaignOverview:StripTextures()
+	CampaignOverview.ScrollFrame:StripTextures()
+	T.SkinScrollBar(QuestMapFrameScrollBar)
+	CampaignOverview:CreateBackdrop("Overlay")
+	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -5)
+	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
+	if UnitFactionGroup("player") == "Horde" then
+		CampaignOverview.backdrop.overlay:SetVertexColor(0.2, 0.1, 0.1)
+	else
+		CampaignOverview.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.2)
+	end
+	CampaignOverview.Header.Background:SetAlpha(0)
+	CampaignOverview.Header.TopFiligree:Hide()
 
-	for i = 1, #questHeader do
-		local frame = questHeader[i]
+	do
+		local frame = QuestScrollFrame.Contents.StoryHeader
 		frame:CreateBackdrop("Overlay")
-		if i == 1 then
-			frame.backdrop:SetPoint("TOPLEFT", 6, -5)
-		else
-			frame.backdrop:SetPoint("TOPLEFT", 6, -9)
-		end
+		frame.backdrop:SetPoint("TOPLEFT", 6, -9)
 		frame.backdrop:SetPoint("BOTTOMRIGHT", -6, 11)
 		frame.HighlightTexture:Hide()
-		frame.Background:Hide()
-		if i == 1 then -- WarCampaignHeader
-			if UnitFactionGroup("player") == "Horde" then
-				frame.backdrop.overlay:SetVertexColor(0.2, 0.1, 0.1)
-			else
-				frame.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.2)
-			end
-		else -- StoryHeader
-			frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
-		end
+		frame.Background:SetAlpha(0)
+		frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 	end
 
 	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 4, -16)
@@ -78,6 +76,12 @@ local function LoadSkin()
 	QuestScrollFrameTopBorder.backdrop:SetSize(284, 23)
 	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
 
+	local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.CampaignOverview)
+	QuestScrollFrameTopBorder:CreateBackdrop("Overlay")
+	QuestScrollFrameTopBorder.backdrop:ClearAllPoints()
+	QuestScrollFrameTopBorder.backdrop:SetSize(284, 23)
+	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+	
 	QuestMapDetailsScrollFrame:SetPoint("TOPLEFT", 1, 0)
 	QuestMapDetailsScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapDetailsScrollFrame, "TOPRIGHT", 0, -18)
 	T.SkinScrollBar(QuestMapDetailsScrollFrame.ScrollBar)
@@ -195,18 +199,23 @@ local function LoadSkin()
 		tex:SetAllPoints(button.Icon)
 	end
 
-	-- Bounty Board
-	-- local function WorldMapBountyBoard(frame)
-		-- frame.BountyName:SetFont(C.media.normal_font, 16)
-		-- frame.BountyName:SetShadowOffset(1, -1)
+	-- Tracking Pin
+	local function WorldMapTrackingPinButton(button)
+		local shadow = button:GetRegions()
+		shadow:Hide()
+		button.Background:Hide()
+		button.IconOverlay:SetAlpha(0)
+		button.Border:Hide()
 
-		-- T.SkinHelpBox(frame.TutorialBox)
-	-- end
+		local tex = button:GetHighlightTexture()
+		tex:SetAtlas("Waypoint-MapPin-Untracked")
+		tex:SetAllPoints(button.Icon)
+	end
 
 	-- Elements
 	WorldMapFloorNavigationDropDown(WorldMapFrame.overlayFrames[1])
 	WorldMapTrackingOptionsButton(WorldMapFrame.overlayFrames[2])
-	--FIXME WorldMapBountyBoard(WorldMapFrame.overlayFrames[3])
+	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
 
 	-- QuestSessionManagement skin (based on skin from Aurora)
 	QuestMapFrame.QuestSessionManagement:StripTextures()

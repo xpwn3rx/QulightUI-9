@@ -111,6 +111,8 @@ local RestoreDefaults = function(self, button)
 			QulightUIPositions.Default[self.frame:GetName()] = nil
 			QulightUIPositions[self.frame:GetName()] = nil
 		end
+	elseif button == "MiddleButton" then
+		self:Hide()
 	end
 end
 

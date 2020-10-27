@@ -205,9 +205,22 @@ if C.skins.blizzard_frames == true then
 		end)
 	end
 
-	SkinSmallMinimizeButton(ObjectiveTrackerBlocksFrame.CampaignQuestHeader.MinimizeButton)
-	SkinSmallMinimizeButton(ObjectiveTrackerBlocksFrame.QuestHeader.MinimizeButton)
-	SkinSmallMinimizeButton(ObjectiveTrackerBlocksFrame.AchievementHeader.MinimizeButton)
+	local smallButton = {
+		ObjectiveTrackerBlocksFrame.QuestHeader,
+		ObjectiveTrackerBlocksFrame.CampaignQuestHeader,
+		ObjectiveTrackerBlocksFrame.ScenarioHeader,
+		ObjectiveTrackerBlocksFrame.AchievementHeader,
+		BONUS_OBJECTIVE_TRACKER_MODULE.Header,
+		WORLD_QUEST_TRACKER_MODULE.Header,
+		ObjectiveTrackerFrame.BlocksFrame.UIWidgetsHeader
+	}
+
+	for i = 1, #smallButton do
+		local button = smallButton[i].MinimizeButton
+		if button then
+			SkinSmallMinimizeButton(button)
+		end
+	end
 end
 
 ----------------------------------------------------------------------------------------
@@ -313,6 +326,22 @@ hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", function(self, block, 
 end)
 
 ----------------------------------------------------------------------------------------
+--	Skin Timer bar
+----------------------------------------------------------------------------------------
+hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", function(self, block, line)
+	local timerBar = self.usedTimerBars[block] and self.usedTimerBars[block][line]
+	local bar = timerBar.Bar
+
+	if not timerBar.styled then
+		bar:SetStatusBarTexture(C.media.texture)
+		bar:SetTemplate("Transparent")
+		bar:SetBackdropColor(0, 0, 0, 0)
+		bar:DisableDrawLayer("ARTWORK")
+		timerBar.styled = true
+	end
+end)
+
+----------------------------------------------------------------------------------------
 --	Set tooltip depending on position
 ----------------------------------------------------------------------------------------
 local function IsFramePositionedLeft(frame)
@@ -362,18 +391,26 @@ StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 5)
 StageBlock.NormalBG:SetAlpha(0)
 StageBlock.FinalBG:SetAlpha(0)
 StageBlock.GlowTexture:SetTexture("")
-----------------------------------------------------------------------------------------
---	Skin Timer bar
-----------------------------------------------------------------------------------------
-hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", function(self, block, line)
-	local timerBar = self.usedTimerBars[block] and self.usedTimerBars[block][line]
-	local bar = timerBar.Bar
 
-	if not timerBar.styled then
-		bar:SetStatusBarTexture(C.media.texture)
-		bar:SetTemplate("Transparent")
-		bar:SetBackdropColor(0, 0, 0, 0)
-		bar:DisableDrawLayer("ARTWORK")
-		timerBar.styled = true
+----------------------------------------------------------------------------------------
+--	Ctrl+Click to abandon a quest or Alt+Click to share a quest(by Suicidal Katt)
+----------------------------------------------------------------------------------------
+hooksecurefunc("QuestMapLogTitleButton_OnClick", function(self)
+	if IsControlKeyDown() then
+		CloseDropDownMenus()
+		QuestMapQuestOptions_AbandonQuest(self.questID)
+	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(self.questID) then
+		CloseDropDownMenus()
+		QuestMapQuestOptions_ShareQuest(self.questID)
 	end
 end)
+
+hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderClick", function(_, block)
+	if IsControlKeyDown() then
+		CloseDropDownMenus()
+		QuestMapQuestOptions_AbandonQuest(block.id)
+	elseif IsAltKeyDown() and C_QuestLog.IsPushableQuest(block.id) then
+		CloseDropDownMenus()
+		QuestMapQuestOptions_ShareQuest(block.id)
+	end
+end) 

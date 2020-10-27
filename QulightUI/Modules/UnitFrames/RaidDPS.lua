@@ -7,12 +7,13 @@ if C.unitframe.enable ~= true then return end
 local _, ns = ...
 local oUF = ns.oUF
 
--- Frame size
+-- Party size
 local party_width = C.raidframe.dps_party_width
 local party_height = C.raidframe.dps_party_height + T.extraHeight
 local party_power_height = C.raidframe.dps_party_power_height + C.unitframe.extra_power_height
 local partytarget_width = party_height + 3
 local partytarget_height = party_height
+-- Raid size
 local raid_width = C.raidframe.dps_raid_width
 local raid_height = C.raidframe.dps_raid_height
 local raid_power_height = C.raidframe.dps_raid_power_height
@@ -47,9 +48,9 @@ local function Shared(self, unit)
 	elseif unit == "tank" then
 		self.Health:SetHeight(tank_height - 3)
 	elseif unit == "raid" then
-		self.Health:SetHeight(raid_height - raid_power_height - 1)
+		self.Health:SetHeight(raid_height - raid_power_height - (raid_power_height > 0 and 1 or 0))
 	elseif unit == "party" then
-		self.Health:SetHeight(party_height - party_power_height - 1)
+		self.Health:SetHeight(party_height - party_power_height - (party_power_height > 0 and 1 or 0))
 	else
 		self.Health:SetHeight(17)
 	end
@@ -61,7 +62,6 @@ local function Shared(self, unit)
 		end
 	end
 
-	self.Health.frequentUpdates = true
 	self.Health.colorTapping = true
 	self.Health.colorDisconnected = true
 	self.Health.colorClassPet = false
@@ -180,10 +180,8 @@ local function Shared(self, unit)
 
 	-- Agro border
 	if C.raidframe.aggro_border == true then
-		table.insert(self.__elements, T.UpdateThreat)
-		self:RegisterEvent("PLAYER_TARGET_CHANGED", T.UpdateThreat, true)
-		self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", T.UpdateThreat)
-		self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
+		self.ThreatIndicator = CreateFrame("Frame", nil, self)
+		self.ThreatIndicator.PostUpdate = T.UpdateThreat
 	end
 
 	-- Raid marks
@@ -256,8 +254,7 @@ local function Shared(self, unit)
 			myBar = mhpb,
 			otherBar = ohpb,
 			absorbBar = ahpb,
-			maxOverflow = 1,
-			frequentUpdates = true
+			maxOverflow = 1
 		}
 	end
 
@@ -272,6 +269,10 @@ local function Shared(self, unit)
 		if not (suffix == "pet" or suffix == "target") then
 			self.Power.Smooth = true
 		end
+	end
+
+	if T.PostCreateDPSRaidFrames then
+		T.PostCreateDPSRaidFrames(self, unit)
 	end
 
 	return self

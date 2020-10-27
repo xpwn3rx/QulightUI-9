@@ -8,6 +8,7 @@ local StoryTooltip = QuestScrollFrame.StoryTooltip
 StoryTooltip:SetFrameLevel(4)
 
 local WarCampaignTooltip = QuestScrollFrame.WarCampaignTooltip
+T.SkinCloseButton(_G.ItemRefTooltip.CloseButton)
 
 local tooltips = {
 	GameTooltip,
@@ -21,6 +22,7 @@ local tooltips = {
 	ReputationParagonTooltip,
 	WarCampaignTooltip,
 	EmbeddedItemTooltip,
+	QuickKeybindTooltip,
 	-- Addons
 	AtlasLootTooltip,
 	QuestGuru_QuestWatchTooltip,
@@ -347,6 +349,8 @@ local OnTooltipSetUnit = function(self)
 		local raidIndex = GetRaidTargetIndex(unit)
 		if raidIndex then
 			ricon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..raidIndex)
+		else
+			ricon:SetTexture(nil)
 		end
 	end
 
