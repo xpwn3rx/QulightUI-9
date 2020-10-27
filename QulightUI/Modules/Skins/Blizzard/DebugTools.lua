@@ -46,4 +46,4 @@ local function LoadSecondarySkin()
 	ScriptErrorsFrame.ScrollFrame.Text:SetFont(C.media.normal_font, 12)
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSecondarySkin)
+tinsert(T.SkinFuncs["QulightUI"], LoadSecondarySkin)

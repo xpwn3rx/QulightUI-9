@@ -259,7 +259,7 @@ local function StyleButton(button, t, size)
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture()
-		checked:SetColorTexture(0, 1, 0, .3)
+		checked:SetColorTexture(.83, .68, .21, .5)
 		checked:SetPoint("TOPLEFT", button, size, -size)
 		checked:SetPoint("BOTTOMRIGHT", button, -size, size)
 		button.checked = checked
@@ -296,7 +296,8 @@ T.SetOriginalBackdrop = function(self)
 end
 
 local function SkinButton(f, strip)
-	f:SetTemplate("Overlay")
+	f:SetTemplate("Transparent")
+
 	if strip then f:StripTextures() end
 
 	if f.SetNormalTexture then f:SetNormalTexture("") end

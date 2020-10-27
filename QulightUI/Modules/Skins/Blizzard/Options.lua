@@ -144,7 +144,7 @@ local function LoadSkin()
 		"Graphics_SSAODropDown",
 		"Graphics_RefractionDropDown",
 		"RaidGraphics_TextureResolutionDropDown",
-		"RaidGraphics_SpellDensityDropDown"
+		"RaidGraphics_SpellDensityDropDown",
 		"RaidGraphics_FilteringDropDown",
 		"RaidGraphics_ProjectedTexturesDropDown",
 		"RaidGraphics_ViewDistanceDropDown",

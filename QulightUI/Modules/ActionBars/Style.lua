@@ -56,20 +56,6 @@ local function StyleNormalButton(button)
 
 		flash:SetTexture("")
 
-		local style = {
-			bgFile =  C.media.texture,
-			edgeFile = C.media.blank, 
-			edgeSize = T.mult,
-			insets = { left = T.mult, right = T.mult, top = T.mult, bottom = T.mult }
-		}
-		local bd = CreateFrame("Frame", nil, button, BackdropTemplateMixin and "BackdropTemplate")
-		bd:SetAllPoints(button)
-		bd:SetFrameStrata("Background")
-		bd:SetBackdrop(style)
-		bd:SetBackdropColor(0, 0, 0, .4)
-		bd:SetBackdropBorderColor(0, 0, 0, 1)
-		button.backdrop = bd
-
 		button:SetNormalTexture("")
 
 		if float then
@@ -139,13 +125,14 @@ local function StyleNormalButton(button)
 		end
 
 		button.oborder:SetFrameLevel(button:GetFrameLevel())
+		
 		button.iborder:SetFrameLevel(button:GetFrameLevel())
 
 		if button.QuickKeybindHighlightTexture then
 			button.QuickKeybindHighlightTexture:SetTexture("")
 		end
 
-		button:StyleButton()
+		button:StyleButton(button, button.size, true)
 
 		button.isSkinned = true
 	end
@@ -252,6 +239,7 @@ local function SetupFlyoutButton()
 			end
 
 			if not button.IsSkinned then
+				button:StyleButton()
 				StyleNormalButton(button)
 
 				if C.actionbar.rightbars_mouseover == true then

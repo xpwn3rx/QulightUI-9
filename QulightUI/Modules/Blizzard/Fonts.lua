@@ -4,18 +4,16 @@
 --	Based on tekticles(by Tekkub)
 ----------------------------------------------------------------------------------------
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
-	if obj then
-		obj:SetFont(font, size, style)
-		if sr and sg and sb then obj:SetShadowColor(sr, sg, sb) end
-		if sox and soy then obj:SetShadowOffset(sox, soy) end
-		if r and g and b then obj:SetTextColor(r, g, b) end
-	end
+	obj:SetFont(font, size, style)
+	if sr and sg and sb then obj:SetShadowColor(sr, sg, sb) end
+	if sox and soy then obj:SetShadowOffset(sox, soy) end
+	if r and g and b then obj:SetTextColor(r, g, b) end
 end
 
 local frame = CreateFrame("Frame", nil, UIParent)
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(_, _, addon)
-	if addon ~= "QulightUI" or addon == "tekticles" then return end
+	if addon ~= "ShestakUI" or addon == "tekticles" then return end
 
 	local NORMAL = C.media.normal_font
 	-- local BLANK = C.media.blank_font
@@ -63,7 +61,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetFont(SystemFont_Shadow_Med1, NORMAL, 13)
 	SetFont(SystemFont_Shadow_Med2, NORMAL, 13)
 	SetFont(SystemFont_Shadow_Med3, NORMAL, 15)
-	--FIXME SetFont(SystemFont_Shadow_Outline_Huge2, NORMAL, 22, "OUTLINE")
+	SetFont(SystemFont22_Shadow_Outline, NORMAL, 22, "OUTLINE")
 	SetFont(SystemFont_Shadow_Small, NORMAL, 11)
 	SetFont(SystemFont_Shadow_Small2, NORMAL, 11)
 	SetFont(SystemFont_Small, NORMAL, 12)

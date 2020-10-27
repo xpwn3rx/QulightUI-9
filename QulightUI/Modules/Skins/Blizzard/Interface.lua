@@ -63,7 +63,7 @@ local function LoadSkin()
 		-- Display
 		"DisplayPanelRotateMinimap",
 		"DisplayPanelAJAlerts",
-		"DisplayPanelShowInGameNavigation"
+		"DisplayPanelShowInGameNavigation",
 		"DisplayPanelShowTutorials",
 		-- Social
 		"SocialPanelProfanityFilter",

@@ -292,7 +292,7 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		i		self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
+		self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
 		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
 		self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)
 		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)

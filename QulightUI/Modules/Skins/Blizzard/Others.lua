@@ -278,7 +278,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			T.SkinCloseButton(self, nil, "-")
 		end)
 		T.SkinCloseButton(_G["RolePollPopupCloseButton"])
-		--FIXME T.SkinCloseButton(_G["ItemRefCloseButton"])
 
 		if C.skins.blizzard_frames == true then
 			-- Social Browser frame
@@ -318,7 +317,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			hooksecurefunc("NavBar_Initialize", SetHomeButtonOffsetX)
 
 			if T.client == "ruRU" then
-				FIXME _G["DeclensionFrame"]:SetTemplate("Transparent")
+				_G["DeclensionFrame"]:SetTemplate("Transparent")
 				_G["DeclensionFrameCancelButton"]:SkinButton()
 				_G["DeclensionFrameOkayButton"]:SkinButton()
 				T.SkinNextPrevButton(_G["DeclensionFrameSetNext"])

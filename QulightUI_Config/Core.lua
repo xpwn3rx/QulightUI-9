@@ -539,7 +539,7 @@ local function CreateOptionPanel(name, text, subText)
 end
 
 ns.addCategory = function(name, text, subText, second, third)
-	local tab = CreateFrame("Button", nil, ShestakUIOptionsPanel)
+	local tab = CreateFrame("Button", nil, QulightUIOptionsPanel)
 	tab:SetPoint("TOPLEFT", 11, -offset)
 	tab:SetSize(168, 22)
 
@@ -563,7 +563,7 @@ ns.addCategory = function(name, text, subText, second, third)
 		panel_2 = CreateOptionPanel(baseName..name2, text, subText)
 		panel[2] = panel_2
 
-		local PrevPageButton = CreateFrame("Button", baseName..name.."PrevButton", ShestakUIOptionsPanel)
+		local PrevPageButton = CreateFrame("Button", baseName..name.."PrevButton", QulightUIOptionsPanel)
 		PrevPageButton:SetPoint("TOPRIGHT", -45, -44)
 		PrevPageButton:SetSize(28, 28)
 		PrevPageButton:SetHighlightTexture("Interface\Buttons\UI-Common-MouseHilight")
@@ -648,7 +648,7 @@ ns.addCategory = function(name, text, subText, second, third)
 			local name3 = name.."3"
 			local tag3 = strlower(name3)
 			panel_3 = CreateOptionPanel(baseName..name3, text, subText)
-			panel[3] = panel
+			panel[3] = panel_3
 
 			tinsert(panels, panel_3)
 
@@ -667,7 +667,7 @@ ns.addCategory = function(name, text, subText, second, third)
 
 			panel_3:SetScript("OnMouseWheel", function(_, delta)
 				if delta > 0 then
-					optional:Click()
+					PrevPageButton:Click()
 				end
 			end)
 		end

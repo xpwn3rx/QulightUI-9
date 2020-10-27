@@ -1,3 +1,4 @@
+UIParentLoadAddOn('Blizzard_DebugTools')
 local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
@@ -933,13 +934,16 @@ T.PreUpdatePower = function(power, unit)
 end
 
 T.PostUpdatePower = function(power, unit, cur, _, max)
+	print(power.value:GetText())
 	if unit and unit:find("arena%dtarget") then return end
 	local self = power:GetParent()
+	local _, class, _ = UnitClass(unit)
+	local r, g, b = GetClassColor(class)
 	local pType, pToken = UnitPowerType(unit)
-	local color = T.oUF_colors.power[pToken]
+	--local color = T.oUF_colors.power[pToken]
 
-	if color then
-		power.value:SetTextColor(color[1], color[2], color[3])
+	if r and g and b then
+		power.value:SetTextColor(r, g, b)
 	end
 
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -953,85 +957,89 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 	elseif UnitIsDead(unit) or UnitIsGhost(unit) or max == 0 then
 		power.value:SetText()
 	else
-		if cur ~= max then
-			if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
-				if unit == "target" then
-					if C.unitframe.show_total_value == true then
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						else
-							power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						end
-					else
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
-						else
-							power.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
-						end
-					end
-				elseif (unit == "player" and power:GetAttribute("normalUnit") == "pet") or unit == "pet" then
-					if C.unitframe.show_total_value == true then
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						else
-							power.value:SetFormattedText("%s |cffffffff-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						end
-					else
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%d%%", floor(cur / max * 100))
-						else
-							power.value:SetFormattedText("|cffffffff%d%%|r", floor(cur / max * 100))
-						end
-					end
-				elseif unit and (unit:find("arena%d") or unit:find("boss%d")) then
-					if C.unitframe.color_value == true then
-						power.value:SetFormattedText("|cffD7BEA5%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
-					else
-						power.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
-					end
-				elseif self:GetParent():GetName():match("oUF_PartyDPS") then
-					if C.unitframe.color_value == true then
-						power.value:SetFormattedText("%s |cffD7BEA5-|r %d%%", T.ShortValue(max - (max - cur)), floor(cur / max * 100))
-					else
-						power.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(max - (max - cur)), floor(cur / max * 100))
-					end
-				else
-					if C.unitframe.show_total_value == true then
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						else
-							power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
-						end
-					else
-						if C.unitframe.color_value == true then
-							power.value:SetFormattedText("%d |cffD7BEA5-|r %d%%", max - (max - cur), floor(cur / max * 100))
-						else
-							power.value:SetFormattedText("|cffffffff%d - %d%%|r", max - (max - cur), floor(cur / max * 100))
-						end
-					end
-				end
-			else
-				if C.unitframe.color_value == true then
-					power.value:SetText(max - (max - cur))
-				else
-					power.value:SetText("|cffffffff"..max - (max - cur).."|r")
-				end
-			end
-		else
-			if unit == "pet" or unit == "target" or (unit and unit:find("arena%d")) or (self:GetParent():GetName():match("oUF_PartyDPS")) then
-				if C.unitframe.color_value == true then
-					power.value:SetText(T.ShortValue(cur))
-				else
-					power.value:SetText("|cffffffff"..T.ShortValue(cur).."|r")
-				end
-			else
-				if C.unitframe.color_value == true then
-					power.value:SetText(cur)
-				else
-					power.value:SetText("|cffffffff"..cur.."|r")
-				end
-			end
+		if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
+			power.value:SetFormattedText("%s || %d%%", cur, floor(cur/max*100))
+			print(power.value:GetText())
 		end
+		--if cur ~= max then
+			-- if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
+			-- 	if unit == "target" then
+			-- 		if C.unitframe.show_total_value == true then
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			else
+			-- 				power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			end
+			-- 		else
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
+			-- 			else
+			-- 				power.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
+			-- 			end
+			-- 		end
+			-- 	elseif (unit == "player" and power:GetAttribute("normalUnit") == "pet") or unit == "pet" then
+			-- 		if C.unitframe.show_total_value == true then
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			else
+			-- 				power.value:SetFormattedText("%s |cffffffff-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			end
+			-- 		else
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%d%%", floor(cur / max * 100))
+			-- 			else
+			-- 				power.value:SetFormattedText("|cffffffff%d%%|r", floor(cur / max * 100))
+			-- 			end
+			-- 		end
+			-- 	elseif unit and (unit:find("arena%d") or unit:find("boss%d")) then
+			-- 		if C.unitframe.color_value == true then
+			-- 			power.value:SetFormattedText("|cffD7BEA5%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
+			-- 		else
+			-- 			power.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(cur / max * 100), T.ShortValue(max - (max - cur)))
+			-- 		end
+			-- 	elseif self:GetParent():GetName():match("oUF_PartyDPS") then
+			-- 		if C.unitframe.color_value == true then
+			-- 			power.value:SetFormattedText("%s |cffD7BEA5-|r %d%%", T.ShortValue(max - (max - cur)), floor(cur / max * 100))
+			-- 		else
+			-- 			power.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(max - (max - cur)), floor(cur / max * 100))
+			-- 		end
+			-- 	else
+			-- 		if C.unitframe.show_total_value == true then
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%s |cffD7BEA5-|r %s", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			else
+			-- 				power.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(max - (max - cur)), T.ShortValue(max))
+			-- 			end
+			-- 		else
+			-- 			if C.unitframe.color_value == true then
+			-- 				power.value:SetFormattedText("%d |cffD7BEA5-|r %d%%", max - (max - cur), floor(cur / max * 100))
+			-- 			else
+			-- 				power.value:SetFormattedText("|cffffffff%d - %d%%|r", max - (max - cur), floor(cur / max * 100))
+			-- 			end
+			-- 		end
+			-- 	end
+		-- 	else
+		-- 		if C.unitframe.color_value == true then
+		-- 			power.value:SetText(max - (max - cur))
+		-- 		else
+		-- 			power.value:SetText("|cffffffff"..max - (max - cur).."|r")
+		-- 		end
+		-- 	end
+		-- else
+		-- 	if unit == "pet" or unit == "target" or (unit and unit:find("arena%d")) or (self:GetParent():GetName():match("oUF_PartyDPS")) then
+		-- 		if C.unitframe.color_value == true then
+		-- 			power.value:SetText(T.ShortValue(cur))
+		-- 		else
+		-- 			power.value:SetText("|cffffffff"..T.ShortValue(cur).."|r")
+		-- 		end
+		-- 	else
+		-- 		if C.unitframe.color_value == true then
+		-- 			power.value:SetText(cur)
+		-- 		else
+		-- 			power.value:SetText("|cffffffff"..cur.."|r")
+		-- 		end
+		-- 	end
+		-- end
 	end
 end
 
@@ -1059,7 +1067,6 @@ end
 
 T.UpdateClassMana = function(self)
 	if self.unit ~= "player" then return end
-
 	if UnitPowerType("player") ~= 0 then
 		local min = UnitPower("player", 0)
 		local max = UnitPowerMax("player", 0)
@@ -1075,11 +1082,11 @@ T.UpdateClassMana = function(self)
 		if min ~= max then
 			if self.Power.value:GetText() then
 				self.ClassMana:SetPoint("RIGHT", self.Power.value, "LEFT", -1, 0)
-				self.ClassMana:SetFormattedText("%d%%|r |cffD7BEA5-|r", floor(min / max * 100))
+				self.ClassMana:SetFormattedText(min, " | ", percMana)
 				self.ClassMana:SetJustifyH("RIGHT")
 			else
 				self.ClassMana:SetPoint("LEFT", self.Power, "LEFT", 4, 0)
-				self.ClassMana:SetFormattedText("%d%%", floor(min / max * 100))
+				self.ClassMana:SetFormattedText(min, " | ", percMana)
 			end
 		else
 			self.ClassMana:SetText()
@@ -1117,7 +1124,7 @@ local setBarTicks = function(Castbar, numTicks)
 			if not ticks[i] then
 				ticks[i] = Castbar:CreateTexture(nil, "OVERLAY")
 				ticks[i]:SetTexture(C.media.texture)
-				ticks[i]:SetVertexColor(unpack(C.media.border_color))
+				ticks[i]:SetVertexColor(0,1,0,.7)
 				ticks[i]:SetWidth(1)
 				ticks[i]:SetHeight(Castbar:GetHeight())
 				ticks[i]:SetDrawLayer("OVERLAY", 7)
@@ -1177,7 +1184,7 @@ T.PostCastStart = function(Castbar, unit)
 
 	if Castbar.notInterruptible and UnitCanAttack("player", unit) then
 		Castbar:SetStatusBarColor(0.8, 0, 0)
-		Castbar.bg:SetVertexColor(0.8, 0, 0, 0.2)
+		Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 		Castbar.Overlay:SetBackdropBorderColor(0.8, 0, 0)
 		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
 			Castbar.Button:SetBackdropBorderColor(0.8, 0, 0)
@@ -1190,22 +1197,29 @@ T.PostCastStart = function(Castbar, unit)
 				Castbar:SetStatusBarColor(unpack(C.unitframe.uf_color))
 				Castbar.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
 			else
-				if b then
-					Castbar:SetStatusBarColor(r, g, b)
-					Castbar.bg:SetVertexColor(r, g, b, 0.2)
-				end
+				-- if b then
+				-- 	Castbar:SetStatusBarColor(r, g, b)
+				-- 	Castbar.bg:SetVertexColor(r, g, b, 0.2)
+				-- end
+				Castbar:SetStatusBarColor(0,0,0)
+				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			end
 		else
 			if C.unitframe.own_color == true then
-				Castbar:SetStatusBarColor(unpack(C.unitframe.uf_color))
-				Castbar.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
+				--Castbar:SetStatusBarColor(unpack(C.unitframe.uf_color))
+				Castbar:SetStatusBarColor(0,0,0,1)
+				--Castbar.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
+				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			else
 				local r, g, b = castColor(unit)
-				Castbar:SetStatusBarColor(r, g, b)
-				Castbar.bg:SetVertexColor(r, g, b, 0.2)
+				--Castbar:SetStatusBarColor(r, g, b)
+				Castbar:SetStatusBarColor(0,0,0,1)
+				--Castbar.bg:SetVertexColor(r, g, b, 0.2)
+				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			end
 		end
-		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
+		--Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
+		Castbar.Overlay:SetBackdropBorderColor(0,0,0,.2)
 		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
 			Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 		end

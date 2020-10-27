@@ -145,7 +145,7 @@ local function Shared(self, unit)
 		self.Power.Smooth = true
 	end
 
-	self.Power.PreUpdate = T.PreUpdatePower
+	--self.Power.PreUpdate = T.PreUpdatePower
 	self.Power.PostUpdate = T.PostUpdatePower
 
 	self.Power.bg = self.Power:CreateTexture(nil, "BACKGROUND")
