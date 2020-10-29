@@ -788,34 +788,34 @@ T.PostUpdateHealth = function(health, unit, min, max)
 					if C.unitframe.color_value == true then
 						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
 					else
-						health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
+						health.value:SetFormattedText("|cffffffff%s || %s|r", T.ShortValue(min), T.ShortValue(max))
 					end
 				else
 					if C.unitframe.color_value == true then
 						health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
 					else
-						health.value:SetFormattedText("|cffffffff%d - %d%%|r", min, floor(min / max * 100))
+						health.value:SetFormattedText("|cffffffff%d || %d%%|r", min, floor(min / max * 100))
 					end
 				end
 			elseif unit == "target" then
 				if C.unitframe.show_total_value == true then
 					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
+						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
 					else
-						health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
+						health.value:SetFormattedText("|cffffffff%s || %s|r", T.ShortValue(min), T.ShortValue(max))
 					end
 				else
 					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
+						health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5|||r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
 					else
-						health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(min / max * 100), T.ShortValue(min))
+						health.value:SetFormattedText("|cffffffff%d%% || %s|r", floor(min / max * 100), T.ShortValue(min))
 					end
 				end
 			elseif unit and unit:find("boss%d") then
 				if C.unitframe.color_value == true then
-					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
+					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5|||r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
 				else
-					health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(min / max * 100), T.ShortValue(min))
+					health.value:SetFormattedText("|cffffffff%d%% || %s|r", floor(min / max * 100), T.ShortValue(min))
 				end
 			else
 				if C.unitframe.color_value == true then
@@ -827,15 +827,16 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		else
 			if (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
 				if C.unitframe.color_value == true then
-					health.value:SetText("|cff559655"..max.."|r")
+					--health.value:SetText("|cff559655"..max.."|r")
+					health.value:SetText("|cff559655"..T.ShortValue(min).." || "..floor(min /max *100).."%|r")
 				else
-					health.value:SetText("|cffffffff"..max.."|r")
+					health.value:SetText("|cffffffff"..T.ShortValue(min).." || "..floor(min /max *100).."%|r")
 				end
 			else
 				if C.unitframe.color_value == true then
-					health.value:SetText("|cff559655"..T.ShortValue(max).."|r")
+					health.value:SetText("|cff559655"..T.ShortValue(min).." || "..floor(min /max *100).."%|r")
 				else
-					health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
+					health.value:SetText("|cffffffff"..T.ShortValue(min).." || "..floor(min /max *100).."%|r")
 				end
 			end
 		end
@@ -934,7 +935,6 @@ T.PreUpdatePower = function(power, unit)
 end
 
 T.PostUpdatePower = function(power, unit, cur, _, max)
-	print(power.value:GetText())
 	if unit and unit:find("arena%dtarget") then return end
 	local self = power:GetParent()
 	local _, class, _ = UnitClass(unit)
@@ -959,7 +959,6 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 	else
 		if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
 			power.value:SetFormattedText("%s || %d%%", cur, floor(cur/max*100))
-			print(power.value:GetText())
 		end
 		--if cur ~= max then
 			-- if pType == 0 and pToken ~= "POWER_TYPE_DINO_SONIC" then
