@@ -493,7 +493,7 @@ local function style(self, unit)
 		self.Health.value:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
 		self.Health.value:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 		self.Health.value:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
-		self:Tag(self.Health.value, "[NameplateHealth]")
+		self:Tag(self.Health.value, "[curhp] - [perhp]%")
 	end
 
 	-- Create Player Power bar
@@ -541,7 +541,7 @@ local function style(self, unit)
 	self.Level:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
 	self.Level:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 	self.Level:SetPoint("RIGHT", self.Health, "LEFT", -2, 0)
-	self:Tag(self.Level, "[DiffColor][NameplateLevel][shortclassification]")
+	self:Tag(self.Level, "[DiffColor][smartlevel][shortclassification]")
 
 	-- Create Cast Bar
 	self.Castbar = CreateFrame("StatusBar", nil, self)
