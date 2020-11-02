@@ -41,7 +41,7 @@ local function CreateOverlay(f)
 	local overlay = f:CreateTexture("$parentOverlay", "BORDER", f)
 	overlay:SetPoint("TOPLEFT", 2, -2)
 	overlay:SetPoint("BOTTOMRIGHT", -2, 2)
-	overlay:SetTexture(C.media.blank)
+	overlay:SetTexture(C.media.texture)
 	overlay:SetVertexColor(0, 0, 0, .4)
 	f.overlay = overlay
 end
@@ -53,7 +53,7 @@ local function CreateBorder(f, i, o)
 		border:SetPoint("TOPLEFT", 0, 0)
 		border:SetPoint("BOTTOMRIGHT", 0)
 		border:SetBackdrop({
-			edgeFile = C.media.blank, edgeSize = T.mult,
+			edgeFile = C.media.glow, edgeSize = T.mult,
 			insets = {left = T.mult, right = T.mult, top = T.mult, bottom = T.mult}
 		})
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
@@ -75,8 +75,8 @@ local function CreateBorder(f, i, o)
 	end
 	f.shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
 	f.shadow:SetOutside(f, 4, 4)
-	f.shadow:SetBackdrop({edgeFile = C.media.shadow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
-	f.shadow:SetBackdropBorderColor(0, 0, 0, .4)
+	f.shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
+	f.shadow:SetBackdropBorderColor(0, 0, 0, 1)
 	f.shadow:SetFrameLevel(1)
 end
 
@@ -114,8 +114,8 @@ local function SetTemplate(f, t)
 	if f.Shadow then return end
 	f.Shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
 	f.Shadow:SetOutside(self, 4, 4)
-	f.Shadow:SetBackdrop({edgeFile = C.media.shadow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
-	f.Shadow:SetBackdropBorderColor(0, 0, 0, .4)
+	f.Shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
+	f.Shadow:SetBackdropBorderColor(0, 0, 0, 1)
 	f.Shadow:SetFrameLevel(1)
 end
 
@@ -129,7 +129,7 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint(a1, p, a2, x, y)
 	f:SetBackdrop({
-		bgFile = C.media.texture, edgeFile = C.media.blank, edgeSize = T.mult,
+		bgFile = C.media.texture, edgeFile = C.media.glow, edgeSize = T.mult,
 		insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
 	})
 
