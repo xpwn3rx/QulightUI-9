@@ -1181,6 +1181,8 @@ T.PostCastStart = function(Castbar, unit)
 		end
 	end
 
+	Castbar:SetStatusBarTexture([[Interface\AddOns\QulightUI\Media\Textures\Texture.tga]])
+
 	if Castbar.notInterruptible and UnitCanAttack("player", unit) then
 		Castbar:SetStatusBarColor(0.8, 0, 0)
 		Castbar.bg:SetVertexColor(.5,.5,.5,.9)
@@ -1200,19 +1202,19 @@ T.PostCastStart = function(Castbar, unit)
 				-- 	Castbar:SetStatusBarColor(r, g, b)
 				-- 	Castbar.bg:SetVertexColor(r, g, b, 0.2)
 				-- end
-				Castbar:SetStatusBarColor(0,0,0)
+				Castbar:SetStatusBarColor(.15,.15,.15,1)
 				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			end
 		else
 			if C.unitframe.own_color == true then
 				--Castbar:SetStatusBarColor(unpack(C.unitframe.uf_color))
-				Castbar:SetStatusBarColor(0,0,0,1)
+				Castbar:SetStatusBarColor(.15,.15,.15,1)
 				--Castbar.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
 				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			else
 				local r, g, b = castColor(unit)
 				--Castbar:SetStatusBarColor(r, g, b)
-				Castbar:SetStatusBarColor(0,0,0,1)
+				Castbar:SetStatusBarColor(.15,.15,.15,1)
 				--Castbar.bg:SetVertexColor(r, g, b, 0.2)
 				Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 			end

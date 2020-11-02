@@ -312,7 +312,8 @@ local function Enable(self, unit)
 		end
 
 		if(element:IsObjectType('StatusBar') and not element:GetStatusBarTexture()) then
-			element:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+			print("1")
+			element:SetStatusBarTexture([[Interface\AddOns\QulightUI\Media\Textures\Texture.tga]])
 		end
 
 		local spark = element.Spark

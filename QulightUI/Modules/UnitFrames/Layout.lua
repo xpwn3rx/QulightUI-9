@@ -832,8 +832,9 @@ local function Shared(self, unit)
 
 	if C.unitframe.unit_castbar == true and not unit:match('%wtarget$') then
 		self.Castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
-		self.Castbar:SetStatusBarTexture(C.media.texture, "ARTWORK")
-
+		self.Castbar:SetStatusBarTexture(C.media.texture)--, "ARTWORK")
+		self.Castbar:SetStatusBarColor(.15,.15,.15,1)
+		
 		self.Castbar.bg = self.Castbar:CreateTexture(nil, "BORDER")
 		self.Castbar.bg:SetAllPoints()
 		self.Castbar.bg:SetTexture(C.media.texture)
