@@ -244,6 +244,7 @@ local function StyleButton(button, t, size)
 		normal:SetTexture(C.media.texture)
 		normal:SetPoint("TOPLEFT", button, size, -size)
 		normal:SetPoint("BOTTOMRIGHT", button, -size, size)
+		normal:SetVertexColor(0,0,0,.5)
 		button.normal = normal
 		button:SetNormalTexture(normal)
 	end

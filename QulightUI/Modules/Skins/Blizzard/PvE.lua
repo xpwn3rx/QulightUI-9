@@ -157,7 +157,6 @@ local function LoadSkin()
 				button.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
 				button.border.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
-			button.normal:SetTexture("")
 		end
 	end)
 
@@ -502,7 +501,6 @@ local function LoadSkin()
 		for _, button in pairs(checkButtons) do
 			button:SetSize(27, 27)
 			T.SkinCheckBox(button)
-			button.normal:SetTexture("")
 		end
 
 		local editBoxes = {
