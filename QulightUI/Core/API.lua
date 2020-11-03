@@ -95,7 +95,7 @@ local function SetTemplate(f, t)
 	GetTemplate(t)
 
 	f:SetBackdrop({
-		bgFile = C.media.texture, edgeFile = C.media.blank, edgeSize = T.mult,
+		bgFile = C.media.texture, edgeFile = C.media.glow, edgeSize = T.mult,
 		insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
 	})
 

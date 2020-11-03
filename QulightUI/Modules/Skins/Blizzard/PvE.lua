@@ -52,6 +52,9 @@ local function LoadSkin()
 	end
 
 	local buttons = {
+		_G.GroupFinderFrame.groupButton1,
+		_G.GroupFinderFrame.groupButton2,
+		_G.GroupFinderFrame.groupButton3,
 		LFDQueueFrameFindGroupButton,
 		RaidFinderFrameFindRaidButton,
 		--FIXME ScenarioQueueFrameFindGroupButton,
@@ -126,8 +129,9 @@ local function LoadSkin()
 		button:CreateBackdrop("Overlay")
 		button.backdrop:SetAllPoints()
 		button:StyleButton()
-
+		
 		button.bg:SetTexture("")
+		button.bg:Kill()
 
 		button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button.icon:SetPoint("LEFT", button, "LEFT", 10, 0)
@@ -145,14 +149,15 @@ local function LoadSkin()
 		for i = 1, 3 do
 			local button = self["groupButton"..i]
 			if i == index then
-				button.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-				button.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
-				button.border.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
+				button.backdrop:SetBackdropBorderColor(0, 0, 0, 1)
+				button.backdrop.overlay:SetVertexColor(0, 0, 0, 0.3)
+				button.border.backdrop:SetBackdropBorderColor(0, 0, 0, 1)
 			else
 				button.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 				button.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
 				button.border.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
+			button.normal:SetTexture("")
 		end
 	end)
 
@@ -497,6 +502,7 @@ local function LoadSkin()
 		for _, button in pairs(checkButtons) do
 			button:SetSize(27, 27)
 			T.SkinCheckBox(button)
+			button.normal:SetTexture("")
 		end
 
 		local editBoxes = {
