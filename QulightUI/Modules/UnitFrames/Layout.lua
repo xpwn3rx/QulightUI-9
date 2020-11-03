@@ -114,23 +114,26 @@ local function Shared(self, unit)
 	elseif unit == "arenatarget" then
 		self.Health.value:Hide()
 	else
-		self.Health.value:SetPoint("LEFT", self.Health, "TOPLEFT", 2, 0)
+		self.Health.value = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size -3, C.font.unit_frames_font_style)
+		self.Health.value:SetPoint("LEFT", self.Health, "TOPLEFT", 0, -2)
 		self.Health.value:SetJustifyH("LEFT")
 	end
 
 	-- Power bar
 	self.Power = CreateFrame("StatusBar", self:GetName().."_Power", self)
+	self.Power:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 1, 1)
+	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", -1, 1)
+	self.Power:SetStatusBarTexture(C.media.texture)
+	self.Power:GetStatusBarTexture():SetHorizTile(true)
 	if unit == "player" or unit == "target" or unit == "arena" or unit == "boss" then
 		self.Power:SetHeight(4 + C.unitframe.extra_power_height)
 	elseif unit == "arenatarget" then
 		self.Power:SetHeight(0)
 	else
-		self.Power:SetHeight(2)
+		self.Power:SetHeight(1)
+		self.Power:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 1, -2)
+	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", -1, -2)
 	end
-	self.Power:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 1, 1)
-	self.Power:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", -1, 1)
-	self.Power:SetStatusBarTexture(C.media.texture)
-	self.Power:GetStatusBarTexture():SetHorizTile(true)
 
 	self.Power.frequentUpdates = true
 	self.Power.colorDisconnected = true
@@ -235,6 +238,7 @@ local function Shared(self, unit)
 			end
 			self:Tag(self.Info, "[GetNameColor][NameMedium]")
 		else
+			self.Info = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size -2, C.font.unit_frames_font_style)
 			self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
 			self.Info:SetPoint("LEFT", self.Health.value, "RIGHT", 0, 0)
 			self.Info:SetJustifyH("RIGHT")
