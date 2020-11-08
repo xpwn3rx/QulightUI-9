@@ -93,12 +93,12 @@ C["unitframe"] = {
 	["uf_color"] = {0.09, 0.09, 0.09},				-- Color for UF if ["own_color"] = true
 	["enemy_health_color"] = true,				-- If enable, enemy target color is red
 	["show_total_value"] = false,				-- Display of info text on player and target with XXXX/Total
-	["color_value"] = false,					-- Health/mana value is colored
+	["color_value"] = true,					-- Health/mana value is colored
 	["bar_color_value"] = false,				-- Health bar color by current health remaining
-	["lines"] = true,							-- Show Player and Target lines
+	["lines"] = false,							-- Show Player and Target lines
 	-- Cast bars
 	["unit_castbar"] = true,					-- Show castbars
-	["castbar_icon"] = false,					-- Show castbar icons
+	["castbar_icon"] = true,					-- Show castbar icons
 	["castbar_latency"] = true,					-- Castbar latency
 	["castbar_ticks"] = true,					-- Castbar ticks
 	-- Frames
@@ -236,7 +236,7 @@ C["actionbar"] = {
 	["macro"] = false,							-- Show macro name on buttons
 	["show_grid"] = true,						-- Show empty action bar buttons
 	["button_size"] = 34,						-- Buttons size
-	["button_space"] = 4,						-- Buttons space
+	["button_space"] = 5,						-- Buttons space
 	["split_bars"] = false,						-- Split the fifth bar on two bars on 6 buttons
 	["classcolor_border"] = false,				-- Enable classcolor border
 	["hide_highlight"] = false,					-- Hide proc highlight
@@ -296,7 +296,7 @@ C["chat"] = {
 	["enable"] = true,							-- Enable chat
 	["width"] = 440,							-- Chat width
 	["height"] = 172,							-- Chat height
-	["background"] = false,						-- Enable background for chat
+	["background"] = true,						-- Enable background for chat
 	["background_alpha"] = 0.7,					-- Background alpha
 	["filter"] = true,							-- Removing some systems spam ("Player1" won duel "Player2")
 	["spam"] = false,							-- Removing some players spam (gold/portals/etc)

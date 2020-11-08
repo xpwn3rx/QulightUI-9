@@ -142,6 +142,7 @@ local function LoadSkin()
 	CharacterModelFrame:CreateBackdrop("Default")
 	CharacterModelFrame.backdrop:SetPoint("TOPLEFT", -3, 4)
 	CharacterModelFrame.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
+	CharacterModelFrameBackdrop.Shadow:SetFrameLevel(CharacterFrame:GetFrameLevel()+1)
 
 	local scrollbars = {
 		"PaperDollTitlesPaneScrollBar",
