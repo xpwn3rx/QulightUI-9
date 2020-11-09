@@ -1,5 +1,5 @@
 ## Interface: 90001
-## Title: QulightUI
+## Title: |cff1784d1QulightUI|r
 ## Notes: A total UI overhaul for World of Warcraft
 ## Author: Shestak - Modified by PWn3R
 ## Version: 9.0

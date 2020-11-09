@@ -1,5 +1,5 @@
 ## Interface: 90001
-## Title: QulightUI Config
+## Title: |cff1784d1QulightUI Config|r
 ## Notes: In-game configuration for QulightUI
 ## Author: Shestak - Modified by PWn3R
 ## Version: 9.00

@@ -123,8 +123,8 @@ bottompanel:SetBackdropBorderColor(0, 0, 0, 1)
 if C.chat.background == true then
 	local chatbd = CreateFrame("Frame", "ChatBackground", UIParent, BackdropTemplateMixin and "BackdropTemplate")
 	chatbd:SetBackdrop(style)
-	chatbd:SetBackdropColor(0, 0, 0, .4)
-	chatbd:SetBackdropBorderColor(0, 0, 0, 1)
+	chatbd:SetBackdropColor(.05,.05,.05,0)
+	chatbd:SetBackdropBorderColor(.15,.15,.15,0)
 	chatbd:CreatePanel("Transparent", C.chat.width + 7, C.chat.height + 4, "TOPLEFT", ChatFrame1, "TOPLEFT", -3, 1)
 	--chatbd:SetBackdropBorderColor(unpack(C.media.classborder_color))
 	--chatbd:SetBackdropColor(0, 0, 0, C.chat.background_alpha)
@@ -139,6 +139,15 @@ else
 	local leftpanel = CreateFrame("Frame", "LeftPanel", UIParent)
 	leftpanel:CreatePanel("Transparent", 1, C.chat.height - 2, "BOTTOMLEFT", bottompanel, "LEFT", 0, 0)
 end
+
+----------------------------------------------------------------------------------------
+--	DPS/Raid background
+----------------------------------------------------------------------------------------
+local dps_frame = CreateFrame("Frame", "ChatPanelRight", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+dps_frame:SetBackdrop(style)
+dps_frame:SetBackdropColor(.05,.05,.05,0)
+dps_frame:SetBackdropBorderColor(.15,.15,.15,0)
+dps_frame:CreatePanel("Transparent", C.chat.width + 7, C.chat.height + 4, "BOTTOMRIGHT", DPSFrame1, "BOTTOMRIGHT", -6, 25)
 
 ----------------------------------------------------------------------------------------
 --	Top panel

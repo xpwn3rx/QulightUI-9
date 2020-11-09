@@ -47,6 +47,14 @@ local function CreateButton(b, l, r, m)
 	b.t:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", -2, 2)
 end
 
+Anchorchatbar = CreateFrame("Frame","Move_chatbgdummy",UIParent)
+Anchorchatbar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 3, 3)
+CreateAnchor(Anchorchatbar, "Move Chat", 440, 172)
+
+local ChatPanel = CreateFrame("Frame", "ChatBackground", UIParent)
+CreatePanel(ChatPanel, 440, 172, "BOTTOMLEFT", Anchorchatbar)
+CreateStyle(ChatPanel, 2)
+
 local b1 = CreateFrame("Button", "$parentButton1", frame)
 CreateButton(b1, "/s", "/w ", "/y")
 b1:SetPoint("TOP", frame, "TOP", 0, 0)

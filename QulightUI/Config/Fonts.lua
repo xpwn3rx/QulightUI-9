@@ -21,7 +21,7 @@ local T, C, L, _ = unpack(select(2, ...))
 C["font"] = {
 	-- Stats font
 	["stats_font"] = C.media.normal_font,
-	["stats_font_size"] = 15,
+	["stats_font_size"] = 12,
 	["stats_font_style"] = "OUTLINE",
 	["stats_font_shadow"] = false,
 
@@ -38,43 +38,43 @@ C["font"] = {
 
 	-- Chat tabs font
 	["chat_tabs_font"] = C.media.normal_font,
-	["chat_tabs_font_size"] = 15,
+	["chat_tabs_font_size"] = 12,
 	["chat_tabs_font_style"] = "OUTLINE",
 	["chat_tabs_font_shadow"] = false,
 
 	-- Action bars font
 	["action_bars_font"] = C.media.normal_font,
-	["action_bars_font_size"] = 15,
+	["action_bars_font_size"] = 12,
 	["action_bars_font_style"] = "OUTLINE",
 	["action_bars_font_shadow"] = false,
 
 	-- Threat meter font
 	["threat_meter_font"] = C.media.normal_font,
-	["threat_meter_font_size"] = 15,
+	["threat_meter_font_size"] = 12,
 	["threat_meter_font_style"] = "OUTLINE",
 	["threat_meter_font_shadow"] = false,
 
 	-- Raid cooldowns font
 	["raid_cooldowns_font"] = C.media.normal_font,
-	["raid_cooldowns_font_size"] = 15,
+	["raid_cooldowns_font_size"] = 12,
 	["raid_cooldowns_font_style"] = "OUTLINE",
 	["raid_cooldowns_font_shadow"] = false,
 
 	-- Cooldowns timer font
 	["cooldown_timers_font"] = C.media.normal_font,
-	["cooldown_timers_font_size"] = 16,
+	["cooldown_timers_font_size"] = 13,
 	["cooldown_timers_font_style"] = "OUTLINE",
 	["cooldown_timers_font_shadow"] = false,
 
 	-- Loot font
 	["loot_font"] = C.media.normal_font,
-	["loot_font_size"] = 15,
+	["loot_font_size"] = 12,
 	["loot_font_style"] = "OUTLINE",
 	["loot_font_shadow"] = false,
 
 	-- Nameplates font
 	["nameplates_font"] = C.media.normal_font,
-	["nameplates_font_size"] = 12,
+	["nameplates_font_size"] = 11,
 	["nameplates_font_style"] = "OUTLINE",
 	["nameplates_font_shadow"] = false,
 
@@ -86,25 +86,25 @@ C["font"] = {
 
 	-- Auras font
 	["auras_font"] = C.media.normal_font,
-	["auras_font_size"] = 15,
+	["auras_font_size"] = 12,
 	["auras_font_style"] = "OUTLINE",
 	["auras_font_shadow"] = false,
 
 	-- Filger bar font
 	["filger_font"] = C.media.normal_font,
-	["filger_font_size"] = 15,
+	["filger_font_size"] = 12,
 	["filger_font_style"] = "OUTLINE",
 	["filger_font_shadow"] = false,
 
 	-- Stylization font
 	["stylization_font"] = C.media.normal_font,
-	["stylization_font_size"] = 15,
+	["stylization_font_size"] = 12,
 	["stylization_font_style"] = "OUTLINE",
 	["stylization_font_shadow"] = false,
 
 	-- Bags font
 	["bags_font"] = C.media.normal_font,
-	["bags_font_size"] = 15,
+	["bags_font_size"] = 12,
 	["bags_font_style"] = "OUTLINE",
 	["bags_font_shadow"] = false,
 }
