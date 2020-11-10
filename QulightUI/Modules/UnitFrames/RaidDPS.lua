@@ -62,7 +62,7 @@ local function Shared(self, unit)
 		end
 	end
 
-	self.Health.colorTapping = true
+	self.Health.colorTapping = false
 	self.Health.colorDisconnected = true
 	self.Health.colorClassPet = false
 	if C.unitframe.own_color == true then
@@ -70,8 +70,9 @@ local function Shared(self, unit)
 		self.Health.colorClass = false
 		self.Health:SetStatusBarColor(unpack(C.unitframe.uf_color))
 	else
-		self.Health.colorReaction = true
-		self.Health.colorClass = true
+		self.Health.colorReaction = false
+		self.Health.colorClass = false
+		self.Health:SetStatusBarColor(.09,.09,.09,1)
 	end
 
 	-- Health bar background

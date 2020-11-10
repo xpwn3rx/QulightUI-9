@@ -61,7 +61,7 @@ local function Shared(self, unit)
 		self.Health:SetStatusBarColor(unpack(C.unitframe.uf_color))
 	else
 		self.Health.colorDisconnected = true
-		self.Health.colorReaction = true
+		self.Health.colorReaction = false
 		self.Health.colorClass = true
 	end
 

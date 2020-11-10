@@ -741,16 +741,16 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		end
 	else
 		local r, g, b
-		if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-			local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
-			if c then
-				r, g, b = c[1], c[2], c[3]
-				health:SetStatusBarColor(r, g, b)
-			else
-				r, g, b = 0.3, 0.7, 0.3
-				health:SetStatusBarColor(r, g, b)
-			end
-		end
+		-- if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+		-- 	local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
+		-- 	if c then
+		-- 		r, g, b = c[1], c[2], c[3]
+		-- 		health:SetStatusBarColor(r, g, b)
+		-- 	else
+		-- 		r, g, b = 0.3, 0.7, 0.3
+		-- 		health:SetStatusBarColor(r, g, b)
+		-- 	end
+		-- end
 		if unit == "pet" then
 			local _, class = UnitClass("player")
 			local r, g, b = unpack(T.oUF_colors.class[class])
