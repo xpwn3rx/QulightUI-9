@@ -148,7 +148,6 @@ local CollapseTable = {
 }
 
 local TextureTable
-local LSM = LibStub and LibStub:GetLibrary("LibSharedMedia-3.0", true)
 if LSM then
 	TextureTable = LSM:HashTable("statusbar")
 else
@@ -575,9 +574,16 @@ do
 	local texture = ns.CreateDropDown(parent, "texture", true, nil, TextureTable, LSM and true)
 	texture:SetPoint("TOPLEFT", backdrop_alpha, "BOTTOMLEFT", -20, -15)
 
+	-- Normal Font
+	local subheader = ns.addSubCategory(parent, L.media_subheader_normal)
+	subheader:SetPoint("TOPLEFT", texture, "BOTTOMLEFT", 16, -10)
+
+	local normal_font = ns.CreateDropDown(parent, "normal_font", true, L.font_stats_font, FontTable, LSM and true)
+	normal_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
+	
 	-- Pixel Font
 	local subheader = ns.addSubCategory(parent, L.media_subheader_pixel)
-	subheader:SetPoint("TOPLEFT", texture, "BOTTOMLEFT", 16, -10)
+	subheader:SetPoint("TOPLEFT", normal_font, "BOTTOMLEFT", 16, -10)
 
 	local pixel_font = ns.CreateDropDown(parent, "pixel_font", true, L.font_stats_font, FontTable, LSM and true)
 	pixel_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -966,6 +972,9 @@ do
 	local uf_color = ns.CreateColourPicker(parent, "uf_color", true, L_GUI_UF_UF_COLOR)
 	uf_color:SetPoint("TOPLEFT", own_color, "BOTTOMLEFT", 24, -4)
 
+	local uf_color_bg = ns.CreateColourPicker(parent, "uf_color_bg", true)
+	uf_color_bg:SetPoint("LEFT", uf_color, "RIGHT", 248, 0)
+
 	local enemy_health_color = ns.CreateCheckBox(parent, "enemy_health_color", L_GUI_UF_ENEMY_HEALTH_COLOR)
 	enemy_health_color:SetPoint("TOPLEFT", uf_color, "BOTTOMLEFT", -24, -4)
 
@@ -1105,8 +1114,14 @@ do
 	local player_width = ns.CreateNumberSlider(parent, "player_width", nil, nil, 105, 400, 1, true)
 	player_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
 
+	local subheader = ns.addSubCategory(parent, L.unitframe_subheader_boss_width)
+	subheader:SetPoint("TOPLEFT", player_width, "BOTTOMLEFT", 0, -10)
+
+	local boss_width = ns.CreateNumberSlider(parent, "boss_width", nil, nil, 105, 300, 1, true, L.unitframe_player_width)
+	boss_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
+
 	local extra_height_auto = ns.CreateCheckBox(parent, "extra_height_auto")
-	extra_height_auto:SetPoint("TOPLEFT", player_width, "BOTTOMLEFT", 0, -10)
+	extra_height_auto:SetPoint("TOPLEFT", boss_width, "BOTTOMLEFT", 0, -10)
 
 	local extra_health_height = ns.CreateNumberSlider(parent, "extra_health_height", nil, nil, 0, 40, 1, true)
 	extra_health_height:SetPoint("TOPLEFT", extra_height_auto, "BOTTOMLEFT", 0, -20)
@@ -1648,6 +1663,12 @@ do
 
 	local totem_icons = ns.CreateCheckBox(parent, "totem_icons", L_GUI_NAMEPLATE_TOTEM_ICONS)
 	totem_icons:SetPoint("TOPLEFT", healer_icon, "BOTTOMLEFT", 0, 0)
+
+	local target_glow = ns.CreateCheckBox(parent, "target_glow")
+	target_glow:SetPoint("TOPLEFT", totem_icons, "BOTTOMLEFT", 0, 0)
+
+	local only_name = ns.CreateCheckBox(parent, "only_name")
+	only_name:SetPoint("TOPLEFT", target_glow, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 2
 	local parent = QulightUIOptionsPanel.nameplate2
@@ -2308,9 +2329,12 @@ do
 	local battleground = ns.CreateCheckBox(parent, "battleground", L_GUI_STATS_BG)
 	battleground:SetPoint("TOPLEFT", coords, "BOTTOMLEFT", 0, 0)
 
+	local bottom_line = ns.CreateCheckBox(parent, "bottom_line")
+	bottom_line:SetPoint("TOPLEFT", battleground, "BOTTOMLEFT", 0, 0)
+
 	-- Currency
 	local currency = ns.addSubCategory(parent, L_GUI_STATS_SUBHEADER_CURRENCY)
-	currency:SetPoint("TOPLEFT", battleground, "BOTTOMLEFT", 0, -16)
+	currency:SetPoint("TOPLEFT", bottom_line, "BOTTOMLEFT", 0, -16)
 
 	local currency_archaeology = ns.CreateCheckBox(parent, "currency_archaeology", L_GUI_STATS_CURRENCY_ARCHAEOLOGY)
 	currency_archaeology:SetPoint("TOPLEFT", currency, "BOTTOMLEFT", 0, -8)

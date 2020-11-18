@@ -697,7 +697,7 @@ if friends.enabled then
 			C_FriendList.ShowFriends()
 			self.hovered = true
 			local online, total = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
-			local zone, status, classc, levelc, zone_r, zone_g, zone_b, grouped, realm_r, realm_g, realm_b
+			local status, classc, levelc, zone_r, zone_g, zone_b, grouped, realm_r, realm_g, realm_b
 			local BNonline, BNtotal = 0, BNGetNumFriends()
 			wipe(BNTableEnter)
 			if BNtotal > 0 then
@@ -829,6 +829,7 @@ if guild.enabled then
 		wipe(guildTable)
 		for i = 1, GetNumGuildMembers() do
 			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = GetGuildRosterInfo(i)
+			if not name then break end
 			name = Ambiguate(name, "none")
 			guildTable[i] = {name, rank, level, zone, note, officernote, connected, status, class, mobile}
 		end

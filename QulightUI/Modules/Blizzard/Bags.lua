@@ -133,6 +133,7 @@ local function Stuffing_OnShow()
 end
 
 local function StuffingBank_OnHide()
+	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then return end
 	CloseBankFrame()
 	if Stuffing.frame:IsShown() then
 		Stuffing.frame:Hide()
@@ -141,6 +142,9 @@ local function StuffingBank_OnHide()
 end
 
 local function Stuffing_OnHide()
+	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
+		CloseBankFrame()
+	end
 	if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
 		Stuffing.bankFrame:Hide()
 	end
@@ -217,6 +221,7 @@ function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	local clink = GetContainerItemLink(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest = GetContainerItemQuestInfo(b.bag, b.slot)
+	local itemIsUpgrade
 
 	-- Set all slot color to default QulightUI on update
 	if not b.frame.lock then
@@ -233,13 +238,16 @@ function Stuffing:SlotUpdate(b)
 	end
 
 	b.frame.Azerite:Hide()
-	b.frame.Corrupted:Hide()
 	b.frame:UpdateItemContextMatching() -- Update Scrap items
 
 	if b.frame.UpgradeIcon then
 		b.frame.UpgradeIcon:SetPoint("TOPLEFT", C.bag.button_size/2.7, -C.bag.button_size/2.7)
 		b.frame.UpgradeIcon:SetSize(C.bag.button_size/1.7, C.bag.button_size/1.7)
-		local itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		if IsAddOnLoaded("Pawn") then
+			itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		else
+			itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		end
 		if itemIsUpgrade and itemIsUpgrade == true then
 			b.frame.UpgradeIcon:SetShown(true)
 		else
@@ -250,18 +258,6 @@ function Stuffing:SlotUpdate(b)
 	if IsAddOnLoaded("CanIMogIt") then
 		CIMI_AddToFrame(b.frame, ContainerFrameItemButton_CIMIUpdateIcon)
 		ContainerFrameItemButton_CIMIUpdateIcon(b.frame.CanIMogItOverlay)
-	end
-
-	if IsAddOnLoaded("CorruptionTooltips") then
-		local itemLoc = ItemLocation:CreateFromBagAndSlot(b.bag, b.slot)
-		local Icons = CorruptionTooltips:GetModule("Icons")
-
-		if itemLoc:IsValid() then
-			local itemLink = C_Item.GetItemLink(itemLoc)
-			Icons:ApplyIcon(b.frame, itemLink)
-		else
-			Icons:ClearIcon(b.frame)
-		end
 	end
 
 	if clink then
@@ -277,10 +273,6 @@ function Stuffing:SlotUpdate(b)
 
 		if b.frame.Azerite and C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
 			b.frame.Azerite:Show()
-		end
-
-		if b.frame.Corrupted and IsCorruptedItem(clink) then
-			b.frame.Corrupted:Show()
 		end
 
 		if (IsItemUnusable(clink) or b.level and b.level > T.level) and not locked then
@@ -360,7 +352,6 @@ function Stuffing:CreateReagentContainer()
 	SwitchBankButton:SetScript("OnClick", function()
 		Reagent:Hide()
 		_G["StuffingFrameBank"]:Show()
-		_G["StuffingFrameBank"]:SetAlpha(1)
 		BankFrame_ShowPanel(BANK_PANELS[1].name)
 		PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
 	end)
@@ -390,6 +381,7 @@ function Stuffing:CreateReagentContainer()
 			ToggleDropDownMenu(nil, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
 			return
 		else
+			Reagent:Hide()
 			StuffingBank_OnHide()
 		end
 	end)
@@ -607,12 +599,6 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame.Azerite:SetPoint("BOTTOMRIGHT", ret.frame, -1, 1)
 		ret.frame.Azerite:Hide()
 
-		ret.frame.Corrupted = ret.frame:CreateTexture(nil, "OVERLAY")
-		ret.frame.Corrupted:SetAtlas("Nzoth-inventory-icon")
-		ret.frame.Corrupted:SetPoint("TOPLEFT", ret.frame, 1, -1)
-		ret.frame.Corrupted:SetPoint("BOTTOMRIGHT", ret.frame, -1, 1)
-		ret.frame.Corrupted:Hide()
-
 		local Battlepay = _G[ret.frame:GetName()].BattlepayItemTexture
 		if Battlepay then
 			Battlepay:SetAlpha(0)
@@ -726,6 +712,32 @@ function Stuffing:SearchUpdate(str)
 			end
 		end
 	end
+
+	if ReagentBankFrameItem1 then
+		for slotID = 1, 98 do
+			local _, _, _, _, _, _, ilink = GetContainerItemInfo(-3, slotID)
+			local button = _G["ReagentBankFrameItem"..slotID]
+			if ilink then
+				local name, _, _, _, minLevel, class, subclass = GetItemInfo(ilink)
+				class = _G[class] or ""
+				subclass = _G[subclass] or ""
+				minLevel = minLevel or 1
+				if not string.find(string.lower(name), str) and not string.find(string.lower(class), str) and not string.find(string.lower(subclass), str) then
+					if IsItemUnusable(name) or minLevel > T.level then
+						_G[button:GetName().."IconTexture"]:SetVertexColor(0.5, 0.5, 0.5)
+					end
+					SetItemButtonDesaturated(button, true)
+					button.searchOverlay:Show()
+				else
+					if IsItemUnusable(name) or minLevel > T.level then
+						_G[button:GetName().."IconTexture"]:SetVertexColor(1, 0.1, 0.1)
+					end
+					SetItemButtonDesaturated(button, false)
+					button.searchOverlay:Hide()
+				end
+			end
+		end
+	end
 end
 
 function Stuffing:SearchReset()
@@ -760,20 +772,47 @@ function Stuffing:CreateBagFrame(w)
 	f:SetFrameLevel(5)
 	f:RegisterForDrag("LeftButton")
 	f:SetScript("OnDragStart", function(self)
-		if IsShiftKeyDown() then
+		if IsAltKeyDown() or IsShiftKeyDown() then
 			self:StartMoving()
 			DragFunction(self, true)
 		end
 	end)
+
 	f:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
 		DragFunction(self, false)
+		local ap, _, rp, x, y = f:GetPoint()
+		QulightUIPositions[f:GetName()] = {ap, "UIParent", rp, x, y}
 	end)
 
-	if w == "Bank" then
-		f:SetPoint(unpack(C.position.bank))
+	f:SetScript("OnMouseDown", function(_, button)
+		if IsControlKeyDown() and button == "RightButton" then
+			f:ClearAllPoints()
+			if w == "Bank" then
+				f:SetPoint(unpack(C.position.bank))
+			else
+				f:SetPoint(unpack(C.position.bag))
+			end
+			f:SetUserPlaced(false)
+			QulightUIPositions[f:GetName()] = nil
+		end
+	end)
+
+	f:SetScript("OnMouseUp", function()
+		f:StopMovingOrSizing()
+		DragFunction(f, false)
+		local ap, _, rp, x, y = f:GetPoint()
+		QulightUIPositions[f:GetName()] = {ap, "UIParent", rp, x, y}
+	end)
+
+	if QulightUIPositions[f:GetName()] then
+		f:SetPoint(unpack(QulightUIPositions[f:GetName()]))
 	else
-		f:SetPoint(unpack(C.position.bag))
+		if w == "Bank" then
+			f:SetPoint(unpack(C.position.bank))
+		else
+			f:SetPoint(unpack(C.position.bag))
+		end
 	end
 
 	if w == "Bank" then
@@ -792,7 +831,7 @@ function Stuffing:CreateBagFrame(w)
 			else
 				_G["StuffingFrameReagent"]:Show()
 			end
-			_G["StuffingFrameBank"]:SetAlpha(0)
+			_G["StuffingFrameBank"]:Hide()
 		end)
 		f.b_reagent:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 		f.b_reagent.text:SetPoint("CENTER")
@@ -1528,42 +1567,76 @@ end
 
 function Stuffing:Restack()
 	local st = {}
+	local sr = {}
+	local did_restack = false
 
 	Stuffing_Open()
 
-	for _, v in pairs(self.buttons) do
-		if InBags(v.bag) then
-			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
+	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
+		for slotID = 1, 98 do
+			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(-3, slotID)
+			local button = _G["ReagentBankFrameItem"..slotID]
 			if clink then
 				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
 
 				if n and cnt ~= s then
-					if not st[clink] then
-						st[clink] = {{item = v, size = cnt, max = s}}
+					if not sr[clink] then
+						sr[clink] = {{item = slotID, size = cnt, max = s}}
 					else
-						table.insert(st[clink], {item = v, size = cnt, max = s})
+						table.insert(sr[clink], {item = slotID, size = cnt, max = s})
 					end
 				end
 			end
 		end
-	end
 
-	local did_restack = false
+		for _, v in pairs(sr) do
+			if #v > 1 then
+				for j = 2, #v, 2 do
+					local a, b = v[j - 1], v[j]
+					local _, _, l1 = GetContainerItemInfo(-3, a.item)
+					local _, _, l2 = GetContainerItemInfo(-3, b.item)
 
-	for _, v in pairs(st) do
-		if #v > 1 then
-			for j = 2, #v, 2 do
-				local a, b = v[j - 1], v[j]
-				local _, _, l1 = GetContainerItemInfo(a.item.bag, a.item.slot)
-				local _, _, l2 = GetContainerItemInfo(b.item.bag, b.item.slot)
-
-				if l1 or l2 then
-					did_restack = true
-				else
-					PickupContainerItem(a.item.bag, a.item.slot)
-					PickupContainerItem(b.item.bag, b.item.slot)
-					did_restack = true
+					if l1 or l2 then
+						did_restack = true
+					else
+						PickupContainerItem(-3, a.item)
+						PickupContainerItem(-3, b.item)
+						did_restack = true
+					end
 				end
+			end
+		end
+	else
+		for _, v in pairs(self.buttons) do
+			if InBags(v.bag) then
+				local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
+				if clink then
+					local n, _, _, _, _, _, _, s = GetItemInfo(clink)
+
+					if n and cnt ~= s then
+						if not st[clink] then
+							st[clink] = {{item = v, size = cnt, max = s}}
+						else
+							table.insert(st[clink], {item = v, size = cnt, max = s})
+						end
+					end
+				end
+			end
+		end
+		for _, v in pairs(st) do
+			if #v > 1 then
+				for j = 2, #v, 2 do
+					local a, b = v[j - 1], v[j]
+					local _, _, l1 = GetContainerItemInfo(a.item.bag, a.item.slot)
+					local _, _, l2 = GetContainerItemInfo(b.item.bag, b.item.slot)
+
+					if l1 or l2 then
+						did_restack = true
+					else
+						PickupContainerItem(a.item.bag, a.item.slot)
+						PickupContainerItem(b.item.bag, b.item.slot)
+						did_restack = true
+					end
 			end
 		end
 	end

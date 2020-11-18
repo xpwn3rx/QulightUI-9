@@ -90,7 +90,8 @@ C["unitframe"] = {
 	-- Main
 	["enable"] = true,							-- Enable unit frames
 	["own_color"] = false,						-- Set your color for health bars
-	["uf_color"] = {0.09, 0.09, 0.09},			-- Color for UF if ["own_color"] = true
+	["uf_color"] = {0.09, 0.09, 0.09},			-- Color for health bars if ["own_color"] = true
+	["uf_color_bg"] = {0.5, 0.5, 0.5},			-- Color for background
 	["enemy_health_color"] = false,				-- If enable, enemy target color is red
 	["show_total_value"] = false,				-- Display of info text on player and target with XXXX/Total
 	["color_value"] = false,					-- Health/mana value is colored
@@ -133,6 +134,7 @@ C["unitframe"] = {
 	["plugins_diminishing"] = false,			-- Diminishing Returns icons on arena frames
 	["plugins_power_prediction"] = false,		-- Power cost prediction bar on player frame
 	["plugins_absorbs"] = false,				-- Absorbs value on player frame
+	["boss_width"] = 150,						-- Boss and Arena width
 	-- Size
 	["player_width"] = 220,						-- Player and Target width
 	["extra_height_auto"] = true,				-- Auto height for health/power depending on font size
@@ -332,8 +334,10 @@ C["nameplate"] = {
 	["track_debuffs"] = true,					-- Show debuffs (from the list)
 	["track_buffs"] = false,					-- Show buffs above player nameplate (from the list)
 	["auras_size"] = 25,						-- Debuffs size
-	["healer_icon"] = true,					-- Show icon above enemy healers nameplate in battlegrounds
+	["healer_icon"] = true,						-- Show icon above enemy healers nameplate in battlegrounds
 	["totem_icons"] = false,					-- Show icon above enemy totems nameplate
+	["target_glow"] = true,						-- Show glow texture for target
+	["only_name"] = false,						-- Show only name for friendly units
 	-- Threat
 	["enhance_threat"] = true,					-- Enable threat feature, automatically changes by your role
 	["good_color"] = {0.2, 0.8, 0.2},			-- Good threat color
@@ -579,6 +583,7 @@ C["stats"] = {
 	["location"] = true,						-- Location
 	["coords"] = true,							-- Coords
 	["battleground"] = false,					-- BG Score
+	["bottom_line"] = true,						-- Bottom classcolor line
 	-- Currency (displayed in gold stats)
 	["currency_archaeology"] = false,			-- Archaeology Fragments
 	["currency_cooking"] = true,				-- Cooking Awards

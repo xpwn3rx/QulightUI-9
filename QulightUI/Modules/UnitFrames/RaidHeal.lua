@@ -70,7 +70,7 @@ local function Shared(self, unit)
 	self.Health.bg:SetAllPoints(self.Health)
 	self.Health.bg:SetTexture(C.media.texture)
 	if C.unitframe.own_color == true then
-		self.Health.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
+		self.Health.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg), 0.9)
 	else
 		self.Health.bg.multiplier = 0.2
 	end
@@ -284,7 +284,6 @@ local function Shared(self, unit)
 		self.RaidDebuffs.ShowDispellableDebuff = C.raidframe.plugins_debuffhighlight_icon
 		self.RaidDebuffs.FilterDispellableDebuff = true
 		self.RaidDebuffs.MatchBySpellName = true
-		self.RaidDebuffs.Debuffs = T.RaidDebuffs
 	end
 
 	if T.PostCreateHealRaidFrames then

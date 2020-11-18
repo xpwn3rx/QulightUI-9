@@ -16,6 +16,7 @@ T.extraHeight = C.unitframe.extra_health_height + C.unitframe.extra_power_height
 
 local player_width = C.unitframe.player_width
 local pet_width = (player_width - 7) / 2
+local boss_width = C.unitframe.boss_width
 
 -- Create layout
 local function Shared(self, unit)
@@ -87,7 +88,7 @@ local function Shared(self, unit)
 	if C.unitframe.own_color == true then
 		self.Health.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
 	else
-		self.Health.bg:SetVertexColor(.5,.5,.5,.9)
+		self.Health.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg),.9)
 		self.Health.bg.multiplier = 0.2
 	end
 
@@ -880,7 +881,7 @@ local function Shared(self, unit)
 			self.Castbar:SetHeight(16)
 		elseif unit == "arena" or unit == "boss" then
 			self.Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
-			self.Castbar:SetWidth(150)
+			self.Castbar:SetWidth(boss_width)
 			self.Castbar:SetHeight(16)
 		else
 			self.Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
@@ -998,9 +999,9 @@ local function Shared(self, unit)
 		self.Swing.bg:SetAllPoints(self.Swing)
 		self.Swing.bg:SetTexture(C.media.texture)
 		if C.unitframe.own_color == true then
-			self.Swing.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
+			self.Swing.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg), 0.9)
 		else
-			self.Swing.bg:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.2)
+			self.Swing.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg), 0.9)
 		end
 
 		self.Swing.Text = T.SetFontString(self.Swing, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
@@ -1236,7 +1237,7 @@ if C.unitframe.show_boss == true then
 		else
 			boss[i]:SetPoint("BOTTOM", boss[i-1], "TOP", 0, 30)
 		end
-		boss[i]:SetSize(150, 27 + T.extraHeight)
+		boss[i]:SetSize(boss_width, 27 + T.extraHeight)
 	end
 end
 
@@ -1253,7 +1254,7 @@ if C.unitframe.show_arena == true then
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 30)
 		end
-		arena[i]:SetSize(150, 27 + T.extraHeight)
+		arena[i]:SetSize(boss_width, 27 + T.extraHeight)
 	end
 
 	local arenatarget = {}
@@ -1468,7 +1469,7 @@ end
 --	Auto reposition heal raid frame
 ----------------------------------------------------------------------------------------
 if C.raidframe.auto_position == "DYNAMIC" then
-	local prevNum = C.raidframe.raid_groups
+	local prevNum = 5
 	local function Reposition(self)
 		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
 			if InCombatLockdown() then return end
@@ -1480,21 +1481,20 @@ if C.raidframe.auto_position == "DYNAMIC" then
 				maxGroup = 7
 			elseif num > 25 then
 				maxGroup = 6
-			else
-				maxGroup = 5
 			end
 			if maxGroup >= C.raidframe.raid_groups then
 				maxGroup = C.raidframe.raid_groups
 			end
 			if prevNum ~= maxGroup then
+				local offset = (maxGroup - 5) * 33
 				if C.unitframe.castbar_icon == true then
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + (maxGroup - 5) * 33)
+					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 				else
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + (maxGroup - 5) * 33)
+					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
 				end
 
-				player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + (maxGroup - 5) * 33)
-				target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + (maxGroup - 5) * 33)
+				player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
+				target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
 				prevNum = maxGroup
 			end
 		else
@@ -1509,14 +1509,15 @@ if C.raidframe.auto_position == "DYNAMIC" then
 elseif C.raidframe.auto_position == "STATIC" then
 	local function Reposition()
 		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
+			local offset = (C.raidframe.raid_groups - 5) * 33
 			if C.unitframe.castbar_icon == true then
-				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + (C.raidframe.raid_groups - 5) * 33)
+				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 			else
-				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + (C.raidframe.raid_groups - 5) * 33)
+				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
 			end
 
-			player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + (C.raidframe.raid_groups - 5) * 33)
-			target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + (C.raidframe.raid_groups - 5) * 33)
+			player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
+			target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
 		end
 	end
 

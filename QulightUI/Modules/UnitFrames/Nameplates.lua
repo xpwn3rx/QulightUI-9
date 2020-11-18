@@ -36,6 +36,7 @@ function frame:PLAYER_LOGIN()
 	if C.nameplate.enhance_threat == true then
 		SetCVar("threatWarning", 3)
 	end
+	SetCVar("nameplateGlobalScale", 1)
 	SetCVar("namePlateMinScale", 1)
 	SetCVar("namePlateMaxScale", 1)
 	SetCVar("nameplateLargerScale", 1)
@@ -206,6 +207,59 @@ local function SetVirtualBorder(frame, r, g, b)
 	frame.borderright:SetColorTexture(r, g, b)
 end
 
+-- Auras functions
+local AurasCustomFilter = function(_, unit, button, name, _, _, _, _, _, caster, isStealable, nameplateShowSelf, _, _, _, _, nameplateShowAll)
+	local allow = false
+
+	if caster == "player" then
+		if UnitIsUnit(unit, "player") then
+			if ((nameplateShowAll or nameplateShowSelf) and not T.BuffBlackList[name]) then
+				allow = true
+			elseif T.BuffWhiteList[name] then
+				allow = true
+			end
+		else
+			if ((nameplateShowAll or nameplateShowSelf) and not T.DebuffBlackList[name]) then
+				allow = true
+			elseif T.DebuffWhiteList[name] then
+				allow = true
+			end
+		end
+	end
+
+	return allow
+end
+
+local AurasPostCreateIcon = function(element, button)
+	CreateVirtualFrame(button)
+	button:EnableMouse(false)
+
+	button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * T.noscalemult, C.font.auras_font_style)
+	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+	button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
+	button.remaining:SetJustifyH("CENTER")
+
+	button.cd.noCooldownCount = true
+
+	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
+	button.count:SetJustifyH("RIGHT")
+	button.count:SetFont(C.font.auras_font, C.font.auras_font_size * T.noscalemult, C.font.auras_font_style)
+	button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	if C.aura.show_spiral == true then
+		element.disableCooldown = false
+		button.cd:SetReverse(true)
+		button.parent = CreateFrame("Frame", nil, button)
+		button.parent:SetFrameLevel(button.cd:GetFrameLevel() + 1)
+		button.count:SetParent(button.parent)
+		button.remaining:SetParent(button.parent)
+	else
+		element.disableCooldown = true
+	end
+end
+
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
@@ -241,6 +295,19 @@ local CreateAuraTimer = function(self, elapsed)
 			self.elapsed = 0
 		end
 	end
+end
+
+local AurasPostUpdateIcon = function(_, _, icon, _, _, duration, expiration)
+	if duration and duration > 0 and C.aura.show_timer == true then
+		icon.remaining:Show()
+		icon.timeLeft = expiration
+		icon:SetScript("OnUpdate", CreateAuraTimer)
+	else
+		icon.remaining:Hide()
+		icon.timeLeft = math.huge
+		icon:SetScript("OnUpdate", nil)
+	end
+	icon.first = true
 end
 
 local function threatColor(self, forced)
@@ -334,6 +401,14 @@ local function UpdateTarget(self)
 			self:SetAlpha(C.nameplate.alpha)
 		end
 	end
+	
+	if C.nameplate.target_glow then
+		if UnitIsUnit(self.unit, "target") and not UnitIsUnit(self.unit, "player") then
+			self.Glow:Show()
+		else
+			self.Glow:Hide()
+		end
+	end
 end
 
 local function UpdateName(self)
@@ -395,11 +470,11 @@ local function castColor(self)
 	end
 end
 
-local function HealthPostUpdate(self, unit)
+local function HealthPostUpdate(self, unit, cur, max)
 	local main = self:GetParent()
 	local perc = 0
-	if self.max and self.max > 0 then
-		perc = self.cur / self.max
+	if max and max > 0 then
+		perc = cur / max
 	end
 
 	local r, g, b
@@ -443,7 +518,7 @@ local function callback(self, _, unit)
 		local unitGUID = UnitGUID(unit)
 		self.npcID = unitGUID and select(6, strsplit('-', unitGUID))
 		self.unitName = UnitName(unit)
-		if self.unitName and T.PlateBlacklist[self.unitName] then
+		if self.npcID and T.PlateBlacklist[self.npcID] then
 			self:Hide()
 		else
 			self:Show()
@@ -459,6 +534,29 @@ local function callback(self, _, unit)
 			self.Name:Show()
 			self.Castbar:SetAlpha(1)
 			self.RaidTargetIndicator:SetAlpha(1)
+		
+			if C.nameplate.only_name then
+				if UnitIsFriend("player", unit) then
+					self.Health:SetAlpha(0)
+					self.Name:ClearAllPoints()
+					self.Name:SetPoint("CENTER", self, "CENTER", 0, 0)
+					self.Level:SetAlpha(0)
+					self.Castbar:SetAlpha(0)
+					if C.nameplate.target_glow then
+						self.Glow:SetAlpha(0)
+					end
+				else
+					self.Health:SetAlpha(1)
+					self.Name:ClearAllPoints()
+					self.Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -3, 4)
+					self.Name:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 3, 4)
+					self.Level:SetAlpha(1)
+					self.Castbar:SetAlpha(1)
+					if C.nameplate.target_glow then
+						self.Glow:SetAlpha(1)
+					end
+				end
+			end
 		end
 	end
 end
@@ -536,6 +634,17 @@ local function style(self, unit)
 		self:Tag(self.Name, "[NameplateNameColor][NameLong]")
 	end
 
+	-- Target Glow
+	if C.nameplate.target_glow then
+		self.Glow = CreateFrame("Frame", nil, self, "BackdropTemplate")
+		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\ShestakUI\Media\Textures\Glow.tga]], edgeSize = 4 * T.noscalemult})
+		self.Glow:SetPoint("TOPLEFT", -7 * T.noscalemult, 7 * T.noscalemult)
+		self.Glow:SetPoint("BOTTOMRIGHT", 7 * T.noscalemult, -7 * T.noscalemult)
+		self.Glow:SetBackdropBorderColor(0.8, 0.8, 0.8)
+		self.Glow:SetFrameLevel(0)
+		self.Glow:Hide()
+	end
+	
 	-- Create Level
 	self.Level = self:CreateFontString(nil, "OVERLAY")
 	self.Level:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
@@ -635,70 +744,9 @@ local function style(self, unit)
 		self.Auras.spacing = 5 * T.noscalemult
 		self.Auras.size = C.nameplate.auras_size * T.noscalemult - 3
 
-		self.Auras.CustomFilter = function(_, unit, _, name, _, _, _, _, _, caster, _, nameplateShowSelf, _, _, _, _, nameplateShowAll)
-			local allow = false
-
-			if caster == "player" then
-				if UnitIsUnit(unit, "player") then
-					if ((nameplateShowAll or nameplateShowSelf) and not T.BuffBlackList[name]) then
-						allow = true
-					elseif T.BuffWhiteList[name] then
-						allow = true
-					end
-				else
-					if ((nameplateShowAll or nameplateShowSelf) and not T.DebuffBlackList[name]) then
-						allow = true
-					elseif T.DebuffWhiteList[name] then
-						allow = true
-					end
-				end
-			end
-
-			return allow
-		end
-
-		self.Auras.PostCreateIcon = function(element, button)
-			CreateVirtualFrame(button)
-			button:EnableMouse(false)
-
-			button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * T.noscalemult, C.font.auras_font_style)
-			button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-			button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
-			button.remaining:SetJustifyH("CENTER")
-
-			button.cd.noCooldownCount = true
-
-			button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
-			button.count:SetJustifyH("RIGHT")
-			button.count:SetFont(C.font.auras_font, C.font.auras_font_size * T.noscalemult, C.font.auras_font_style)
-			button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-
-			if C.aura.show_spiral == true then
-				element.disableCooldown = false
-				button.cd:SetReverse(true)
-				button.parent = CreateFrame("Frame", nil, button)
-				button.parent:SetFrameLevel(button.cd:GetFrameLevel() + 1)
-				button.count:SetParent(button.parent)
-				button.remaining:SetParent(button.parent)
-			else
-				element.disableCooldown = true
-			end
-		end
-
-		self.Auras.PostUpdateIcon = function(_, _, icon, _, _, duration, expiration)
-			if duration and duration > 0 and C.aura.show_timer == true then
-				icon.remaining:Show()
-				icon.timeLeft = expiration
-				icon:SetScript("OnUpdate", CreateAuraTimer)
-			else
-				icon.remaining:Hide()
-				icon.timeLeft = math.huge
-				icon:SetScript("OnUpdate", nil)
-			end
-			icon.first = true
-		end
+		self.Auras.CustomFilter = AurasCustomFilter
+		self.Auras.PostCreateIcon = AurasPostCreateIcon
+		self.Auras.PostUpdateIcon = AurasPostUpdateIcon
 	end
 
 	self.Health:RegisterEvent("PLAYER_REGEN_DISABLED")
