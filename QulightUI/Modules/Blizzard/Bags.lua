@@ -1756,6 +1756,7 @@ StaticPopupDialogs.BUY_BANK_SLOT = {
 	timeout = 0,
 	hideOnEscape = 1,
 }
+end
 
 -- Kill Blizzard functions
 LootWonAlertFrame_OnClick = T.dummy
