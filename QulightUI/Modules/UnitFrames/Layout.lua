@@ -88,7 +88,7 @@ local function Shared(self, unit)
 	if C.unitframe.own_color == true then
 		self.Health.bg:SetVertexColor(C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3], 0.2)
 	else
-		self.Health.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg),.9)
+		self.Health.bg:SetVertexColor(.5, .5, .5, 0.9)
 		self.Health.bg.multiplier = 0.2
 	end
 

@@ -798,13 +798,6 @@ function Stuffing:CreateBagFrame(w)
 		end
 	end)
 
-	f:SetScript("OnMouseUp", function()
-		f:StopMovingOrSizing()
-		DragFunction(f, false)
-		local ap, _, rp, x, y = f:GetPoint()
-		QulightUIPositions[f:GetName()] = {ap, "UIParent", rp, x, y}
-	end)
-
 	if QulightUIPositions[f:GetName()] then
 		f:SetPoint(unpack(QulightUIPositions[f:GetName()]))
 	else
@@ -941,7 +934,7 @@ function Stuffing:InitBags()
 		Stuffing:SearchUpdate("")
 	end
 
-		-- local resetAndClear = function(self)
+	-- local resetAndClear = function(self)
 		-- self:GetParent().detail:Show()
 		-- self:ClearFocus()
 		-- Stuffing:SearchReset()
@@ -1637,6 +1630,7 @@ function Stuffing:Restack()
 						PickupContainerItem(b.item.bag, b.item.slot)
 						did_restack = true
 					end
+				end
 			end
 		end
 	end
@@ -1756,7 +1750,6 @@ StaticPopupDialogs.BUY_BANK_SLOT = {
 	timeout = 0,
 	hideOnEscape = 1,
 }
-end
 
 -- Kill Blizzard functions
 LootWonAlertFrame_OnClick = T.dummy
