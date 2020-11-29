@@ -20,6 +20,7 @@
 	<Script file="Channels.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="ChatConfig.lua"/>
+	<Script file="ChromieTime.lua"/>
 	<Script file="Collections.lua"/>
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
@@ -58,11 +59,11 @@
 	<Script file="PartyPoseUI.lua"/>
 	<Script file="Petition.lua"/>
 	<Script file="PetStable.lua"/>
+	<Script file="PlayerChoice.lua"/>
 	<Script file="PvE.lua"/>
 	<Script file="PvP.lua"/>
 	<Script file="PvPMatch.lua"/>
 	<Script file="Quest.lua"/>
-	<Script file="QuestChoice.lua"/>
 	<Script file="QuestLog.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="RaidInfo.lua"/>

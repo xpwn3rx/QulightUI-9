@@ -39,7 +39,7 @@ local function SkinItemButton(_, block)
 	local item = block.itemButton
 
 	if item and not item.skinned then
-		item:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+		item:SetSize(25, 25)
 		item:SetTemplate("Default")
 		item:StyleButton()
 
@@ -66,21 +66,47 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", SkinItemButton)
 hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddObjective", SkinItemButton)
 hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddObjective", SkinItemButton)
 
-hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", function(block, button)
-	if button and button.GetPoint then
-		local a, b, c, d, e = button:GetPoint()
-		if block.groupFinderButton and b == block.groupFinderButton and block.itemButton and button == block.itemButton then
-			button:SetPoint(a, b, c, d - 1, e)
-		end
-	end
-end)
-
 hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
 	if block.hasGroupFinderButton and block.groupFinderButton and not block.groupFinderButton.styled then
-		block.groupFinderButton:SetSize(21, 21)
-		block.groupFinderButton:SkinButton()
+		local icon = block.groupFinderButton
+		icon:SetSize(26, 26)
+		icon:SetNormalTexture("")
+		icon:SetHighlightTexture("")
+		icon:SetPushedTexture("")
+		icon.b = CreateFrame("Frame", nil, block)
+		icon.b:SetTemplate("Overlay")
+		icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", 2, -3)
+		icon.b:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -4, 3)
 
-		block.groupFinderButton.styled = true
+		icon:HookScript("OnEnter", function(self)
+			if self:IsEnabled() then
+				self.b:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				if self.b.overlay then
+					self.b.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+				end
+			end
+		end)
+
+		icon:HookScript("OnLeave", function(self)
+			self.b:SetBackdropBorderColor(unpack(C.media.border_color))
+			if self.b.overlay then
+				self.b.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
+			end
+		end)
+
+		hooksecurefunc(icon, "Hide", function(button)
+			if button.b and button.b:IsShown() then
+				button.b:Hide()
+			end
+		end)
+
+		hooksecurefunc(icon, "Show", function(button)
+			if button.b and not button.b:IsShown() then
+				button.b:Show()
+			end
+		end)
+
+	icon.styled = true
 	end
 end)
 
@@ -294,13 +320,9 @@ local function SkinSimpleBar(self, block, line)
 	end
 end
 
-hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", function(self, block, line)
-	SkinSimpleBar(self, block, line)
-end)
-
-hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", function(self, block, line)
-	SkinSimpleBar(self, block, line)
-end)
+hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinSimpleBar)
+hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinSimpleBar)
+hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinSimpleBar)
 
 ----------------------------------------------------------------------------------------
 --	Skin Timer bar

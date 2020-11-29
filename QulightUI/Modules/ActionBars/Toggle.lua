@@ -248,7 +248,7 @@ for i = 1, 5 do
 				if QulightUISettingsPerChar.BottomBars > 2 then
 					QulightUISettingsPerChar.BottomBars = 1
 				end
-			elseif C.actionbar.rightbars = true or C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
+			elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
 				if QulightUISettingsPerChar.BottomBars > 3 then
 					QulightUISettingsPerChar.BottomBars = 1
 				elseif QulightUISettingsPerChar.BottomBars > 2 then
@@ -256,7 +256,7 @@ for i = 1, 5 do
 				elseif QulightUISettingsPerChar.BottomBars < 1 then
 					QulightUISettingsPerChar.BottomBars = 3
 				end
-			elseif C.actionbar.rightbars = true or C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
+			elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
 				if QulightUISettingsPerChar.BottomBars > 2 then
 					QulightUISettingsPerChar.BottomBars = 1
 				end

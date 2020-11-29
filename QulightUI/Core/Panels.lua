@@ -99,6 +99,8 @@ StanceAnchor:SetScript("OnEvent", function()
 	end
 end)
 
+RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
+
 local style = {
 	bgFile =  C.media.texture,
 	edgeFile = C.media.blank, 

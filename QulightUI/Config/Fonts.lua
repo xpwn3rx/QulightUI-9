@@ -107,6 +107,11 @@ C["font"] = {
 	["bags_font_size"] = 12,
 	["bags_font_style"] = "OUTLINE",
 	["bags_font_shadow"] = false,
+
+	-- Blizzard fonts
+	["tooltip_header_font_size"] = 13,
+	["tooltip_font_size"] = 11,
+	["bubble_font_size"] = 14,
 }
 
 ----------------------------------------------------------------------------------------
@@ -199,5 +204,8 @@ if locale_font then
 	C["font"].bags_font = locale_font
 	C["font"].bags_font_size = 11
 	C["font"].bags_font_style = "OUTLINE"
-	C["font"].bags_font_shadow = true
+	
+	C["font"].tooltip_header_font_size = 14
+	C["font"].tooltip_font_size = 12
+	C["font"].bubble_font_size = 14
 end

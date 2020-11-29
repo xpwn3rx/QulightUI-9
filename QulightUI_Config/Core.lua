@@ -402,6 +402,7 @@ end
 
 -- DropDown
 local DropDownText = {
+	["Interface\\AddOns\\QulightUI\\Media\\Textures\\Texture.tga"] = "Normal texture",
 	["Interface\\AddOns\\QulightUI\\Media\\Fonts\\Normal.ttf"] = "Normal font",
 	["Interface\\AddOns\\QulightUI\\Media\\Fonts\\Pixel.ttf"] = "Pixel Font",
 	[STANDARD_TEXT_FONT] = "Blizzard font",
@@ -415,25 +416,32 @@ local DropDownText = {
 	["STATIC"] = L.raidframe_auto_position_static,
 }
 
-ns.CreateDropDown = function(parent, option, needsReload, text, tableValue, keyName)
+ns.CreateDropDown = function(parent, option, needsReload, text, tableValue, LSM, isFont)
 	local f = CreateFrame("Frame", parent:GetName()..option.."DropDown", parent, "UIDropDownMenuTemplate")
 	UIDropDownMenu_SetWidth(f, 110)
 
-	UIDropDownMenu_Initialize(f, function(self)
+	UIDropDownMenu_Initialize(f, function(self, level)
 		local info = UIDropDownMenu_CreateInfo()
 		info.func = self.SetValue
 		for key, value in pairs(tableValue) do
-			info.text = keyName and key or DropDownText[value] or value
+			info.text = LSM and (DropDownText[value] or key) or DropDownText[value] or value
 			info.arg1 = value
 			info.arg2 = key
 			info.checked = value == f.selectedValue
+
+			if isFont then
+				local fObject = CreateFont(info.text)
+				fObject:SetFont(value, 12)
+				info.fontObject = fObject
+			end
+
 			UIDropDownMenu_AddButton(info)
 		end
 	end)
 
 	function f:SetValue(newValue, newkey)
 		f.selectedValue = newValue
-		local text = keyName and newkey or DropDownText[newValue] or newValue
+		local text = LSM and (DropDownText[newValue] or newkey) or DropDownText[newValue] or newValue
 		UIDropDownMenu_SetText(f, text)
 		SaveValue(f, newValue)
 		old[f] = f.oldValue
@@ -488,7 +496,7 @@ local function setActiveTab(tab)
 
 	activeTab.panel:Show()
 
-	if activeTab.panel.second then
+	if activeTab.panel_2 then
 		activeTab.panel.PrevPageButton:Show()
 		activeTab.panel.PrevPageButton:Disable()
 		activeTab.panel.NextPageButton:Enable()
@@ -508,13 +516,17 @@ local onTabClick = function(tab)
 
 	activeTab.panel.tab.Text:SetTextColor(1, 0.82, 0)
 
-	if activeTab.panel.second then
+	if activeTab.panel_2 then
 		activeTab.panel.PrevPageButton:Hide()
 		activeTab.panel_2:Hide()
 	end
 
-	if activeTab.panel.third then
+	if activeTab.panel_3 then
 		activeTab.panel_3:Hide()
+	end
+
+	if activeTab.panel_4 then
+		activeTab.panel_4:Hide()
 	end
 
 	setActiveTab(tab)
@@ -543,7 +555,7 @@ local function CreateOptionPanel(name, text, subText)
 	return panel
 end
 
-ns.addCategory = function(name, text, subText, second, third)
+ns.addCategory = function(name, text, subText, num)
 	local tab = CreateFrame("Button", nil, QulightUIOptionsPanel)
 	tab:SetPoint("TOPLEFT", 11, -offset)
 	tab:SetSize(168, 22)
@@ -555,18 +567,36 @@ ns.addCategory = function(name, text, subText, second, third)
 	tab.Text:SetJustifyH("LEFT")
 
 	tab:SetScript("OnMouseUp", onTabClick)
+	offset = (offset + 24)
 
 	local tag = strlower(name)
 
-	local panel, panel_2, panel_3 = CreateOptionPanel(baseName..name, text, subText)
+	local panel = CreateOptionPanel(baseName..name, text, subText)
 	panel[1] = panel
+	tinsert(panels, panel)
 
-	local numPages = third and 3 or second and 2 or 1
+	tab.panel = panel
+	panel.tab = tab
+	panel.tag = tag
+	QulightUIOptionsPanel[tag] = panel
+
+	local numPages = num or 1
 	if numPages > 1 then
 		local name2 = name.."2"
 		local tag2 = strlower(name2)
-		panel_2 = CreateOptionPanel(baseName..name2, text, subText)
+		local panel_2 = CreateOptionPanel(baseName..name2, text, subText)
 		panel[2] = panel_2
+
+		tinsert(panels, panel_2)
+
+		if name == "general" then
+			panel_2.tag = "media"
+		else
+			panel_2.tag = tag
+		end
+
+		QulightUIOptionsPanel[tag2] = panel_2
+		tab.panel_2 = panel_2
 
 		local PrevPageButton = CreateFrame("Button", baseName..name.."PrevButton", QulightUIOptionsPanel)
 		PrevPageButton:SetPoint("TOPRIGHT", -45, -44)
@@ -597,16 +627,24 @@ ns.addCategory = function(name, text, subText, second, third)
 			if panel.currentPage == 1 then
 				PrevPageButton:Disable()
 				NextPageButton:Enable()
-				panel:Show()
+				panel[1]:Show()
 			elseif panel.currentPage == 2 then
 				PrevPageButton:Enable()
-				if not third then
-					NextPageButton:Disable()
-				else
+				if numPages > 2 then
 					NextPageButton:Enable()
+				else
+					NextPageButton:Disable()
 				end
-				panel_2:Show()
+				panel[2]:Show()
 			elseif panel.currentPage == 3 then
+				PrevPageButton:Enable()
+				if numPages > 3 then
+					NextPageButton:Enable()
+				else
+					NextPageButton:Disable()
+				end
+				panel[3]:Show()
+			elseif panel.currentPage == 4 then
 				PrevPageButton:Enable()
 				NextPageButton:Disable()
 				panel_3:Show()
@@ -621,21 +659,11 @@ ns.addCategory = function(name, text, subText, second, third)
 			SetPage(false)
 		end)
 
-		tinsert(panels, panel_2)
 		tinsert(ns.NextPrevButtons, PrevPageButton)
 		tinsert(ns.NextPrevButtons, NextPageButton)
 
-		panel.second = true
 		panel.PrevPageButton = PrevPageButton
 		panel.NextPageButton = NextPageButton
-
-		if name == "general" then
-			panel_2.tag = "media"
-		else
-			panel_2.tag = tag
-		end
-
-		QulightUIOptionsPanel[tag2] = panel_2
 
 		panel:SetScript("OnMouseWheel", function(_, delta)
 			if delta < 0 then
@@ -652,13 +680,12 @@ ns.addCategory = function(name, text, subText, second, third)
 		if numPages > 2 then
 			local name3 = name.."3"
 			local tag3 = strlower(name3)
-			panel_3 = CreateOptionPanel(baseName..name3, text, subText)
+			local panel_3 = CreateOptionPanel(baseName..name3, text, subText)
 			panel[3] = panel_3
 
 			tinsert(panels, panel_3)
 
-			panel.third = true
-
+			tab.panel_3 = panel_3
 			panel_3.tag = tag
 			QulightUIOptionsPanel[tag3] = panel_3
 
@@ -675,20 +702,34 @@ ns.addCategory = function(name, text, subText, second, third)
 					PrevPageButton:Click()
 				end
 			end)
+
+			if numPages > 3 then
+				local name4 = name.."4"
+				local tag4 = strlower(name4)
+				local panel_4 = CreateOptionPanel(baseName..name4, text, subText)
+				panel[4] = panel_4
+				tinsert(panels, panel_4)
+
+				tab.panel_4 = panel_4
+				panel_4.tag = tag
+				QulightUIOptionsPanel[tag4] = panel_4
+
+				panel_3:SetScript("OnMouseWheel", function(_, delta)
+					if delta > 0 then
+						PrevPageButton:Click()
+					elseif delta < 0 then
+						NextPageButton:Click()
+					end
+				end)
+
+				panel_4:SetScript("OnMouseWheel", function(_, delta)
+					if delta > 0 then
+						PrevPageButton:Click()
+					end
+				end)
+			end
 		end
 	end
-
-	tab.panel = panel
-	tab.panel_2 = panel_2
-	tab.panel_3 = panel_3
-	panel.tab = tab
-	panel.tag = tag
-
-	QulightUIOptionsPanel[tag] = panel
-
-	tinsert(panels, panel)
-
-	offset = (offset + 24)
 end
 
 ns.addSubCategory = function(category, name)
