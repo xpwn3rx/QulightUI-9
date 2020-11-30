@@ -7,8 +7,8 @@ if GetLocale() ~= "frFR" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Sauvegarder la configuration par personnage"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "Réinitialiser les paramètres de votre personnage sur ShestakUI ?"
-L_GUI_RESET_ALL = "Réinitialiser tous les paramètres de ShestakUI ?"
+L_GUI_RESET_CHAR = "Réinitialiser les paramètres de votre personnage sur QulightUI ?"
+L_GUI_RESET_ALL = "Réinitialiser tous les paramètres de QulightUI ?"
 L_GUI_PER_CHAR = "Modifier la configuration du personnage ?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review
@@ -69,6 +69,9 @@ L.font_subheader_aura = "Police des Auras"
 L.font_subheader_filger = "Police de Filger"
 L.font_subheader_style = "Police de la stylisation"
 L.font_subheader_bag = "Police des Sacs"
+L.font_subheader_blizzard = "System font size" -- Need review
+L.font_tooltip_header_font_size = "Tooltip header" -- Need review
+L.font_tooltip_font_size = "Tooltip text" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "Personnalisation d'addon"
@@ -300,8 +303,8 @@ L_GUI_NAMEPLATE_CLASS_ICON = "Icône de classe en JcJ"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Afficher les noms abrégés"
 L_GUI_NAMEPLATE_CLAMP = "Afficher les barres en haut de l'écran quand celles-ci sont au delà de la vision"
 L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Affiche les affaiblissements (Les noms abrégés doivent être désactivés)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Afficher les améliorations au dessus des barres des alliés (contenu dans la liste)"
-L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Taille des affaiblissements"
+L_GUI_NAMEPLATE_SHOW_BUFFS = "Show dispellable enemy buffs and buffs from the list" -- Need review
+L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Taille des affaiblissements" -- Need review
 L_GUI_NAMEPLATE_HEALER_ICON = "Affiche une icône de soigneur sur toutes les barres de vie des soigneurs ennemis dans les champs de bataille"
 L_GUI_NAMEPLATE_TOTEM_ICONS = "Afficher une icone au dessus des barres de vie des totems ennemis"
 L.nameplate_target_glow = "Show glow texture for target" -- Need review

@@ -7,8 +7,8 @@ if GetLocale() ~= "itIT" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Imposta le impostazioni 'Per-Personaggio'"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "Vuoi davvero ripristinare le impostazioni iniziali della ShestakUI per questo personaggio?"
-L_GUI_RESET_ALL = "Vuoi davvero ripristinate tutte le impostazioni iniziali della ShestakUI?"
+L_GUI_RESET_CHAR = "Vuoi davvero ripristinare le impostazioni iniziali della QulightUI per questo personaggio?"
+L_GUI_RESET_ALL = "Vuoi davvero ripristinate tutte le impostazioni iniziali della QulightUI?"
 L_GUI_PER_CHAR = "Vuoi davvero modificare questa impostazione (attivazione/disattivazione salvataggio impostazioni 'Per-Personaggio')?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review
@@ -69,6 +69,9 @@ L.font_subheader_aura = "Auras font" -- Need review
 L.font_subheader_filger = "Filger font" -- Need review
 L.font_subheader_style = "Stylization font" -- Need review
 L.font_subheader_bag = "Bags font" -- Need review
+L.font_subheader_blizzard = "System font size" -- Need review
+L.font_tooltip_header_font_size = "Tooltip header" -- Need review
+L.font_tooltip_font_size = "Tooltip text" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "Restyling"
@@ -300,8 +303,8 @@ L_GUI_NAMEPLATE_CLASS_ICON = "Icone delle classi in PvP"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Mostra nomi abbreviati"
 L_GUI_NAMEPLATE_CLAMP = "Aggancia le barre delle unità in cima allo schermo quando sono fuori portata visiva"
 L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Mostra le penalità sulle barre delle unità (l'ozpione 'Mostra nomi abbreviati' deve essere disabilitata)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Mostra i benefici (da un elenco) sopra la barra la barra del giocatore"
-L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Dimensioni delle penalità sulle barre delle unità"
+L_GUI_NAMEPLATE_SHOW_BUFFS = "Show dispellable enemy buffs and buffs from the list" -- Need review
+L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Dimensioni delle penalità sulle barre delle unità" -- Need review
 L_GUI_NAMEPLATE_HEALER_ICON = "Nei Campi di Battaglia, mostra un'icona 'guaritore' accanto alle barre delle unità di tutti i guaritori nemici"
 L_GUI_NAMEPLATE_TOTEM_ICONS = "Mostra un’icona sopra la barra dei totem nemici"
 L.nameplate_target_glow = "Show glow texture for target" -- Need review

@@ -3,12 +3,12 @@ if GetLocale() ~= "ruRU" then return end
 
 ----------------------------------------------------------------------------------------
 --	Localization for ruRU client
---	Translation: Shestak, Wetxius
+--	Translation: Qulight, Wetxius
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Установить настройки для персонажа"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Переключение между профилем, который применяется ко всем персонажам, и профилем, уникальным для этого персонажа."
-L_GUI_RESET_CHAR = "Вы уверены, что хотите сбросить все настройки ShestakUI для этого персонажа?"
-L_GUI_RESET_ALL = "Вы уверены, что хотите сбросить все настройки ShestakUI?"
+L_GUI_RESET_CHAR = "Вы уверены, что хотите сбросить все настройки QulightUI для этого персонажа?"
+L_GUI_RESET_ALL = "Вы уверены, что хотите сбросить все настройки QulightUI?"
 L_GUI_PER_CHAR = "Вы уверены, что хотите сменить режим сохранения настроек?"
 L_GUI_RESET_CAT = "Вы уверены, что хотите сбросить настройки этого раздела?"
 L_GUI_RESET_CAT_DESC = "Cбросывает настройки раздела. \nCTRL-клик, чтобы сбросить всё"
@@ -69,6 +69,9 @@ L.font_subheader_aura = "Шрифт аур"
 L.font_subheader_filger = "Шрифт полос Filger"
 L.font_subheader_style = "Шрифт стилизаций"
 L.font_subheader_bag = "Шрифт сумок"
+L.font_subheader_blizzard = "Размер системных шрифтов"
+L.font_tooltip_header_font_size = "Заголовок подсказки"
+L.font_tooltip_font_size = "Текст подсказки"
 
 -- Skins options
 L_GUI_SKINS = "Стилизация"
@@ -299,8 +302,8 @@ L_GUI_NAMEPLATE_CASTBAR_NAME = "Название заклинания"
 L_GUI_NAMEPLATE_CLASS_ICON = "Иконки классов в PvP"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Сокращение имен"
 L_GUI_NAMEPLATE_CLAMP = "Прикреплять к верху экрана, когда цели пропадают из прямой видимости"
-L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Отображать отрицательные эффекты (из списка)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Отображать баффы над полосой игрока (из списка)"
+L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Отображать ваши отрицательные эффекты (из списка)"
+L_GUI_NAMEPLATE_SHOW_BUFFS = "Отображать снимаемые баффы + из списка"
 L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Размер иконок аур"
 L_GUI_NAMEPLATE_HEALER_ICON = "Отображать иконку над вражескими целителями на полях боя"
 L_GUI_NAMEPLATE_TOTEM_ICONS = "Отображать иконку над вражескими тотемами"

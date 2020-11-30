@@ -7,8 +7,8 @@ if GetLocale() ~= "deDE" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Einstellungen für jeden Charakter einzeln vornehmen"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Umschalten zwischen einem Profil, das für alle Chars gilt, und einem Profil, das für diesen Chars gilt."
-L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für ShestakUI zurücksetzen willst?"
-L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von ShestakUI zurücksetzen willst?"
+L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für QulightUI zurücksetzen willst?"
+L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von QulightUI zurücksetzen willst?"
 L_GUI_PER_CHAR = "Bist du sicher, dass du 'Einzelne Einstellungen für jeden Charakter' ein oder ausschalten möchtest?"
 L_GUI_RESET_CAT = "Bist Du sicher, dass Du die Einstellungen der Kategorie zurücksetzen möchtest?"
 L_GUI_RESET_CAT_DESC = "Einstellungen der Kategorie zurücksetzen. \nCTRL-Klick zum Zurücksetzen aller"
@@ -69,6 +69,9 @@ L.font_subheader_aura = "Auras Schriftart"
 L.font_subheader_filger = "Filger Schriftart"
 L.font_subheader_style = "Design Schriftart"
 L.font_subheader_bag = "Taschen Schriftart"
+L.font_subheader_blizzard = "System font size" -- Need review
+L.font_tooltip_header_font_size = "Tooltip header" -- Need review
+L.font_tooltip_font_size = "Tooltip text" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "Design/Skins"
@@ -300,8 +303,8 @@ L_GUI_NAMEPLATE_CLASS_ICON = "Zeige Klassensymbole an (PvP)"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Namen abgekürzt anzeigen"
 L_GUI_NAMEPLATE_CLAMP = "Namensschilder am oberen Rand des Bildschirms, wenn außerhalb der Sichtweite."
 L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Zeige Schwächungszauber (Abgekürzte Namen müssen deaktiviert sein)"
-L_GUI_NAMEPLATE_SHOW_BUFFS = "Buffs über dem Namensschild des Spielers anzeigen (aus der Liste)"
-L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Größe der Debuffs"
+L_GUI_NAMEPLATE_SHOW_BUFFS = "Show dispellable enemy buffs and buffs from the list" -- Need review
+L_GUI_NAMEPLATE_DEBUFFS_SIZE = "Größe der Debuffs" -- Need review
 L_GUI_NAMEPLATE_HEALER_ICON = "Zeige Heilersymbol auf allen gegnerischen Heiler-Nameplates im BG"
 L_GUI_NAMEPLATE_TOTEM_ICONS = "Symbol über dem Namensschild des feindlichen Totems anzeigen"
 L.nameplate_target_glow = "Show glow texture for target" -- Need review
