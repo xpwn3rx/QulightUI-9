@@ -7,8 +7,8 @@ if GetLocale() ~= "frFR" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Sauvegarder la configuration par personnage"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "Réinitialiser les paramètres de votre personnage sur QulightUI ?"
-L_GUI_RESET_ALL = "Réinitialiser tous les paramètres de QulightUI ?"
+L_GUI_RESET_CHAR = "Réinitialiser les paramètres de votre personnage sur ShestakUI ?"
+L_GUI_RESET_ALL = "Réinitialiser tous les paramètres de ShestakUI ?"
 L_GUI_PER_CHAR = "Modifier la configuration du personnage ?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review
@@ -235,6 +235,11 @@ L.actionbar_stancebar_horizontal_desc = "Located below the player's frame" -- Ne
 L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER = "Changeforme/Posture/barre de totems en 'mouseover'" -- Need review
 L_GUI_ACTIONBAR_MICROMENU = "Active le Micro menu"
 L_GUI_ACTIONBAR_MICROMENU_MOUSEOVER = "Affiche le Micro menu au survol de la souris"
+L.actionbar_editor = "Bars editor" -- Needs review
+L.actionbar_editor_desc = "Allow to move and change each panel individually" -- Needs review
+L.actionbar_bar1_num = "Number of buttons" -- Needs review
+L.actionbar_bar1_row = "Buttons per row" -- Needs review
+L.actionbar_bar1_mouseover = "Bar on mouseover" -- Needs review
 
 -- Tooltip options
 L.tooltip = "Tooltip"
@@ -383,7 +388,7 @@ L_GUI_BAGS_BAG = "Nombre de colonne pour les sacs"
 L_GUI_MINIMAP_SUBTEXT = "Minimap settings." -- Need review
 L_GUI_MINIMAP_ENABLE = "Activer la minicarte"
 L_GUI_MINIMAP_ICON = "Icone de pistage"
-L_GUI_GARRISON_ICON = "Icone de la Garnison"
+L_GUI_GARRISON_ICON = "Icone de la Garnison" -- Need review
 L_GUI_MINIMAP_SIZE = "Taille de la minicarte"
 L_GUI_MINIMAP_HIDE_COMBAT = "Cacher la minimap en combat"
 L_GUI_MINIMAP_TOGGLE_MENU = "Montre le menu déroulant"

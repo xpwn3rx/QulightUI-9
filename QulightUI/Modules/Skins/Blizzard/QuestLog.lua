@@ -212,6 +212,33 @@ local function LoadSkin()
 					followerReward.PortraitFrame.Portrait:SetPoint("TOPLEFT", squareBG, 2, -2)
 					followerReward.PortraitFrame.Portrait:SetPoint("BOTTOMRIGHT", squareBG, -2, 2)
 
+					-- AdventuresFollowerPortraitFrame
+					local portrait = followerReward.AdventuresFollowerPortraitFrame
+					portrait:SetWidth(portrait:GetHeight())
+					portrait:ClearAllPoints()
+					portrait:SetPoint("RIGHT", followerReward.backdrop, "LEFT", -2, 0)
+
+					portrait.CircleMask:Hide()
+					portrait.PuckBorder:Hide()
+					portrait.LevelDisplayFrame.LevelCircle:SetAlpha(0)
+
+					local level = portrait.LevelDisplayFrame.LevelText
+					level:ClearAllPoints()
+					level:SetPoint("BOTTOM", portrait, 0, 5)
+					level:SetFontObject("SystemFont_Outline_Small")
+					level:SetShadowOffset(0, 0)
+
+					if not portrait.backdrop then
+						portrait:CreateBackdrop("Default")
+						portrait.backdrop:SetPoint("TOPLEFT", portrait, "TOPLEFT", -1, 1)
+						portrait.backdrop:SetPoint("BOTTOMRIGHT", portrait, "BOTTOMRIGHT", 1, -1)
+						portrait.backdrop:SetFrameLevel(portrait:GetFrameLevel())
+					end
+
+					portrait.Portrait:SetTexCoord(0.2, 0.85, 0.2, 0.85)
+					portrait.Portrait:ClearAllPoints()
+					portrait.Portrait:SetInside(portrait.backdrop)
+
 					local point, relativeTo, relativePoint, _, yOfs = followerReward:GetPoint()
 					followerReward:SetPoint(point, relativeTo, relativePoint, 8, yOfs)
 				end
@@ -250,20 +277,22 @@ local function LoadSkin()
 	QuestInfoItemHighlight:StripTextures()
 	QuestInfoItemHighlight:SetTemplate("Default")
 	QuestInfoItemHighlight:SetBackdropBorderColor(1, 1, 0)
-	QuestInfoItemHighlight:SetBackdropColor(0, 0, 0, 0)
+	QuestInfoItemHighlight:SetBackdropColor(1, 1, 1, 0.2)
 
 	hooksecurefunc("QuestInfoItem_OnClick", function(self)
-		QuestInfoItemHighlight:ClearAllPoints()
-		QuestInfoItemHighlight:SetPoint("TOPLEFT", self.Icon, "TOPLEFT", -2, 2)
-		QuestInfoItemHighlight:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 2, -2)
+		if self.type == "choice" then
+			QuestInfoItemHighlight:ClearAllPoints()
+			QuestInfoItemHighlight:SetPoint("TOPLEFT", self.Icon, "TOPLEFT", -2, 2)
+			QuestInfoItemHighlight:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 2, -2)
 
-		local parent = self:GetParent()
-		for i = 1, #parent.RewardButtons do
-			local questItem = QuestInfoRewardsFrame.RewardButtons[i]
-			if questItem ~= self then
-				questItem.Name:SetTextColor(1, 1, 1)
-			else
-				self.Name:SetTextColor(1, 1, 0)
+			local parent = self:GetParent()
+			for i = 1, #parent.RewardButtons do
+				local questItem = QuestInfoRewardsFrame.RewardButtons[i]
+				if questItem ~= self then
+					questItem.Name:SetTextColor(1, 1, 1)
+				else
+					self.Name:SetTextColor(1, 1, 0)
+				end
 			end
 		end
 	end)
@@ -286,6 +315,32 @@ local function LoadSkin()
 
 			questItem.Name:SetTextColor(1, 1, 1)
 		end
+	end)
+
+	QuestModelScene:StripTextures()
+	QuestModelScene:CreateBackdrop("Overlay")
+	QuestModelScene.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+	QuestNPCModelNameTooltipFrame:CreateBackdrop("Overlay")
+	QuestNPCModelNameTooltipFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPLEFT", QuestModelScene.backdrop, "BOTTOMLEFT", 0, -3)
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("BOTTOMRIGHT", QuestNPCModelTextFrame, "BOTTOMRIGHT", 2, -1)
+	QuestNPCModelNameText:SetPoint("TOPLEFT", QuestNPCModelNameplate, 15, -20)
+	QuestNPCModelNameText:SetPoint("BOTTOMRIGHT", QuestNPCModelNameplate, -15, 7)
+	QuestNPCModelTextFrame:SetHeight(85)
+	QuestNPCModelTextFrame:StripTextures()
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, _, _, _, _, x, y)
+		if parentFrame == QuestLogPopupDetailFrame or parentFrame == QuestFrame then
+			x = x + 8
+			y = y + 40
+
+			QuestModelScene.backdrop.overlay:Hide()
+			QuestNPCModelNameTooltipFrame.backdrop.overlay:Hide()
+		else
+			QuestModelScene.backdrop.overlay:Show()
+			QuestNPCModelNameTooltipFrame.backdrop.overlay:Show()
+		end
+		QuestModelScene:ClearAllPoints()
+		QuestModelScene:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x, y)
 	end)
 
 	local function SkinExpandOrCollapse(f)
@@ -353,6 +408,17 @@ local function LoadSkin()
 		end)
 	end
 
+	local campaignColor = {
+		Bastion = {0.45, 0.4, 0.4},
+		Maldraxxus = {0.1, 0.3, 0.15},
+		Ardenweald = {0.15, 0.25, 0.35},
+		Revendreth = {0.25, 0.1, 0.1},
+		Kyrian = {0.45, 0.4, 0.4},
+		Necrolord = {0.1, 0.3, 0.15},
+		Fey = {0.15, 0.25, 0.35},
+		Venthyr = {0.25, 0.1, 0.1}
+	}
+
 	hooksecurefunc("QuestLogQuests_Update", function()
 		for i = 1, QuestMapFrame.QuestsFrame.Contents:GetNumChildren() do
 			local child = select(i, QuestMapFrame.QuestsFrame.Contents:GetChildren())
@@ -363,23 +429,41 @@ local function LoadSkin()
 				end
 			end
 		end
-	end)
-	
-	hooksecurefunc(CampaignHeaderMixin, "UpdateCollapsedState", function(self)
-		if not self.styled then
-			local frame = QuestScrollFrame.Contents
-			frame:CreateBackdrop("Overlay")
-			frame.backdrop:SetPoint("TOPLEFT", self, 6, -5)
-			frame.backdrop:SetPoint("BOTTOMRIGHT", self, -6, 10)
+		for campaignHeader in QuestScrollFrame.campaignHeaderFramePool:EnumerateActive() do
+			local campaign = campaignHeader:GetCampaign()
+			if campaign then
+				if not campaignHeader.backdrop then
+					campaignHeader:CreateBackdrop("Overlay")
+					campaignHeader.backdrop:SetPoint("TOPLEFT", campaignHeader.Background, 6, -2)
+					campaignHeader.backdrop:SetPoint("BOTTOMRIGHT", campaignHeader.Background, -6, 10)
 
-			frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
+					campaignHeader.SelectedHighlight:SetAlpha(0)
+					campaignHeader.HighlightTexture:SetAlpha(0)
+					campaignHeader.Background:SetAlpha(0)
+					campaignHeader.TopFiligree:Hide()
+					SkinExpandOrCollapse(campaignHeader.CollapseButton)
+				end
+				if campaignHeader.backdrop then
+					if campaignColor[campaign.uiTextureKit] then
+						campaignHeader.backdrop.overlay:SetVertexColor(unpack(campaignColor[campaign.uiTextureKit]))
+					else
+						campaignHeader.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
+					end
+				end
+			end
+		end
+		for callingHeader in QuestScrollFrame.covenantCallingsHeaderFramePool:EnumerateActive() do
+			if not callingHeader.backdrop then
+				callingHeader:CreateBackdrop("Overlay")
+				callingHeader.backdrop:SetPoint("TOPLEFT", callingHeader.Background, 7, -2)
+				callingHeader.backdrop:SetPoint("BOTTOMRIGHT", callingHeader.Background, -5, 10)
+				callingHeader.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 
-			self.SelectedHighlight:SetAlpha(0)
-			self.HighlightTexture:SetAlpha(0)
-			self.Background:SetAlpha(0)
-			self.TopFiligree:Hide()
-			SkinExpandOrCollapse(self.CollapseButton)
-			self.styled = true
+				callingHeader.Background:SetAlpha(0)
+				callingHeader.HighlightBackground:SetAlpha(0)
+				callingHeader.SelectedTexture:SetAlpha(0)
+				callingHeader.Divider:SetAlpha(0)
+			end
 		end
 	end)
 end

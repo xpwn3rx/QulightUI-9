@@ -46,7 +46,7 @@ local function LoadSkin()
 	CampaignOverview.ScrollFrame:StripTextures()
 	T.SkinScrollBar(QuestMapFrameScrollBar)
 	CampaignOverview:CreateBackdrop("Overlay")
-	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -5)
+	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
 	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
 	CampaignOverview.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 	CampaignOverview.Header.Background:SetAlpha(0)
@@ -112,36 +112,6 @@ local function LoadSkin()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton(true)
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SetPoint("TOP", 0, 4)
-
-	QuestModelScene:StripTextures()
-	QuestModelScene:CreateBackdrop("Overlay")
-	QuestModelScene.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
-	QuestNPCModelNameTooltipFrame:CreateBackdrop("Overlay")
-	QuestNPCModelNameTooltipFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
-	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPLEFT", QuestModelScene.backdrop, "BOTTOMLEFT", 0, -1)
-	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPRIGHT", QuestModelScene.backdrop, "BOTTOMRIGHT", 0, -1)
-	QuestNPCModelNameText:SetPoint("TOPLEFT", QuestNPCModelNameplate, 15, -15)
-	QuestNPCModelNameText:SetPoint("BOTTOMRIGHT", QuestNPCModelNameplate, -15, 12)
-	QuestNPCModelTextFrame:StripTextures()
-	QuestNPCModelTextFrame:CreateBackdrop("Overlay")
-	QuestNPCModelTextFrame.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
-	QuestNPCModelTextFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModelNameTooltipFrame.backdrop, "BOTTOMLEFT", 0, -1)
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, _, _, _, _, x, y)
-		if parentFrame == QuestLogPopupDetailFrame or parentFrame == QuestFrame then
-			x = x + 8
-			y = y + 40
-
-			QuestModelScene.backdrop.overlay:Hide()
-			QuestNPCModelNameTooltipFrame.backdrop.overlay:Hide()
-			QuestNPCModelTextFrame.backdrop.overlay:Hide()
-		else
-			QuestModelScene.backdrop.overlay:Show()
-			QuestNPCModelNameTooltipFrame.backdrop.overlay:Show()
-			QuestNPCModelTextFrame.backdrop.overlay:Show()
-		end
-		QuestModelScene:ClearAllPoints()
-		QuestModelScene:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x, y)
-	end)
 
 	-- Quests Buttons
 	for i = 1, 2 do

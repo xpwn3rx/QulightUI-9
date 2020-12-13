@@ -107,7 +107,7 @@ local function restorePosition(obj)
 		end
 		target:ClearAllPoints()
 		
-		SetPoint(target, unpack(ShestakUIPositions.UnitFrame[target:GetName()]))
+		SetPoint(target, unpack(QulightUIPositions.UnitFrame[target:GetName()]))
 	else
 		-- We've not saved any custom position for this style
 		if not _DB[style] or not _DB[style][identifier] then return end

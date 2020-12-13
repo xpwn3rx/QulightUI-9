@@ -10,6 +10,7 @@ if C.actionbar.stancebar_hide then StanceBarFrame:SetParent(StanceBarAnchor) Sta
 -- Create bar
 local bar = CreateFrame("Frame", "StanceHolder", UIParent, "SecureHandlerStateTemplate")
 bar:SetAllPoints(StanceBarAnchor)
+
 bar:RegisterEvent("PLAYER_LOGIN")
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -43,7 +44,6 @@ bar:SetScript("OnEvent", function(self, event)
 				button:Hide()
 			end
 		end
-
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 		if InCombatLockdown() then return end
 		for i = 1, NUM_STANCE_SLOTS do
@@ -75,7 +75,7 @@ if C.actionbar.rightbars_mouseover == true and C.actionbar.stancebar_horizontal 
 		b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
 	end
 end
-if C.actionbar.stancebar_mouseover == true and C.actionbar.stancebar_horizontal == true then
+if C.actionbar.stancebar_mouseover == true and (C.actionbar.stancebar_horizontal == true or C.actionbar.editor) then
 	StanceBarAnchor:SetAlpha(0)
 	StanceBarAnchor:SetScript("OnEnter", function() StanceBarMouseOver(1) end)
 	StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)

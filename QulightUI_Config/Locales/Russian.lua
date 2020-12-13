@@ -3,12 +3,12 @@ if GetLocale() ~= "ruRU" then return end
 
 ----------------------------------------------------------------------------------------
 --	Localization for ruRU client
---	Translation: Qulight, Wetxius
+--	Translation: Shestak, Wetxius
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Установить настройки для персонажа"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Переключение между профилем, который применяется ко всем персонажам, и профилем, уникальным для этого персонажа."
-L_GUI_RESET_CHAR = "Вы уверены, что хотите сбросить все настройки QulightUI для этого персонажа?"
-L_GUI_RESET_ALL = "Вы уверены, что хотите сбросить все настройки QulightUI?"
+L_GUI_RESET_CHAR = "Вы уверены, что хотите сбросить все настройки ShestakUI для этого персонажа?"
+L_GUI_RESET_ALL = "Вы уверены, что хотите сбросить все настройки ShestakUI?"
 L_GUI_PER_CHAR = "Вы уверены, что хотите сменить режим сохранения настроек?"
 L_GUI_RESET_CAT = "Вы уверены, что хотите сбросить настройки этого раздела?"
 L_GUI_RESET_CAT_DESC = "Cбросывает настройки раздела. \nCTRL-клик, чтобы сбросить всё"
@@ -235,6 +235,11 @@ L.actionbar_stancebar_horizontal_desc = "Расположена снизу от 
 L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER = "По наведению курсора"
 L_GUI_ACTIONBAR_MICROMENU = "Включить микроменю"
 L_GUI_ACTIONBAR_MICROMENU_MOUSEOVER = "Микроменю по наведению курсора"
+L.actionbar_editor = "Редактор панелей"
+L.actionbar_editor_desc = "Разблокировать настройку и перемещение каждой панели в отдельности"
+L.actionbar_bar1_num = "Количество кнопок"
+L.actionbar_bar1_row = "Кнопок в ряду"
+L.actionbar_bar1_mouseover = "По наведениею курсора"
 
 -- Tooltip options
 L.tooltip = "Подсказки"
@@ -383,7 +388,7 @@ L_GUI_BAGS_BAG = "Cтолбцов в сумках"
 L_GUI_MINIMAP_SUBTEXT = "Настройка миникарты."
 L_GUI_MINIMAP_ENABLE = "Включить миникарту"
 L_GUI_MINIMAP_ICON = "Иконка отслеживания объектов"
-L_GUI_GARRISON_ICON = "Иконка гарнизона"
+L_GUI_GARRISON_ICON = "Иконка ковенанта"
 L_GUI_MINIMAP_SIZE = "Размер миникарты"
 L_GUI_MINIMAP_HIDE_COMBAT = "Скрыть миникарту в бою"
 L_GUI_MINIMAP_TOGGLE_MENU = "Отображать меню над миникартой"

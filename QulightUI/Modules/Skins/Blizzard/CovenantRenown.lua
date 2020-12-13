@@ -2,16 +2,17 @@ local T, C, L, _ = unpack(select(2, ...))
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
---	Help skin
+--	Covenant Renown skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local frame = _G.HelpFrame
-	frame:StripTextures()
-	frame:CreateBackdrop('Transparent')
-	T.SkinCloseButton(_G.HelpFrameCloseButton, frame.backdrop)
+	local frame = CovenantRenownFrame
+	frame:CreateBackdrop("Transparent")
+	T.SkinCloseButton(frame.CloseButton)
 
-	local browser = _G.HelpBrowser
-	browser.BrowserInset:StripTextures()
+	hooksecurefunc(frame, "SetUpCovenantData", function(self)
+		self.CloseButton.Border:Hide()
+		self:StripTextures()
+	end)
 end
 
-tinsert(T.SkinFuncs["QulightUI"], LoadSkin)
+T.SkinFuncs["Blizzard_CovenantRenown"] = LoadSkin

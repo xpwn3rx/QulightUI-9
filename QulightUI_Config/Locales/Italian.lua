@@ -7,8 +7,8 @@ if GetLocale() ~= "itIT" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Imposta le impostazioni 'Per-Personaggio'"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "Vuoi davvero ripristinare le impostazioni iniziali della QulightUI per questo personaggio?"
-L_GUI_RESET_ALL = "Vuoi davvero ripristinate tutte le impostazioni iniziali della QulightUI?"
+L_GUI_RESET_CHAR = "Vuoi davvero ripristinare le impostazioni iniziali della ShestakUI per questo personaggio?"
+L_GUI_RESET_ALL = "Vuoi davvero ripristinate tutte le impostazioni iniziali della ShestakUI?"
 L_GUI_PER_CHAR = "Vuoi davvero modificare questa impostazione (attivazione/disattivazione salvataggio impostazioni 'Per-Personaggio')?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review
@@ -235,6 +235,11 @@ L.actionbar_stancebar_horizontal_desc = "Located below the player's frame" -- Ne
 L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER = "Barra postura al passaggio del mouse"
 L_GUI_ACTIONBAR_MICROMENU = "Attiva il micromenu"
 L_GUI_ACTIONBAR_MICROMENU_MOUSEOVER = "Micromenu al passaggio del mouse"
+L.actionbar_editor = "Bars editor" -- Needs review
+L.actionbar_editor_desc = "Allow to move and change each panel individually" -- Needs review
+L.actionbar_bar1_num = "Number of buttons" -- Needs review
+L.actionbar_bar1_row = "Buttons per row" -- Needs review
+L.actionbar_bar1_mouseover = "Bar on mouseover" -- Needs review
 
 -- Tooltip options
 L.tooltip = "Suggerimenti"
@@ -383,7 +388,7 @@ L_GUI_BAGS_BAG = "Numero di colonne nella sacca principale"
 L_GUI_MINIMAP_SUBTEXT = "Minimap settings." -- Need review
 L_GUI_MINIMAP_ENABLE = "Attiva la minimappa"
 L_GUI_MINIMAP_ICON = "Icona tracciamento"
-L_GUI_GARRISON_ICON = "Icona della guarnigione"
+L_GUI_GARRISON_ICON = "Icona della guarnigione" -- Need review
 L_GUI_MINIMAP_SIZE = "Dimensioni della minimappa"
 L_GUI_MINIMAP_HIDE_COMBAT = "Nascondi la minimappa in combattimento"
 L_GUI_MINIMAP_TOGGLE_MENU = "Mostra il menu a scomparsa"

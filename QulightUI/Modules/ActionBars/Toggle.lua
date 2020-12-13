@@ -17,7 +17,7 @@ local ToggleBarText = function(i, text, plus, neg)
 end
 
 local MainBars = function()
-	if C.actionbar.rightbars == true or C.actionbar.rightbars > 2 then
+	if C.actionbar.rightbars > 2 then
 		if QulightUISettingsPerChar.BottomBars == 1 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size)
 			ToggleBarText(1, "+ + +", true)
@@ -27,7 +27,7 @@ local MainBars = function()
 			ToggleBarText(1, "- - -", false, true)
 			Bar2Holder:Show()
 		end
-	elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
+	elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
 		if QulightUISettingsPerChar.BottomBars == 1 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size)
 			ToggleBarText(1, "+ + +", true)
@@ -44,7 +44,7 @@ local MainBars = function()
 			Bar2Holder:Show()
 			Bar5Holder:Show()
 		end
-	elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
+	elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
 		if QulightUISettingsPerChar.BottomBars == 1 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size)
 			ToggleBarText(1, "+ + +", true)
@@ -86,7 +86,7 @@ local MainBars = function()
 end
 
 local RightBars = function()
-	if C.actionbar.rightbars == true or C.actionbar.rightbars > 2 then
+	if C.actionbar.rightbars > 2 then
 		if QulightUISettingsPerChar.RightBars == 1 then
 			RightActionBarAnchor:SetWidth(C.actionbar.button_size)
 			if not C.actionbar.petbar_horizontal == true then
@@ -175,7 +175,7 @@ local RightBars = function()
 end
 
 local SplitBars = function()
-	if C.actionbar.rightbars == true or C.actionbar.split_bars == true and C.actionbar.rightbars ~= 3 then
+	if C.actionbar.split_bars == true and C.actionbar.rightbars ~= 3 then
 		if QulightUISettingsPerChar.SplitBars == true then
 			ToggleBar[3]:ClearAllPoints()
 			ToggleBar[3]:SetPoint("BOTTOMLEFT", SplitBarRight, "BOTTOMRIGHT", C.actionbar.button_space, 0)
@@ -244,11 +244,11 @@ for i = 1, 5 do
 			if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 			QulightUISettingsPerChar.BottomBars = QulightUISettingsPerChar.BottomBars + 1
 
-			if C.actionbar.rightbars == true or C.actionbar.rightbars > 2 then
+			if C.actionbar.rightbars > 2 then
 				if QulightUISettingsPerChar.BottomBars > 2 then
 					QulightUISettingsPerChar.BottomBars = 1
 				end
-			elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
+			elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
 				if QulightUISettingsPerChar.BottomBars > 3 then
 					QulightUISettingsPerChar.BottomBars = 1
 				elseif QulightUISettingsPerChar.BottomBars > 2 then
@@ -256,7 +256,7 @@ for i = 1, 5 do
 				elseif QulightUISettingsPerChar.BottomBars < 1 then
 					QulightUISettingsPerChar.BottomBars = 3
 				end
-			elseif C.actionbar.rightbars == true or C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
+			elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
 				if QulightUISettingsPerChar.BottomBars > 2 then
 					QulightUISettingsPerChar.BottomBars = 1
 				end

@@ -63,4 +63,4 @@ local function LoadSkin()
 	end)
 end
 
-T.SkinFuncs["Blizzard_ChromieTimeUI"] = LoadSkin 
+T.SkinFuncs["Blizzard_ChromieTimeUI"] = LoadSkin

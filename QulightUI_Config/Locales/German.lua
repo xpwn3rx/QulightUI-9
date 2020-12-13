@@ -7,8 +7,8 @@ if GetLocale() ~= "deDE" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Einstellungen für jeden Charakter einzeln vornehmen"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Umschalten zwischen einem Profil, das für alle Chars gilt, und einem Profil, das für diesen Chars gilt."
-L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für QulightUI zurücksetzen willst?"
-L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von QulightUI zurücksetzen willst?"
+L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für ShestakUI zurücksetzen willst?"
+L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von ShestakUI zurücksetzen willst?"
 L_GUI_PER_CHAR = "Bist du sicher, dass du 'Einzelne Einstellungen für jeden Charakter' ein oder ausschalten möchtest?"
 L_GUI_RESET_CAT = "Bist Du sicher, dass Du die Einstellungen der Kategorie zurücksetzen möchtest?"
 L_GUI_RESET_CAT_DESC = "Einstellungen der Kategorie zurücksetzen. \nCTRL-Klick zum Zurücksetzen aller"
@@ -235,6 +235,11 @@ L.actionbar_stancebar_horizontal_desc = "Befindet sich unter dem Rahmen des Spie
 L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER = "Zeige Haltungsleiste/Gestaltenleiste nur bei Mouseover"
 L_GUI_ACTIONBAR_MICROMENU = "Zeige Micromenü"
 L_GUI_ACTIONBAR_MICROMENU_MOUSEOVER = "Micromenü bei MouseOver"
+L.actionbar_editor = "Bars editor" -- Needs review
+L.actionbar_editor_desc = "Allow to move and change each panel individually" -- Needs review
+L.actionbar_bar1_num = "Number of buttons" -- Needs review
+L.actionbar_bar1_row = "Buttons per row" -- Needs review
+L.actionbar_bar1_mouseover = "Bar on mouseover" -- Needs review
 
 -- Tooltip options
 L.tooltip = "Tooltip"
@@ -383,7 +388,7 @@ L_GUI_BAGS_BAG = "Anzahl der Spalten in der Tasche"
 L_GUI_MINIMAP_SUBTEXT = "Minimap Einstellungen."
 L_GUI_MINIMAP_ENABLE = "Minimap aktivieren"
 L_GUI_MINIMAP_ICON = "Aufspüren Symbol"
-L_GUI_GARRISON_ICON = "Garrisons Symbol"
+L_GUI_GARRISON_ICON = "Garrisons Symbol" -- Need review
 L_GUI_MINIMAP_SIZE = "Minimap-Größe"
 L_GUI_MINIMAP_HIDE_COMBAT = "Minimap im Kampf verstecken"
 L_GUI_MINIMAP_TOGGLE_MENU = "Zeige Toggle Menü"

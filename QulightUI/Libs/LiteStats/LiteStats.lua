@@ -57,11 +57,11 @@ local function RegEvents(f, l) for _, e in ipairs{strsplit(" ", l)} do f:Registe
 local ls, coordX, coordY, conf, Coords = CreateFrame("Frame"), 0, 0, {}
 RegEvents(ls, "ADDON_LOADED PLAYER_REGEN_DISABLED PLAYER_REGEN_ENABLED")
 ls:SetScript("OnEvent", function(_, event, addon)
-	if event == "ADDON_LOADED" and addon == "QulightUI" then
-		if not QulightUIStats then QulightUIStats = {} end
-		if not QulightUIStats[realm] then QulightUIStats[realm] = {} end
-		if not QulightUIStats[realm][char] then QulightUIStats[realm][char] = {} end
-		conf = QulightUIStats[realm][char]
+	if event == "ADDON_LOADED" and addon == "ShestakUI" then
+		if not ShestakUIStats then ShestakUIStats = {} end
+		if not ShestakUIStats[realm] then ShestakUIStats[realm] = {} end
+		if not ShestakUIStats[realm][char] then ShestakUIStats[realm][char] = {} end
+		conf = ShestakUIStats[realm][char]
 
 		-- true/false defaults for autosell and autorepair
 		if conf.AutoSell == nil then conf.AutoSell = true end
@@ -240,7 +240,7 @@ function SlashCmdList.LSTATS()
 	if gold.enabled then
 		slprint(strtrim(gsub(MONEY, "%%d", "")), L_STATS_OPEN_CURRENCY, L_STATS_RC_AUTO_SELLING, L_STATS_NEED_TO_SELL, L_STATS_WATCH_CURRENCY)
 	end
-	print("|cffBCEE68", format(L_STATS_OTHER_OPTIONS, "|cff66C6FFQulightUI\\Config\\DataText.lua").."|r")
+	print("|cffBCEE68", format(L_STATS_OTHER_OPTIONS, "|cff66C6FFShestakUI\\Config\\DataText.lua").."|r")
 end
 
 CreateFrame("Frame", "LSMenus", UIParent, "UIDropDownMenuTemplate")
@@ -1105,7 +1105,6 @@ if experience.enabled then
 	local repname, repcolor, standingname, currep, minrep, maxrep
 	local mobxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON, "%%[sd]", "(.*)")
 	local questxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON_UNNAMED, "%%[sd]", "(.*)")
-	local AzeritXP, AzeritTotalLevelXP, AzeritLevel = 0, 0, 0
 	local function short(num, tt)
 		if short or tt then
 			num = tonumber(num)
@@ -1159,12 +1158,6 @@ if experience.enabled then
 			or sub == "repleft" and abs(maxrep - currep)
 			or sub == "maxrep" and (currep ~= maxrep and abs(maxrep - minrep) or maxrep > 0 and 1 or 0)
 			or sub == "rep%" and (currep ~= 0 and floor(abs(currep - minrep) / abs(maxrep - minrep) * 100) or 0)
-			-- artifact tags
-			or sub == "curart" and short(AzeritXP, tt)
-			or sub == "curart%" and floor(AzeritXP / AzeritTotalLevelXP * 100)
-			or sub == "totalart" and short(AzeritTotalLevelXP, tt)
-			or sub == "remainingart" and short(AzeritTotalLevelXP - AzeritXP, tt)
-			or sub == "remainingart%" and 100 - floor(AzeritXP / AzeritTotalLevelXP * 100)
 			or format("[%s]", sub)
 	end
 	Inject("Experience", {
@@ -1176,18 +1169,16 @@ if experience.enabled then
 					return gsub(experience.played_fmt, "%[([%w%%]-)%]", tags)
 				elseif conf.ExpMode == "xp" then
 					return gsub(experience[format("xp_%s_fmt", (GetXPExhaustion() or 0) > 0 and "rested" or "normal")], "%[([%w%%]-)%]", tags) or " "
-				elseif conf.ExpMode == "art" then
-					return self:GetText()
 				end
 			end
 		},
 		OnLoad = function(self)
-			RegEvents(self, "TIME_PLAYED_MSG PLAYER_LOGOUT PLAYER_LOGIN UPDATE_FACTION CHAT_MSG_COMBAT_XP_GAIN PLAYER_LEVEL_UP AZERITE_ITEM_EXPERIENCE_CHANGED PLAYER_EQUIPMENT_CHANGED")
+			RegEvents(self, "TIME_PLAYED_MSG PLAYER_LOGOUT PLAYER_LOGIN UPDATE_FACTION CHAT_MSG_COMBAT_XP_GAIN PLAYER_LEVEL_UP")
 			-- Filter first time played message
 			local ofunc = ChatFrame_DisplayTimePlayed
 			function ChatFrame_DisplayTimePlayed() ChatFrame_DisplayTimePlayed = ofunc end
 			RequestTimePlayed()
-			if not conf.ExpMode or conf.ExpMode == "xp" then
+			if not conf.ExpMode or conf.ExpMode == "xp" or conf.ExpMode == "art" then
 				conf.ExpMode = UnitLevel(P) ~= MAX_PLAYER_LEVEL and "xp" or "played"
 			end
 		end,
@@ -1245,24 +1236,6 @@ if experience.enabled then
 			if event == "PLAYER_LOGOUT" or event == "TIME_PLAYED_MSG" then
 				conf.Played = floor(playedtotal + GetTime() - playedmsg)
 			end
-			if (event == "AZERITE_ITEM_EXPERIENCE_CHANGED" or event == "PLAYER_EQUIPMENT_CHANGED" or event == "PLAYER_LOGIN") and conf.ExpMode == "art" then
-				if event == "PLAYER_EQUIPMENT_CHANGED" then
-					local slot = ...
-					if slot ~= INVSLOT_MAINHAND then
-						return
-					end
-				end
-				local azeriteItemLocation = C_AzeriteItem and C_AzeriteItem.FindActiveAzeriteItem()
-				if azeriteItemLocation then
-					AzeritXP, AzeritTotalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation)
-					AzeritLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation)
-					self.text:SetText(gsub(experience.artifact_fmt, "%[([%w%%]-)%]", tags))
-				else
-					if event == "PLAYER_EQUIPMENT_CHANGED" then
-						conf.ExpMode = "played"
-					end
-				end
-			end
 		end,
 		OnEnter = function(self)
 			self.hovered = true
@@ -1278,7 +1251,7 @@ if experience.enabled then
 				GameTooltip:AddLine(" ")
 				GameTooltip:AddLine(L_STATS_ACC_PLAYED, ttsubh.r, ttsubh.g, ttsubh.b)
 				local total = 0
-				for realm, t in pairs(QulightUIStats) do
+				for realm, t in pairs(ShestakUIStats) do
 					for name, conf in pairs(t) do
 						if conf.Played then
 							local r, g, b, player = 1, 1, 1
@@ -1324,32 +1297,17 @@ if experience.enabled then
 				if currep ~= maxrep then
 					GameTooltip:AddDoubleLine(format("%s%% | %s/%s", tags"rep%", tags"currep", tags"maxrep"), -tags"repleft", ttsubh.r, ttsubh.g, ttsubh.b, 1, 0.33, 0.33)
 				end
-			elseif conf.ExpMode == "art" then
-				local azeriteItemLocation = C_AzeriteItem and C_AzeriteItem.FindActiveAzeriteItem()
-				if azeriteItemLocation then
-					AzeritXP, AzeritTotalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation)
-					AzeritLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation)
-					local azeriteName = Item:CreateFromItemLocation(azeriteItemLocation):GetItemName()
-					GameTooltip:AddDoubleLine(azeriteName, format(LEVEL_GAINED, AzeritLevel), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
-					GameTooltip:AddLine(" ")
-					GameTooltip:AddDoubleLine(L_STATS_CURRENT_XP, format("%s/%s (%s%%)", tags"curart", tags"totalart", tags"curart%"), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
-					GameTooltip:AddDoubleLine(L_STATS_REMAINING_XP, format("%s (%s%%)", tags"remainingart", tags"remainingart%"), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
-				end
 			end
 			GameTooltip:Show()
 		end,
 		OnClick = function(self, button)
 			if button == "RightButton" then
 				conf.ExpMode = conf.ExpMode == "xp" and "played"
-					or (conf.ExpMode == "played" and C_AzeriteItem and C_AzeriteItem.FindActiveAzeriteItem()) and "art"
 					or conf.ExpMode == "played" and "rep"
-					or conf.ExpMode == "art" and "rep"
 					or (conf.ExpMode == "rep" and UnitLevel(P) ~= MAX_PLAYER_LEVEL) and "xp"
 					or conf.ExpMode == "rep" and "played"
 				if conf.ExpMode == "rep" then
 					self:GetScript("OnEvent")(self, "UPDATE_FACTION")
-				elseif conf.ExpMode == "art" then
-					self:GetScript("OnEvent")(self, "AZERITE_ITEM_EXPERIENCE_CHANGED")
 				else
 					self:GetScript("OnUpdate")(self, 5)
 				end
@@ -1357,9 +1315,6 @@ if experience.enabled then
 			elseif button == "LeftButton" then
 				if conf.ExpMode == "rep" then
 					ToggleCharacter("ReputationFrame")
-				elseif conf.ExpMode == "art" then
-					UIParentLoadAddOn("Blizzard_AzeriteEssenceUI")
-					ToggleFrame(AzeriteEssenceUI)
 				end
 			end
 		end
@@ -1459,7 +1414,7 @@ if talents.enabled then
 		end,
 		OnEnter = function(self)
 			self.hovered = true
-			if UnitLevel(P) < 10 then
+			if UnitLevel(P) >= 10 then
 				GameTooltip:SetOwner(self, "ANCHOR_NONE")
 				GameTooltip:ClearAllPoints()
 				GameTooltip:SetPoint(modules.Talents.tip_anchor, modules.Talents.tip_frame, modules.Talents.tip_x, modules.Talents.tip_y)
@@ -1656,7 +1611,7 @@ if gold.enabled then
 		OnLoad = function(self)
 			self.started = GetMoney()
 			RegEvents(self, "PLAYER_LOGIN PLAYER_MONEY MERCHANT_SHOW")
-			if not QulightUIStats.JunkIgnore then QulightUIStats.JunkIgnore = {} end
+			if not QulightUIStats.JunkIgnore then ShestakUIStats.JunkIgnore = {} end
 		end,
 		OnEvent = function(self, event)
 			conf.Gold = GetMoney()
@@ -1668,7 +1623,7 @@ if gold.enabled then
 						local link = GetContainerItemLink(bag, slot)
 						if link then
 							local itemstring, ignore = strmatch(link, "|Hitem:(%d-):"), false
-							for _, exception in pairs(QulightUIStats.JunkIgnore) do
+							for _, exception in pairs(ShestakUIStats.JunkIgnore) do
 								if exception == itemstring then ignore = true break end
 							end
 							local _, _, itemRarity, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(link)
@@ -1713,7 +1668,7 @@ if gold.enabled then
 			local goldTable = {}
 			local charIndex = 0
 			wipe(goldTable)
-			for char, conf in pairs(QulightUIStats[realm]) do
+			for char, conf in pairs(ShestakUIStats[realm]) do
 				if conf.Gold and conf.Gold > 99 then
 					charIndex = charIndex + 1
 					goldTable[charIndex] = {char, formatgold(5, conf.Gold), conf.Gold}
@@ -1739,7 +1694,7 @@ if gold.enabled then
 					if currencies == 0 then GameTooltip:AddLine(TRACKING, ttsubh.r, ttsubh.g, ttsubh.b) end
 					local r, g, b
 					if info.quantity > 0 then r, g, b = 1, 1, 1 else r, g, b = 0.5, 0.5, 0.5 end
-					GameTooltip:AddDoubleLine(info.name, format("%d |T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t", info.quantity, icon.iconFileID, t_icon), r, g, b, r, g, b)
+					GameTooltip:AddDoubleLine(info.name, format("%d |T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t", info.quantity, info.iconFileID, t_icon), r, g, b, r, g, b)
 					currencies = currencies + 1
 				end
 			end
@@ -1773,23 +1728,16 @@ if gold.enabled then
 				Currency(402)	-- Ironpaw Token
 			end
 
-			if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
-				titleName = L_STATS_CURRENCY_RAID
-				Currency(1580, false, true)	-- Seal of Wartorn Fate
-			end
+			--if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+			--	titleName = L_STATS_CURRENCY_RAID
+			--	Currency(1580, false, true)	-- Seal of Wartorn Fate
+			--end
 
 			if C.stats.currency_misc then
-				titleName = EXPANSION_NAME7
-				Currency(1560)	-- War Resources
-				Currency(1710)	-- Seafarer's Dubloon
-				Currency(1716)	-- Honorbound Service Medal
-				Currency(1717)	-- 7th Legion Service Medal
-				Currency(1718)	-- Titan Residuum
-				Currency(1721)	-- Prismatic Manapearl
-				Currency(1719)	-- Corrupted Mementos
-				Currency(1755)	-- Coalescing Visions
-				Currency(1803)	-- Echoes of Ny'alotha
-				Currency(515)	-- Darkmoon Prize Ticket
+				titleName = EXPANSION_NAME8
+				Currency(1813)	-- Reservoir Anima
+				Currency(1828)	-- Soul Ash
+				Currency(1767)	-- Stygia
 			end
 
 			GameTooltip:AddLine(" ")
@@ -1809,13 +1757,13 @@ if gold.enabled then
 	function SlashCmdList.KJUNK(s)
 		local action = strsplit(" ", s)
 		if action == "list" then
-			print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_ADDITIONS, (#QulightUIStats.JunkIgnore == 0 and NONE or "")))
-			for i, id in pairs(QulightUIStats.JunkIgnore) do
+			print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_ADDITIONS, (#ShestakUIStats.JunkIgnore == 0 and NONE or "")))
+			for i, id in pairs(ShestakUIStats.JunkIgnore) do
 				local _, link = GetItemInfo(id)
 				print("- ["..i.."]", link)
 			end
 		elseif action == "clear" then
-			QulightUIStats.JunkIgnore = {}
+			ShestakUIStats.JunkIgnore = {}
 			print("|cff66C6FF"..L_STATS_JUNK_CLEARED.."|r")
 		elseif action == "add" or strfind(action, "^del") or strfind(action, "^rem") then
 			local _, mouselink = GameTooltip:GetItem()
@@ -1823,28 +1771,28 @@ if gold.enabled then
 				mouselink = nil
 				local _, link = GetItemInfo(id)
 				if action == "add" then
-					if not tContains(QulightUIStats.JunkIgnore,id) then
-						tinsert(QulightUIStats.JunkIgnore, id)
+					if not tContains(ShestakUIStats.JunkIgnore,id) then
+						tinsert(ShestakUIStats.JunkIgnore, id)
 						print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_ADDED, link))
 					else
 						print(format("%s |cff66C6FF%s|r", link, L_STATS_JUNK_ALREADY_ADDITIONS))
 					end
 				elseif strfind(action, "^del") or strfind(action, "^rem") then
-					tDeleteItem(QulightUIStats.JunkIgnore, id)
+					tDeleteItem(ShestakUIStats.JunkIgnore, id)
 					print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_REMOVED, link))
 				end
 			end
 			if mouselink then
 				for id in mouselink:gmatch("|Hitem:(%d-):") do
 					if action == "add" then
-						if not tContains(QulightUIStats.JunkIgnore,id) then
-							tinsert(QulightUIStats.JunkIgnore, id)
+						if not tContains(ShestakUIStats.JunkIgnore,id) then
+							tinsert(ShestakUIStats.JunkIgnore, id)
 							print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_ADDED, mouselink))
 						else
 							print(format("%s |cff66C6FF%s|r", mouselink, L_STATS_JUNK_ALREADY_ADDITIONS))
 						end
 					elseif strfind(action, "^del") or strfind(action, "^rem") then
-						tDeleteItem(QulightUIStats.JunkIgnore, id)
+						tDeleteItem(ShestakUIStats.JunkIgnore, id)
 						print(format("|cff66C6FF%s:|r %s", L_STATS_JUNK_REMOVED, mouselink))
 					end
 				end

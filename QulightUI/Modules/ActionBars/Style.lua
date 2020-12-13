@@ -39,7 +39,7 @@ local function UpdateHotkey(self)
 	end
 end
 
-local function StyleNormalButton(button)
+local function StyleNormalButton(button, size)
 	if not button.isSkinned then
 		local name = button:GetName()
 		local icon = _G[name.."Icon"]
@@ -55,7 +55,6 @@ local function StyleNormalButton(button)
 		local isFlyout = name:match("Flyout")
 
 		flash:SetTexture("")
-
 		button:SetNormalTexture("")
 
 		if float then
@@ -98,16 +97,14 @@ local function StyleNormalButton(button)
 		end
 
 		if not isFlyout and not isExtraAction then
-			button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+			button:SetSize(size or C.actionbar.button_size, size or C.actionbar.button_size)
 		end
 		button:SetTemplate("Transparent")
 		if C.actionbar.classcolor_border == true then
 			button:SetBackdropBorderColor(unpack(C.media.classborder_color))
-		else
-			button:SetBackdropBorderColor(0, 0, 0)
 		end
 
-		icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		icon:SetPoint("TOPLEFT", button, 2, -2)
 		icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
 		icon:SetDrawLayer("BACKGROUND", 7)
@@ -125,14 +122,13 @@ local function StyleNormalButton(button)
 		end
 
 		button.oborder:SetFrameLevel(button:GetFrameLevel())
-		
 		button.iborder:SetFrameLevel(button:GetFrameLevel())
 
 		if button.QuickKeybindHighlightTexture then
 			button.QuickKeybindHighlightTexture:SetTexture("")
 		end
 
-		button:StyleButton(button, button.size, true)
+		button:StyleButton()
 
 		button.isSkinned = true
 	end
@@ -170,8 +166,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 		button:SetTemplate("Transparent")
 		if C.actionbar.classcolor_border == true then
-			--button:SetBackdropBorderColor(unpack(C.media.classborder_color))
-			button:SetBackdropBorderColor(0, 1, 0)
+			button:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		end
 
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -239,7 +234,6 @@ local function SetupFlyoutButton()
 			end
 
 			if not button.IsSkinned then
-				button:StyleButton()
 				StyleNormalButton(button)
 
 				if C.actionbar.rightbars_mouseover == true then
@@ -248,7 +242,7 @@ local function SetupFlyoutButton()
 					button:HookScript("OnEnter", function() RightBarMouseOver(1) end)
 					button:HookScript("OnLeave", function() RightBarMouseOver(0) end)
 				end
-				
+
 				if C.actionbar.bottombars_mouseover == true then
 					SpellFlyout:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
 					SpellFlyout:HookScript("OnLeave", function() BottomBarMouseOver(0) end)
@@ -294,11 +288,11 @@ end
 
 do
 	for i = 1, 12 do
-		StyleNormalButton(_G["ActionButton"..i])
-		StyleNormalButton(_G["MultiBarBottomLeftButton"..i])
-		StyleNormalButton(_G["MultiBarBottomRightButton"..i])
-		StyleNormalButton(_G["MultiBarLeftButton"..i])
-		StyleNormalButton(_G["MultiBarRightButton"..i])
+		StyleNormalButton(_G["ActionButton"..i], C.actionbar.editor and C.actionbar.bar1_size)
+		StyleNormalButton(_G["MultiBarBottomLeftButton"..i], C.actionbar.editor and C.actionbar.bar2_size)
+		StyleNormalButton(_G["MultiBarLeftButton"..i], C.actionbar.editor and C.actionbar.bar3_size)
+		StyleNormalButton(_G["MultiBarRightButton"..i], C.actionbar.editor and C.actionbar.bar4_size)
+		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
 	end
 
 	StyleNormalButton(ExtraActionButton1)

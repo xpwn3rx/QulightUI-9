@@ -5,6 +5,7 @@
 	<Script file="AdventureMap.lua"/>
 	<Script file="AlertFrames.lua"/>
 	<Script file="AlliedRaces.lua"/>
+	<Script file="AnimaDiversion.lua"/>
 	<Script file="Archeology.lua"/>
 	<Script file="Artifact.lua"/>
 	<Script file="Auction.lua"/>
@@ -25,6 +26,9 @@
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
 	<Script file="Contribution.lua"/>
+	<Script file="CovenantPreview.lua"/>
+	<Script file="CovenantRenown.lua"/>
+	<Script file="CovenantSanctum.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="DeathRecap.lua"/>
 	<Script file="DressUp.lua"/>
@@ -32,12 +36,10 @@
 	<Script file="FlightMap.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="Garrison.lua"/>
-	<Script file="GMSurvey.lua"/>
 	<Script file="Gossip.lua"/>
 	<Script file="Guild.lua"/>
 	<Script file="GuildBank.lua"/>
 	<Script file="GuildControl.lua"/>
-	<Script file="GuildFinder.lua"/>
 	<Script file="GuildRegistrar.lua"/>
 	<Script file="Help.lua"/>
 	<Script file="Inspect.lua"/>
@@ -68,17 +70,19 @@
 	<Script file="Raid.lua"/>
 	<Script file="RaidInfo.lua"/>
 	<Script file="Scrapping.lua"/>
+	<Script file="Soulbinds.lua"/>
 	<Script file="SpellBook.lua"/>
 	<Script file="Tabard.lua"/>
 	<Script file="Talent.lua"/>
 	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
+	<Script file="TorghastLevelPicker.lua"/>
 	<Script file="Trade.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="Tutorial.lua"/>
 	<Script file="VoidStorage.lua"/>
-	<Script file="Warboard.lua"/>
+	<Script file="WeeklyRewards.lua"/>
 	<Script file="WorldMap.lua"/>
 </Ui>

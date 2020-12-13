@@ -142,7 +142,6 @@ local function LoadSkin()
 	CharacterModelFrame:CreateBackdrop("Default")
 	CharacterModelFrame.backdrop:SetPoint("TOPLEFT", -3, 4)
 	CharacterModelFrame.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
-	CharacterModelFrameBackdrop.Shadow:SetFrameLevel(CharacterFrame:GetFrameLevel()+1)
 
 	local scrollbars = {
 		"PaperDollTitlesPaneScrollBar",
@@ -309,7 +308,6 @@ local function LoadSkin()
 		T.SkinCheckBox(ReputationDetailInactiveCheckBox)
 		T.SkinCheckBox(ReputationDetailAtWarCheckBox)
 	end
-
 	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
 	hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
 	hooksecurefunc("CollapseFactionHeader", UpdateFactionSkins)

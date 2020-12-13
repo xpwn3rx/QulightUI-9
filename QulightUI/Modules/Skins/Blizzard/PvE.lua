@@ -14,7 +14,6 @@ local function LoadSkin()
 		RaidFinderQueueFrame,
 		RaidFinderFrameBottomInset,
 		RaidFinderFrameRoleInset,
-		ScenarioFinderFrame,
 		LFGDungeonReadyDialog,
 		LFGDungeonReadyStatus,
 		LFDQueueFrameCooldownFrame,
@@ -48,9 +47,6 @@ local function LoadSkin()
 	end
 
 	local buttons = {
-		_G.GroupFinderFrame.groupButton1,
-		_G.GroupFinderFrame.groupButton2,
-		_G.GroupFinderFrame.groupButton3,
 		LFDQueueFrameFindGroupButton,
 		RaidFinderFrameFindRaidButton,
 		LFGDungeonReadyDialogLeaveQueueButton,
@@ -98,7 +94,6 @@ local function LoadSkin()
 	end)
 
 	local scrollbars = {
-		--FIXME ScenarioQueueFrameSpecificScrollFrameScrollBar,
 		LFGListApplicationViewerScrollFrameScrollBar,
 		LFDQueueFrameSpecificListScrollFrameScrollBar,
 		LFDQueueFrameRandomScrollFrameScrollBar,
@@ -113,9 +108,8 @@ local function LoadSkin()
 
 	-- Set texture to hide circle
 	_G.GroupFinderFrame.groupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
-	_G.GroupFinderFrame.groupButton2.icon:SetTexture("Interface\\Icons\\Icon_Scenarios")
-	_G.GroupFinderFrame.groupButton3.icon:SetTexture("Interface\\LFGFrame\\UI-LFR-PORTRAIT")
-	--FIXME _G.GroupFinderFrame.groupButton4.icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
+	_G.GroupFinderFrame.groupButton2.icon:SetTexture("Interface\\LFGFrame\\UI-LFR-PORTRAIT")
+	_G.GroupFinderFrame.groupButton3.icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
 
 	for i = 1, 3 do
 		local button = GroupFinderFrame["groupButton"..i]
@@ -124,9 +118,8 @@ local function LoadSkin()
 		button:CreateBackdrop("Overlay")
 		button.backdrop:SetAllPoints()
 		button:StyleButton()
-		
+
 		button.bg:SetTexture("")
-		button.bg:Kill()
 
 		button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button.icon:SetPoint("LEFT", button, "LEFT", 10, 0)
@@ -144,9 +137,9 @@ local function LoadSkin()
 		for i = 1, 3 do
 			local button = self["groupButton"..i]
 			if i == index then
-				button.backdrop:SetBackdropBorderColor(0, 0, 0, 1)
-				button.backdrop.overlay:SetVertexColor(0, 0, 0, 0.3)
-				button.border.backdrop:SetBackdropBorderColor(0, 0, 0, 1)
+				button.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
+				button.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+				button.border.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
 			else
 				button.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 				button.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)

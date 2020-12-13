@@ -291,7 +291,7 @@ local function LoadSkin()
 	PlayerTalentFrameTalents.PvpTalentFrame:StripTextures()
 	PlayerTalentFrameTalentsPvpTalentFrameTalentList:StripTextures()
 	PlayerTalentFrameTalentsPvpTalentFrameTalentList:CreateBackdrop("Transparent")
-	PlayerTalentFrameTalentsPvpTalentFrameTalentList.backdrop:SetPoint("TOPLEFT", 3, 2) 
+	PlayerTalentFrameTalentsPvpTalentFrameTalentList.backdrop:SetPoint("TOPLEFT", 3, 2)
 	T.SkinScrollBar(PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameScrollBar)
 
 	PlayerTalentFrameTalentsPvpTalentFrameTalentList:ClearAllPoints()

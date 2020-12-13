@@ -7,8 +7,8 @@ if GetLocale() ~= "esES" and GetLocale() ~= "esMX" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Cambios aplicables sólo a este PJ"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "¿Estás seguro de que quieres reiniciar tus preferencias de QulightUI para este PJ?"
-L_GUI_RESET_ALL = "¿Estás seguro de que quieres reiniciar tus preferencias de QulightUI para todos los PJs?"
+L_GUI_RESET_CHAR = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para este PJ?"
+L_GUI_RESET_ALL = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para todos los PJs?"
 L_GUI_PER_CHAR = "¿Estás segudo de que quieres cambiar a o desde 'Cambios sólo a este PJ'?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review
@@ -235,6 +235,11 @@ L.actionbar_stancebar_horizontal_desc = "Located below the player's frame" -- Ne
 L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER = "Barras de Cambios de forma/Estancias al pasar el ratón" -- Needs review
 L_GUI_ACTIONBAR_MICROMENU = "Enable micro menu" -- Needs review
 L_GUI_ACTIONBAR_MICROMENU_MOUSEOVER = "Micro menu on mouseover" -- Needs review
+L.actionbar_editor = "Bars editor" -- Needs review
+L.actionbar_editor_desc = "Allow to move and change each panel individually" -- Needs review
+L.actionbar_bar1_num = "Number of buttons" -- Needs review
+L.actionbar_bar1_row = "Buttons per row" -- Needs review
+L.actionbar_bar1_mouseover = "Bar on mouseover" -- Needs review
 
 -- Tooltip options
 L.tooltip = "Descripciones"
@@ -383,7 +388,7 @@ L_GUI_BAGS_BAG = "Número de columnas en la bolsa principal"
 L_GUI_MINIMAP_SUBTEXT = "Minimap settings." -- Need review
 L_GUI_MINIMAP_ENABLE = "Activar minimapa"
 L_GUI_MINIMAP_ICON = "Icono de seguimiento"
-L_GUI_GARRISON_ICON = "Garrison icon" -- Need review
+L_GUI_GARRISON_ICON = "Covenant icon" -- Need review
 L_GUI_MINIMAP_SIZE = "Tamaño del minimapa"
 L_GUI_MINIMAP_HIDE_COMBAT = "Ocultar minimapa en combate"
 L_GUI_MINIMAP_TOGGLE_MENU = "Show toggle menu" -- Needs review

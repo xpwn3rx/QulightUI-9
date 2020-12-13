@@ -32,67 +32,71 @@ local function LoadSkin()
 			frame.IsSkinned = true
 		end
 
-		frame.backdrop:SetShown(not IsInJailersTower())
+		local IsInJailers = IsInJailersTower()
+		frame.backdrop:SetShown(not IsInJailers)
 
 		for i = 1, frame:GetNumOptions() do
 			local option = frame.Options[i]
+			local hasArtworkBorderArt = option.ArtworkBorder:IsShown() or option.ArtworkBorderDisabled:IsShown()
 			option:CreateBackdrop("Overlay")
 			option.backdrop:SetPoint("TOPLEFT", -2, 20)
+			option.backdrop:SetShown(not IsInJailers and hasArtworkBorderArt)
 
 			for i = 1, #option.OptionButtonsContainer.Buttons do
-				option.OptionButtonsContainer.Buttons[i]:SkinButton()
+				local button = option.OptionButtonsContainer.Buttons[i]
+				if not button.isSkinned then
+					if IsInJailers then
+						button:StripTextures(true)
+					end
+					if i == 1 or (hasArtworkBorderArt and i == 2) then
+						button:SkinButton()
+					end
+					button.isSkinned = true
+				end
 			end
 
 			option.Header.Text:SetTextColor(1, .8, 0)
 			option.OptionText:SetTextColor(1, 1, 1)
 
-			option.Background:SetAlpha(0)
+			option.Background:SetShown(IsInJailers and not hasArtworkBorderArt)
+			-- if IsInJailers then
+				-- option.Background:Show()
+			-- end
 			option.Header.Ribbon:SetAlpha(0)
 
 			option.ArtworkBorder:SetAlpha(0)
 			option.ArtworkBorderDisabled:SetAlpha(0)
-			option.ArtBackdrop = CreateFrame("Frame", nil, option)
-			option.ArtBackdrop:SetFrameLevel(option:GetFrameLevel())
-			option.ArtBackdrop:SetPoint("TOPLEFT", option.Artwork, -2, 2)
-			option.ArtBackdrop:SetPoint("BOTTOMRIGHT", option.Artwork, 2, -2)
-			option.ArtBackdrop:SetTemplate("Default")
-
-			for i = 1, option.WidgetContainer:GetNumChildren() do
-				local child = select(i, option.WidgetContainer:GetChildren())
-				if child then
-					if child.Text then
-						child.Text:SetTextColor(1, 1, 1)
-					end
-
-					if child.Spell then
-						if not child.Spell.isSkinned then
-							child.Spell.Border:SetTexture("")
-							child.Spell.IconMask:Hide()
-
-							child.Spell.Icon:SkinIcon()
-
-							child.Spell.isSkinned = true
-						end
-
-						child.Spell.Text:SetTextColor(1, 1, 1)
-					end
-
-					for j = 1, child:GetNumChildren() do
-						local child2 = select(j, child:GetChildren())
-						if child2 then
-							if child2.Text then StyleText(child2.Text) end
-							if child2.LeadingText then StyleText(child2.LeadingText) end
-							if child2.Icon and not child2.Icon.isSkinned then
-								child2.Icon:SkinIcon()
-
-								child2.Icon.isSkinned = true
-							end
-						end
-					end
-				end
+			if not option.ArtBackdrop then
+				option.ArtBackdrop = CreateFrame("Frame", nil, option)
+				option.ArtBackdrop:SetFrameLevel(option:GetFrameLevel())
+				option.ArtBackdrop:SetPoint("TOPLEFT", option.Artwork, -2, 2)
+				option.ArtBackdrop:SetPoint("BOTTOMRIGHT", option.Artwork, 2, -2)
+				option.ArtBackdrop:SetTemplate("Default")
 			end
+			option.ArtBackdrop:SetShown(not IsInJailers and hasArtworkBorderArt)
+
+			if option.WidgetContainer.widgetFrames then
+                for _, widgetFrame in next, option.WidgetContainer.widgetFrames do
+                    if widgetFrame.widgetType == _G.Enum.UIWidgetVisualizationType.TextWithState then
+						widgetFrame.Text:SetTextColor(1, 1, 1)
+					elseif widgetFrame.widgetType == _G.Enum.UIWidgetVisualizationType.SpellDisplay then
+						local _, g = widgetFrame.Spell.Text:GetTextColor()
+						if g < 0.2 then
+							widgetFrame.Spell.Text:SetTextColor(1, 1, 1)
+						end
+						widgetFrame.Spell.Border:Hide()
+						widgetFrame.Spell.IconMask:Hide()
+						if not widgetFrame.Spell.backdrop then
+							widgetFrame.Spell.Icon:SkinIcon()
+						end
+						if widgetFrame.Spell.Icon:GetWidth() < 25 then
+							widgetFrame.Spell.Icon:SetSize(20, 20)
+						end
+					end
+                end
+            end
 		end
 	end)
 end
 
-T.SkinFuncs["Blizzard_PlayerChoiceUI"] = LoadSkin 
+T.SkinFuncs["Blizzard_PlayerChoiceUI"] = LoadSkin

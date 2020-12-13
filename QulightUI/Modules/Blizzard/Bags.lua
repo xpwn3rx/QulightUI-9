@@ -1330,6 +1330,14 @@ function Stuffing:ADDON_LOADED(addon)
 	CloseAllBags = Stuffing_Close
 	CloseBackpack = Stuffing_Close
 
+	OpenAllBagsMatchingContext = function()
+		for i = 0, NUM_BAG_FRAMES do
+			if ItemButtonUtil.GetItemContextMatchResultForContainer(i) == ItemButtonUtil.ItemContextMatchResult.Match then
+				Stuffing_Open()
+			end
+		end
+	end
+
 	BankFrame:UnregisterAllEvents()
 	BankFrame:SetScale(0.00001)
 	BankFrame:SetAlpha(0)
