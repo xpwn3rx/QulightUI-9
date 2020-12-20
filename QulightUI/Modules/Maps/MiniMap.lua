@@ -179,6 +179,7 @@ end)
 ----------------------------------------------------------------------------------------
 local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local guildText = IsInGuild() and ACHIEVEMENTS_GUILD_TAB or LOOKINGFORGUILD
+local journalText = T.client == "ruRU" and ENCOUNTER_JOURNAL or ADVENTURE_JOURNAL
 local micromenu = {
 	{text = CHARACTER_BUTTON, notCheckable = 1, func = function()
 		ToggleCharacter("PaperDollFrame")
@@ -229,7 +230,7 @@ local micromenu = {
 			end
 		end
 	end},
-	{text = DUNGEONS_BUTTON, notCheckable = 1, func = function()
+	{text = GROUP_FINDER, notCheckable = 1, func = function()
 		if T.level >= 10 then
 			PVEFrame_ToggleFrame("GroupFinderFrame", nil)
 		else
@@ -240,7 +241,7 @@ local micromenu = {
 			end
 		end
 	end},
-	{text = ADVENTURE_JOURNAL, notCheckable = 1, func = function()
+	{text = journalText, notCheckable = 1, func = function()
 		if C_AdventureJournal.CanBeShown() then
 			ToggleEncounterJournal()
 		else
@@ -273,6 +274,15 @@ local micromenu = {
 
 if not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() then
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
+end
+
+if T.level == MAX_PLAYER_LEVEL then
+	tinsert(micromenu, {text = RATED_PVP_WEEKLY_VAULT, notCheckable = 1, func = function()
+		if not WeeklyRewardsFrame then
+			WeeklyRewards_LoadUI()
+		end
+		ToggleFrame(WeeklyRewardsFrame)
+	end})
 end
 
 local frame = CreateFrame("Frame")

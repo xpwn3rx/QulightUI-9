@@ -576,7 +576,22 @@ do
 	backdrop_alpha:SetPoint("TOPLEFT", backdrop_color, "BOTTOMLEFT", 0, -28)
 
 	local texture = ns.CreateDropDown(parent, "texture", true, nil, TextureTable, LSM and true)
-	texture:SetPoint("TOPLEFT", backdrop_alpha, "BOTTOMLEFT", -20, -15)
+	
+
+	local texturePreview = CreateFrame("Frame", nil, parent)
+	texturePreview:SetSize(100, 30)
+	texturePreview:SetPoint("LEFT", texture.label, "RIGHT", 10, 0)
+	texturePreview:Hide()
+
+	texturePreview.tex = texturePreview:CreateTexture(nil, "OVERLAY")
+	texturePreview.tex:SetPoint("CENTER")
+	texturePreview.tex:SetSize(100, 30)
+
+	hooksecurefunc(texture, "SetValue", function()
+		texturePreview:Show()
+		texturePreview.tex:SetTexture(C.options.media.texture)
+		texturePreview.tex:SetVertexColor(unpack(C.media.classborder_color))
+	end)
 
 	-- Normal Font
 	local subheader = ns.addSubCategory(parent, L.media_subheader_normal)
@@ -1679,8 +1694,14 @@ do
 	local spam = ns.CreateCheckBox(parent, "spam", L_GUI_CHAT_GOLD)
 	spam:SetPoint("TOPLEFT", filter, "BOTTOMLEFT", 0, 0)
 
+
+	local spam_list = ns.CreateEditBox(parent, "spam_list", true)
+	spam_list:SetPoint("TOPLEFT", spam, "BOTTOMLEFT", 6, -10)
+	spam_list:SetWidth(200)
+	spam_list:SetMaxLetters(40)
+
 	local chat_bar = ns.CreateCheckBox(parent, "chat_bar", L_GUI_CHAT_BAR)
-	chat_bar:SetPoint("TOPLEFT", spam, "BOTTOMLEFT", 0, 0)
+	chat_bar:SetPoint("TOPLEFT", spam_list, "BOTTOMLEFT", -6, -10)
 
 	local chat_bar_mouseover = ns.CreateCheckBox(parent, "chat_bar_mouseover", L_GUI_CHAT_BAR_MOUSEOVER)
 	chat_bar_mouseover:SetPoint("TOPLEFT", chat_bar, "BOTTOMLEFT", 20, 0)

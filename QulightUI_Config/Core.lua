@@ -502,9 +502,6 @@ local function setActiveTab(tab)
 		activeTab.panel.NextPageButton:Enable()
 		activeTab.panel.pageText:SetFormattedText(COLLECTION_PAGE_NUMBER, 1, activeTab.panel.maxPages)
 		activeTab.panel.currentPage = 1
-	end
-
-	if activeTab.panel_2 then
 		activeTab.panel_2:Hide()
 	end
 
@@ -785,7 +782,7 @@ local function displaySettings()
 
 	for _, slider in pairs(sliders) do
 		local value = C[slider.group][slider.option]
-		if slider.group == "font" and T.screenHeight > 1200 then
+		if T.screenHeight > 1200 and slider.group == "font" and slider.option ~= "nameplates_font_size" then
 			value = value / T.mult
 		end
 		slider:SetValue(value)

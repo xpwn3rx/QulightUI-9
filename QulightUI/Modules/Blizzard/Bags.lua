@@ -172,46 +172,12 @@ end
 -- Bag slot stuff
 local trashButton = {}
 local trashBag = {}
-
--- Tooltip and scanning by Phanx @ http://www.wowinterface.com/forums/showthread.php?p=271406
-local S_ITEM_LEVEL = "^" .. gsub(_G.ITEM_LEVEL, "%%d", "(%%d+)")
-
-local scanner = CreateFrame("GameTooltip", "BagScanningTooltip", nil, "GameTooltipTemplate")
-local scannerName = scanner:GetName()
-
 local ItemDB = {}
 
-local function _getRealItemLevel(link, owner, bag, slot)
+local function _getRealItemLevel(link, bag, slot)
 	if ItemDB[link] then return ItemDB[link] end
 
-	local realItemLevel
-
-	scanner.owner = owner
-	scanner:SetOwner(owner, "ANCHOR_NONE")
-	scanner:SetBagItem(bag, slot)
-
-	local line = _G[scannerName.."TextLeft2"]
-	if line then
-		local msg = line:GetText()
-		if msg and string.find(msg, S_ITEM_LEVEL) then
-			local itemLevel = string.match(msg, S_ITEM_LEVEL)
-			if itemLevel and (tonumber(itemLevel) > 0) then
-				realItemLevel = itemLevel
-			end
-		else
-			-- Check line 3, some artifacts have the ilevel there
-			line = _G[scannerName.."TextLeft3"]
-			if line then
-				local msg = line:GetText()
-				if msg and string.find(msg, S_ITEM_LEVEL) then
-					local itemLevel = string.match(msg, S_ITEM_LEVEL)
-					if itemLevel and (tonumber(itemLevel) > 0) then
-						realItemLevel = itemLevel
-					end
-				end
-			end
-		end
-	end
+local realItemLevel = C_Item.GetCurrentItemLevel(ItemLocation:CreateFromBagAndSlot(bag, slot))
 
 	ItemDB[link] = tonumber(realItemLevel)
 	return realItemLevel
@@ -233,11 +199,9 @@ function Stuffing:SlotUpdate(b)
 		CooldownFrame_Set(b.cooldown, start, duration, enable)
 	end
 
-	if C.bag.ilvl == true then
-		b.frame.text:SetText("")
-	end
-
 	b.frame.Azerite:Hide()
+	b.frame.Conduit:Hide()
+	b.frame.Conduit2:Hide()
 	b.frame:UpdateItemContextMatching() -- Update Scrap items
 
 	if b.frame.UpgradeIcon then
@@ -267,12 +231,20 @@ function Stuffing:SlotUpdate(b)
 		end
 
 		if C.bag.ilvl == true and b.itemlevel and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
-			b.itemlevel = _getRealItemLevel(clink, self, b.bag, b.slot) or b.itemlevel
+			b.itemlevel = _getRealItemLevel(clink, b.bag, b.slot) or b.itemlevel
 			b.frame.text:SetText(b.itemlevel)
 		end
 
-		if b.frame.Azerite and C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
+		if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
+			b.frame.Azerite:SetAtlas("AzeriteIconFrame")
 			b.frame.Azerite:Show()
+		elseif C_Soulbinds.IsItemConduitByItemInfo(clink) then
+			b.frame.Conduit:SetAtlas("ConduitIconFrame")
+			b.frame.Conduit:Show()
+			local color = BAG_ITEM_QUALITY_COLORS[quality]
+			b.frame.Conduit:SetVertexColor(color.r, color.g, color.b)
+			b.frame.Conduit2:SetAtlas("ConduitIconFrame-Corners")
+			b.frame.Conduit2:Show()
 		end
 
 		if (IsItemUnusable(clink) or b.level and b.level > T.level) and not locked then
@@ -587,17 +559,28 @@ function Stuffing:SlotNew(bag, slot)
 		ret.count:SetPoint("BOTTOMRIGHT", 1, 1)
 
 		if C.bag.ilvl == true then
-			ret.frame:FontString("text", C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
+			ret.frame.text = ret.frame:CreateFontString(nil, "ARTWORK")
+			ret.frame.text:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 			ret.frame.text:SetPoint("TOPLEFT", 1, -1)
 			ret.frame.text:SetTextColor(1, 1, 0)
 		end
 
-		ret.frame.Azerite = ret.frame:CreateTexture(nil, "OVERLAY")
+		ret.frame.Azerite = ret.frame:CreateTexture(nil, "ARTWORK")
 		ret.frame.Azerite:SetAtlas("AzeriteIconFrame")
-		ret.frame.Azerite:SetTexCoord(0, 1, 0, 1)
 		ret.frame.Azerite:SetPoint("TOPLEFT", ret.frame, 1, -1)
 		ret.frame.Azerite:SetPoint("BOTTOMRIGHT", ret.frame, -1, 1)
 		ret.frame.Azerite:Hide()
+		ret.frame.Conduit = ret.frame:CreateTexture(nil, "ARTWORK")
+		ret.frame.Conduit:SetAtlas("ConduitIconFrame")
+		ret.frame.Conduit:SetPoint("TOPLEFT", ret.frame, 2, -2)
+		ret.frame.Conduit:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+		ret.frame.Conduit:Hide()
+
+		ret.frame.Conduit2 = ret.frame:CreateTexture(nil, "ARTWORK")
+		ret.frame.Conduit2:SetAtlas("ConduitIconFrame-Corners")
+		ret.frame.Conduit2:SetPoint("TOPLEFT", ret.frame, 2, -2)
+		ret.frame.Conduit2:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+		ret.frame.Conduit2:Hide()
 
 		local Battlepay = _G[ret.frame:GetName()].BattlepayItemTexture
 		if Battlepay then
@@ -673,7 +656,11 @@ function Stuffing:SearchUpdate(str)
 
 	for _, b in ipairs(self.buttons) do
 		if b.frame and not b.name then
-			b.frame:SetAlpha(0.2)
+			if str == "" then
+				b.frame.searchOverlay:Hide()
+			else
+				b.frame.searchOverlay:Show()
+			end
 		end
 		if b.name then
 			local ilink = GetContainerItemLink(b.bag, b.slot)
@@ -705,9 +692,6 @@ function Stuffing:SearchUpdate(str)
 					end
 					SetItemButtonDesaturated(b.frame, false)
 					b.frame.searchOverlay:Hide()
-					if C.bag.ilvl == true then
-						b.frame.text:SetAlpha(1)
-					end
 				end
 			end
 		end
@@ -769,7 +753,7 @@ function Stuffing:CreateBagFrame(w)
 	f:EnableMouse(true)
 	f:SetMovable(true)
 	f:SetFrameStrata("MEDIUM")
-	f:SetFrameLevel(5)
+	f:SetFrameLevel(10)
 	f:RegisterForDrag("LeftButton")
 	f:SetScript("OnDragStart", function(self)
 		if IsAltKeyDown() or IsShiftKeyDown() then
