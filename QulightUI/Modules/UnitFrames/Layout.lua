@@ -161,6 +161,11 @@ local function Shared(self, unit)
 		self.Power.bg.multiplier = 0.2
 	end
 
+	if self.Power then
+	
+		self.Power:SetFrameLevel(self.Health:GetFrameLevel()+2)
+	end
+
 	self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 	if unit == "player" or unit == "target" then
 		self.Power.value:SetPoint("TOPRIGHT", self.Power, "TOPRIGHT", 3, 15)

@@ -403,10 +403,11 @@ oUF:Factory(function(self)
 			"groupFilter", "MAINTANK",
 			"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 		)
-		if C.actionbar.split_bars then
-			raidtank:SetPoint(C.position.unitframes.tank[1], SplitBarRight, C.position.unitframes.tank[3], C.position.unitframes.tank[4], C.position.unitframes.tank[5])
-		else
-			raidtank:SetPoint(unpack(C.position.unitframes.tank))
-		end
+		-- if C.actionbar.split_bars then
+		-- 	raidtank:SetPoint(C.position.unitframes.tank[1], SplitBarRight, C.position.unitframes.tank[3], C.position.unitframes.tank[4], C.position.unitframes.tank[5])
+		-- else
+		-- 	raidtank:SetPoint(unpack(C.position.unitframes.tank))
+		-- end
+		raidtank:SetPoint("TOPLEFT", T_DE_BUFF_BAR_Anchor, "BOTTOMLEFT", 0, -4)
 	end
 end)
