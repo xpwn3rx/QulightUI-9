@@ -161,6 +161,11 @@ local function Shared(self, unit)
 		self.Power.bg.multiplier = 0.2
 	end
 
+	if self.Power then
+
+		self.Power:SetFrameLevel(self.Health:GetFrameLevel()+2)
+	end
+
 	self.Power.value = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 	if unit == "player" or unit == "target" then
 		self.Power.value:SetPoint("TOPRIGHT", self.Power, "TOPRIGHT", 3, 15)
@@ -1366,25 +1371,25 @@ SlashCmdList.TEST_UF = function()
 			end
 		end
 
-		if C.unitframe.show_arena == true then
-			for i = 1, 5 do
-				_G["oUF_Arena"..i].oldunit = _G["oUF_Arena"..i].unit
-				_G["oUF_Arena"..i].Trinket.Hide = T.dummy
-				_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
-				_G["oUF_Arena"..i]:SetAttribute("unit", "player")
+		-- if C.unitframe.show_arena == true then
+			-- for i = 1, 5 do
+				-- _G["oUF_Arena"..i].oldunit = _G["oUF_Arena"..i].unit
+				-- _G["oUF_Arena"..i].Trinket.Hide = T.dummy
+				-- _G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
+				-- _G["oUF_Arena"..i]:SetAttribute("unit", "player")
 
-				_G["oUF_Arena"..i.."Target"].oldunit = 	_G["oUF_Arena"..i.."Target"].unit
-				_G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
+				-- _G["oUF_Arena"..i.."Target"].oldunit = 	_G["oUF_Arena"..i.."Target"].unit
+				-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
 
-				if C.unitframe.plugins_enemy_spec == true then
-					_G["oUF_Arena"..i].EnemySpec:SetText(SPECIALIZATION)
-				end
+				-- if C.unitframe.plugins_enemy_spec == true then
+					-- _G["oUF_Arena"..i].EnemySpec:SetText(SPECIALIZATION)
+				-- end
 
-				if C.unitframe.plugins_diminishing == true then
-					SlashCmdList.DIMINISHINGCD()
-				end
-			end
-		end
+				-- if C.unitframe.plugins_diminishing == true then
+					-- SlashCmdList.DIMINISHINGCD()
+				-- end
+			-- end
+		-- end
 
 		if C.unitframe.show_boss == true then
 			for i = 1, MAX_BOSS_FRAMES do
@@ -1400,13 +1405,13 @@ SlashCmdList.TEST_UF = function()
 			end
 		end
 
-		if C.unitframe.show_arena == true then
-			for i = 1, 5 do
-				_G["oUF_Arena"..i].Trinket.Hide = nil
-				_G["oUF_Arena"..i]:SetAttribute("unit", _G["oUF_Arena"..i].oldunit)
-				_G["oUF_Arena"..i.."Target"]:SetAttribute("unit", _G["oUF_Arena"..i.."Target"].oldunit)
-			end
-		end
+		-- if C.unitframe.show_arena == true then
+			-- for i = 1, 5 do
+				-- _G["oUF_Arena"..i].Trinket.Hide = nil
+				-- _G["oUF_Arena"..i]:SetAttribute("unit", _G["oUF_Arena"..i].oldunit)
+				-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", _G["oUF_Arena"..i.."Target"].oldunit)
+			-- end
+		-- end
 
 		if C.unitframe.show_boss == true then
 			for i = 1, MAX_BOSS_FRAMES do

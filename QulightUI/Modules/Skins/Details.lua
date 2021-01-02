@@ -29,8 +29,8 @@ end)
 
 hooksecurefunc(_detalhes, "SetFontOutline", function(_, fontString)
 	local fonte, size = fontString:GetFont()
-	if fonte == "Interface\\AddOns\\QulightUI\\Media\\Fonts\\Pixel.ttf" then
-		fontString:SetFont(fonte, size, "MONOCHROMEOUTLINE")
+	if fonte == "Interface\\AddOns\\QulightUI\\Media\\Fonts\\Normal.ttf" then
+		fontString:SetFont(fonte, size)
 		if fontString:GetShadowColor() then
 			fontString:SetShadowColor(0, 0, 0, 0)
 		end
@@ -161,7 +161,7 @@ local skinTable = {
 			},
 			["texture_background_class_color"] = false,
 			["start_after_icon"] = true,
-			["font_face_file"] = "Interface\\AddOns\\QulightUI\\Media\\Fonts\\Pixel.ttf",
+			["font_face_file"] = "Interface\\AddOns\\QulightUI\\Media\\Fonts\\Normal.ttf",
 			["backdrop"] = {
 				["enabled"] = false,
 				["size"] = 12,

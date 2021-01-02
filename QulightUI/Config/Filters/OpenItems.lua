@@ -553,6 +553,7 @@ T.OpenItems = {
 	[181476] = true,	-- Tribute of the Wild Hunt
 	[181556] = true,	-- Tribute of the Court
 	[181741] = true,	-- Tribute of the Paragon
+	[181733] = true,	-- Tribute of the Duty-Bound
 	[181732] = true,	-- Tribute of the Ambitious
  	[183701] = true,	-- Cleansing Rite Materials
 	[184522] = true,	-- Veiled Satchel of Cooperation

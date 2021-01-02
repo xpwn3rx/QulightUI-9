@@ -11,7 +11,7 @@ LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 		return
 	end
 
-	if addon == "ShestakUI" then
+	if addon == "QulightUI" then
 		local Tooltips = {
 			FloatingGarrisonFollowerTooltip,
 			FloatingGarrisonFollowerAbilityTooltip,
@@ -945,6 +945,12 @@ local function LoadSkin()
 	CovenantMissionFrameMissions.RaisedFrameEdges:StripTextures()
 	T.SkinScrollBar(CovenantMissionFrameMissionsListScrollFrameScrollBar)
 
+	CovenantMissionFrameMissionsListScrollFrameScrollBarScrollUpButton:SetSize(17, 15)
+	CovenantMissionFrameMissionsListScrollFrameScrollBarThumbTexture:SetWidth(17)
+	CovenantMissionFrameMissionsListScrollFrameScrollBarScrollDownButton:SetSize(17, 15)
+	CovenantMissionFrameMissionsListScrollFrameScrollBar:SetPoint("TOPLEFT", CovenantMissionFrameMissionsListScrollFrame, "TOPRIGHT", -17, -23)
+	CovenantMissionFrameMissionsListScrollFrameScrollBar:SetPoint("BOTTOMLEFT", CovenantMissionFrameMissionsListScrollFrame, "BOTTOMRIGHT", -17, 21)
+
 	for i = 1, #CovenantMissionFrame.MissionTab.MissionList.listScroll.buttons do
 		local button = CovenantMissionFrame.MissionTab.MissionList.listScroll.buttons[i]
 		if not button.backdrop then
@@ -955,6 +961,10 @@ local function LoadSkin()
 			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 			button:StyleButton(nil, 2)
 			button.Overlay.Overlay:SetAllPoints(button.backdrop)
+
+			if i ~= 1 then
+				button:SetPoint("TOPLEFT", CovenantMissionFrame.MissionTab.MissionList.listScroll.buttons[i-1], "BOTTOMLEFT", 0, -3)
+			end
 		end
 	end
 
@@ -990,12 +1000,27 @@ local function LoadSkin()
 	CovenantMissionFrame.MissionTab.MissionPage.StartMissionButton:SkinButton()
 
 	CovenantMissionFrame.MissionComplete.CompleteFrame.ContinueButton:SkinButton()
+	CovenantMissionFrame.MissionComplete.CompleteFrame.SpeedButton:SkinButton()
 	CovenantMissionFrame.MissionComplete.RewardsScreen.FinalRewardsPanel.ContinueButton:SkinButton()
 
 	HandleGarrisonPortrait(GarrisonLandingPage.FollowerTab.CovenantFollowerPortraitFrame)
 
 	CovenantMissionFrame.MissionTab.MissionPage.CostFrame.CostLabel:SetFont(C.media.normal_font, 14)
 	CovenantMissionFrame.MissionTab.MissionPage.CostFrame.CostIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+	----------------------------------------------------------------------------------------
+	--	KayrCovenantMissions AddOn skin
+	----------------------------------------------------------------------------------------
+	if IsAddOnLoaded("KayrCovenantMissions") then
+		hooksecurefunc(CovenantMissionFrame, "SetupTabs", function(tab, isSelected)
+			if KayrCovenantMissionsAdvice then
+				KayrCovenantMissionsAdvice:StripTextures()
+				KayrCovenantMissionsAdvice:CreateBackdrop("Transparent")
+				KayrCovenantMissionsAdvice.backdrop:SetPoint("TOPLEFT", 2, -4)
+				KayrCovenantMissionsAdvice.backdrop:SetPoint("BOTTOMRIGHT", 0, 4)
+			end
+		end)
+	end
 end
 
 T.SkinFuncs["Blizzard_GarrisonUI"] = LoadSkin
