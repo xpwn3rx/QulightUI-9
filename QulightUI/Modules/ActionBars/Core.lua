@@ -158,7 +158,7 @@ function BottomBarMouseOver(alpha)
 	end
 
 	if C.actionbar.rightbars < 3 and MultiBarBottomRight:IsShown() then
-		if C.actionbar.toggle_mode == true and ShestakUISettingsPerChar.BottomBars == 1 then
+		if C.actionbar.toggle_mode == true and QulightUISettingsPerChar.BottomBars == 1 then
 			for i = 4, 6 do
 				local b = _G["MultiBarBottomRightButton"..i]
 				b:SetAlpha(alpha)

@@ -240,14 +240,14 @@ end
 
 local RestoreDefaults = function(self, button)
 	if button == "RightButton" then
-		local data = ShestakUIPositions.Default and ShestakUIPositions.Default[self.frame:GetName()]
+		local data = QulightUIPositions.Default and QulightUIPositions.Default[self.frame:GetName()]
 		if data then
 			self.frame:ClearAllPoints()
 			self.frame:SetPoint(unpack(data))
 			self:ClearAllPoints()
 			self:SetAllPoints(self.frame)
-			ShestakUIPositions.Default[self.frame:GetName()] = nil
-			ShestakUIPositions[self.frame:GetName()] = nil
+			QulightUIPositions.Default[self.frame:GetName()] = nil
+			QulightUIPositions[self.frame:GetName()] = nil
 		end
 	elseif button == "MiddleButton" then
 		self:Hide()

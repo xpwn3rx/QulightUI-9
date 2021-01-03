@@ -126,7 +126,7 @@ LevelUpdater:SetScript("OnEvent", CheckLevel)
 ----------------------------------------------------------------------------------------
 --	Pet Battle Hider
 ----------------------------------------------------------------------------------------
-T_PetBattleFrameHider = CreateFrame("Frame", "ShestakUI_PetBattleFrameHider", UIParent, "SecureHandlerStateTemplate")
+T_PetBattleFrameHider = CreateFrame("Frame", "QulightUI_PetBattleFrameHider", UIParent, "SecureHandlerStateTemplate")
 T_PetBattleFrameHider:SetAllPoints()
 T_PetBattleFrameHider:SetFrameStrata("LOW")
 RegisterStateDriver(T_PetBattleFrameHider, "visibility", "[petbattle] hide; show")

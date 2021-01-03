@@ -148,7 +148,7 @@ end
 
 local savePosition = function(obj, anchor)
 	local x, y, ap = T.CalculateMoverPoints(anchor)
-	ShestakUIPositions.UnitFrame[anchor.target:GetName()] = {ap, "UIParent", ap, x, y}
+	QulightUIPositions.UnitFrame[anchor.target:GetName()] = {ap, "UIParent", ap, x, y}
 end
 
 -- Controls
@@ -208,7 +208,7 @@ local function CreateArrow(moveX, moveY, callback)
 		if not relativeTo then
 			relativeTo = UIParent
 		end
-		ShestakUIPositions.UnitFrame[frame.target:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
+		QulightUIPositions.UnitFrame[frame.target:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
 		frame:SetAllPoints(frame.target)
 		controls.x:SetText(T.Round(xOfs))
 		controls.y:SetText(T.Round(yOfs))
