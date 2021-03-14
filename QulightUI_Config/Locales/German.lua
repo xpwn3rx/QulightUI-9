@@ -72,6 +72,7 @@ L.font_subheader_bag = "Taschen Schriftart"
 L.font_subheader_blizzard = "System font size" -- Need review
 L.font_tooltip_header_font_size = "Tooltip header" -- Need review
 L.font_tooltip_font_size = "Tooltip text" -- Need review
+L.font_global_font = "Disable Pixel font" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "Design/Skins"
@@ -140,6 +141,8 @@ L.unitframe_extra_height_auto = "Automatische Höhe für Gesundheit/Kraft"
 L.unitframe_extra_height_auto_desc = "Intelligente Anpassung je nach Schriftgröße"
 L.unitframe_extra_health_height = "Zusätzliche Höhe für die Gesundheit"
 L.unitframe_extra_power_height = "Zusätzliche Höhe für Power/Energie"
+L.unitframe_subheader_castbar = "Size of player and target castbar" -- Need review
+L.unitframe_castbar_height = "Height" -- Need review
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Unit Frames Klassenleisten"
@@ -162,6 +165,8 @@ L_GUI_UF_AGGRO_BORDER = "Rahmen bei Bedrohung"
 L_GUI_UF_DEFICIT_HEALTH = "Fehlendes Leben im Raid"
 L_GUI_UF_SHOW_PARTY = "Zeige Gruppenfenster"
 L_GUI_UF_SHOW_RAID = "Zeige Raidfenster"
+L.raidframe_show_target = "Show target frames" -- Needs review
+L.raidframe_show_pet = "Show pet frames" -- Needs review
 L.raidframe_vertical_health = "Vertikale Orientierung für Lebensbalken"
 L.raidframe_vertical_health_desc = "Only for heal layout" -- Needs review
 L_GUI_UF_ALPHA_HEALTH = "Transparenz der Lebensbalken wenn 100% Leben"

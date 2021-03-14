@@ -126,7 +126,6 @@ C["unitframe"] = {
 	["plugins_swing"] = false,						-- Swing bar
 	["plugins_reputation_bar"] = true,					-- Reputation bar (left from player frame by mouseover, Middle-Click to lock visibility)
 	["plugins_experience_bar"] = true,					-- Experience bar (left from player frame by mouseover, Middle-Click to lock visibility)
-	["plugins_artifact_bar"] = false,					-- Artifact Power bar (left from player frame by mouseover, Middle-Click to lock visibility)
 	["plugins_smooth_bar"] = false,						-- Smooth bar
 	["plugins_enemy_spec"] = true,						-- Enemy specialization in BG and Arena
 	["plugins_combat_feedback"] = false,					-- Combat text on player/target frame
@@ -140,6 +139,8 @@ C["unitframe"] = {
 	["extra_height_auto"] = true,						-- Auto height for health/power depending on font size
 	["extra_health_height"] = 0,						-- Additional height for health
 	["extra_power_height"] = 0,						-- Additional height for power
+	["castbar_width"] = 258,						-- Player and Target castbar width
+	["castbar_height"] = 16,						-- Player and Target castbar height
 }
 
 ----------------------------------------------------------------------------------------
@@ -165,6 +166,8 @@ C["raidframe"] = {
 	-- Main
 	["show_party"] = true,							-- Show party frames
 	["show_raid"] = true,							-- Show raid frames
+	["show_target"] = true,							-- Show target frames
+	["show_pet"] = true,							-- Show pet frames
 	["solo_mode"] = false,							-- Show player frame always
 	["player_in_party"] = true,						-- Show player frame in party
 	["raid_tanks"] = true,							-- Show raid tanks
@@ -339,6 +342,8 @@ C["chat"] = {
 	["sticky"] = true,							-- Remember last channel
 	["damage_meter_spam"] = true,						-- Merge damage meter spam in one line-link
 	["loot_icons"] = false,							-- Icons for loot
+	["role_icons"] = false,							-- Role Icons
+	["history"] = false,							-- Chat history
 	["custom_time_color"] = true,						-- Enable custom timestamp coloring
 	["time_color"] = {1, 1, 0},						-- Timestamp coloring (http://www.december.com/html/spec/colorcodescompact.html)
 }

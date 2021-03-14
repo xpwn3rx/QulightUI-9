@@ -720,6 +720,9 @@ do
 	local cooldown_timers_font_shadow = ns.CreateCheckBox(parent, "cooldown_timers_font_shadow", L.font_stats_font_shadow)
 	cooldown_timers_font_shadow:SetPoint("LEFT", cooldown_timers_font_size, "RIGHT", 160, 0)
 
+	local global_font = ns.CreateCheckBox(parent, "global_font")
+	global_font:SetPoint("TOPLEFT", cooldown_timers_font_size, "BOTTOMLEFT", 0, -30)
+
 	-- Panel 2
 	local parent = QulightUIOptionsPanel.font2
 
@@ -1220,8 +1223,14 @@ do
 	local show_raid = ns.CreateCheckBox(parent, "show_raid", L_GUI_UF_SHOW_RAID)
 	show_raid:SetPoint("LEFT", show_party, "RIGHT", 248, 0)
 
+	local show_target = ns.CreateCheckBox(parent, "show_target")
+	show_target:SetPoint("TOPLEFT", show_party, "BOTTOMLEFT", 0, 0)
+
+	local show_pet = ns.CreateCheckBox(parent, "show_pet")
+	show_pet:SetPoint("LEFT", show_target, "RIGHT", 248, 0)
+
 	local raid_tanks = ns.CreateCheckBox(parent, "raid_tanks", L_GUI_UF_SHOW_TANK)
-	raid_tanks:SetPoint("TOPLEFT", show_party, "BOTTOMLEFT", 0, 0)
+	raid_tanks:SetPoint("TOPLEFT", show_target, "BOTTOMLEFT", 0, 0)
 
 	local raid_tanks_tt = ns.CreateCheckBox(parent, "raid_tanks_tt", L_GUI_UF_SHOW_TANK_TT)
 	raid_tanks_tt:SetPoint("LEFT", raid_tanks, "RIGHT", 248, 0)
@@ -1230,10 +1239,10 @@ do
 	solo_mode:SetPoint("TOPLEFT", raid_tanks, "BOTTOMLEFT", 0, 0)
 
 	local player_in_party = ns.CreateCheckBox(parent, "player_in_party", L_GUI_UF_PLAYER_PARTY)
-	player_in_party:SetPoint("TOPLEFT", solo_mode, "BOTTOMLEFT", 0, 0)
+	player_in_party:SetPoint("LEFT", solo_mode, "RIGHT", 248, 0)
 
 	local raid_groups = ns.CreateNumberSlider(parent, "raid_groups", nil, nil, 1, 8, 1, true, L_GUI_UF_RAID_GROUP)
-	raid_groups:SetPoint("TOPLEFT", player_in_party, "BOTTOMLEFT", 0, -20)
+	raid_groups:SetPoint("TOPLEFT", solo_mode, "BOTTOMLEFT", 0, -20)
 
 	local auto_position = ns.CreateDropDown(parent, "auto_position", true, L.raidframe_auto_position, {"DYNAMIC", "STATIC", "NONE"})
 	auto_position:SetPoint("TOPLEFT", raid_groups, "BOTTOMLEFT", -16, -10)
@@ -1729,8 +1738,14 @@ do
 	local loot_icons = ns.CreateCheckBox(parent, "loot_icons")
 	loot_icons:SetPoint("TOPLEFT", damage_meter_spam, "BOTTOMLEFT", 0, 0)
 
+	local role_icons = ns.CreateCheckBox(parent, "role_icons", L.tooltip_unit_role)
+	role_icons:SetPoint("TOPLEFT", loot_icons, "BOTTOMLEFT", 0, 0)
+
+	local history = ns.CreateCheckBox(parent, "history", HISTORY)
+	history:SetPoint("TOPLEFT", role_icons, "BOTTOMLEFT", 0, 0)
+
 	local custom_time_color = ns.CreateCheckBox(parent, "custom_time_color")
-	custom_time_color:SetPoint("TOPLEFT", loot_icons, "BOTTOMLEFT", 0, 0)
+	custom_time_color:SetPoint("TOPLEFT", history, "BOTTOMLEFT", 0, 0)
 
 	local time_color = ns.CreateColourPicker(parent, "time_color", true)
 	time_color:SetPoint("TOPLEFT", custom_time_color, "BOTTOMLEFT", 24, -4)

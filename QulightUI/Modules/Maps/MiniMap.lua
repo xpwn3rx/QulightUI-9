@@ -5,7 +5,7 @@ if C.minimap.enable ~= true then return end
 --	Minimap border
 ----------------------------------------------------------------------------------------
 local MinimapAnchor = CreateFrame("Frame", "MinimapAnchor", UIParent)
-MinimapAnchor:CreatePanel("Transparent", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
+MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
 
 ----------------------------------------------------------------------------------------
 --	Shape, location and scale
@@ -121,21 +121,6 @@ if StreamingIcon then
 	StreamingIcon:SetFrameStrata("BACKGROUND")
 end
 
-if T.beta ~= 90002 then
--- Ticket icon
-HelpOpenTicketButton:SetParent(Minimap)
-HelpOpenTicketButton:CreateBackdrop("ClassColor")
-HelpOpenTicketButton:SetFrameLevel(4)
-HelpOpenTicketButton:ClearAllPoints()
-HelpOpenTicketButton:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 2)
-HelpOpenTicketButton:SetHighlightTexture(nil)
-HelpOpenTicketButton:SetPushedTexture("Interface\\Icons\\inv_misc_note_03")
-HelpOpenTicketButton:SetNormalTexture("Interface\\Icons\\inv_misc_note_03")
-HelpOpenTicketButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-HelpOpenTicketButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-HelpOpenTicketButton:SetSize(16, 16)
-end
-
 -- GhostFrame
 GhostFrame:StripTextures()
 GhostFrame:SetTemplate("Overlay")
@@ -166,7 +151,7 @@ MinimapAnchor:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_TimeManager" then
 		TimeManagerClockButton:Kill()
 	elseif addon == "Blizzard_HybridMinimap" then
-        HybridMinimap:SetFrameStrata("BACKGROUND")
+ 	        HybridMinimap:SetFrameStrata("BACKGROUND")
 		HybridMinimap:SetFrameLevel(100)
 		HybridMinimap.MapCanvas:SetUseMaskTexture(false)
 		HybridMinimap.CircleMask:SetTexture("Interface\\BUTTONS\\WHITE8X8")
@@ -266,9 +251,6 @@ local micromenu = {
 	end},
 	{text = BATTLEFIELD_MINIMAP, notCheckable = 1, func = function()
 		ToggleBattlefieldMap()
-	end},
-	{text = LOOT_ROLLS, notCheckable = 1, func = function()
-		ToggleFrame(LootHistoryFrame)
 	end},
 }
 

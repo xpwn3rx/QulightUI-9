@@ -8,12 +8,12 @@ if C.raidframe.plugins_aura_watch ~= true then return end
 ----------------------------------------------------------------------------------------
 T.RaidBuffs = {
 	DRUID = {
-		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},					-- Rejuvenation
+		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},				-- Rejuvenation
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
 		{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
 		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
 		{102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
-		{155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
+		{155777, "RIGHT", {0.4, 0.9, 0.4}},				-- Rejuvenation (Germination)
 	},
 	MONK = {
 		{119611, "TOPRIGHT", {0.2, 0.7, 0.7}},				-- Renewing Mist
@@ -27,27 +27,26 @@ T.RaidBuffs = {
 		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
 		{200025, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Virtue
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
-		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
-		{204013, "BOTTOMRIGHT", {0.93, 0.75, 0}, true},		-- Blessing of Salvation
-		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
-		{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
+		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},			-- Blessing of Freedom
+		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},			-- Blessing of Sacrifice
+		{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},			-- Blessing of Spellwarding
 		{287280, "BOTTOMLEFT", {0.9, 0.5, 0.1}},			-- Glimmer of Light
 	},
 	PRIEST = {
 		{194384, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, 				-- Renew
-		{6788, "BOTTOMLEFT", {1, 0, 0}, true}, 				-- Weakened Soul
-		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},			-- Power Word: Shield
+		{6788, "BOTTOMLEFT", {1, 0, 0}}, 				-- Weakened Soul
+		{17, "TOPLEFT", {0.81, 0.85, 0.1}},				-- Power Word: Shield
 		{33206, "LEFT", {0.89, 0.1, 0.1}, true},			-- Pain Suppression
 		{47788, "LEFT", {0.86, 0.52, 0}, true},				-- Guardian Spirit
 	},
 	SHAMAN = {
 		{61295, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Riptide
-		{204288, "BOTTOMRIGHT", {0.2, 0.7, 0.2}, true},		-- Earth Shield
+		{204288, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Earth Shield
 	},
 	HUNTER = {
-		{35079, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
+		{35079, "TOPRIGHT", {0.2, 0.2, 1}},				-- Misdirection
 	},
 	ROGUE = {
 		{57934, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
@@ -55,13 +54,10 @@ T.RaidBuffs = {
 	WARLOCK = {
 		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
 	},
-	WARRIOR = {
-		{114030, "TOPLEFT", {0.2, 0.2, 1}},					-- Vigilance
-	},
 	ALL = {
-		{23333, "LEFT", {1, 0, 0}, true}, 					-- Warsong flag, Horde
-		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
-		{34976, "LEFT", {1, 0, 0}, true}, 					-- Netherstorm Flag
+		{23333, "LEFT", {1, 0, 0}, true}, 				-- Warsong flag, Horde
+		{23335, "LEFT", {0, 0, 1}, true},				-- Warsong flag, Alliance
+		{34976, "LEFT", {1, 0, 0}, true}, 				-- Netherstorm Flag
 	},
 }
 
@@ -183,6 +179,7 @@ T.RaidDebuffs = {
 	[SpellName(323650)] = 3,	-- Haunting Fixation
 	[SpellName(326874)] = 3,	-- Ankle Bites
 	[SpellName(340446)] = 3,	-- Mark of Envy
+	[SpellName(323437)] = 3,	-- Stigma of Pride
 
 	-- Mists of Tirna Scithe
 	[SpellName(325027)] = 3,	-- Bramble Burst
@@ -213,7 +210,8 @@ T.RaidDebuffs = {
 	[SpellName(320512)] = 3,	-- Corroded Claws
 	[SpellName(333406)] = 3,	-- Assassinate
 	[SpellName(332397)] = 3,	-- Shroudweb
-	[SpellName(330069)] = 3,	-- Concentrated Plague
+	[SpellName(330069)] = 2,	-- Concentrated Plague
+	[SpellName(319070)] = 3,	-- Corrosive Gunk
 
 	-- The Necrotic Wake
 	[SpellName(321821)] = 3,	-- Disgusting Guts
@@ -233,6 +231,8 @@ T.RaidDebuffs = {
 	[SpellName(334748)] = 3,	-- Drain FLuids
 	[SpellName(333489)] = 3,	-- Necrotic Breath
 	[SpellName(320717)] = 3,	-- Blood Hunger
+	[SpellName(320788)] = 3,	-- Frozen Binds
+	[SpellName(320200)] = 3,	-- Stitchneedle
 
 	-- Theater of Pain
 	[SpellName(333299)] = 3,	-- Curse of Desolation
@@ -261,6 +261,7 @@ T.RaidDebuffs = {
 	[SpellName(335306)] = 3,	-- Barbed Shackles
 	[SpellName(322429)] = 3,	-- Severing Slice
 	[SpellName(334653)] = 3,	-- Engorge
+	[SpellName(327814)] = 3,	-- Wicked Gash
 
 	-- Spires of Ascension
 	[SpellName(338729)] = 3,	-- Charged Stomp
@@ -296,6 +297,8 @@ T.RaidDebuffs = {
 	[SpellName(323687)] = 3,	-- Arcane Lightning
 	[SpellName(323877)] = 3,	-- Echo Finger Laser X-treme
 	[SpellName(334535)] = 3,	-- Beak Slice
+	[SpellName(333711)] = 3,	-- Decrepit Bite
+	[SpellName(320147)] = 3,	-- Bleeding
 
 	-- 8.3 Mythic+
 	[SpellName(314406)] = 3,	-- Crippling Pestilence
@@ -839,7 +842,8 @@ T.RaidDebuffsReverse = {
 }
 
 T.RaidDebuffsIgnore = {
-	--[spellID] = true,			-- Spell name
+	[980] = true,			-- Agony
+	[1943] = true,			-- Rupture
 }
 
 for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
