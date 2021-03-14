@@ -179,7 +179,7 @@ local function Shared(self, unit)
 		self.AssistantIndicator:SetPoint("TOPLEFT", self.Health, -3, 8)
 	end
 
-	-- Agro border
+	-- Aggro border
 	if C.raidframe.aggro_border == true then
 		self.ThreatIndicator = CreateFrame("Frame", nil, self)
 		self.ThreatIndicator.PostUpdate = T.UpdateThreat
@@ -251,11 +251,15 @@ local function Shared(self, unit)
 		ahpb:SetTexture(C.media.texture)
 		ahpb:SetVertexColor(1, 1, 0, 0.2)
 
-		self.HealPrediction = {
+		local hab = self.Health:CreateTexture(nil, "ARTWORK")
+		hab:SetTexture(C.media.texture)
+		hab:SetVertexColor(1, 0, 0, 0.4)
+
+		self.HealthPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
 			absorbBar = ahpb,
-			maxOverflow = 1
+			healAbsorbBar = hab
 		}
 	end
 
@@ -310,50 +314,54 @@ oUF:Factory(function(self)
 		party:SetPoint(unpack(C.position.unitframes.party_dps))
 
 		-- Party targets
-		local partytarget = self:SpawnHeader("oUF_PartyTargetDPS", nil, "custom [@raid6,exists] hide;show",
-			"oUF-initialConfigFunction", [[
-				local header = self:GetParent()
-				self:SetWidth(header:GetAttribute("initial-width"))
-				self:SetHeight(header:GetAttribute("initial-height"))
-				self:SetAttribute("unitsuffix", "target")
-			]],
-			"initial-width", T.Scale(partytarget_width),
-			"initial-height", T.Scale(partytarget_height),
-			"showSolo", C.raidframe.solo_mode,
-			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-			"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", C.raidframe.by_role and "NAME",
-			"showParty", true,
-			"showRaid", true,
-			"yOffset", T.Scale(28),
-			"point", "BOTTOM"
-		)
-		partytarget:SetPoint("TOPLEFT", party, "TOPRIGHT", 7, 0)
+		if C.raidframe.show_target then
+			local partytarget = self:SpawnHeader("oUF_PartyTargetDPS", nil, "custom [@raid6,exists] hide;show",
+				"oUF-initialConfigFunction", [[
+					local header = self:GetParent()
+					self:SetWidth(header:GetAttribute("initial-width"))
+					self:SetHeight(header:GetAttribute("initial-height"))
+					self:SetAttribute("unitsuffix", "target")
+				]],
+				"initial-width", T.Scale(partytarget_width),
+				"initial-height", T.Scale(partytarget_height),
+				"showSolo", C.raidframe.solo_mode,
+				"showPlayer", C.raidframe.player_in_party,
+				"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
+				"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", C.raidframe.by_role and "NAME",
+				"showParty", true,
+				"showRaid", true,
+				"yOffset", T.Scale(28),
+				"point", "BOTTOM"
+			)
+			partytarget:SetPoint("TOPLEFT", party, "TOPRIGHT", 7, 0)
+		end
 
 		-- Party pets
-		local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
-			"oUF-initialConfigFunction", [[
-				local header = self:GetParent()
-				self:SetWidth(header:GetAttribute("initial-width"))
-				self:SetHeight(header:GetAttribute("initial-height"))
-				self:SetAttribute("useOwnerUnit", "true")
-				self:SetAttribute("unitsuffix", "pet")
-			]],
-			"initial-width", T.Scale(partytarget_width),
-			"initial-height", T.Scale(partytarget_height),
-			"showSolo", C.raidframe.solo_mode,
-			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-			"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", C.raidframe.by_role and "NAME",
-			"showParty", true,
-			"showRaid", true,
-			"yOffset", T.Scale(28),
-			"point", "BOTTOM"
-		)
+		if C.raidframe.show_pet then
+			local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
+				"oUF-initialConfigFunction", [[
+					local header = self:GetParent()
+					self:SetWidth(header:GetAttribute("initial-width"))
+					self:SetHeight(header:GetAttribute("initial-height"))
+					self:SetAttribute("useOwnerUnit", "true")
+					self:SetAttribute("unitsuffix", "pet")
+				]],
+				"initial-width", T.Scale(partytarget_width),
+				"initial-height", T.Scale(partytarget_height),
+				"showSolo", C.raidframe.solo_mode,
+				"showPlayer", C.raidframe.player_in_party,
+				"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
+				"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", C.raidframe.by_role and "NAME",
+				"showParty", true,
+				"showRaid", true,
+				"yOffset", T.Scale(28),
+				"point", "BOTTOM"
+			)
 
-		partypet:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", partytarget_width + 14, 0)
+			partypet:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", partytarget_width + 14, 0)
+		end
 	end
 
 	if C.raidframe.show_raid == true then

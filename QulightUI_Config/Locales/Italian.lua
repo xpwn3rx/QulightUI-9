@@ -72,6 +72,7 @@ L.font_subheader_bag = "Bags font" -- Need review
 L.font_subheader_blizzard = "System font size" -- Need review
 L.font_tooltip_header_font_size = "Tooltip header" -- Need review
 L.font_tooltip_font_size = "Tooltip text" -- Need review
+L.font_global_font = "Disable Pixel font" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "Restyling"
@@ -140,6 +141,8 @@ L.unitframe_extra_height_auto = "Auto height for health/power" -- Need review
 L.unitframe_extra_height_auto_desc = "Smart adjust depending on font size" -- Need review
 L.unitframe_extra_health_height = "Additional height for health" -- Need review
 L.unitframe_extra_power_height = "Additional height for power" -- Need review
+L.unitframe_subheader_castbar = "Size of player and target castbar" -- Need review
+L.unitframe_castbar_height = "Height" -- Need review
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Barre di classe"
@@ -162,6 +165,8 @@ L_GUI_UF_AGGRO_BORDER = "Cambio di colore dei bordi in base al grado di aggressi
 L_GUI_UF_DEFICIT_HEALTH = "Deficit salute in incursione"
 L_GUI_UF_SHOW_PARTY = "Mostra i riquadri del gruppo"
 L_GUI_UF_SHOW_RAID = "Mostra i riquadri d'incursione"
+L.raidframe_show_target = "Show target frames" -- Needs review
+L.raidframe_show_pet = "Show pet frames" -- Needs review
 L.raidframe_vertical_health = "Orientamento verticale della salute"
 L.raidframe_vertical_health_desc = "Only for heal layout" -- Needs review
 L_GUI_UF_ALPHA_HEALTH = "Trasparenza delle barre della salute quando i punti sono al 100%"
