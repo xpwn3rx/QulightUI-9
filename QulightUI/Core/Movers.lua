@@ -276,8 +276,9 @@ local CreateMover = function(frame)
 	mover.name:SetPoint("CENTER")
 	mover.name:SetTextColor(1, 1, 1)
 	local text = frame:GetName()
-	text = text:gsub("_Anchor", "")
-	text = text:gsub("Anchor", "")
+	if string.find(text, "Anchor") then
+		text = text:gsub("Anchor", "")
+	end
 	mover.name:SetText(text)
 	mover.name:SetWidth(frame:GetWidth() - 4)
 	movers[frame:GetName()] = mover

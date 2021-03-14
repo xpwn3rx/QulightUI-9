@@ -459,6 +459,13 @@ local function Shared(self, unit)
 				end
 				self.ComboPoints[i]:SetStatusBarTexture(C.media.texture)
 			end
+
+			self.ComboPoints[1]:SetStatusBarColor(0.9, 0.1, 0.1)
+			self.ComboPoints[2]:SetStatusBarColor(0.9, 0.1, 0.1)
+			self.ComboPoints[3]:SetStatusBarColor(0.9, 0.9, 0.1)
+			self.ComboPoints[4]:SetStatusBarColor(0.9, 0.9, 0.1)
+			self.ComboPoints[5]:SetStatusBarColor(0.1, 0.9, 0.1)
+			self.ComboPoints[6]:SetStatusBarColor(0.1, 0.9, 0.1)
 		end
 
 		-- Totem bar for Shaman
@@ -580,6 +587,51 @@ local function Shared(self, unit)
 			self.Reputation.colorStanding = true
 		end
 
+		-- Artifact Power bar
+		--FIXME if C.unitframe.plugins_artifact_bar == true
+			-- self.ArtifactPower = CreateFrame("StatusBar", self:GetName().."_ArtifactPower", self)
+			-- self.ArtifactPower:CreateBackdrop("Default")
+			-- self.ArtifactPower:EnableMouse(true)
+			-- if C.unitframe.portrait_enable == true then
+				-- if self.Experience and self.Experience:IsShown() then
+					-- if C.unitframe.plugins_reputation_bar == true then
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -53 - C.unitframe.portrait_width, 28)
+					-- else
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
+					-- end
+				-- else
+					-- if C.unitframe.plugins_reputation_bar == true then
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
+					-- else
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
+					-- end
+				-- end
+			-- else
+				-- if self.Experience and self.Experience:IsShown() then
+					-- if C.unitframe.plugins_reputation_bar == true then
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -46, 28)
+					-- else
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
+					-- end
+				-- else
+					-- if C.unitframe.plugins_reputation_bar == true then
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
+					-- else
+						-- self.ArtifactPower:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
+					-- end
+				-- end
+			-- end
+			-- self.ArtifactPower:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
+			-- self.ArtifactPower:SetOrientation("Vertical")
+			-- self.ArtifactPower:SetStatusBarTexture(C.media.texture)
+
+			-- self.ArtifactPower.bg = self.ArtifactPower:CreateTexture(nil, "BORDER")
+			-- self.ArtifactPower.bg:SetAllPoints()
+			-- self.ArtifactPower.bg:SetTexture(C.media.texture)
+
+			-- self.ArtifactPower.offAlpha = 0
+		-- end
+
 		-- GCD spark
 		if C.unitframe.plugins_gcd == true then
 			self.GCD = CreateFrame("Frame", self:GetName().."_GCD", self)
@@ -617,9 +669,12 @@ local function Shared(self, unit)
 		self.CounterBar.Text = T.SetFontString(self.CounterBar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 		self.CounterBar.Text:SetPoint("CENTER")
 
+		local r, g, b
+		local max
+
 		self.CounterBar:SetScript("OnValueChanged", function(_, value)
-			local _, max = self.CounterBar:GetMinMaxValues()
-			local r, g, b = oUF:ColorGradient(value, max, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+			_, max = self.CounterBar:GetMinMaxValues()
+			r, g, b = oUF:ColorGradient(value, max, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
 			self.CounterBar:SetStatusBarColor(r, g, b)
 			self.CounterBar.bg:SetVertexColor(r, g, b, 0.2)
 			self.CounterBar.Text:SetText(floor(value))
@@ -741,6 +796,13 @@ local function Shared(self, unit)
 					end
 					self.ComboPoints[i]:SetStatusBarTexture(C.media.texture)
 				end
+
+				self.ComboPoints[1]:SetStatusBarColor(0.9, 0.1, 0.1)
+				self.ComboPoints[2]:SetStatusBarColor(0.9, 0.1, 0.1)
+				self.ComboPoints[3]:SetStatusBarColor(0.9, 0.9, 0.1)
+				self.ComboPoints[4]:SetStatusBarColor(0.9, 0.9, 0.1)
+				self.ComboPoints[5]:SetStatusBarColor(0.1, 0.9, 0.1)
+				self.ComboPoints[6]:SetStatusBarColor(0.1, 0.9, 0.1)
 			end
 
 			-- Enemy specialization
@@ -798,30 +860,30 @@ local function Shared(self, unit)
 
 		if unit == "player" then
 			if C.unitframe.castbar_icon == true then
-				self.Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + ((C.unitframe.castbar_height + 7) / 2) , C.position.unitframes.player_castbar[5])
-				self.Castbar:SetWidth(C.unitframe.castbar_width)
+				self.Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5])
+				self.Castbar:SetWidth(258)
 			else
 				self.Castbar:SetPoint(unpack(C.position.unitframes.player_castbar))
-				self.Castbar:SetWidth(C.unitframe.castbar_width + C.unitframe.castbar_height + 7)
+				self.Castbar:SetWidth(281)
 			end
-			self.Castbar:SetHeight(C.unitframe.castbar_height)
+			self.Castbar:SetHeight(16)
 		elseif unit == "target" then
 			if C.unitframe.castbar_icon == true then
 				if C.unitframe.plugins_swing == true then
-					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - C.unitframe.castbar_height - 7, C.position.unitframes.target_castbar[5] + 12)
+					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - 23, C.position.unitframes.target_castbar[5] + 12)
 				else
-					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - C.unitframe.castbar_height - 7, C.position.unitframes.target_castbar[5])
+					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - 23, C.position.unitframes.target_castbar[5])
 				end
-				self.Castbar:SetWidth(C.unitframe.castbar_width)
+				self.Castbar:SetWidth(258)
 			else
 				if C.unitframe.plugins_swing == true then
 					self.Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4], C.position.unitframes.target_castbar[5] + 12)
 				else
 					self.Castbar:SetPoint(unpack(C.position.unitframes.target_castbar))
 				end
-				self.Castbar:SetWidth(C.unitframe.castbar_width + C.unitframe.castbar_height + 7)
+				self.Castbar:SetWidth(281)
 			end
-			self.Castbar:SetHeight(C.unitframe.castbar_height)
+			self.Castbar:SetHeight(16)
 		elseif unit == "arena" or unit == "boss" then
 			self.Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
 			self.Castbar:SetWidth(boss_width)
@@ -830,6 +892,37 @@ local function Shared(self, unit)
 			self.Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
 			self.Castbar:SetWidth(pet_width)
 			self.Castbar:SetHeight(5)
+		end
+
+		if unit == "focus" then
+			self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
+			self.Castbar.Button:SetHeight(65)
+			self.Castbar.Button:SetWidth(65)
+			self.Castbar.Button:SetPoint(unpack(C.position.unitframes.focus_castbar))
+			self.Castbar.Button:SetTemplate("Default")
+
+			self.Castbar.Icon = self.Castbar.Button:CreateTexture(nil, "ARTWORK")
+			self.Castbar.Icon:SetPoint("TOPLEFT", self.Castbar.Button, 2, -2)
+			self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar.Button, -2, 2)
+			self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+			self.Castbar.Time = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
+			self.Castbar.Time:SetParent(self.Castbar.Button)
+			self.Castbar.Time:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, 10)
+			self.Castbar.Time:SetTextColor(1, 1, 1)
+
+			self.Castbar.Time2 = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
+			self.Castbar.Time2:SetParent(self.Castbar.Button)
+			self.Castbar.Time2:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, -10)
+			self.Castbar.Time2:SetTextColor(1, 1, 1)
+
+			self.Castbar.CustomTimeText = function(self, duration)
+				self.Time:SetText(("%.1f"):format(self.max))
+				self.Time2:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
+			end
+			self.Castbar.CustomDelayText = function(self)
+				self.Time:SetText(("|cffaf5050%s %.1f|r"):format(self.channeling and "-" or "+", abs(self.delay)))
+			end
 		end
 
 		if unit == "player" or unit == "target" or unit == "arena" or unit == "boss" then
@@ -849,7 +942,8 @@ local function Shared(self, unit)
 
 			if (C.unitframe.castbar_icon == true and (unit == "player" or unit == "target")) or unit == "arena" or unit == "boss" then
 				self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
-				self.Castbar.Button:SetSize(self.Castbar:GetHeight() + 4, self.Castbar:GetHeight() + 4)
+				self.Castbar.Button:SetHeight(20)
+				self.Castbar.Button:SetWidth(20)
 				self.Castbar.Button:SetTemplate("Default")
 
 				self.Castbar.Icon = self.Castbar.Button:CreateTexture(nil, "ARTWORK")
@@ -885,36 +979,6 @@ local function Shared(self, unit)
 				self.Castbar.Latency:SetTextColor(1, 1, 1)
 				self.Castbar.Latency:SetPoint("TOPRIGHT", self.Castbar.Time, "BOTTOMRIGHT", 0, 0)
 				self.Castbar.Latency:SetJustifyH("RIGHT")
-			end
-		end
-
-		if unit == "focus" then
-			self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
-			self.Castbar.Button:SetSize(65, 65)
-			self.Castbar.Button:SetPoint(unpack(C.position.unitframes.focus_castbar))
-			self.Castbar.Button:SetTemplate("Default")
-
-			self.Castbar.Icon = self.Castbar.Button:CreateTexture(nil, "ARTWORK")
-			self.Castbar.Icon:SetPoint("TOPLEFT", self.Castbar.Button, 2, -2)
-			self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar.Button, -2, 2)
-			self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			self.Castbar.Time = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-			self.Castbar.Time:SetParent(self.Castbar.Button)
-			self.Castbar.Time:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, 10)
-			self.Castbar.Time:SetTextColor(1, 1, 1)
-
-			self.Castbar.Time2 = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-			self.Castbar.Time2:SetParent(self.Castbar.Button)
-			self.Castbar.Time2:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, -10)
-			self.Castbar.Time2:SetTextColor(1, 1, 1)
-
-			self.Castbar.CustomTimeText = function(self, duration)
-				self.Time:SetText(("%.1f"):format(self.max))
-				self.Time2:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
-			end
-			self.Castbar.CustomDelayText = function(self)
-				self.Time:SetText(("|cffaf5050%s %.1f|r"):format(self.channeling and "-" or "+", abs(self.delay)))
 			end
 		end
 	end
@@ -1045,7 +1109,7 @@ local function Shared(self, unit)
 		self:HookScript("OnShow", T.UpdateAllElements)
 	end
 
-	-- Aggro border
+	-- Agro border
 	if C.raidframe.aggro_border == true and unit ~= "arenatarget" then
 		self.ThreatIndicator = CreateFrame("Frame", nil, self)
 		self.ThreatIndicator.PostUpdate = T.UpdateThreat
@@ -1084,15 +1148,11 @@ local function Shared(self, unit)
 		ahpb:SetTexture(C.media.texture)
 		ahpb:SetVertexColor(1, 1, 0, 0.2)
 
-		local hab = self.Health:CreateTexture(nil, "ARTWORK")
-		hab:SetTexture(C.media.texture)
-		hab:SetVertexColor(1, 0, 0, 0.4)
-
-		self.HealthPrediction = {
+		self.HealPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
 			absorbBar = ahpb,
-			healAbsorbBar = hab
+			maxOverflow = 1
 		}
 	end
 
@@ -1418,13 +1478,14 @@ if C.raidframe.auto_position == "DYNAMIC" then
 	local function Reposition(self)
 		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
 			if InCombatLockdown() then return end
-			local maxGroup = 5
 			local num = GetNumGroupMembers()
-			if num > 5 then
-				local _, _, subgroup = GetRaidRosterInfo(num)
-				if subgroup and subgroup > maxGroup then
-					maxGroup = subgroup
-				end
+			local maxGroup = 5
+			if num > 35 then
+				maxGroup = 8
+			elseif num > 30 then
+				maxGroup = 7
+			elseif num > 25 then
+				maxGroup = 6
 			end
 			if maxGroup >= C.raidframe.raid_groups then
 				maxGroup = C.raidframe.raid_groups

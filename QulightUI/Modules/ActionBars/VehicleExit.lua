@@ -5,11 +5,7 @@ if C.actionbar.enable ~= true then return end
 --	Vehicle exit button(by Tukz)
 ----------------------------------------------------------------------------------------
 local anchor = CreateFrame("Frame", "VehicleButtonAnchor", UIParent)
-if C.actionbar.split_bars then
-	anchor:SetPoint(C.position.vehicle_bar[1], SplitBarLeft, C.position.vehicle_bar[3], C.position.vehicle_bar[4], C.position.vehicle_bar[5])
-else
-	anchor:SetPoint(unpack(C.position.vehicle_bar))
-end
+anchor:SetPoint(unpack(C.position.vehicle_bar))
 anchor:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 
 local vehicle = CreateFrame("Button", "VehicleButton", UIParent)
@@ -39,7 +35,6 @@ hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
 		end
 		vehicle:Show()
 	else
-		vehicle:UnlockHighlight()
 		vehicle:Hide()
 	end
 end)

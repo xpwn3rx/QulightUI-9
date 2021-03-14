@@ -164,6 +164,10 @@ local function LoadSkin()
 	T.SkinCloseButton(TradeSkillFrame.DetailsFrame.GuildFrame.CloseButton)
 	T.SkinScrollBar(TradeSkillFrameScrollFrame.scrollBar)
 
+	if Auctionator_Search then
+		Auctionator_Search:SkinButton(true)
+	end
+
 	-- Optional Reagent list
 	local OptionalReagents = TradeSkillFrame.OptionalReagentList
 	OptionalReagents:StripTextures()

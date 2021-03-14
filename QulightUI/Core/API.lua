@@ -731,7 +731,7 @@ function T.SkinCloseButton(f, point, text, pixel)
 	end
 	if not f.text then
 		if pixel then
-			f.text = f:FontString(nil, [[Interface\AddOns\QulightUI\Media\Fonts\Pixel.ttf]], 8)
+			f.text = f:FontString(nil, C.media.pixel_font, 8)
 			f.text:SetPoint("CENTER", 0, 0)
 		else
 			f.text = f:FontString(nil, C.media.normal_font, 17)

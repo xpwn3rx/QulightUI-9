@@ -18,12 +18,12 @@ if C.raidcooldown.enable == true then
 		{80353, 300},	-- Time Warp
 		{264667, 300},	-- Primal Rage {Hunter's pet]
 		-- Healing
-		{633, 600},	-- Lay on Hands
-		{740, 180},	-- Tranquility
+		{633, 600},		-- Lay on Hands
+		{740, 180},		-- Tranquility
 		{115310, 180},	-- Revival
 		{64843, 180},	-- Divine Hymn
 		{108280, 180},	-- Healing Tide Totem
-		{15286, 120},	-- Vampiric Embrace
+		{15286, 180},	-- Vampiric Embrace
 		{108281, 120},	-- Ancestral Guidance
 		-- Defense
 		{62618, 180},	-- Power Word: Barrier
@@ -32,14 +32,14 @@ if C.raidcooldown.enable == true then
 		{31821, 180},	-- Aura Mastery
 		{98008, 180},	-- Spirit Link Totem
 		{97462, 180},	-- Rallying Cry
-		{196718, 180},	-- Darkness
+		{88611, 180},	-- Smoke Bomb
 		{51052, 120},	-- Anti-Magic Zone
 		{116849, 120},	-- Life Cocoon
 		{6940, 120},	-- Blessing of Sacrifice
-		{102342, 90},	-- Ironbark
+		{114030, 120},	-- Vigilance
+		{102342, 60},	-- Ironbark
 		-- Other
 		{106898, 120},	-- Stampeding Roar
-		{192077, 120},	-- Wind Rush Totem
 	}
 
 	if #C.raidcooldown.spells_list > 0 then
@@ -64,10 +64,10 @@ if C.enemycooldown.enable == true then
 		{106839, 15},	-- Skull Bash
 		{116705, 15},	-- Spear Hand Strike
 		{96231, 15},	-- Rebuke
-		{1766, 15},	-- Kick
-		{6552, 15},	-- Pummel
+		{1766, 15},		-- Kick
+		{6552, 15},		-- Pummel
 		{147362, 24},	-- Counter Shot
-		{2139, 24},	-- Counterspell
+		{2139, 24},		-- Counterspell
 		{19647, 24},	-- Spell Lock
 		{115781, 24},	-- Optical Blast
 		{15487, 45},	-- Silence
@@ -77,23 +77,23 @@ if C.enemycooldown.enable == true then
 		{115078, 15},	-- Paralysis
 		{20066, 15},	-- Repentance
 		{187650, 30},	-- Freezing Trap
-		{8122, 30},	-- Psychic Scream
+		{8122, 30},		-- Psychic Scream
+		{30283, 30},	-- Shadowfury
 		{107570, 30},	-- Storm Bolt
 		{51514, 30},	-- Hex
-		{5484, 40},	-- Howl of Terror
-		{30283, 45},	-- Shadowfury
+		{5484, 40},		-- Howl of Terror
 		{108194, 45},	-- Asphyxiate
 		{19386, 45},	-- Wyvern Sting
 		{113724, 45},	-- Ring of Frost
-		{64044, 45},	-- Psychic Horror
-		{6789, 45},	-- Mortal Coil
 		{119381, 45},	-- Leg Sweep
-		{853, 60},	-- Hammer of Justice
+		{64044, 45},	-- Psychic Horror
+		{6789, 45},		-- Mortal Coil
+		{853, 60},		-- Hammer of Justice
 		-- Defense abilities
 		{48707, 60},	-- Anti-Magic Shell
+		{31224, 90},	-- Cloak of Shadows
 		{46924, 90},	-- Bladestorm
 		{287081, 60},	-- Lichborne
-		{31224, 90},	-- Cloak of Shadows
 		{213664, 120},	-- Nimble Brew
 		{47585, 120},	-- Dispersion
 		{1856, 120},	-- Vanish

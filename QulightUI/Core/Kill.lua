@@ -34,10 +34,11 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 
 	SetCVar("countdownForCooldowns", 0)
-	InterfaceOptionsActionBarsPanelCountdownCooldowns:Hide()
+	InterfaceOptionsActionBarsPanelCountdownCooldowns:Kill()
+
+	SetCVar("fstack_preferParentKeys", 0)
 
 	if C.chat.enable then
-		InterfaceOptionsSocialPanelChatStyle:Hide()
 		SetCVar("chatStyle", "im")
 	end
 
@@ -45,18 +46,17 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		if T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune ~= true then
 			RuneFrame:Kill()
 		end
-		InterfaceOptionsDisplayPanelDisplayDropDown:Hide()
-		InterfaceOptionsCombatPanelTargetOfTarget:Hide()
+		InterfaceOptionsCombatPanelTargetOfTarget:Kill()
 		SetCVar("showPartyBackground", 0)
 	end
 
 	if C.actionbar.enable then
-		InterfaceOptionsActionBarsPanelBottomLeft:Hide()
-		InterfaceOptionsActionBarsPanelBottomRight:Hide()
-		InterfaceOptionsActionBarsPanelRight:Hide()
-		InterfaceOptionsActionBarsPanelRightTwo:Hide()
-		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Hide()
-		InterfaceOptionsActionBarsPanelStackRightBars:Hide()
+		InterfaceOptionsActionBarsPanelBottomLeft:Kill()
+		InterfaceOptionsActionBarsPanelBottomRight:Kill()
+		InterfaceOptionsActionBarsPanelRight:Kill()
+		InterfaceOptionsActionBarsPanelRightTwo:Kill()
+		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
+		InterfaceOptionsActionBarsPanelStackRightBars:Kill()
 		if not InCombatLockdown() then
 			SetCVar("multiBarRightVerticalLayout", 0)
 		end
@@ -67,7 +67,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.minimap.enable then
-		InterfaceOptionsDisplayPanelRotateMinimap:Hide()
+		InterfaceOptionsDisplayPanelRotateMinimap:Kill()
 	end
 
 	if C.bag.enable then

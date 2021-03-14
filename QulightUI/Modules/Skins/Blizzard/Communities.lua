@@ -310,7 +310,7 @@ local function LoadSkin()
 
 	-- Communities Settings
 	local Settings = CommunitiesSettingsDialog
-	Settings.BG:Hide()
+	Settings:StripTextures()
 	Settings:SetTemplate("Transparent")
 
 	Settings.IconPreview:RemoveMaskTexture(Settings.CircleMask)
@@ -326,8 +326,6 @@ local function LoadSkin()
 	Settings.Accept:SkinButton()
 	Settings.Delete:SkinButton()
 	Settings.Cancel:SkinButton()
-
-	T.SkinDropDownBox(ClubFinderLanguageDropdown)
 
 	-- Avatar Picker
 	local Avatar = CommunitiesAvatarPickerDialog

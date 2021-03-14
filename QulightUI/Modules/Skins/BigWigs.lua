@@ -158,6 +158,7 @@ local function registerStyle(myProfile)
 	if BigWigsLoader and myProfile and myProfile.barStyle == "QulightUI" then
 		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_FrameCreated", function()
 			BigWigsProximityAnchor:SetTemplate("Transparent")
+			BigWigsAltPower:SetTemplate("Transparent")
 			BigWigsInfoBox:SetTemplate("Transparent")
 		end)
 
@@ -188,12 +189,9 @@ f:SetScript("OnEvent", function(_, event, addon)
 			registerStyle(myProfile)
 			f:UnregisterEvent("ADDON_LOADED")
 		elseif addon == "QulightUI" then
-			if BigWigsLoader then
+			if BigWigsLoader and C.skins.blizzard_frames == true then
 				BigWigsLoader.RegisterMessage(addon, "BigWigs_FrameCreated", function(_, frame, name)
-					if name == "AltPower" then
-						frame:SetTemplate("Transparent")
-					end
-					if name == "QueueTimer" and C.skins.blizzard_frames then
+					if name == "QueueTimer" then
 						frame:SetSize(240, 15)
 						frame:StripTextures()
 						frame:SetStatusBarTexture(C.media.texture)

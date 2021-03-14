@@ -39,11 +39,6 @@ if C.announcements.toys == true then
 end
 
 if C.announcements.feasts == true then
-	T.AnnounceFeast = {
-		[308458] = true,	-- Surprisingly Palatable Feast
-		[308462] = true,	-- Feast of Gluttonous Hedonism
-		[307157] = true,	-- Eternal Cauldron
-	}
 	T.AnnounceBots = {
 		[22700] = true,		-- Field Repair Bot 74A
 		[44389] = true,		-- Field Repair Bot 110G
@@ -51,9 +46,8 @@ if C.announcements.feasts == true then
 		[67826] = true,		-- Jeeves
 		[126459] = true,	-- Blingtron 4000
 		[161414] = true,	-- Blingtron 5000
-		[298926] = true,	-- Blingtron 7000
 		[199109] = true,	-- Auto-Hammer
-		[324029] = true,	-- Codex of the Still Mind
+		[226241] = true,	-- Codex of the Tranquil Mind
 	}
 end
 
@@ -114,8 +108,6 @@ if C.announcements.bad_gear == true then
 		},
 		-- Main-Hand
 		[16] = {
-			180136,	-- The Brokers Angle'r
-			133755,	-- Underlight Angler
 			44050,	-- Mastercraft Kalu'ak Fishing Pole
 			19970,	-- Arcanite Fishing Pole
 			84660,	-- Pandaren Fishing Pole

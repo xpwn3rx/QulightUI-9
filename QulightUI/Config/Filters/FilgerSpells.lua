@@ -215,10 +215,7 @@ C["filger_spells"] = {
 			-- Netherwalk
 			{spellID = 196555, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nether Bond
-			{spellID = 207810, unitID = "player", caster = "player", filter = "BUFF"}, 
-			--- Chaotic Blades (Proc from Legendary item)
-			{spellID = 337567, unitID = "player", caster = "player", filter = "BUFF"},
-
+			{spellID = 207810, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -232,9 +229,10 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Soul Fragments
 			{spellID = 203981, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Painbringer (Vengeance Artifact)
+			{spellID = 212988, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Momentum
 			{spellID = 208628, unitID = "player", caster = "player", filter = "BUFF"},
-
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -326,6 +324,8 @@ C["filger_spells"] = {
 			{spellID = 211053, filter = "CD"},
 			-- Vengeful Retreat
 			{spellID = 198793, filter = "CD", absID = true},
+			-- Soul Carver (Artifact)
+			{spellID = 207407, filter = "CD"},
 			-- Sigil of Silence
 			{spellID = 202137, filter = "CD"},
 			-- Sigil of Misery
@@ -350,6 +350,8 @@ C["filger_spells"] = {
 			{spellID = 236189, filter = "CD"},
 			-- Blur
 			{spellID = 198589, filter = "CD"},
+			-- Fury of the Illidari (Artifact)
+			{spellID = 201467, filter = "CD"},
 			-- Netherwalk
 			{spellID = 196555, filter = "CD"},
 			-- Nemesis
@@ -798,8 +800,6 @@ C["filger_spells"] = {
 			{spellID = 12042, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Combustion
 			{spellID = 190319, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Infernal Cascade
-			{spellID = 336832, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blazing Barrier
 			{spellID = 235313, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Prismatic Barrier
@@ -2243,8 +2243,6 @@ C["filger_spells"] = {
 			{spellID = 309658, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mallet of Thunderous Skins
 			{spellID = 292686, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Prideful (Seasonal Affix)
-			{spellID = 340880, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Engineering
 			-- Goblin Glider [Goblin Glider Kit]
@@ -2343,8 +2341,6 @@ C["filger_spells"] = {
 			{spellID = 91797, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Gnaw (Ghoul)
 			{spellID = 91800, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Blinding Sleet
-			{spellID = 207167, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Demon Hunter
 			-- Imprison
@@ -2377,8 +2373,6 @@ C["filger_spells"] = {
 			{spellID = 117526, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Intimidation
 			{spellID = 24394, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Scatter Shot
-			{spellID = 213691, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Mage
 			-- Polymorph
@@ -2411,14 +2405,8 @@ C["filger_spells"] = {
 			{spellID = 64044, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Psychic Scream
 			{spellID = 8122, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Mind Bomb
-			{spellID = 205369, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Sin and Punishment
 			{spellID = 87204, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Holy Word: Chastise
-			{spellID = 88625, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Mindgames
-			{spellID = 323673, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Rogue
 			-- Sap
@@ -2438,7 +2426,7 @@ C["filger_spells"] = {
 			-- Static Charge
 			{spellID = 118905, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Pulverize (Earth Elemental)
-			{spellID = 118345, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			{spellID = 118345, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Sundering
 			{spellID = 197214, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Lightning Lasso
@@ -2700,10 +2688,6 @@ C["filger_spells"] = {
 			{spellID = 117526, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Intimidation
 			{spellID = 24394, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Scatter Shot
-			{spellID = 213691, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Roar of Sacrifice
-			{spellID = 53480, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Mage
 			-- Ice Block
@@ -2712,10 +2696,6 @@ C["filger_spells"] = {
 			{spellID = 66, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Greater Invisibility
 			{spellID = 113862, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Combustion
-			{spellID = 190319, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Alter Time
-			{spellID = 108978, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Temporal Shield
 			{spellID = 198111, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Evanesce
@@ -2779,8 +2759,6 @@ C["filger_spells"] = {
 			{spellID = 853, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Blinding Light
 			{spellID = 105421, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Turn Evil
-			{spellID = 10326, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Avenger's Shield
 			{spellID = 31935, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -2806,8 +2784,6 @@ C["filger_spells"] = {
 			{spellID = 64044, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Psychic Scream
 			{spellID = 8122, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Mind Bomb
-			{spellID = 205369, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Silence
 			{spellID = 15487, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -2855,7 +2831,7 @@ C["filger_spells"] = {
 			-- Static Charge
 			{spellID = 118905, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Pulverize (Earth Elemental)
-			{spellID = 118345, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			{spellID = 118345, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Sundering
 			{spellID = 197214, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Lightning Lasso
@@ -2926,6 +2902,10 @@ C["filger_spells"] = {
 			{spellID = 107079, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- War Stomp (Tauren)
 			{spellID = 20549, unitID = "target", caster = "all", filter = "DEBUFF"},
+
+			-- Professions
+			-- Shieldtronic Shield
+			{spellID = 173260, unitID = "target", caster = "all", filter = "BUFF"},
 
 			-- Player vs. Player
 			-- Battlegrounds

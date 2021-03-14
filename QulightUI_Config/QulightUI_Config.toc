@@ -1,4 +1,4 @@
-## Interface: 90005
+## Interface: 90001
 ## Title: |cff1784d1QulightUI Config|r
 ## Notes: In-game configuration for QulightUI
 ## Author: Shestak - Modified by PWn3R

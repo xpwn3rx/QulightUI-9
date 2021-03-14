@@ -72,7 +72,6 @@ L.font_subheader_bag = "背包"
 L.font_subheader_blizzard = "系統"
 L.font_tooltip_header_font_size = "滑鼠提示標題"
 L.font_tooltip_font_size = "滑鼠提示信息"
-L.font_global_font = "Disable Pixel font" -- Need review
 
 -- Skins options
 L_GUI_SKINS = "界面美化"
@@ -141,8 +140,6 @@ L.unitframe_extra_height_auto = "血量/能量框架自動增高"
 L.unitframe_extra_height_auto_desc = "按字體大小智能調節框架高度"
 L.unitframe_extra_health_height = "血量框架額外增高"
 L.unitframe_extra_power_height = "能量框架額外增高"
-L.unitframe_subheader_castbar = "Size of player and target castbar" -- Need review
-L.unitframe_castbar_height = "Height" -- Need review
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "職業資源欄"
@@ -165,8 +162,6 @@ L_GUI_UF_AGGRO_BORDER = "邊框按仇恨值著色"
 L_GUI_UF_DEFICIT_HEALTH = "團隊生命值虧減模式"
 L_GUI_UF_SHOW_PARTY = "隊伍框架"
 L_GUI_UF_SHOW_RAID = "團隊框架"
-L.raidframe_show_target = "Show target frames" -- Needs review
-L.raidframe_show_pet = "Show pet frames" -- Needs review
 L.raidframe_vertical_health = "垂直顯示團隊框架生命值"
 L.raidframe_vertical_health_desc = "僅在HPS佈局中生效"
 L_GUI_UF_ALPHA_HEALTH = "滿血時淡化單位框架"
@@ -453,7 +448,7 @@ L_GUI_ANNOUNCEMENTS_TOY_TRAIN = "使用玩具火車/烈酒的遙控器時進行�
 L_GUI_ANNOUNCEMENTS_PULL_COUNTDOWN = "倒計時通告(/pc #)"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD = "通告食物和精煉的使用情況(/ffcheck)"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD_RAID = "在團隊頻道通告"
-L_GUI_ANNOUNCEMENTS_FLASK_FOOD_AUTO = "當團隊凖備確認時進行檢查"
+L_GUI_ANNOUNCEMENTS_FLASK_FOOD_AUTO = "當團隊檢查就緒時進行通告" -- Needs review
 L_GUI_ANNOUNCEMENTS_FEASTS = "放置食物/大鍋/靈魂井/修理機器人時進行通告"
 L_GUI_ANNOUNCEMENTS_PORTALS = "開啟傳送門/召喚儀式時進行通告"
 L.announcements_bad_gear = "檢查裝備"
