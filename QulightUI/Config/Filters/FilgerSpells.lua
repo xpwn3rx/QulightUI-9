@@ -202,8 +202,6 @@ C["filger_spells"] = {
 
 			-- Metamorphosis
 			{spellID = 187827, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Darkness
-			{spellID = 196718, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Immolation Aura
 			{spellID = 258920, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Demon Spikes
@@ -616,6 +614,8 @@ C["filger_spells"] = {
 			{spellID = 82921, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spitting Cobra
 			{spellID = 194407, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Trueshot
+			{spellID = 288613, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -669,10 +669,6 @@ C["filger_spells"] = {
 			{spellID = 131894, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hunter's Mark
 			{spellID = 257284, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Narrow Escape
-			{spellID = 136634, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Entrapment
-			{spellID = 135373, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Caltrops
 			{spellID = 194279, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Warp Time (Warp Stalker)
@@ -707,8 +703,6 @@ C["filger_spells"] = {
 			BarWidth = 189,
 			Position = {"LEFT", PVE_PVP_CC_Anchor},
 
-			-- Wyvern Sting
-			{spellID = 19386, unitID = "focus", caster = "player", filter = "DEBUFF"},
 			-- Freezing Trap
 			{spellID = 3355, unitID = "focus", caster = "player", filter = "DEBUFF"},
 		},
@@ -754,8 +748,6 @@ C["filger_spells"] = {
 			{spellID = 117526, filter = "CD"},
 			-- Master's Call
 			{spellID = 53271, filter = "CD"},
-			-- Wyvern Sting
-			{spellID = 19386, filter = "CD"},
 			-- Intimidation
 			{spellID = 19577, filter = "CD"},
 			-- Bestial Wrath
@@ -1227,6 +1219,22 @@ C["filger_spells"] = {
 			{spellID = 25771, unitID = "player", caster = "all", filter = "DEBUFF"},
 		},
 		{
+			Name = "PVE/PVP_CC",
+			Direction = "DOWN",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 189,
+			Position = {"LEFT", PVE_PVP_CC_Anchor},
+
+			-- Repentance
+			{spellID = 20066, unitID = "focus", caster = "player", filter = "DEBUFF"},
+			-- Turn Evil
+			{spellID = 10326, unitID = "focus", caster = "player", filter = "DEBUFF"},
+		},
+		{
 			Name = "COOLDOWN",
 			Direction = "RIGHT",
 			Mode = "ICON",
@@ -1290,8 +1298,6 @@ C["filger_spells"] = {
 			{spellID = 115750, filter = "CD"},
 			-- Holy Avenger
 			{spellID = 105809, filter = "CD"},
-			-- Holy Wrath
-			{spellID = 210220, filter = "CD"},
 			-- Aura Mastery
 			{spellID = 31821, filter = "CD"},
 			-- Blessing of Sacrifice
@@ -2269,6 +2275,8 @@ C["filger_spells"] = {
 			{spellID = 58984, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Stoneform (Dwarf)
 			{spellID = 65116, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fireblood (Dark Iron Dwarf)
+			{spellID = 265221, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Zone Buffs
 			-- Inactive (Battlegrounds)
@@ -2299,6 +2307,8 @@ C["filger_spells"] = {
 			{spellID = 114030, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Rallying Cry
 			{spellID = 97463, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Darkness
+			{spellID = 209426, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Other
 			-- Symbol of Hope
@@ -2343,6 +2353,8 @@ C["filger_spells"] = {
 			{spellID = 91797, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Gnaw (Ghoul)
 			{spellID = 91800, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Dead of Winter
+			{spellID = 287254, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Blinding Sleet
 			{spellID = 207167, unitID = "player", caster = "all", filter = "DEBUFF"},
 
@@ -2355,6 +2367,8 @@ C["filger_spells"] = {
 			{spellID = 179057, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Illidan's Grasp
 			{spellID = 205630, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Sigil of Misery
+			{spellID = 207685, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Druid
 			-- Cyclone
@@ -2371,10 +2385,6 @@ C["filger_spells"] = {
 			-- Hunter
 			-- Freezing Trap
 			{spellID = 3355, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Wyvern Sting
-			{spellID = 19386, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Binding Shot
-			{spellID = 117526, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Intimidation
 			{spellID = 24394, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Scatter Shot
@@ -2395,6 +2405,8 @@ C["filger_spells"] = {
 			{spellID = 119381, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Fists of Fury
 			{spellID = 120086, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Song of Chi-Ji
+			{spellID = 198898, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Paladin
 			-- Repentance
@@ -2416,7 +2428,7 @@ C["filger_spells"] = {
 			-- Sin and Punishment
 			{spellID = 87204, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Holy Word: Chastise
-			{spellID = 88625, unitID = "player", caster = "all", filter = "DEBUFF"},
+			{spellID = 200196, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Mindgames
 			{spellID = 323673, unitID = "player", caster = "all", filter = "DEBUFF"},
 
@@ -2441,9 +2453,9 @@ C["filger_spells"] = {
 			{spellID = 118345, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Sundering
 			{spellID = 197214, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Lightning Lasso
+			-- Lightning Lasso (PvP Talent)
 			{spellID = 204437, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Earthfury
+			-- Earthfury (PvP Talent)
 			{spellID = 204399, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Warlock
@@ -2471,18 +2483,36 @@ C["filger_spells"] = {
 			{spellID = 132169, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shockwave
 			{spellID = 132168, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Warpath (Prot PvP Talent)
+			{spellID = 199085, unitID = "player", caster = "all", filter = "DEBUFF"},
+
+			-- Covenant
+			-- Sulfuric Emission (Necrolord - Emeni Trait)
+			{spellID = 324263, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Agent of Chaos (Venthyr - Nadjia Trait)
+			{spellID = 331866, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Sparkling Driftglobe Core (Kyrian - Mikanikos Trait)
+			{spellID = 332423, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Racial
 			-- Quaking Palm (Pandaren)
 			{spellID = 107079, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- War Stomp (Tauren)
 			{spellID = 20549, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Bull Rush (Highmountain Tauren)
+			{spellID = 255654, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Haymaker (Kul Tiran)
+			{spellID = 287712, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Silences
 			-- Strangulate
 			{spellID = 47476, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Sigil of Silence
+			{spellID = 204490, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Solar Beam
 			{spellID = 78675, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Spider Sting
+			{spellID = 202933, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Avenger's Shield
 			{spellID = 31935, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Silence
@@ -2501,10 +2531,14 @@ C["filger_spells"] = {
 			{spellID = 102359, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Immobilized
 			{spellID = 45334, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Entrapment
-			{spellID = 135373, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Narrow Escape
-			{spellID = 136634, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Binding Shot
+			{spellID = 117526, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Tracker's Net
+			{spellID = 212638, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Harpoon
+			{spellID = 190925, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Steel Trap
+			{spellID = 162480, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Frostbite
 			{spellID = 198121, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Frost Nova
@@ -2533,7 +2567,9 @@ C["filger_spells"] = {
 			{spellID = 5116, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Frost Breath (Chimaera)
 			{spellID = 54644, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Ice Trap
+			-- Bursting Shot
+			{spellID = 186387, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Tar Trap
 			{spellID = 135299, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Frozen Ammo
 			{spellID = 162546, unitID = "player", caster = "all", filter = "DEBUFF"},
@@ -2581,6 +2617,8 @@ C["filger_spells"] = {
 			{spellID = 1715, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Piercing Howl
 			{spellID = 12323, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Debilitate (Terrorguard)
+			{spellID = 170996, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Other
 			-- Dark Simulacrum
@@ -2597,6 +2635,8 @@ C["filger_spells"] = {
 			{spellID = 76577, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Rocket Fuel Leak
 			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
+			-- Duel
+			{spellID = 236273, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Mythic+
 			-- Necrotic Wound
@@ -2694,14 +2734,14 @@ C["filger_spells"] = {
 			-- Debuffs
 			-- Freezing Trap
 			{spellID = 3355, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Wyvern Sting
-			{spellID = 19386, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Binding Shot
-			{spellID = 117526, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Intimidation
 			{spellID = 24394, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Scatter Shot
 			{spellID = 213691, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Binding Shot
+			{spellID = 117526, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Steel Trap
+			{spellID = 162480, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Roar of Sacrifice
 			{spellID = 53480, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -2718,8 +2758,6 @@ C["filger_spells"] = {
 			{spellID = 108978, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Temporal Shield
 			{spellID = 198111, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Evanesce
-			{spellID = 157913, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Evocation
 			{spellID = 12051, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Debuffs
@@ -2750,6 +2788,8 @@ C["filger_spells"] = {
 			{spellID = 119381, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Fists of Fury
 			{spellID = 120086, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Song of Chi-Ji
+			{spellID = 198898, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Paladin
 			-- Divine Shield
@@ -2762,6 +2802,8 @@ C["filger_spells"] = {
 			{spellID = 498, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Ardent Defender
 			{spellID = 31850, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Avenging Wrath
+			{spellID = 31884, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Aura Mastery
 			{spellID = 31821, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Blessing of Spellwarding
@@ -2847,8 +2889,6 @@ C["filger_spells"] = {
 			{spellID = 114052, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Ethereal Form
 			{spellID = 210918, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Spirit Link
-			{spellID = 204293, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Debuffs
 			-- Hex
 			{spellID = 51514, unitID = "target", caster = "all", filter = "DEBUFF"},
@@ -2858,9 +2898,9 @@ C["filger_spells"] = {
 			{spellID = 118345, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Sundering
 			{spellID = 197214, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Lightning Lasso
+			-- Lightning Lasso (PvP Talent)
 			{spellID = 204437, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Earthfury
+			-- Earthfury (PvP Talent)
 			{spellID = 204399, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Warlock
@@ -2889,8 +2929,6 @@ C["filger_spells"] = {
 			{spellID = 30283, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Meteor Strike (Abyssal)
 			{spellID = 171156, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Debilitate (Terrorguard)
-			{spellID = 170996, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Unstable Affliction
 			{spellID = 31117, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 
@@ -2926,6 +2964,8 @@ C["filger_spells"] = {
 			{spellID = 107079, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- War Stomp (Tauren)
 			{spellID = 20549, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Haymaker (Kul Tiran)
+			{spellID = 287712, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Player vs. Player
 			-- Battlegrounds
@@ -2997,8 +3037,29 @@ do
 		-- Darkflight
 		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 68992, filter = "CD"}})
 	elseif race == "Pandaren" then
-		-- Quaking Palm (Pandaren)
+		-- Quaking Palm
 		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 107079, filter = "CD"}})
+	elseif race == "DarkIronDwarf" then
+		-- Fireblood
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 265221, filter = "CD"}})
+	elseif race == "KulTiran" then
+		-- Haymaker
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 287712, filter = "CD"}})
+	elseif race == "HighmountainTauren" then
+		-- Bull Rush
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 255654, filter = "CD"}})
+	elseif race == "Vulpera" then
+		-- Bag of Tricks
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 312411, filter = "CD"}})
+	elseif race == "LightforgedDraenei" then
+		-- Light's Judgment
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 255647, filter = "CD"}})
+	elseif race == "ZandalariTroll" then
+		-- Regeneratin'
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 291944, filter = "CD"}})
+	elseif race == "MagharOrc" then
+		-- Ancestral Call
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = 274738, filter = "CD"}})
 	end
 
 	-- Items

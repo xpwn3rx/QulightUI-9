@@ -90,11 +90,7 @@ local function InstallUI()
 	QulightUISettingsPerChar.RightBars = C.actionbar.rightbars
 	QulightUISettingsPerChar.BottomBars = C.actionbar.bottombars
 
-	if QulightUISettings.RaidLayout ~= "UNKNOWN" then
-		ReloadUI()
-	else
-		StaticPopup_Show("SWITCH_RAID")
-	end
+	ReloadUI()
 end
 
 local function DisableUI()
@@ -110,8 +106,7 @@ StaticPopupDialogs.INSTALL_UI = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = InstallUI,
-	OnCancel = function() QulightUISettingsPerChar.Install = false
-	if QulightUISettings.RaidLayout == "UNKNOWN" then StaticPopup_Show("SWITCH_RAID") end end,
+	OnCancel = function() ShestakUISettingsPerChar.Install = false end,
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = false,
@@ -155,20 +150,6 @@ StaticPopupDialogs.RESET_STATS = {
 	preferredIndex = 5,
 }
 
-StaticPopupDialogs.SWITCH_RAID = {
-	text = L_POPUP_SWITCH_RAID,
-	button1 = DAMAGER,
-	button2 = HEALER,
-	button3 = "Blizzard",
-	OnAccept = function() QulightUISettings.RaidLayout = "DPS" ReloadUI() end,
-	OnCancel = function() QulightUISettings.RaidLayout = "HEAL" ReloadUI() end,
-	OnAlt = function() QulightUISettings.RaidLayout = "NONE" ReloadUI() end,
-	timeout = 0,
-	whileDead = 1,
-	hideOnEscape = false,
-	preferredIndex = 5,
-}
-
 SLASH_CONFIGURE1 = "/resetui"
 SlashCmdList.CONFIGURE = function() StaticPopup_Show("RESET_UI") end
 
@@ -183,52 +164,10 @@ OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	-- TODO delete old variable
-	if SavedOptions then
-		QulightUISettings = SavedOptions
-		SavedOptions = nil
-	end
-
-	if SavedStats then
-		QulightUIStats = SavedStats
-		SavedStats = nil
-	end
-
-	if SavedBindings then
-		QulightUIBindings = SavedBindings
-		SavedBindings = nil
-	end
-
-	if SavedCurrency then
-		QulightUICurrency = SavedCurrency
-		SavedCurrency = nil
-	end
-
-	if QulightUISettings == nil then QulightUISettings = {} end
-	if not QulightUISettings.Migrated then
-		if SavedOptionsPerChar then
-			if SavedOptionsPerChar.UFPos then
-				SavedPositions.UFPos = SavedOptionsPerChar.UFPos
-				SavedOptionsPerChar.UFPos = nil
-				StaticPopup_Show("INSTALL_UI")
-			end
-			QulightUISettingsPerChar = SavedOptionsPerChar
-			SavedOptionsPerChar = nil
-		end
-
-		if SavedPositions then
-			QulightUIPositions = SavedPositions
-			SavedPositions = nil
-		end
-
-		QulightUISettings.Migrated = true
-	end
-
 	-- Create empty CVar if they doesn't exist
 	if QulightUISettings == nil then QulightUISettings = {} end
 	if QulightUIPositions == nil then QulightUIPositions = {} end
 	if QulightUISettingsPerChar == nil then QulightUISettingsPerChar = {} end
-	if QulightUISettings.RaidLayout == nil then QulightUISettings.RaidLayout = "UNKNOWN" end
 	if QulightUISettingsPerChar.FogOfWar == nil then QulightUISettingsPerChar.FogOfWar = true end
 	if QulightUISettingsPerChar.Coords == nil then QulightUISettingsPerChar.Coords = true end
 	if QulightUISettingsPerChar.Archaeology == nil then QulightUISettingsPerChar.Archaeology = false end
@@ -258,10 +197,6 @@ OnLogon:SetScript("OnEvent", function(self)
 		if not QulightUISettingsPerChar.Install then
 			StaticPopup_Show("INSTALL_UI")
 		end
-	end
-
-	if QulightUISettings.RaidLayout == "UNKNOWN" and QulightUISettingsPerChar.Install then
-		StaticPopup_Show("SWITCH_RAID")
 	end
 
 	-- Welcome message

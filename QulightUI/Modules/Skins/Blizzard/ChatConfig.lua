@@ -27,7 +27,8 @@ local function LoadSkin()
 		"CombatConfigMessageSourcesDoneBy",
 		"CombatConfigMessageSourcesDoneTo",
 		"CombatConfigColorsUnitColors",
-		"CombatConfigColorsHighlighting"
+		"CombatConfigColorsHighlighting",
+		"ChatConfigTextToSpeechChannelSettingsLeft"
 	}
 
 	for i = 1, getn(frames) do
@@ -120,7 +121,7 @@ local function LoadSkin()
 
 			local checkBoxNameString = frame:GetName().."CheckBox"
 
-			if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
+			if checkBoxTemplate == "ChatConfigCheckBoxTemplate" or checkBoxTemplate == "ChatConfigCheckBoxSmallTemplate" then
 				for index in ipairs(checkBoxTable) do
 					local checkBoxName = checkBoxNameString..index
 					local checkbox = _G[checkBoxName]
@@ -244,6 +245,47 @@ local function LoadSkin()
 			end
 		end
 	end)
+	
+	-- TextToSpeech
+	if T.newPatch then
+		local checkBoxes = {
+			TextToSpeechFramePanelContainer.PlaySoundSeparatingChatLinesCheckButton,
+			TextToSpeechFramePanelContainer.AddCharacterNameToSpeechCheckButton,
+			TextToSpeechFramePanelContainer.PlayActivitySoundWhenNotFocusedCheckButton,
+			TextToSpeechFramePanelContainer.NarrateMyMessagesCheckButton,
+			TextToSpeechFramePanelContainer.UseAlternateVoiceForSystemMessagesCheckButton
+		}
+
+		for i = 1, #checkBoxes do
+			T.SkinCheckBox(checkBoxes[i])
+		end
+
+		TextToSpeechDefaultButton:SkinButton()
+		TextToSpeechFramePlaySampleButton:SkinButton()
+		TextToSpeechFramePlaySampleAlternateButton:SkinButton()
+
+		T.SkinDropDownBox(TextToSpeechFrameTtsVoiceDropdown)
+		T.SkinDropDownBox(TextToSpeechFrameTtsVoiceAlternateDropdown)
+
+		T.SkinSlider(TextToSpeechFrameAdjustRateSlider)
+		T.SkinSlider(TextToSpeechFrameAdjustVolumeSlider)
+
+		hooksecurefunc("TextToSpeechFrame_UpdateMessageCheckboxes", function(frame)
+			local checkBoxTable = frame.checkBoxTable
+			if checkBoxTable then
+				local checkBoxNameString = frame:GetName().."CheckBox"
+				local checkBoxName, checkBox
+				for index, value in ipairs(checkBoxTable) do
+					checkBoxName = checkBoxNameString..index
+					checkBox = _G[checkBoxName]
+					if checkBox and not checkBox.styled then
+						T.SkinCheckBox(checkBox)
+						checkBox.styled = true
+					end
+				end
+			end
+		end)
+	end
 end
 
 tinsert(T.SkinFuncs["QulightUI"], LoadSkin)

@@ -191,26 +191,6 @@ SLASH_DBMTEST1 = "/dbmtest"
 SLASH_DBMTEST2 = "/виьеуые"
 
 ----------------------------------------------------------------------------------------
---	Switch to Heal layout
-----------------------------------------------------------------------------------------
-SlashCmdList.HEAL = function()
-	QulightUISettings.RaidLayout = "HEAL"
-	ReloadUI()
-end
-SLASH_HEAL1 = "/heal"
-SLASH_HEAL2 = "/руфд"
-
-----------------------------------------------------------------------------------------
---	Switch to DPS layout
-----------------------------------------------------------------------------------------
-SlashCmdList.DPS = function()
-	QulightUISettings.RaidLayout = "DPS"
-	ReloadUI()
-end
-SLASH_DPS1 = "/dps"
-SLASH_DPS2 = "/взы"
-
-----------------------------------------------------------------------------------------
 --	Command to show frame you currently have mouseovered
 ----------------------------------------------------------------------------------------
 SlashCmdList.FRAME = function(arg)
@@ -292,11 +272,13 @@ SLASH_FRAMELIST4 = "/ад"
 --	Frame Stack on Cyrillic
 ----------------------------------------------------------------------------------------
 SlashCmdList.FSTACK = function()
-	SlashCmdList.FRAMESTACK(0)
+	UIParentLoadAddOn("Blizzard_DebugTools")
+	FrameStackTooltip_Toggle(false, true, true)
 end
 SLASH_FSTACK1 = "/аыефсл"
 SLASH_FSTACK2 = "/fs"
 SLASH_FSTACK3 = "/аы"
+SLASH_FRAMESTK1 = nil -- fix LFGFilter
 
 ----------------------------------------------------------------------------------------
 --	Clear chat

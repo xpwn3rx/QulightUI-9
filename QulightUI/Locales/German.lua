@@ -87,9 +87,6 @@ L_MAP_COORDS = "Koordinaten"
 
 -- Minimap
 L_MINIMAP_CALENDAR = "Kalender"
-L_MINIMAP_HEAL_LAYOUT = "Links-Klick - Heiler Layout"
-L_MINIMAP_DPS_LAYOUT = "Rechts-Klick - DPS Layout"
-L_MINIMAP_BLIZZ_LAYOUT = "Mittel-Klick - Blizzard Layout"
 L_MINIMAP_FARM = "Minimap größe"
 L_MINIMAP_TOGGLE = "Aktionsleisten umschalten"
 
@@ -177,7 +174,6 @@ L_INFO_SKIN_DISABLED2 = " ist ausgeschaltet."
 L_POPUP_INSTALLUI = "Dies ist Ihre erste Benutzung von QulightUI mit diesem Charakter. Um das Interface zu konfigurieren, wird das UI nun neugeladen."
 L_POPUP_RESETUI = "Sind Sie sich sicher, dass Sie die Einstellungen von QulightUI zurückgesetzen wollen?"
 L_POPUP_RESETSTATS = "Bist du sicher das du die Gold und verbrachte Zeit Statistik zurücksetzen möchtest?"
-L_POPUP_SWITCH_RAID = "Wähle Raid Layout."
 L_POPUP_DISBAND_RAID = "Bist du dir sicher, dass du die Gruppe auflösen möchtest?"
 L_POPUP_DISABLEUI = "QulightUI funktioniert nicht mit deiner Auflösung, möchtest du QulightUI ausschalten? (Drücke Abbrechen, falls du eine andere Auflösung testen willst)"
 L_POPUP_SETTINGS_ALL = "Einstellungen für alle AddOns übernehmen? (DBM, BigWigs, Skada und MSBT)"
@@ -284,8 +280,6 @@ L_SLASHCMD_HELP = {
 	"/teleport - Teleport vom beliebigen Dungeon.",
 	"/ss - Zwischen den Talenten wechseln.",
 	"/tt - Ziehl anflüstern.",
-	"/heal - Zum Heiler Layout wechseln.",
-	"/dps - Zum DPS Layout wechseln.",
 	"/farmmode - Erhöht die Größe der Minimap.",
 	"/resetui - Zurücksetzen der allgemeinen Einstellungen auf die Standardwerte.",
 	"/resetuf - Zurücksetzen der Einheitenfenster auf die Standardposition.",

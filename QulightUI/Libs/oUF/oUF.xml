@@ -7,7 +7,6 @@
 	<Script file="Blizzard.lua"/>
 	<Script file="Units.lua"/>
 	<Script file="Colors.lua"/>
-
 	<Script file="Elements\AlternativePower.lua"/>
 	<Script file="Elements\AssistantIndicator.lua"/>
 	<Script file="Elements\Auras.lua"/>
@@ -32,9 +31,7 @@
 	<Script file="Elements\SummonIndicator.lua"/>
 	<Script file="Elements\Tags.lua"/>
 	<Script file="Elements\ThreatIndicator.lua"/>
-	
 	<Script file="Finalize.lua"/>
-
 	<Script file="Modules\ArcaneCharge.lua"/>
 	<Script file="Modules\AuraTracker.lua"/>
 	<Script file="Modules\AuraWatch.lua"/>
@@ -50,7 +47,7 @@
 	<Script file="Modules\GCD.lua"/>
 	<Script file="Modules\HarmonyOrbs.lua"/>
 	<Script file="Modules\HolyPower.lua"/>
-	<Script file="Modules\MovableFrames.lua"/>
+	<Script file="Modules\QuestIcon.lua"/>
 	<Script file="Modules\RaidDebuffs.lua"/>
 	<Script file="Modules\Reputation.lua"/>
 	<Script file="Modules\Smooth.lua"/>

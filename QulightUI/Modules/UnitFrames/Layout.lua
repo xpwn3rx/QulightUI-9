@@ -462,7 +462,7 @@ local function Shared(self, unit)
 		end
 
 		-- Totem bar for Shaman
-		if C.unitframe_class_bar.totem == true and T.class == "SHAMAN" then
+		if C.unitframe_class_bar.totem == true and C.unitframe_class_bar.totem_other == true and T.class ~= "SHAMAN" then
 			self.TotemBar = CreateFrame("Frame", self:GetName().."_TotemBar", self)
 			self.TotemBar:CreateBackdrop("Default")
 			self.TotemBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
@@ -654,7 +654,11 @@ local function Shared(self, unit)
 
 	if unit == "player" or unit == "target" then
 		if C.unitframe.portrait_enable == true then
-			self.Portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
+			if C.unitframe.portrait_type == "3D" or C.unitframe.portrait_type == "OVERLAY" then
+				self.Portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
+			else
+				self.Portrait = CreateFrame("Frame", self:GetName().."_Portrait", self)
+			end
 			self.Portrait:SetHeight(C.unitframe.portrait_height)
 			self.Portrait:SetWidth(C.unitframe.portrait_width)
 			if unit == "player" then
@@ -663,8 +667,15 @@ local function Shared(self, unit)
 				self.Portrait:SetPoint(unpack(C.position.unitframes.target_portrait))
 			end
 
+			self.Portrait.Icon = self.Portrait:CreateTexture(nil, "ARTWORK")
+			self.Portrait.Icon:SetAllPoints()
+
+			if C.unitframe.portrait_type == "ICONS" then
+				self.Portrait.classIcons = true
+			end
+
 			self.Portrait:CreateBackdrop("Transparent")
-			self.Portrait.backdrop:SetPoint("TOPLEFT", -2 + T.mult, 2 + T.mult)
+			self.Portrait.backdrop:SetPoint("TOPLEFT", -2 - T.mult, 2 + T.mult)
 			self.Portrait.backdrop:SetPoint("BOTTOMRIGHT", 2 + T.mult, -2 - T.mult)
 
 			if C.unitframe.portrait_classcolor_border == true then
@@ -682,6 +693,23 @@ local function Shared(self, unit)
 						end
 					end)
 				end
+			end
+			
+			if C.unitframe.portrait_type == "OVERLAY" then
+				local healthTex = self.Health:GetStatusBarTexture()
+				self.Portrait:ClearAllPoints()
+				self.Portrait:SetPoint("TOPLEFT", healthTex, "TOPLEFT", 0, 0)
+				self.Portrait:SetPoint("BOTTOMRIGHT", healthTex, "BOTTOMRIGHT", 0, 1)
+				self.Portrait:SetFrameLevel(self.Health:GetFrameLevel())
+				self.Portrait.backdrop:Hide()
+				self.Portrait:SetAlpha(0.5)
+
+				local frame = CreateFrame("Frame")
+				frame:RegisterEvent("PLAYER_LOGIN")
+				frame:SetScript("OnEvent", function()
+					T_DE_BUFF_BAR_Anchor:ClearAllPoints()
+					T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.position.filger.target_bar[4], C.position.filger.target_bar[5])
+				end)
 			end
 		end
 
@@ -1117,7 +1145,7 @@ local function Shared(self, unit)
 		if unit ~= "arena" or unit ~= "arenatarget" or unit ~= "boss" then
 			self.Fader = {
 				[1] = {Combat = 1, Arena = 1, Instance = 1},
-				[2] = {PlayerTarget = 1, PlayerNotMaxHealth = 1, PlayerNotMaxMana = 1},
+				[2] = {PlayerTarget = 1, PlayerNotMaxHealth = 1, PlayerNotMaxMana = 1, Casting = 1},
 				[3] = {Stealth = 0.5},
 				[4] = {notCombat = 0, PlayerTaxi = 0},
 			}
@@ -1318,7 +1346,7 @@ SlashCmdList.TEST_UF = function()
 				-- _G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
 				-- _G["oUF_Arena"..i]:SetAttribute("unit", "player")
 
-				-- _G["oUF_Arena"..i.."Target"].oldunit = 	_G["oUF_Arena"..i.."Target"].unit
+				-- _G["oUF_Arena"..i.."Target"].oldunit = _G["oUF_Arena"..i.."Target"].unit
 				-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
 
 				-- if C.unitframe.plugins_enemy_spec == true then
@@ -1341,7 +1369,8 @@ SlashCmdList.TEST_UF = function()
 	else
 		for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
 			if _G[frames] then
-				_G[frames]:SetAttribute("unit", _G[frames].oldunit)
+				_G[frames].unit = _G[frames].oldunit
+				_G[frames]:SetAttribute("unit", _G[frames].unit)
 			end
 		end
 
@@ -1355,7 +1384,8 @@ SlashCmdList.TEST_UF = function()
 
 		if C.unitframe.show_boss == true then
 			for i = 1, MAX_BOSS_FRAMES do
-				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].oldunit)
+				_G["oUF_Boss"..i].unit = _G["oUF_Boss"..i].oldunit
+				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].unit)
 			end
 		end
 		moving = false
@@ -1415,9 +1445,12 @@ end
 ----------------------------------------------------------------------------------------
 if C.raidframe.auto_position == "DYNAMIC" then
 	local prevNum = 5
-	local function Reposition(self)
-		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
-			if InCombatLockdown() then return end
+	local function Reposition(self, event)
+		if C.raidframe.layout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
+			if InCombatLockdown() then
+				self:RegisterEvent("PLAYER_REGEN_ENABLED")
+				return
+			end
 			local maxGroup = 5
 			local num = GetNumGroupMembers()
 			if num > 5 then
@@ -1430,7 +1463,8 @@ if C.raidframe.auto_position == "DYNAMIC" then
 				maxGroup = C.raidframe.raid_groups
 			end
 			if prevNum ~= maxGroup then
-				local offset = (maxGroup - 5) * 33
+				-- local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7) + ((maxGroup - ((maxGroup - 5))) * (C.raidframe.heal_height - 26))
+				local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7)
 				if C.unitframe.castbar_icon == true then
 					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 				else
@@ -1440,6 +1474,9 @@ if C.raidframe.auto_position == "DYNAMIC" then
 				player:SetPoint(C.position.unitframes.player[1], C.position.unitframes.player[2], C.position.unitframes.player[3], C.position.unitframes.player[4], C.position.unitframes.player[5] + offset)
 				target:SetPoint(C.position.unitframes.target[1], C.position.unitframes.target[2], C.position.unitframes.target[3], C.position.unitframes.target[4], C.position.unitframes.target[5] + offset)
 				prevNum = maxGroup
+			end
+			if event == "PLAYER_REGEN_ENABLED" then
+				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 			end
 		else
 			self:UnregisterEvent("GROUP_ROSTER_UPDATE")
@@ -1453,7 +1490,8 @@ if C.raidframe.auto_position == "DYNAMIC" then
 elseif C.raidframe.auto_position == "STATIC" then
 	local function Reposition()
 		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
-			local offset = (C.raidframe.raid_groups - 5) * 33
+			-- local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_height - 26))
+			local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7)
 			if C.unitframe.castbar_icon == true then
 				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 			else

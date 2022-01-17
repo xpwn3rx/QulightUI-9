@@ -119,6 +119,7 @@ C["unitframe"] = {
 	-- Portraits
 	["portrait_enable"] = false,						-- Enable player/target portraits
 	["portrait_classcolor_border"] = false,					-- Enable classcolor border
+	["portrait_type"] = "3D",					-- Type of portraits (3D, 2D, ICONS, OVERLAY)
 	["portrait_height"] = 92,						-- Portrait height
 	["portrait_width"] = 67,						-- Portrait width
 	-- Plugins
@@ -156,7 +157,8 @@ C["unitframe_class_bar"] = {
 	["holy"] = true,							-- Holy Power bar
 	["shard"] = true,							-- Shard/Burning bar
 	["rune"] = true,							-- Rune bar
-	["totem"] = true,							-- Totem bar
+	["totem"] = true,							-- Totem bar for Shaman
+	["totem_other"] = true,						-- Totem bar for other classes
 }
 
 ----------------------------------------------------------------------------------------
@@ -164,6 +166,7 @@ C["unitframe_class_bar"] = {
 ----------------------------------------------------------------------------------------
 C["raidframe"] = {
 	-- Main
+	["layout"] = "HEAL",						-- Raid layout (HEAL, DPS, AUTO, BLIZZARD)
 	["show_party"] = true,							-- Show party frames
 	["show_raid"] = true,							-- Show raid frames
 	["show_target"] = true,							-- Show target frames
@@ -192,10 +195,11 @@ C["raidframe"] = {
 	["icons_sumon"] = true,							-- Sumon icons on frames
 	["icons_phase"] = true,							-- Phase icons on frames
 	-- Plugins
-	["plugins_debuffhighlight_icon"] = true,				-- Debuff highlight texture + icon
 	["plugins_aura_watch"] = true,						-- Raid debuff icons (from the list)
 	["plugins_aura_watch_timer"] = false,					-- Timer on raid debuff icons
 	["plugins_pvp_debuffs"] = true,						-- Show also PvP debuff icons (from the list)
+	["plugins_debuffhighlight_icon"] = true,	-- Show dispellable debuff icon (texture will be shown anyway)
+	["plugins_pvp_debuffs"] = true,			-- Show PvP debuff icons (from the list)
 	["plugins_healcomm"] = true,						-- Incoming heal bar on raid frame
 	["plugins_auto_resurrection"] = false,					-- Auto cast resurrection on middle-click (doesn't work with Clique)
 	-- Heal layout size
@@ -228,8 +232,8 @@ C["aura"] = {
 	["boss_buffs"] = true,							-- Buffs on boss frame
 	["player_aura_only"] = false,						-- Only your debuff on target frame
 	["debuff_color_type"] = true,						-- Color debuff by type
-	["cast_by"] = false,							-- Show who cast a buff/debuff in its tooltip
 	["classcolor_border"] = false,						-- Enable classcolor border for player buffs
+	["cast_by"] = false,							-- Show who cast a buff/debuff in its tooltip
 }
 
 ----------------------------------------------------------------------------------------
@@ -360,24 +364,32 @@ C["nameplate"] = {
 	["ad_height"] = 0,							-- Additional height for selected nameplate
 	["ad_width"] = 0,							-- Additional width for selected nameplate
 	["combat"] = false,							-- Automatically show nameplate in combat
-	["health_value"] = false,						-- Numeral health value
-	["show_castbar_name"] = false,						-- Show castbar name
-	["class_icons"] = false,						-- Icons by class in PvP
-	["name_abbrev"] = false,						-- Display abbreviated names
+	["health_value"] = false,					-- Numeral health value
+	["show_castbar_name"] = false,				-- Show castbar name
+	["class_icons"] = false,					-- Icons by class in PvP
+	["name_abbrev"] = false,					-- Display abbreviated names
 	["clamp"] = false,							-- Clamp nameplates to the top of the screen when outside of view
-	["track_debuffs"] = true,						-- Show your debuffs (from the list)
-	["track_buffs"] = false,						-- Show dispellable enemy buffs and buffs from the list
-	["auras_size"] = 25,							-- Auras size
-	["healer_icon"] = true,							-- Show icon above enemy healers nameplate in battlegrounds
-	["totem_icons"] = false,						-- Show icon above enemy totems nameplate
-	["target_glow"] = true,							-- Show glow texture for target
-	["only_name"] = false,							-- Show only name for friendly units
+	["track_debuffs"] = true,					-- Show your debuffs (from the list)
+	["track_buffs"] = false,					-- Show dispellable enemy buffs and buffs from the list
+	["auras_size"] = 25,						-- Auras size
+	["healer_icon"] = true,						-- Show icon above enemy healers nameplate in battlegrounds
+	["totem_icons"] = false,					-- Show icon above enemy totems nameplate
+	["target_glow"] = true,						-- Show glow texture for target
+	["only_name"] = false,						-- Show only name for friendly units
+	["quests"] = false,							-- Show quest icon
+	["low_health"] = false,						-- Show red border when low health
+	["low_health_value"] = 0.2,					-- Value for low health (between 0.1 and 1)
+	["cast_color"] = false,						-- Show color border for casting important spells
+	["kick_color"] = false,						-- Change cast color if interrupt on cd
 	-- Threat
-	["enhance_threat"] = true,						-- Enable threat feature, automatically changes by your role
-	["good_color"] = {0.2, 0.8, 0.2},					-- Good threat color
-	["near_color"] = {1, 1, 0},						-- Near threat color
-	["bad_color"] = {1, 0, 0},						-- Bad threat color
-	["offtank_color"] = {0, 0.5, 1},					-- Offtank threat color
+	["enhance_threat"] = true,					-- Enable threat feature, automatically changes by your role
+	["good_color"] = {0.2, 0.8, 0.2},			-- Good threat color
+	["near_color"] = {1, 1, 0},					-- Near threat color
+	["bad_color"] = {1, 0, 0},					-- Bad threat color
+	["offtank_color"] = {0, 0.5, 1},			-- Offtank threat color
+	["extra_color"] = {1, 0.3, 0},				-- Explosive and Spiteful affix color
+	["mob_color_enable"] = false,				-- Change color for important mobs in dungeons
+	["mob_color"] = {0, 0.5, 0.8},				-- Color for mobs
 }
 
 ----------------------------------------------------------------------------------------
@@ -387,30 +399,30 @@ C["combattext"] = {
 	["enable"] = true,							-- Global enable combat text
 	["blizz_head_numbers"] = false,						-- Use blizzard damage/healing output (above mob/player head)
 	["damage_style"] = true,						-- Change default damage/healing font above mobs/player heads (you need to restart WoW to see changes)
-	["damage"] = true,							-- Show outgoing damage in it's own frame
-	["healing"] = true,							-- Show outgoing healing in it's own frame
+	["damage"] = true,							-- Show outgoing damage
+	["pet_damage"] = true,						-- Show your pet damage
+	["dot_damage"] = true,						-- Show damage from your dots
+	["healing"] = true,							-- Show outgoing healing
 	["show_hots"] = true,							-- Show periodic healing effects in healing frame
 	["show_overhealing"] = true,						-- Show outgoing overhealing
-	["pet_damage"] = true,							-- Show your pet damage
-	["dot_damage"] = true,							-- Show damage from your dots
 	["damage_color"] = true,						-- Display damage numbers depending on school of magic
-	["crit_prefix"] = "*",							-- Symbol that will be added before crit
-	["crit_postfix"] = "*",							-- Symbol that will be added after crit
+	["dispel"] = true,							-- Tells you about your dispels (works only with ["damage"] = true)
+	["interrupt"] = true,						-- Tells you about your interrupts (works only with ["damage"] = true)
 	["icons"] = true,							-- Show outgoing damage icons
 	["icon_size"] = 16,							-- Icon size of spells in outgoing damage frame, also has effect on dmg font size
-	["treshold"] = 1,							-- Minimum damage to show in damage frame
-	["heal_treshold"] = 1,							-- Minimum healing to show in incoming/outgoing healing messages
-	["scrollable"] = false,							-- Allows you to scroll frame lines with mousewheel
 	["max_lines"] = 15,							-- Max lines to keep in scrollable mode (more lines = more memory)
 	["time_visible"] = 3,							-- Time (seconds) a single message will be visible
-	["dk_runes"] = true,							-- Show deathknight rune recharge
-	["killingblow"] = true,							-- Tells you about your killingblows
+	["short_numbers"] = true,					-- Use short numbers ("25.3k" instead of "25342")
 	["merge_aoe_spam"] = true,						-- Merges multiple aoe damage spam into single message
 	["merge_melee"] = true,							-- Merges multiple auto attack damage spam
-	["dispel"] = true,							-- Tells you about your dispels (works only with ["damage"] = true)
-	["interrupt"] = true,							-- Tells you about your interrupts (works only with ["damage"] = true)
 	["direction"] = true,							-- Change scrolling direction from bottom to top
-	["short_numbers"] = true,						-- Use short numbers ("25.3k" instead of "25342")
+	["dk_runes"] = true,						-- Show Death Knight rune recharge
+	["killingblow"] = false,					-- Tells you about your killingblows
+	["scrollable"] = false,						-- Allows you to scroll frame lines with mousewheel
+	["crit_prefix"] = "*",						-- Symbol that will be added before crit
+	["crit_postfix"] = "*",						-- Symbol that will be added after crit
+	["treshold"] = 1,							-- Minimum damage to show in damage frame
+	["heal_treshold"] = 1,						-- Minimum healing to show in incoming/outgoing healing messages
 }
 
 ----------------------------------------------------------------------------------------
@@ -486,17 +498,17 @@ C["filger"] = {
 --	Announcements options
 ----------------------------------------------------------------------------------------
 C["announcements"] = {
-	["drinking"] = true,							-- Announce when arena enemy is drinking
 	["interrupts"] = true,							-- Announce when you interrupt
 	["spells"] = false,							-- Announce when you cast some spell (from the list)
 	["spells_from_all"] = false,						-- Check spells cast from all members
+	["feasts"] = false,							-- Announce Feasts/Souls/Repair Bots cast
+	["portals"] = false,						-- Announce Portals/Ritual of Summoning cast
 	["toys"] = true,							-- Announce some annoying toys
-	["pull_countdown"] = true,						-- Pull countdown announce (/pc #)
 	["flask_food"] = true,							-- Announce the usage of flasks and food (/ffcheck)
 	["flask_food_raid"] = true,						-- Announce to raid channel
 	["flask_food_auto"] = true,						-- Auto announce to raid channel when ReadyCheck
-	["feasts"] = true,							-- Announce Feasts/Souls/Repair Bots cast
-	["portals"] = true,							-- Announce Portals/Ritual of Summoning cast
+	["drinking"] = false,						-- Announce when arena enemy is drinking
+	["pull_countdown"] = true,					-- Pull countdown announce (/pc #)
 	["bad_gear"] = false,							-- Check your bad gear in instance (fishing pole, from the list)
 	["safari_hat"] = true,							-- Check Safari Hat when starting Pet Battle
 }
@@ -511,7 +523,7 @@ C["automation"] = {
 	["accept_invite"] = true,						-- Auto accept invite
 	["decline_duel"] = false,						-- Auto decline duel (/disduel to temporarily disable)
 	["accept_quest"] = true,						-- Auto accept quests (disabled if hold Shift)
-	["auto_collapse"] = "NONE",						-- Auto collapse Objective Tracker (RAID, RELOAD, NONE)
+	["auto_collapse"] = "NONE",					-- Auto collapse Objective Tracker (RAID, RELOAD, SCENARIO, NONE)
 	["skip_cinematic"] = false,						-- Auto skip cinematics/movies (disabled if hold Ctrl)
 	["auto_role"] = true,							-- Auto set your role
 	["cancel_bad_buffs"] = false,						-- Auto cancel annoying holiday buffs (from the list)

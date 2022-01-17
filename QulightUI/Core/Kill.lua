@@ -12,7 +12,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end
 	end
 
-	if C.unitframe.enable and (QulightUISettings and (QulightUISettings.RaidLayout == "HEAL" or QulightUISettings.RaidLayout == "DPS")) then
+	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 		if not InCombatLockdown() then
@@ -73,6 +73,15 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if C.bag.enable then
 		SetSortBagsRightToLeft(true)
 		SetInsertItemsLeftToRight(false)
+	end
+	
+	if C.combattext.enable then
+		InterfaceOptionsCombatPanelEnableFloatingCombatText:Hide()
+		if C.combattext.incoming then
+			SetCVar("enableFloatingCombatText", 1)
+		else
+			SetCVar("enableFloatingCombatText", 0)
+		end
 	end
 end)
 

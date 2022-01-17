@@ -106,7 +106,7 @@ if modules and ((coords and coords.enabled) or (location and location.enabled)) 
 		end
 	end)
 
-	function Coords() return format(coords and coords.fmt or "%d, %d", coordX and coordX * 100, coordY and coordY * 100) end
+	function Coords() return format(coords and coords.fmt or "%.0f, %.0f", coordX and coordX * 100 or 0, coordY and coordY * 100 or 0) end
 end
 
 -- Set profile
@@ -610,13 +610,20 @@ if friends.enabled then
 	end
 	local clientTags = {
 		[BNET_CLIENT_D3] = "Diablo 3",
+		[BNET_CLIENT_D2] = "Diablo 2: Resurrected",
 		[BNET_CLIENT_WTCG] = "Hearthstone",
 		[BNET_CLIENT_HEROES] = "Heroes of the Storm",
 		[BNET_CLIENT_OVERWATCH] = "Overwatch",
 		[BNET_CLIENT_SC] = "StarCraft",
 		[BNET_CLIENT_SC2] = "StarCraft 2",
 		[BNET_CLIENT_DESTINY2] = "Destiny 2",
-		[BNET_CLIENT_COD] = "Call of Duty: Black Ops 4",
+		[BNET_CLIENT_WC3] = "Warcraft 3: Reforged",
+		[BNET_CLIENT_ARCADE] = "Arcade Collection",
+		[BNET_CLIENT_CRASH4] = "Crash Bandicoot 4",
+		[BNET_CLIENT_COD] = "COD: Black Ops 4",
+		[BNET_CLIENT_COD_MW] = "COD: Modern Warfare",
+		[BNET_CLIENT_COD_MW2] = "COD: Modern Warfare 2",
+		[BNET_CLIENT_COD_BOCW] = "COD: Cold War",
 		["BSAp"] = COMMUNITIES_PRESENCE_MOBILE_CHAT
 	}
 	Inject("Friends", {

@@ -11,7 +11,7 @@ if C.raidcooldown.enable == true then
 		{20484, 600},	-- Rebirth
 		{61999, 600},	-- Raise Ally
 		{20707, 600},	-- Soulstone
-		{265116, 600},	-- Unstable Temporal Time Shifter
+		{345130, 600},	-- Disposable Spectrophasic Reanimator
 		-- Heroism
 		{32182, 300},	-- Heroism
 		{2825, 300},	-- Bloodlust
@@ -43,6 +43,11 @@ if C.raidcooldown.enable == true then
 	}
 
 	if #C.raidcooldown.spells_list > 0 then
+		-- Sync spell list with new changes
+		if not C.options.raidcooldown.spells_list_ver or C.options.raidcooldown.spells_list_ver < 2 then
+			tinsert(C.raidcooldown.spells_list, {345130, 600})
+			C.options.raidcooldown.spells_list_ver = 2
+		end
 		T.raid_spells = C.raidcooldown.spells_list
 	else
 		if C.options.raidcooldown and C.options.raidcooldown.spells_list then
@@ -62,6 +67,7 @@ if C.enemycooldown.enable == true then
 		{47528, 15},	-- Mind Freeze
 		{183752, 15},	-- Disrupt
 		{106839, 15},	-- Skull Bash
+		{187707, 15},	-- Muzzle
 		{116705, 15},	-- Spear Hand Strike
 		{96231, 15},	-- Rebuke
 		{1766, 15},	-- Kick
@@ -74,16 +80,15 @@ if C.enemycooldown.enable == true then
 		{47476, 60},	-- Strangulate
 		{78675, 60},	-- Solar Beam
 		-- Crowd Controls
-		{115078, 15},	-- Paralysis
 		{20066, 15},	-- Repentance
-		{187650, 30},	-- Freezing Trap
+		{51514, 20},	-- Hex
+		{187650, 25},	-- Freezing Trap
+		{115078, 30},	-- Paralysis
 		{8122, 30},	-- Psychic Scream
 		{107570, 30},	-- Storm Bolt
-		{51514, 30},	-- Hex
 		{5484, 40},	-- Howl of Terror
 		{30283, 45},	-- Shadowfury
 		{108194, 45},	-- Asphyxiate
-		{19386, 45},	-- Wyvern Sting
 		{113724, 45},	-- Ring of Frost
 		{64044, 45},	-- Psychic Horror
 		{6789, 45},	-- Mortal Coil
@@ -92,9 +97,8 @@ if C.enemycooldown.enable == true then
 		-- Defense abilities
 		{48707, 60},	-- Anti-Magic Shell
 		{46924, 90},	-- Bladestorm
-		{287081, 60},	-- Lichborne
-		{31224, 90},	-- Cloak of Shadows
-		{213664, 120},	-- Nimble Brew
+		{49039, 120},	-- Lichborne
+		{31224, 120},	-- Cloak of Shadows
 		{47585, 120},	-- Dispersion
 		{1856, 120},	-- Vanish
 		{7744, 120},	-- Will of the Forsaken (Racial)
@@ -103,6 +107,27 @@ if C.enemycooldown.enable == true then
 	}
 
 	if #C.enemycooldown.spells_list > 0 then
+		-- Sync spell list with new changes
+		if not C.options.enemycooldown.spells_list_ver or C.options.enemycooldown.spells_list_ver < 2 then
+			for i, spell in pairs(C.enemycooldown.spells_list) do
+				if spell[1] == 51514 then
+					spell[2] = 20
+				elseif spell[1] == 187650 then
+					spell[2] = 25
+				elseif spell[1] == 115078 then
+					spell[2] = 30
+				elseif spell[1] == 49039 then
+					spell[2] = 120
+				elseif spell[1] == 31224 then
+					spell[2] = 120
+				elseif spell[1] == 213664 or spell[1] == 19386 then
+					tremove(C.enemycooldown.spells_list, i)
+				end
+			end
+
+			tinsert(C.enemycooldown.spells_list, {187707, 15})
+			C.options.enemycooldown.spells_list_ver = 2
+		end
 		T.enemy_spells = C.enemycooldown.spells_list
 	else
 		if C.options.enemycooldown and C.options.enemycooldown.spells_list then
