@@ -39,6 +39,7 @@ L.general_color_picker_desc = "Add copy/paste buttons and digit text entry for B
 L.general_minimize_mouseover = "Pulsante per minimizzare le missioni al passaggio del mouse"
 L.general_hide_banner = "Nascondi il Boss Banner Loot Frame"
 L.general_hide_talking_head = "Nascondi il Talking Head Frame"
+L.general_hide_maw_buffs = "Hide Maw Buffs frame in instances" -- Need review
 
 -- Media options
 L.media_border_color = "Color for borders" -- Need review
@@ -81,7 +82,6 @@ L_GUI_SKINS_SUBTEXT = "Change the appearance of the standard interface." -- Need
 L_GUI_SKINS_BLIZZARD = "Attiva il restyling dei riquadri Blizzard"
 L_GUI_SKINS_MINIMAP_BUTTONS = "Attiva il restyling dei pulsanti delle AddOns sulla minimappa"
 L_GUI_SKINS_SUBHEADER = "Stylization of addons" -- Need review
-L_GUI_SKINS_DBM_MOVABLE = "Consenti di poter spostare le barre di DBM"
 L.skins_minimap_buttons_mouseover = "Addons icons on mouseover" -- Need review
 
 -- Unit Frames options
@@ -303,6 +303,7 @@ L_GUI_CHAT_TABS_MOUSEOVER = "Linguette delle chats al passaggio del mouse"
 L_GUI_CHAT_STICKY = "Ricorda l'ultimo canale"
 L_GUI_CHAT_DAMAGE_METER_SPAM = "Riunisce lo spam di un contatore dei danni in un singolo link"
 L.chat_loot_icons = "Icons for loot" -- Needs review
+L.chat_hide_combat = "Hide chat in combat" -- Needs review
 L.chat_custom_time_color = "Enable custom timestamp coloring" -- Needs review
 L.chat_time_color = "Colorazione orario dei messaggi"
 
@@ -385,7 +386,7 @@ L_GUI_COMBATTEXT_SHORT_NUMBERS = "Usa abbreviazioni numeriche ('25.3k' invece di
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buffs size" -- Need review
 L_GUI_AURA_PLAYER_BUFF_SIZE_DESC = "Dimensione benefici giocatore"
-L.aura_player_debuff_size = "Debuffs size" -- Need review
+L.aura_debuff_size = "Debuffs size" -- Need review
 L_GUI_AURA_SHOW_SPIRAL = "Spirale trascorrere tempo sulle icone delle auree"
 L_GUI_AURA_SHOW_TIMER = "Mostra il timer del recupero sulle icone delle auree"
 L_GUI_AURA_PLAYER_AURAS = "Auree sul riquadro del giocatore"
@@ -394,11 +395,13 @@ L_GUI_AURA_FOCUS_DEBUFFS = "Penalità sul riquadro del focus"
 L_GUI_AURA_FOT_DEBUFFS = "Penalità sul riquadro del bersaglio del focus"
 L_GUI_AURA_PET_DEBUFFS = "Penalità sul riquadro del famiglio"
 L_GUI_AURA_TOT_DEBUFFS = "Penalità sul riquadro del bersaglio del bersaglio"
-L.aura_boss_buffs = "Benefici sul riquadro del boss" -- Need review
+L.aura_subheader_boss = "Benefici sul riquadro del boss" -- Need review
 L_GUI_AURA_PLAYER_AURA_ONLY = "Mostra solo le tue penalità sul riquadro del bersaglio"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Colora le penalità a seconda del tipo"
 L_GUI_AURA_CAST_BY = "Mostra chi ha lanciato un beneficio o una penalità nei suggerimenti"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Colora i bordi dei benefici del giocatore in base al colore della classi"
+L.aura_subheader_buffs = "Player buffs" -- Need review
+L.aura_subheader_debuffs = "Debuffs" -- Need review
 
 -- Bag options
 L_GUI_BAGS = "Sacche"

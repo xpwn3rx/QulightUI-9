@@ -17,8 +17,8 @@ local partytarget_height = party_height
 local raid_width = C.raidframe.dps_raid_width
 local raid_height = C.raidframe.dps_raid_height
 local raid_power_height = C.raidframe.dps_raid_power_height
-local tank_width = C.raidframe.heal_width
-local tank_height = C.raidframe.heal_height
+local tank_width = C.raidframe.heal_raid_width
+local tank_height = C.raidframe.heal_raid_height
 
 -- Create layout
 local function Shared(self, unit)
@@ -255,11 +255,20 @@ local function Shared(self, unit)
 		hab:SetTexture(C.media.texture)
 		hab:SetVertexColor(1, 0, 0, 0.4)
 
+		local oa = self.Health:CreateTexture(nil, "ARTWORK")
+		oa:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
+		oa:SetVertexColor(0.5, 0.5, 1)
+		oa:SetHorizTile(true)
+		oa:SetVertTile(true)
+		oa:SetAlpha(0.4)
+		oa:SetBlendMode("ADD")
+
 		self.HealthPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
 			absorbBar = ahpb,
-			healAbsorbBar = hab
+			healAbsorbBar = hab,
+			overAbsorb = oa
 		}
 	end
 
@@ -417,7 +426,7 @@ oUF:Factory(function(self)
 			"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 		)
 		_G["RaidTankDPSAnchor"]:SetSize(tank_width, tank_height)
-		raidtank:SetPoint("TOPLEFT", _G["RaidTankDPSAnchor"])
+		raidtank:SetPoint("BOTTOMLEFT", _G["RaidTankDPSAnchor"])
 	end
 end)
 

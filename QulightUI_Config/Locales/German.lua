@@ -39,6 +39,7 @@ L.general_color_picker_desc = "Hinzufügen von Kopieren/Einfügen-Schaltflächen
 L.general_minimize_mouseover = "Mouseover für Quest minimieren Taste"
 L.general_hide_banner = "Autoverstecken des Boss Loot Frame"
 L.general_hide_talking_head = "Verstecke Talking Head Frame"
+L.general_hide_maw_buffs = "Hide Maw Buffs frame in instances" -- Need review
 
 -- Media options
 L.media_border_color = "Farbe für Rahmen"
@@ -81,7 +82,6 @@ L_GUI_SKINS_SUBTEXT = "Ändert das Erscheinungsbild der Standard UI."
 L_GUI_SKINS_BLIZZARD = "Aktiviere Styles für Blizzardfenster"
 L_GUI_SKINS_MINIMAP_BUTTONS = "Aktiviere styling Addonincons an der Minimap"
 L_GUI_SKINS_SUBHEADER = "Design/Skins für Addons"
-L_GUI_SKINS_DBM_MOVABLE = "Erlaube das bewegen der DBM Leisten"
 L.skins_minimap_buttons_mouseover = "Addons-Symbole bei Mouseover"
 
 -- Unit Frames options
@@ -303,6 +303,7 @@ L_GUI_CHAT_TABS_MOUSEOVER = "Zeige Chat-Reiter bei Mouseover"
 L_GUI_CHAT_STICKY = "Behalte den letzen Channel"
 L_GUI_CHAT_DAMAGE_METER_SPAM = "Fasse DMG-Meterspam in einer Zeile zusammen"
 L.chat_loot_icons = "Symbole für Beute"
+L.chat_hide_combat = "Hide chat in combat" -- Needs review
 L.chat_custom_time_color = "Aktivieren der benutzerdefinierten Zeitstempelfärbung"
 L.chat_time_color = "Farbe des Zeitstempels"
 
@@ -385,7 +386,7 @@ L_GUI_COMBATTEXT_SHORT_NUMBERS = "Zeige kurze Zahlen an ('25.3k' statt '25342')"
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buff größe"
 L_GUI_AURA_PLAYER_BUFF_SIZE_DESC = "Größe der Spielerbuffs"
-L.aura_player_debuff_size = "Debuff größe"
+L.aura_debuff_size = "Debuff größe"
 L_GUI_AURA_SHOW_SPIRAL = "Spirale auf Buffsymbolen"
 L_GUI_AURA_SHOW_TIMER = "Zeige Abklingzeit für Buffs"
 L_GUI_AURA_PLAYER_AURAS = "Buffs auf dem Spielerfenster"
@@ -394,11 +395,13 @@ L_GUI_AURA_FOCUS_DEBUFFS = "Debuffs auf dem Fokusfenster"
 L_GUI_AURA_FOT_DEBUFFS = "Debuffs auf dem Fokusziel"
 L_GUI_AURA_PET_DEBUFFS = "Debuffs auf dem Begleiterfenster"
 L_GUI_AURA_TOT_DEBUFFS = "Debuffs bei Ziel des Ziels anzeigen"
-L.aura_boss_buffs = "Stärkungszauber auf dem Bossframe anzeigen." -- Need review
+L.aura_subheader_boss = "Stärkungszauber auf dem Bossframe anzeigen." -- Need review
 L_GUI_AURA_PLAYER_AURA_ONLY = "Nur eigenen Debuffs bei dem Zielfenster anzeigen"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Debuffs nach Art einfärben"
 L_GUI_AURA_CAST_BY = "Zeige im Tooltip an von wem ein Buff- bzw. Debuff gewirkt wurde"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Aktiviere Klassenfarbe für Spielerbuffs"
+L.aura_subheader_buffs = "Player buffs" -- Need review
+L.aura_subheader_debuffs = "Debuffs" -- Need review
 
 -- Bag options
 L_GUI_BAGS = "Taschen"

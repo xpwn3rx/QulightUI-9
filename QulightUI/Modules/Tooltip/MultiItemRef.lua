@@ -37,12 +37,8 @@ local CreateTip = function(link)
 	tip:RegisterForDrag("LeftButton")
 	tip:SetScript("OnDragStart", function(self) self:StartMoving() end)
 	tip:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+	tip.NineSlice:SetAlpha(0)
 
-	tip:SetBackdrop(nil)
-	tip.SetBackdrop = T.dummy
-	if tip.BackdropFrame then
-		tip.BackdropFrame:SetBackdrop(nil)
-	end
 	local bg = CreateFrame("Frame", nil, tip)
 	bg:SetPoint("TOPLEFT")
 	bg:SetPoint("BOTTOMRIGHT")
@@ -74,7 +70,7 @@ end
 local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
 function _G.ItemRefTooltip:SetHyperlink(link, ...)
 	local handled = strsplit(":", link)
-	if not IsModifiedClick() and handled and types[handled] and not shown then
+	if not InCombatLockdown() and not IsModifiedClick() and handled and types[handled] and not shown then
 		local tip = CreateTip(link)
 		if tip then
 			ShowTip(tip, link)

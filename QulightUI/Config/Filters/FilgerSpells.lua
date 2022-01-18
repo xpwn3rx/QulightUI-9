@@ -2249,8 +2249,6 @@ C["filger_spells"] = {
 			{spellID = 309658, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mallet of Thunderous Skins
 			{spellID = 292686, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Prideful (Seasonal Affix)
-			{spellID = 340880, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Engineering
 			-- Goblin Glider [Goblin Glider Kit]
@@ -3077,4 +3075,10 @@ do
 	-- Trinkets
 	tinsert(T.CustomFilgerSpell, {"COOLDOWN", {slotID = 13, filter = "CD"}})
 	tinsert(T.CustomFilgerSpell, {"COOLDOWN", {slotID = 14, filter = "CD"}})
+	
+	-- Shard of Domination [9.1]
+	-- Soul Fragment
+	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 356042, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+	-- Chaos Bane
+	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 356043, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
 end

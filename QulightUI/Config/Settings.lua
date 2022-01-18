@@ -43,6 +43,7 @@ C["general"] = {
 	["minimize_mouseover"] = false,						-- Mouseover for quest minimize button
 	["hide_banner"] = false,						-- Hide Boss Banner Loot Frame
 	["hide_talking_head"] = false,						-- Hide Talking Head Frame
+	["hide_maw_buffs"] = false,					-- Hide Maw Buffs frame in instances
 }
 
 ----------------------------------------------------------------------------------------
@@ -62,7 +63,6 @@ C["skins"] = {
 	["clique"] = true,							-- Clique skin
 	["cool_line"] = true,							-- CoolLine skin
 	["dbm"] = true,								-- DBM skin
-	["dbm_movable"] = true,							-- Allow to move DBM bars
 	["details"] = true,							-- Details skin
 	["dominos"] = true,							-- Dominos skin
 	["flyout_button"] = true,						-- FlyoutButtonCustom skin
@@ -203,16 +203,19 @@ C["raidframe"] = {
 	["plugins_healcomm"] = true,						-- Incoming heal bar on raid frame
 	["plugins_auto_resurrection"] = false,					-- Auto cast resurrection on middle-click (doesn't work with Clique)
 	-- Heal layout size
-	["heal_width"] = 60.2,							-- Unit width
-	["heal_height"] = 26,							-- Unit height
-	["heal_power_height"] = 2,						-- Raid power height
+	["heal_party_width"] = 60.2,				-- Party width
+	["heal_party_height"] = 26,					-- Party height
+	["heal_party_power_height"] = 2,			-- Party power height
+	["heal_raid_width"] = 60.2,					-- Raid width
+	["heal_raid_height"] = 26,					-- Raid height
+	["heal_raid_power_height"] = 2,				-- Raid power height
 	-- DPS layout size
-	["dps_raid_width"] = 82,						-- Raid width
-	["dps_raid_height"] = 24,						-- Raid height
-	["dps_raid_power_height"] = 1,						-- Raid power height
 	["dps_party_width"] = 140,						-- Party width
 	["dps_party_height"] = 27,						-- Party height
 	["dps_party_power_height"] = 5,						-- Party power height
+	["dps_raid_width"] = 104,					-- Raid width
+	["dps_raid_height"] = 17,					-- Raid height
+	["dps_raid_power_height"] = 1,				-- Raid power height
 }
 
 ----------------------------------------------------------------------------------------
@@ -348,6 +351,7 @@ C["chat"] = {
 	["loot_icons"] = false,							-- Icons for loot
 	["role_icons"] = false,							-- Role Icons
 	["history"] = false,							-- Chat history
+	["hide_combat"] = false,					-- Hide chat in combat
 	["custom_time_color"] = true,						-- Enable custom timestamp coloring
 	["time_color"] = {1, 1, 0},						-- Timestamp coloring (http://www.december.com/html/spec/colorcodescompact.html)
 }

@@ -39,6 +39,7 @@ L.general_color_picker_desc = "Add copy/paste buttons and digit text entry for B
 L.general_minimize_mouseover = "Mouseover for quest minimize button" -- Need review
 L.general_hide_banner = "Hide Boss Banner Loot Frame" -- Need review
 L.general_hide_talking_head = "Hide Talking Head Frame" -- Need review
+L.general_hide_maw_buffs = "Hide Maw Buffs frame in instances" -- Need review
 
 -- Media options
 L.media_border_color = "Color for borders" -- Need review
@@ -81,7 +82,6 @@ L_GUI_SKINS_SUBTEXT = "Change the appearance of the standard interface." -- Need
 L_GUI_SKINS_BLIZZARD = "Activar estilizado de marcos de Blizzard"
 L_GUI_SKINS_MINIMAP_BUTTONS = "Activar estilizado de los iconos de los addons en el minimapa"
 L_GUI_SKINS_SUBHEADER = "Stylization of addons" -- Need review
-L_GUI_SKINS_DBM_MOVABLE = "Allow to move DBM bars" -- Need review
 L.skins_minimap_buttons_mouseover = "Addons icons on mouseover" -- Need review
 
 -- Unit Frames options
@@ -303,6 +303,7 @@ L_GUI_CHAT_TABS_MOUSEOVER = "Chat tabs on mouseover" -- Needs review
 L_GUI_CHAT_STICKY = "Recordar último canal"
 L_GUI_CHAT_DAMAGE_METER_SPAM = "Merge damage meter spam in one line-link" -- Needs review
 L.chat_loot_icons = "Icons for loot" -- Needs review
+L.chat_hide_combat = "Hide chat in combat" -- Needs review
 L.chat_custom_time_color = "Enable custom timestamp coloring" -- Needs review
 L.chat_time_color = "Color de la marca de tiempo"
 
@@ -385,7 +386,7 @@ L_GUI_COMBATTEXT_SHORT_NUMBERS = "Use short numbers ('25.3k' instead of '25342')
 -- Auras/Buffs/Debuffs
 L_GUI_AURA_PLAYER_BUFF_SIZE = "Buffs size" -- Need review
 L_GUI_AURA_PLAYER_BUFF_SIZE_DESC = "Tamaño de las beneficios del jugador"
-L.aura_player_debuff_size = "Debuffs size" -- Need review
+L.aura_debuff_size = "Debuffs size" -- Need review
 L_GUI_AURA_SHOW_SPIRAL = "Espiral en los iconos de las auras"
 L_GUI_AURA_SHOW_TIMER = "Mostrar tiempo de reutilización en los iconos de las auras"
 L_GUI_AURA_PLAYER_AURAS = "Auras en el marco del jugador"
@@ -394,11 +395,13 @@ L_GUI_AURA_FOCUS_DEBUFFS = "Perjuicios en el marco del foco"
 L_GUI_AURA_FOT_DEBUFFS = "Perjuicios en el marco del objetivo del foco"
 L_GUI_AURA_PET_DEBUFFS = "Perjuicios en el marco de la mascota"
 L_GUI_AURA_TOT_DEBUFFS = "Perjuicios en el marco del objetivo del objetivo"
-L.aura_boss_buffs = "Beneficios en el marco del jefe" -- Need review
+L.aura_subheader_boss = "Beneficios en el marco del jefe" -- Need review
 L_GUI_AURA_PLAYER_AURA_ONLY = "Solo tus perjuicios en el marco del objetivo"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Color de los perjuicios por tipo"
 L_GUI_AURA_CAST_BY = "Mostrar quién lanza un beneficio/perjuicio en su descripción"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Activar borde por color de clase para los beneficios del jugador"
+L.aura_subheader_buffs = "Player buffs" -- Need review
+L.aura_subheader_debuffs = "Debuffs" -- Need review
 
 -- Bag options
 L_GUI_BAGS = "Bolsas"

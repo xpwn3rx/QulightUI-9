@@ -630,7 +630,7 @@ local function Shared(self, unit)
 		self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
 		self.Debuffs:SetHeight(25)
 		self.Debuffs:SetWidth(pet_width + 4)
-		self.Debuffs.size = T.Scale(C.aura.player_debuff_size)
+		self.Debuffs.size = T.Scale(C.aura.debuff_size)
 		self.Debuffs.spacing = T.Scale(3)
 		self.Debuffs.num = 4
 		self.Debuffs["growth-y"] = "DOWN"
@@ -704,12 +704,14 @@ local function Shared(self, unit)
 				self.Portrait.backdrop:Hide()
 				self.Portrait:SetAlpha(0.5)
 
-				local frame = CreateFrame("Frame")
-				frame:RegisterEvent("PLAYER_LOGIN")
-				frame:SetScript("OnEvent", function()
-					T_DE_BUFF_BAR_Anchor:ClearAllPoints()
-					T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.position.filger.target_bar[4], C.position.filger.target_bar[5])
-				end)
+				if C.filger.enable then
+					local frame = CreateFrame("Frame")
+					frame:RegisterEvent("PLAYER_LOGIN")
+					frame:SetScript("OnEvent", function()
+						T_DE_BUFF_BAR_Anchor:ClearAllPoints()
+						T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.position.filger.target_bar[4], C.position.filger.target_bar[5])
+					end)
+				end
 			end
 		end
 
@@ -717,7 +719,7 @@ local function Shared(self, unit)
 			self.Debuffs = CreateFrame("Frame", self:GetName().."_Debuffs", self)
 			self.Debuffs:SetHeight(165)
 			self.Debuffs:SetWidth(player_width + 4)
-			self.Debuffs.size = T.Scale(C.aura.player_debuff_size)
+			self.Debuffs.size = T.Scale(C.aura.debuff_size)
 			self.Debuffs.spacing = T.Scale(3)
 			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
 			self.Debuffs["growth-y"] = "UP"
@@ -744,9 +746,9 @@ local function Shared(self, unit)
 			self.Auras.numDebuffs = 16
 			self.Auras.numBuffs = 32
 			self.Auras:SetHeight(165)
-			self.Auras:SetWidth(player_width + 4)
+			self.Auras:SetWidth(player_width + 4 - (C.aura.debuff_size - 25) * 4)
 			self.Auras.spacing = T.Scale(3)
-			self.Auras.size = T.Scale(C.aura.player_debuff_size)
+			self.Auras.size = T.Scale(C.aura.debuff_size)
 			self.Auras.gap = true
 			self.Auras.PostCreateIcon = T.PostCreateIcon
 			self.Auras.PostUpdateIcon = T.PostUpdateIcon
@@ -1047,7 +1049,7 @@ local function Shared(self, unit)
 		self.AlternativePower.text:SetPoint("CENTER", self.AlternativePower, "CENTER", 0, 0)
 		self:Tag(self.AlternativePower.text, "[AltPower]")
 
-		if C.aura.boss_buffs == true then
+		if C.aura.boss_auras == true then
 			self.Auras = CreateFrame("Frame", self:GetName().."_Auras", self)
 			if C.unitframe.boss_on_right == true then
 				self.Auras:SetPoint("RIGHT", self, "LEFT", -5, 0)
@@ -1058,10 +1060,10 @@ local function Shared(self, unit)
 				self.Auras.initialAnchor = "LEFT"
 				self.Auras["growth-x"] = "RIGHT"
 			end
-			self.Auras.numDebuffs = C.unitframe.boss_debuffs
-			self.Auras.numBuffs = C.unitframe.boss_buffs
+			self.Auras.numDebuffs = C.aura.boss_debuffs
+			self.Auras.numBuffs = C.aura.boss_buffs
 			self.Auras:SetHeight(31 + T.extraHeight)
-			self.Auras:SetWidth((34 + T.extraHeight) * (C.unitframe.boss_debuffs + C.unitframe.boss_buffs + 1))
+			self.Auras:SetWidth((34 + T.extraHeight) * (C.aura.boss_debuffs + C.aura.boss_buffs + 1))
 			self.Auras.spacing = T.Scale(3)
 			self.Auras.size = T.Scale(31 + T.extraHeight)
 			self.Auras.gap = true
@@ -1116,11 +1118,20 @@ local function Shared(self, unit)
 		hab:SetTexture(C.media.texture)
 		hab:SetVertexColor(1, 0, 0, 0.4)
 
+		local oa = self.Health:CreateTexture(nil, "ARTWORK")
+		oa:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
+		oa:SetVertexColor(0.5, 0.5, 1)
+		oa:SetHorizTile(true)
+		oa:SetVertTile(true)
+		oa:SetAlpha(0.4)
+		oa:SetBlendMode("ADD")
+
 		self.HealthPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
 			absorbBar = ahpb,
-			healAbsorbBar = hab
+			healAbsorbBar = hab,
+			overAbsorb = oa
 		}
 	end
 
@@ -1463,8 +1474,8 @@ if C.raidframe.auto_position == "DYNAMIC" then
 				maxGroup = C.raidframe.raid_groups
 			end
 			if prevNum ~= maxGroup then
-				-- local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7) + ((maxGroup - ((maxGroup - 5))) * (C.raidframe.heal_height - 26))
-				local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7)
+				-- local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7) + ((maxGroup - ((maxGroup - 5))) * (C.raidframe.heal_raid_height - 26))
+				local offset = (maxGroup - 5) * (C.raidframe.heal_raid_height + 7)
 				if C.unitframe.castbar_icon == true then
 					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 				else
@@ -1490,8 +1501,8 @@ if C.raidframe.auto_position == "DYNAMIC" then
 elseif C.raidframe.auto_position == "STATIC" then
 	local function Reposition()
 		if QulightUISettings and QulightUISettings.RaidLayout == "HEAL" and not C.raidframe.raid_groups_vertical and C.raidframe.raid_groups > 5 then
-			-- local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_height - 26))
-			local offset = (maxGroup - 5) * (C.raidframe.heal_height + 7)
+			-- local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7) + ((C.raidframe.raid_groups - ((C.raidframe.raid_groups - 5))) * (C.raidframe.heal_raid_height - 26))
+			local offset = (C.raidframe.raid_groups - 5) * (C.raidframe.heal_raid_height + 7)
 			if C.unitframe.castbar_icon == true then
 				oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
 			else

@@ -105,9 +105,7 @@ local function StyleNormalButton(button)
 			button:SetBackdropBorderColor(0, 0, 0)
 		end
 
-		icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		icon:SetPoint("TOPLEFT", button, 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
+		icon:CropIcon()
 		icon:SetDrawLayer("BACKGROUND", 7)
 
 		if normal then

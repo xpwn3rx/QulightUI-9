@@ -404,8 +404,8 @@ function Stuffing:CreateReagentContainer()
 	Close:HookScript("OnLeave", tooltip_hide)
 
 	for i = 1, 98 do
-		local button = _G["ReagentBankFrameItem" .. i]
-		local icon = _G[button:GetName() .. "IconTexture"]
+		local button = _G["ReagentBankFrameItem"..i]
+		local icon = _G[button:GetName().."IconTexture"]
 		local count = _G[button:GetName().."Count"]
 
 		ReagentBankFrame:SetParent(Reagent)
@@ -444,9 +444,7 @@ function Stuffing:CreateReagentContainer()
 			NumButtons = NumButtons + 1
 		end
 
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		icon:CropIcon()
 
 		count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 		count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
@@ -528,9 +526,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.frame:SetNormalTexture(nil)
 
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
-	ret.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	ret.icon:SetPoint("TOPLEFT", ret.frame, 2, -2)
-	ret.icon:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+	ret.icon:CropIcon()
 
 	return ret
 end
@@ -581,9 +577,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame:SetNormalTexture(nil)
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
-		ret.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		ret.icon:SetPoint("TOPLEFT", ret.frame, 2, -2)
-		ret.icon:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+		ret.icon:CropIcon()
 
 		ret.count = _G[ret.frame:GetName().."Count"]
 		ret.count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
@@ -791,14 +785,19 @@ function Stuffing:CreateBagFrame(w)
 		if IsAltKeyDown() or IsShiftKeyDown() then
 			self:StartMoving()
 			DragFunction(self, true)
+			f.moved = true
 		end
 	end)
 
 	f:SetScript("OnDragStop", function(self)
-		self:StopMovingOrSizing()
-		DragFunction(self, false)
-		local ap, _, rp, x, y = f:GetPoint()
-		QulightUIPositions[f:GetName()] = {ap, "UIParent", rp, x, y}
+		if f.moved then	-- prevent false register without modifier key
+			self:StopMovingOrSizing()
+			DragFunction(self, false)
+			local ap, p, rp, x, y = f:GetPoint()
+			if not p then p = UIParent end
+			ShestakUIPositions[f:GetName()] = {ap, p:GetName(), rp, x, y}
+			f.moved = nil
+		end
 	end)
 
 	f:SetScript("OnMouseDown", function(_, button)
@@ -1389,18 +1388,16 @@ function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
 	end
 end
 
-function Stuffing:PLAYERREAGENTBANKSLOTS_CHANGED()
-	for i = 1, 98 do
-		local button = _G["ReagentBankFrameItem" .. i]
-		if not button then return end
-		local _, _, _, quality = GetContainerItemInfo(-3, i)
-		local clink = GetContainerItemLink(-3, i)
-		button:SetBackdropBorderColor(unpack(C.media.border_color))
+function Stuffing:PLAYERREAGENTBANKSLOTS_CHANGED(id)
+	local button = _G["ReagentBankFrameItem"..id]
+	if not button then return end
+	local clink = GetContainerItemLink(-3, id)
+	button:SetBackdropBorderColor(unpack(C.media.border_color))
 
-		if clink then
-			if quality and quality > 1 then
-				button:SetBackdropBorderColor(GetItemQualityColor(quality))
-			end
+	if clink then
+		local _, _, _, quality = GetContainerItemInfo(-3, id)
+		if quality and quality > 1 then
+			button:SetBackdropBorderColor(GetItemQualityColor(quality))
 		end
 	end
 end

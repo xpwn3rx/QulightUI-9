@@ -72,7 +72,6 @@ local function LoadSkin()
 		"Advanced_MaxFPSCheckBox",
 		"Advanced_TargetFPSCheckBox",
 		"Advanced_MaxFPSBKCheckBox",
-		"Advanced_DesktopGamma",
 		"AudioOptionsSoundPanelEnableSound",
 		"AudioOptionsSoundPanelSoundEffects",
 		"AudioOptionsSoundPanelErrorSpeech",
@@ -84,13 +83,11 @@ local function LoadSkin()
 		"AudioOptionsSoundPanelSoundInBG",
 		"AudioOptionsSoundPanelReverb",
 		"AudioOptionsSoundPanelHRTF",
-		"AudioOptionsSoundPanelEnableDSPs",
 		"AudioOptionsSoundPanelPetBattleMusic",
 		"AudioOptionsSoundPanelDialogSounds",
 		"NetworkOptionsPanelOptimizeSpeed",
 		"NetworkOptionsPanelUseIPv6",
 		"NetworkOptionsPanelAdvancedCombatLogging",
-		"Advanced_ShowHDModels",
 		"Display_RaidSettingsEnabledCheckBox"
 	}
 
@@ -104,31 +101,22 @@ local function LoadSkin()
 	local dropdown = {
 		"Display_DisplayModeDropDown",
 		"Display_ResolutionDropDown",
-		"Display_RefreshDropDown",
 		"Display_PrimaryMonitorDropDown",
 		"Display_AntiAliasingDropDown",
 		"Display_VerticalSyncDropDown",
 		"Graphics_TextureResolutionDropDown",
 		"Graphics_FilteringDropDown",
 		"Graphics_ProjectedTexturesDropDown",
-		"Graphics_ViewDistanceDropDown",
-		"Graphics_EnvironmentalDetailDropDown",
-		"Graphics_GroundClutterDropDown",
 		"Graphics_ShadowsDropDown",
 		"Graphics_LiquidDetailDropDown",
-		"Graphics_SunshaftsDropDown",
 		"Graphics_ParticleDensityDropDown",
 		"Graphics_DepthEffectsDropDown",
 		"Graphics_ComputeEffectsDropDown",
-		"Graphics_LightingQualityDropDown",
 		"Graphics_OutlineModeDropDown",
 		"Graphics_SpellDensityDropDown",
-		"Advanced_FilteringDropDown",
 		"Advanced_RTShadowQualityDropDown",
 		"Advanced_SSAOTypeDropDown",
 		"Advanced_BufferingDropDown",
-		"Advanced_LagDropDown",
-		"Advanced_HardwareCursorDropDown",
 		"Advanced_GraphicsAPIDropDown",
 		"Advanced_PhysicsInteractionDropDown",
 		"Advanced_MultisampleAntiAliasingDropDown",
@@ -139,26 +127,17 @@ local function LoadSkin()
 		"AudioOptionsSoundPanelHardwareDropDown",
 		"AudioOptionsSoundPanelSoundChannelsDropDown",
 		"AudioOptionsSoundPanelSoundCacheSizeDropDown",
-		"AudioOptionsVoicePanelInputDeviceDropDown",
 		"AudioOptionsVoicePanelMicDeviceDropdown",
 		"AudioOptionsVoicePanelOutputDeviceDropdown",
 		"Graphics_SSAODropDown",
-		"Graphics_RefractionDropDown",
 		"RaidGraphics_TextureResolutionDropDown",
 		"RaidGraphics_SpellDensityDropDown",
-		"RaidGraphics_FilteringDropDown",
 		"RaidGraphics_ProjectedTexturesDropDown",
-		"RaidGraphics_ViewDistanceDropDown",
-		"RaidGraphics_EnvironmentalDetailDropDown",
-		"RaidGraphics_GroundClutterDropDown",
 		"RaidGraphics_ShadowsDropDown",
 		"RaidGraphics_LiquidDetailDropDown",
-		"RaidGraphics_SunshaftsDropDown",
 		"RaidGraphics_ParticleDensityDropDown",
-		"RaidGraphics_RefractionDropDown",
 		"RaidGraphics_SSAODropDown",
 		"RaidGraphics_DepthEffectsDropDown",
-		"RaidGraphics_LightingQualityDropDown",
 		"RaidGraphics_OutlineModeDropDown",
 		"RaidGraphics_ComputeEffectsDropDown"
 	}
@@ -167,8 +146,6 @@ local function LoadSkin()
 		local frame = _G[dropdown[i]]
 		if frame then
 			T.SkinDropDownBox(frame, 165)
-		else
-			-- print(dropdown[i]) -- TODO: Delete outdated frames later
 		end
 	end
 
@@ -178,23 +155,15 @@ local function LoadSkin()
 		"Graphics_EnvironmentalDetailSlider",
 		"Graphics_GroundClutterSlider",
 		"Advanced_TargetFPSSlider",
-		"Advanced_UIScaleSlider",
 		"Advanced_MaxFPSSlider",
 		"Advanced_MaxFPSBKSlider",
 		"Advanced_GammaSlider",
-		"Advanced_RenderScaleSlider",
 		"Advanced_ContrastSlider",
 		"Advanced_BrightnessSlider",
-		"AudioOptionsSoundPanelSoundQuality",
+		"Advanced_ResampleSharpnessSlider",
 		"AudioOptionsSoundPanelMasterVolume",
 		"AudioOptionsSoundPanelSoundVolume",
 		"AudioOptionsSoundPanelMusicVolume",
-		"AudioOptionsSoundPanelAmbienceVolume",
-		"AudioOptionsVoicePanelMicrophoneVolume",
-		"AudioOptionsVoicePanelSpeakerVolume",
-		"AudioOptionsVoicePanelSoundFade",
-		"AudioOptionsVoicePanelMusicFade",
-		"AudioOptionsVoicePanelAmbienceFade",
 		"AudioOptionsSoundPanelDialogVolume",
 		"AudioOptionsVoicePanelVoiceChatMicVolume",
 		"AudioOptionsVoicePanelVoiceChatMicSensitivity",
@@ -219,7 +188,7 @@ local function LoadSkin()
 	_G["RaidGraphics_Quality"].SetBackdrop = T.dummy
 
 	local VUMeter = AudioOptionsVoicePanelTestInputDevice.VUMeter
-	VUMeter:SetBackdrop(nil)
+	VUMeter.NineSlice:SetAlpha(0)
 	VUMeter.Status:CreateBackdrop("Overlay")
 
 	_G["VideoOptionsFrameDefaults"]:ClearAllPoints()

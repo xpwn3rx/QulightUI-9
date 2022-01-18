@@ -74,7 +74,9 @@ local function Timer_OnUpdate(self, elapsed)
 	end
 end
 
-local function Timer_Create(self)
+local Timer_Create
+if IsWetxius then
+	 Timer_Create = function(self)
 	local scaler = CreateFrame("Frame", nil, self)
 	scaler:SetAllPoints(self)
 
@@ -84,15 +86,40 @@ local function Timer_Create(self)
 	timer:SetScript("OnUpdate", Timer_OnUpdate)
 
 	local text = timer:CreateFontString(nil, "OVERLAY")
-	text:SetPoint("CENTER", 1, 0)
+	text:SetPoint("LEFT", -2, 0)
+	text:SetPoint("RIGHT", 3, 0)
+
 	text:SetJustifyH("CENTER")
 	timer.text = text
 
 	Timer_OnSizeChanged(timer, scaler:GetSize())
-	scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
+		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
-	self.timer = timer
-	return timer
+		self.timer = timer
+		return timer
+	end
+else
+	Timer_Create = function(self)
+		local scaler = CreateFrame("Frame", nil, self)
+		scaler:SetAllPoints(self)
+
+		local timer = CreateFrame("Frame", nil, scaler)
+		timer:Hide()
+		timer:SetAllPoints(scaler)
+		timer:SetScript("OnUpdate", Timer_OnUpdate)
+
+		local text = timer:CreateFontString(nil, "OVERLAY")
+		text:SetPoint("CENTER", 1, 0)
+
+		text:SetJustifyH("CENTER")
+		timer.text = text
+
+		Timer_OnSizeChanged(timer, scaler:GetSize())
+		scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
+
+		self.timer = timer
+		return timer
+	end
 end
 
 local Cooldown_MT = getmetatable(_G.ActionButton1Cooldown).__index

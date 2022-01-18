@@ -150,14 +150,11 @@ local OnMouseDown = function(self, button)
 	end
 end
 
+local barWidth = C.raidcooldown.width + (C.raidcooldown.show_icon and 0 or 28)
 local CreateBar = function()
 	local bar = CreateFrame("Statusbar", nil, UIParent)
 	bar:SetFrameStrata("MEDIUM")
-	if C.raidcooldown.show_icon == true then
-		bar:SetSize(C.raidcooldown.width, C.raidcooldown.height)
-	else
-		bar:SetSize(C.raidcooldown.width + 28, C.raidcooldown.height)
-	end
+	bar:SetSize(barWidth, C.raidcooldown.height)
 	bar:SetStatusBarTexture(C.media.texture)
 	bar:SetMinMaxValues(0, 100)
 	bar:CreateBackdrop("Default")
@@ -169,7 +166,7 @@ local CreateBar = function()
 	bar.left = CreateFS(bar)
 	bar.left:SetPoint("LEFT", 2, 0)
 	bar.left:SetJustifyH("LEFT")
-	bar.left:SetSize(C.raidcooldown.width - 30, C.font.raid_cooldowns_font_size)
+	bar.left:SetSize(barWidth - 30 - ((C.font.raid_cooldowns_font_size - 8) * 2), C.font.raid_cooldowns_font_size)
 
 	bar.right = CreateFS(bar)
 	bar.right:SetPoint("RIGHT", 1, 0)
@@ -220,8 +217,13 @@ local StartTimer = function(name, spellId)
 			bar:SetStatusBarColor(color.r, color.g, color.b)
 			bar.bg:SetVertexColor(color.r, color.g, color.b, 0.2)
 		else
-			bar:SetStatusBarColor(0.3, 0.7, 0.3)
-			bar.bg:SetVertexColor(0.3, 0.7, 0.3, 0.2)
+			if curCharges and curCharges > 0 then
+				bar:SetStatusBarColor(0.3, 0.7, 0.3)
+				bar.bg:SetVertexColor(0.3, 0.7, 0.3, 0.2)
+			else
+				bar:SetStatusBarColor(0.8, 0.3, 0.3)
+				bar.bg:SetVertexColor(0.8, 0.3, 0.3, 0.2)
+			end
 		end
 
 		bar:SetScript("OnUpdate", BarUpdate)
@@ -271,7 +273,7 @@ end
 
 local OnEvent = function(self, event)
 	if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" then
-		if select(2, IsInInstance()) == "raid" and IsInGroup() then
+		if (select(2, IsInInstance()) == "raid" or select(2, IsInInstance()) == "party") and IsInGroup() then
 			self:RegisterEvent("SPELL_UPDATE_CHARGES")
 		else
 			self:UnregisterEvent("SPELL_UPDATE_CHARGES")

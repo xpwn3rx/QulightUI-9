@@ -78,7 +78,6 @@ local function InstallUI()
 	end
 
 	-- Reset saved variables on char
-	QulightUIPositions = {}
 	QulightUISettingsPerChar = {}
 
 	QulightUISettingsPerChar.Install = true

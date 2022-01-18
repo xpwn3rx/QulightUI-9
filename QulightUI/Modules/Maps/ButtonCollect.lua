@@ -14,20 +14,25 @@ local BlackList = {
 
 local buttons = {}
 local collectFrame = CreateFrame("Frame", "ButtonCollectFrame", UIParent)
-local line = math.ceil(C.minimap.size / 20)
+local line = math.ceil(C.minimap.size / 20.8)
+
+local texList = {
+	["136430"] = true,	-- Interface\\Minimap\\MiniMap-TrackingBorder
+	["136467"] = true,	-- Interface\\Minimap\\UI-Minimap-Background
+}
 
 local function SkinButton(f)
 	f:SetPushedTexture(nil)
 	f:SetHighlightTexture(nil)
 	f:SetDisabledTexture(nil)
-	f:SetSize(20, 20)
+	f:SetSize(20.8, 20.8)
 
 	for i = 1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())
 		if region:IsVisible() and region:GetObjectType() == "Texture" then
 			local tex = tostring(region:GetTexture())
 
-			if tex and (tex:find("Border") or tex:find("Background") or tex:find("AlphaMask")) then
+			if tex and (texList[tex] or tex:find("Border") or tex:find("Background") or tex:find("AlphaMask")) then
 				region:SetTexture(nil)
 			else
 				region:ClearAllPoints()
@@ -46,7 +51,7 @@ local function SkinButton(f)
 end
 
 local function PositionAndStyle()
-	collectFrame:SetSize(20, 20)
+	collectFrame:SetSize(20.8, 20.8)
 	collectFrame:SetPoint(unpack(C.position.minimap_buttons))
 	for i = 1, #buttons do
 		local f = buttons[i]
