@@ -172,12 +172,12 @@ end
 -- Bag slot stuff
 local trashButton = {}
 local trashBag = {}
-local ItemDB = {}
 
+local ItemDB = {}
 local function _getRealItemLevel(link, bag, slot)
 	if ItemDB[link] then return ItemDB[link] end
 
-local realItemLevel = C_Item.GetCurrentItemLevel(ItemLocation:CreateFromBagAndSlot(bag, slot))
+	local realItemLevel = C_Item.GetCurrentItemLevel(ItemLocation:CreateFromBagAndSlot(bag, slot))
 
 	ItemDB[link] = tonumber(realItemLevel)
 	return realItemLevel
@@ -199,9 +199,14 @@ function Stuffing:SlotUpdate(b)
 		CooldownFrame_Set(b.cooldown, start, duration, enable)
 	end
 
+	if C.bag.ilvl == true then
+		b.frame.text:SetText("")
+	end
+
 	b.frame.Azerite:Hide()
 	b.frame.Conduit:Hide()
 	b.frame.Conduit2:Hide()
+
 	b.frame:UpdateItemContextMatching() -- Update Scrap items
 
 	if b.frame.UpgradeIcon then
@@ -596,6 +601,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame.Azerite:SetPoint("TOPLEFT", ret.frame, 1, -1)
 		ret.frame.Azerite:SetPoint("BOTTOMRIGHT", ret.frame, -1, 1)
 		ret.frame.Azerite:Hide()
+
 		ret.frame.Conduit = ret.frame:CreateTexture(nil, "ARTWORK")
 		ret.frame.Conduit:SetAtlas("ConduitIconFrame")
 		ret.frame.Conduit:SetPoint("TOPLEFT", ret.frame, 2, -2)
@@ -709,9 +715,6 @@ function Stuffing:SearchUpdate(str)
 					end
 					SetItemButtonDesaturated(b.frame, true)
 					b.frame.searchOverlay:Show()
-					if C.bag.ilvl == true then
-						b.frame.text:SetAlpha(0.2)
-					end
 				else
 					if IsItemUnusable(b.name) or minLevel > T.level then
 						_G[b.frame:GetName().."IconTexture"]:SetVertexColor(1, 0.1, 0.1)
@@ -795,7 +798,7 @@ function Stuffing:CreateBagFrame(w)
 			DragFunction(self, false)
 			local ap, p, rp, x, y = f:GetPoint()
 			if not p then p = UIParent end
-			ShestakUIPositions[f:GetName()] = {ap, p:GetName(), rp, x, y}
+			QulightUIPositions[f:GetName()] = {ap, p:GetName(), rp, x, y}
 			f.moved = nil
 		end
 	end)
@@ -1014,88 +1017,6 @@ function Stuffing:InitBags()
 
 	button:SetScript("OnEnter", tooltip_show)
 	button:SetScript("OnLeave", tooltip_hide)
-
-	--Deposit Button
-	f.depositButton = CreateFrame("Button", nil, f);
-	f.depositButton:SetSize(16, 16)
-	f.depositButton:SetTemplate()
-	f.depositButton:SetPoint("TOPRIGHT", f, -25, -4)
-	f.depositButton:SetHeight(18)
-	f.depositButton:SetWidth(18)
-	f.depositButton:SetNormalTexture("Interface\\ICONS\\misc_arrowdown")
-	f.depositButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	f.depositButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-	f.depositButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-	f.depositButton:SetPushedTexture("Interface\\ICONS\\misc_arrowdown")
-	f.depositButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	f.depositButton:GetPushedTexture():SetPoint("TOPLEFT", 2, -2)
-	f.depositButton:GetPushedTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-	f.depositButton:StyleButton()
-	f.depositButton.ttText = "Deposit Reagents"
-	f.depositButton:SetScript("OnEnter", tooltip_show)
-	f.depositButton:SetScript("OnLeave", tooltip_hide)
-	f.depositButton:SetScript('OnClick',function(self, btn)
-
-			PlaySound("igMainMenuOption");
-			DepositReagentBank()
-	end)
-
-	--Sort Button
-	f.sortButton = CreateFrame("Button", nil, f);
-	f.sortButton:SetSize(16, 16)
-	f.sortButton:SetTemplate()
-	f.sortButton:SetPoint("TOPRIGHT", f.depositButton, -25, 0)
-	f.sortButton:SetHeight(18)
-	f.sortButton:SetWidth(18)
-	f.sortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
-	f.sortButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	f.sortButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-	f.sortButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-	f.sortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
-	f.sortButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	f.sortButton:GetPushedTexture():SetPoint("TOPLEFT", 2, -2)
-	f.sortButton:GetPushedTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-	f.sortButton:StyleButton()
-	f.sortButton.ttText = "LM:Cleanup / RM:Blizzard"
-	f.sortButton:SetScript("OnEnter", tooltip_show)
-	f.sortButton:SetScript("OnLeave", tooltip_hide)
-	f.sortButton:SetScript("OnMouseUp", function(self, btn)
-		if btn == "RightButton" then
-		SetSortBagsRightToLeft(true)
-		SortBags()
-		else
-		Stuffing:SetBagsForSorting("d")
-		Stuffing:SortBags()
-		end
-	end)
-
-	--Artifact Button
-	f.ArtifactButton = CreateFrame("Button", nil, f, "BankItemButtonGenericTemplate");
-	f.ArtifactButton:SetSize(16, 16)
-	f.ArtifactButton:SetTemplate()
-	f.ArtifactButton:SetPoint("TOPRIGHT", f.sortButton, -25, 0)
-	f.ArtifactButton:SetHeight(18)
-	f.ArtifactButton:SetWidth(18)
-	f.ArtifactButton:SetNormalTexture("Interface\\Icons\\Achievement_doublejeopardy")
-	f.ArtifactButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	f.ArtifactButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-	f.ArtifactButton:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
-	f.ArtifactButton:StyleButton()
-	f.ArtifactButton:RegisterForClicks("RightButtonUp")
-	f.ArtifactButton.ttText = "Right click to use Artifact Power item in bag"
-	f.ArtifactButton:SetScript("OnEnter", tooltip_show)
-	f.ArtifactButton:SetScript("OnLeave", tooltip_hide)
-	f.ArtifactButton:SetScript('PreClick',function(self, btn, down)
-		for bag=0, 4 do
-			for slot=1, GetContainerNumSlots(bag) do
-				if IsArtifactPowerItem(GetContainerItemID(bag, slot)) then 
-					self:GetParent():SetID(bag)
-					self:SetID(slot)
-					return
-				end
-			end 
-		end
-	end)
 
 	f.editbox = editbox
 	f.detail = detail
@@ -1674,7 +1595,6 @@ function Stuffing:Restack()
 	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		for slotID = 1, 98 do
 			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(-3, slotID)
-			local button = _G["ReagentBankFrameItem"..slotID]
 			if clink then
 				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
 

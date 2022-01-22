@@ -7,8 +7,8 @@ if GetLocale() ~= "deDE" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Einstellungen für jeden Charakter einzeln vornehmen"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Umschalten zwischen einem Profil, das für alle Chars gilt, und einem Profil, das für diesen Chars gilt."
-L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für ShestakUI zurücksetzen willst?"
-L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von ShestakUI zurücksetzen willst?"
+L_GUI_RESET_CHAR = "Bist du sicher, dass du die Charaktereinstellungen für QulightUI zurücksetzen willst?"
+L_GUI_RESET_ALL = "Bist du sicher, dass du alle Einstellungen von QulightUI zurücksetzen willst?"
 L_GUI_PER_CHAR = "Bist du sicher, dass du 'Einzelne Einstellungen für jeden Charakter' ein oder ausschalten möchtest?"
 L_GUI_RESET_CAT = "Bist Du sicher, dass Du die Einstellungen der Kategorie zurücksetzen möchtest?"
 L_GUI_RESET_CAT_DESC = "Einstellungen der Kategorie zurücksetzen. \nCTRL-Klick zum Zurücksetzen aller"

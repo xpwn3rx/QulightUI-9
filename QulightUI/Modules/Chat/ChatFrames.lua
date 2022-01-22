@@ -412,9 +412,9 @@ if C.chat.role_icons == true then
 	}
 
 	local role_tex = {
-		TANK = "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Tank.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
-		HEALER	= "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Healer.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
-		DAMAGER = "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Damager.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+		TANK = "\124T"..[[Interface\AddOns\QulightUI\Media\Textures\Tank.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+		HEALER	= "\124T"..[[Interface\AddOns\QulightUI\Media\Textures\Healer.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+		DAMAGER = "\124T"..[[Interface\AddOns\QulightUI\Media\Textures\Damager.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
 	}
 
 	local GetColoredName_orig = _G.GetColoredName

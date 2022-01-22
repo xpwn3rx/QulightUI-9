@@ -284,7 +284,7 @@ if IsWetxius then
 end
 
 ----------------------------------------------------------------------------------------
---	Load external profile https://github.com/Wetxius/ShestakUI_Profile
+--	Load external profile https://github.com/Wetxius/QulightUI_Profile
 ----------------------------------------------------------------------------------------
 if QulightUICustomProfile then
 	QulightUICustomProfile()

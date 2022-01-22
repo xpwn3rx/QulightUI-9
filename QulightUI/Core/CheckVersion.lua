@@ -10,16 +10,16 @@ local check = function(self, event, prefix, message, _, sender)
 			print("|cffff0000"..L_MISC_UI_OUTDATED.."|r")
 			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
-	else
-		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-			C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "INSTANCE_CHAT")
-		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "RAID")
-		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "PARTY")
-		elseif IsInGuild() then
-			C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "GUILD")
-		end
+	--else
+		--if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+			--C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "INSTANCE_CHAT")
+		--elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
+			--C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "RAID")
+		--elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
+			--C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "PARTY")
+		--elseif IsInGuild() then
+			--C_ChatInfo.SendAddonMessage("QulightUIVersion", tonumber(T.version), "GUILD")
+		--end
 	end
 end
 

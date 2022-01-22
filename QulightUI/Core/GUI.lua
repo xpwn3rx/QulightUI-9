@@ -16,6 +16,7 @@ C.enemycooldown.spells_list_ver = 1
 C.nameplate.debuffs_list = {}
 C.nameplate.buffs_list = {}
 C.chat.spam_list = ""
+C.font.global_font = false
 C.media.profile = "-- Insert Your code here\n"
 C.options = {}
 
@@ -63,9 +64,9 @@ end
 C.options = profile
 
 -- Load edited profile code
-loadstring("local T, C, L = unpack(ShestakUI)\n"..C["media"].profile)()
+loadstring("local T, C, L = unpack(QulightUI)\n"..C["media"].profile)()
 
--- Sync new settings
+-- Sync new settings -- TODO: delete after while
 if C.options.raidframe then
 	if C.options.raidframe.heal_width then
 		C.options.raidframe.heal_party_width = C.options.raidframe.heal_width

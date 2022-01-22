@@ -105,7 +105,7 @@ StaticPopupDialogs.INSTALL_UI = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = InstallUI,
-	OnCancel = function() ShestakUISettingsPerChar.Install = false end,
+	OnCancel = function() QulightUISettingsPerChar.Install = false end,
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = false,

@@ -372,21 +372,21 @@ local RestoreUI = function(self)
 	end
 	if QulightUIPositions then
 		-- TODO: delete after while
-			if ShestakUIPositions.UnitFrame then
-				for frame_name, point in pairs(ShestakUIPositions.UnitFrame) do
+			if QulightUIPositions.UnitFrame then
+				for frame_name, point in pairs(QulightUIPositions.UnitFrame) do
 					if _G[frame_name] then
 						for _, frame in pairs(unitFrames) do
 							print(frame:GetName(), _G[frame_name]:GetName())
 							if frame:GetName() and frame:GetName() == _G[frame_name]:GetName() then
 								_G[frame_name]:ClearAllPoints()
 								_G[frame_name]:SetPoint(unpack(point))
-								ShestakUIPositions[frame_name] = point
+								QulightUIPositions[frame_name] = point
 							end
 						end
 					end
 				end
-				ShestakUIPositions.UnitFrame = nil
-				ShestakUIPositions.UFPos = nil
+				QulightUIPositions.UnitFrame = nil
+				QulightUIPositions.UFPos = nil
 			end
 			-- End of block to delete
 	
@@ -419,7 +419,7 @@ StaticPopupDialogs.RESET_UF = {
 	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else
 		for _, frame in pairs(unitFrames) do
 			if frame:GetName() then
-				ShestakUIPositions[frame:GetName()] = nil
+				QulightUIPositions[frame:GetName()] = nil
 			end
 		end
 		ReloadUI()

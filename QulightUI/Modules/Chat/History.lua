@@ -44,7 +44,7 @@ end
 
 function t.ADDON_LOADED(addon)
 	if addon == a then
-		DB = ShestakUIChatHistory
+		DB = QulightUIChatHistory
 		for frame, elements in next, DB do
 			for element = #elements, 1, -1 do
 				if elements[element].extraData then

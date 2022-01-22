@@ -256,7 +256,7 @@ local function Shared(self, unit)
 		hab:SetVertexColor(1, 0, 0, 0.4)
 
 		local oa = self.Health:CreateTexture(nil, "ARTWORK")
-		oa:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
+		oa:SetTexture([[Interface\AddOns\QulightUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
 		oa:SetVertexColor(0.5, 0.5, 1)
 		oa:SetHorizTile(true)
 		oa:SetVertTile(true)

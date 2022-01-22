@@ -1337,11 +1337,11 @@ do
 	local subheader = ns.addSubCategory(parent, L.raidframe_subheader_heal_size)
 	subheader:SetPoint("TOPLEFT", plugins_auto_resurrection, "BOTTOMLEFT", 0, -10)
 
+	local heal_party_width = ns.CreateNumberSlider(parent, "heal_party_width", nil, nil, 50, 200, 1, true, L.raidframe_dps_party_width)
+	heal_party_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -30)
+
 	local heal_party_height = ns.CreateNumberSlider(parent, "heal_party_height", nil, nil, 20, 200, 1, true, L.raidframe_dps_party_height)
 	heal_party_height:SetPoint("LEFT", heal_party_width, "RIGHT", 120, 0)
-
-	local heal_height = ns.CreateNumberSlider(parent, "heal_height", nil, nil, 20, 200, 1, true)
-	heal_height:SetPoint("LEFT", heal_width, "RIGHT", 120, 0)
 
 	local heal_raid_width = ns.CreateNumberSlider(parent, "heal_raid_width", nil, nil, 50, 200, 1, true, L.raidframe_dps_raid_width)
 	heal_raid_width:SetPoint("TOPLEFT", heal_party_width, "BOTTOMLEFT", 0, -20)
@@ -1868,7 +1868,7 @@ do
 	quests:SetPoint("TOPLEFT", only_name, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.nameplate2
+	local parent = QulightUIOptionsPanel.nameplate2
 
 	local only_name = ns.CreateCheckBox(parent, "only_name")
 	only_name:SetPoint("TOPLEFT", target_glow, "BOTTOMLEFT", 0, 0)
@@ -1970,8 +1970,11 @@ do
 	local short_numbers = ns.CreateCheckBox(parent, "short_numbers", L_GUI_COMBATTEXT_SHORT_NUMBERS)
 	short_numbers:SetPoint("TOPLEFT", max_lines, "BOTTOMLEFT", 0, -8)
 
-	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
-	scrollable:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
+	local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam", L_GUI_COMBATTEXT_MERGE_AOE_SPAM)
+	merge_aoe_spam:SetPoint("TOPLEFT", short_numbers, "BOTTOMLEFT", 0, 0)
+
+	local merge_melee = ns.CreateCheckBox(parent, "merge_melee", L_GUI_COMBATTEXT_MERGE_MELEE)
+	merge_melee:SetPoint("TOPLEFT", merge_aoe_spam, "BOTTOMLEFT", 20, 0)
 
 	local direction = ns.CreateCheckBox(parent, "direction", L_GUI_COMBATTEXT_DIRECTION)
 	direction:SetPoint("TOPLEFT", merge_melee, "BOTTOMLEFT", -20, 0)
@@ -1985,11 +1988,8 @@ do
 	local killingblow = ns.CreateCheckBox(parent, "killingblow", L_GUI_COMBATTEXT_KILLINGBLOW)
 	killingblow:SetPoint("TOPLEFT", dk_runes, "BOTTOMLEFT", 0, 0)
 
-	local merge_aoe_spam = ns.CreateCheckBox(parent, "merge_aoe_spam", L_GUI_COMBATTEXT_MERGE_AOE_SPAM)
-	merge_aoe_spam:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
-
-	local merge_melee = ns.CreateCheckBox(parent, "merge_melee", L_GUI_COMBATTEXT_MERGE_MELEE)
-	merge_melee:SetPoint("TOPLEFT", merge_aoe_spam, "BOTTOMLEFT", 0, 0)
+	local scrollable = ns.CreateCheckBox(parent, "scrollable", L_GUI_COMBATTEXT_SCROLLABLE)
+	scrollable:SetPoint("TOPLEFT", killingblow, "BOTTOMLEFT", 0, 0)
 
 	local crit_prefix = ns.CreateEditBox(parent, "crit_prefix", true, L_GUI_COMBATTEXT_CRIT_PREFIX)
 	crit_prefix:SetPoint("TOPLEFT", scrollable, "BOTTOMLEFT", 6, -8)
@@ -2748,8 +2748,8 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
-	if not ShestakUI then return end
-	T, C = unpack(ShestakUI)
+	if not QulightUI then return end
+	T, C = unpack(QulightUI)
 
 	SpellList:StripTextures()
 	SpellList:CreateBackdrop("Transparent")

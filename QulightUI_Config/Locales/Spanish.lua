@@ -7,8 +7,8 @@ if GetLocale() ~= "esES" and GetLocale() ~= "esMX" then return end
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Cambios aplicables sólo a este PJ"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Switch between a profile that applies to all characters and one that is unique to this character." -- Need review
-L_GUI_RESET_CHAR = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para este PJ?"
-L_GUI_RESET_ALL = "¿Estás seguro de que quieres reiniciar tus preferencias de ShestakUI para todos los PJs?"
+L_GUI_RESET_CHAR = "¿Estás seguro de que quieres reiniciar tus preferencias de QulightUI para este PJ?"
+L_GUI_RESET_ALL = "¿Estás seguro de que quieres reiniciar tus preferencias de QulightUI para todos los PJs?"
 L_GUI_PER_CHAR = "¿Estás segudo de que quieres cambiar a o desde 'Cambios sólo a este PJ'?"
 L_GUI_RESET_CAT = "Are you sure you want to reset category's settings?" -- Need review
 L_GUI_RESET_CAT_DESC = "Reset category's settings. \nCTRL-click to reset all" -- Need review

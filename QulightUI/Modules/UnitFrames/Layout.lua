@@ -462,7 +462,7 @@ local function Shared(self, unit)
 		end
 
 		-- Totem bar for Shaman
-		if C.unitframe_class_bar.totem == true and C.unitframe_class_bar.totem_other == true and T.class ~= "SHAMAN" then
+		if C.unitframe_class_bar.totem == true and T.class == "SHAMAN" then
 			self.TotemBar = CreateFrame("Frame", self:GetName().."_TotemBar", self)
 			self.TotemBar:CreateBackdrop("Default")
 			self.TotemBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
@@ -489,7 +489,7 @@ local function Shared(self, unit)
 		end
 
 		-- Totem bar for other classes
-		if C.unitframe_class_bar.totem == true and T.class ~= "SHAMAN" then
+		if C.unitframe_class_bar.totem == true and C.unitframe_class_bar.totem_other == true and T.class ~= "SHAMAN" then
 			self.TotemBar = CreateFrame("Frame", self:GetName().."_TotemBar", self)
 			self.TotemBar:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 			self.TotemBar:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
@@ -1119,7 +1119,7 @@ local function Shared(self, unit)
 		hab:SetVertexColor(1, 0, 0, 0.4)
 
 		local oa = self.Health:CreateTexture(nil, "ARTWORK")
-		oa:SetTexture([[Interface\AddOns\ShestakUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
+		oa:SetTexture([[Interface\AddOns\QulightUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
 		oa:SetVertexColor(0.5, 0.5, 1)
 		oa:SetHorizTile(true)
 		oa:SetVertTile(true)

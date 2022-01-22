@@ -4,7 +4,6 @@ if C.reminder.raid_buffs_enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Raid buffs on player(by Elv22)
 ----------------------------------------------------------------------------------------
--- Locals
 local flaskbuffs = T.ReminderBuffs["Flask"]
 local battleelixirbuffs = T.ReminderBuffs["BattleElixir"]
 local guardianelixirbuffs = T.ReminderBuffs["GuardianElixir"]
@@ -14,9 +13,6 @@ local custombuffs = T.ReminderBuffs["Custom"]
 local visible, flask, battleelixir, guardianelixir, food, stamina, spell4, custom, weapon, armor
 local playerBuff = {}
 
-element.handler = CreateFrame("Frame", nil, element)
-			element.handler:RegisterEvent("PLAYER_LOGIN")
-			element.handler:SetScript("OnEvent", function() CheckAlpha(element) end)
 local function CheckElixir()
 	if #battleelixirbuffs > 0 then
 		for i = 1, #battleelixirbuffs do

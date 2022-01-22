@@ -222,21 +222,23 @@ C["raidframe"] = {
 --	Auras/Buffs/Debuffs options
 ----------------------------------------------------------------------------------------
 C["aura"] = {
-	["player_buff_size"] = 35,						-- Player buffs size
-	["player_debuff_size"] = 35,						-- Debuffs size
-	["show_spiral"] = false,						-- Spiral on aura icons
-	["show_timer"] = true,							-- Show cooldown timer on aura icons
-	["player_auras"] = true,						-- Auras on player frame
-	["target_auras"] = true,						-- Auras on target frame
-	["focus_debuffs"] = false,						-- DeBuffs on focus frame
-	["fot_debuffs"] = false,						-- DeBuffs on focustarget frame
-	["pet_debuffs"] = false,						-- DeBuffs on pet frame
-	["tot_debuffs"] = false,						-- DeBuffs on targettarget frame
-	["boss_buffs"] = true,							-- Buffs on boss frame
-	["player_aura_only"] = false,						-- Only your debuff on target frame
-	["debuff_color_type"] = true,						-- Color debuff by type
-	["classcolor_border"] = false,						-- Enable classcolor border for player buffs
-	["cast_by"] = false,							-- Show who cast a buff/debuff in its tooltip
+	["player_buff_size"] = 25,					-- Player buffs size
+	["debuff_size"] = 25,						-- Debuffs size on unitframes
+	["show_spiral"] = false,					-- Spiral on aura icons
+	["show_timer"] = true,						-- Show cooldown timer on aura icons
+	["player_auras"] = true,					-- Auras on player frame
+	["target_auras"] = true,					-- Auras on target frame
+	["focus_debuffs"] = false,					-- DeBuffs on focus frame
+	["fot_debuffs"] = false,					-- DeBuffs on focustarget frame
+	["pet_debuffs"] = false,					-- DeBuffs on pet frame
+	["tot_debuffs"] = false,					-- DeBuffs on targettarget frame
+	["boss_auras"] = true,						-- Auras on boss frame
+	["boss_debuffs"] = 0,						-- Number of debuffs on the boss frames
+	["boss_buffs"] = 3,							-- Number of buffs on the boss frames
+	["player_aura_only"] = false,				-- Only your debuff on target frame
+	["debuff_color_type"] = true,				-- Color debuff by type
+	["classcolor_border"] = false,				-- Enable classcolor border for player buffs
+	["cast_by"] = false,						-- Show who cast a buff/debuff in its tooltip
 }
 
 ----------------------------------------------------------------------------------------
