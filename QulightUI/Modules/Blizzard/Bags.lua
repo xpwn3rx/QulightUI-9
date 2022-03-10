@@ -247,10 +247,9 @@ function Stuffing:SlotUpdate(b)
 			b.frame.Conduit:SetAtlas("ConduitIconFrame")
 			b.frame.Conduit:Show()
 			local color = BAG_ITEM_QUALITY_COLORS[quality]
-						if color then
+			if color then
 				b.frame.Conduit:SetVertexColor(color.r, color.g, color.b)
 			end
-
 			b.frame.Conduit2:SetAtlas("ConduitIconFrame-Corners")
 			b.frame.Conduit2:Show()
 		end
@@ -263,12 +262,13 @@ function Stuffing:SlotUpdate(b)
 
 		-- Color slot according to item quality
 		if not b.frame.lock and quality and quality > 1 and not (isQuestItem or questId) then
-			b.frame:SetBackdropBorderColor(GetItemQualityColor(quality))
+			b.frame:SetBackdropBorderColor(GetItemQualityColor(quality), 1)
 		elseif questId and not isActiveQuest then
-			b.frame:SetBackdropBorderColor(1, 0.3, 0.3)
+			b.frame:SetBackdropBorderColor(1, 0.3, 0.3, 1)
 		elseif questId or isQuestItem then
-			b.frame:SetBackdropBorderColor(1, 1, 0)
+			b.frame:SetBackdropBorderColor(1, 1, 0, 1)
 		end
+		b.frame:SetFrameLevel(10000)
 	else
 		b.name, b.level = nil, nil
 	end
@@ -303,8 +303,6 @@ function Stuffing:SlotUpdate(b)
 			end
 		end
 	end
-
-
 
 	b.frame:Show()
 end
@@ -1157,7 +1155,7 @@ function Stuffing:Layout(isBank)
 				yoff = yoff * -1
 
 				b.frame:ClearAllPoints()
-				b.frame:SetPoint("TOPLEFT", f, "TOPLEFT", xoff, yoff)
+				b.frame:SetPoint("TOPLEFT", f, "TOPLEFT", T.Scale(xoff), T.Scale(yoff))
 				b.frame:SetSize(C.bag.button_size, C.bag.button_size)
 				b.frame.lock = false
 				b.frame:SetAlpha(1)

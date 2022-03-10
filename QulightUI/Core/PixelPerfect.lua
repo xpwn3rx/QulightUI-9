@@ -22,10 +22,20 @@ end
 T.mult = 768 / T.screenHeight / C.general.uiscale
 T.noscalemult = T.mult * C.general.uiscale
 
-T.Scale = function(x)
-	if x then
-		return T.mult * math.floor(x / T.mult + 0.5)
-	end
+-- Old Scale function
+-- T.Scale = function(x)
+	-- return T.mult * math.floor(x / T.mult + 0.5)
+-- end
+
+-- New Scale function
+	T.Scale = function(x)
+		local m = T.mult
+		if m == 1 or x == 0 then
+			return x
+		else
+			local y = m > 1 and m or -m
+			return x - x % (x < 0 and y or -y)
+		end
 end
 
 ----------------------------------------------------------------------------------------

@@ -45,7 +45,7 @@ local function Shared(self, unit)
 	-- Backdrop for every units
 	self:CreateBackdrop("Default")
 	self:SetFrameStrata("BACKGROUND")
-	self.backdrop:SetFrameLevel(3)
+	self.backdrop:SetFrameLevel(0)
 	self:SetSize(220,38)
 
 	-- Health bar
@@ -272,7 +272,7 @@ local function Shared(self, unit)
 		if C.unitframe.icons_resting == true then
 			self.RestingIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 			self.RestingIndicator:SetSize(18, 18)
-			self.RestingIndicator:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", -8, -8)
+			self.RestingIndicator:SetPoint("TOP", self, "TOP", 0, -2)
 		end
 
 		-- Leader/Assistant icons
@@ -746,7 +746,7 @@ local function Shared(self, unit)
 			self.Auras.numDebuffs = 16
 			self.Auras.numBuffs = 32
 			self.Auras:SetHeight(165)
-			self.Auras:SetWidth(player_width + 4 - (C.aura.debuff_size - 25) * 4)
+			self.Auras:SetWidth(player_width + 4)
 			self.Auras.spacing = T.Scale(3)
 			self.Auras.size = T.Scale(C.aura.debuff_size)
 			self.Auras.gap = true
@@ -1100,39 +1100,9 @@ local function Shared(self, unit)
 		self.DebuffHighlightFilter = true
 	end
 
-	-- Incoming heal text/bar
+	-- Incoming heals and heal/damage absorbs
 	if C.raidframe.plugins_healcomm == true then
-		local mhpb = self.Health:CreateTexture(nil, "ARTWORK")
-		mhpb:SetTexture(C.media.texture)
-		mhpb:SetVertexColor(0, 1, 0.5, 0.2)
-
-		local ohpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ohpb:SetTexture(C.media.texture)
-		ohpb:SetVertexColor(0, 1, 0, 0.2)
-
-		local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ahpb:SetTexture(C.media.texture)
-		ahpb:SetVertexColor(1, 1, 0, 0.2)
-
-		local hab = self.Health:CreateTexture(nil, "ARTWORK")
-		hab:SetTexture(C.media.texture)
-		hab:SetVertexColor(1, 0, 0, 0.4)
-
-		local oa = self.Health:CreateTexture(nil, "ARTWORK")
-		oa:SetTexture([[Interface\AddOns\QulightUI\Media\Textures\Cross.tga]], "REPEAT", "REPEAT")
-		oa:SetVertexColor(0.5, 0.5, 1)
-		oa:SetHorizTile(true)
-		oa:SetVertTile(true)
-		oa:SetAlpha(0.4)
-		oa:SetBlendMode("ADD")
-
-		self.HealthPrediction = {
-			myBar = mhpb,
-			otherBar = ohpb,
-			absorbBar = ahpb,
-			healAbsorbBar = hab,
-			overAbsorb = oa
-		}
+		T.CreateHealthPrediction(self)
 	end
 
 	-- Power Prediction bar

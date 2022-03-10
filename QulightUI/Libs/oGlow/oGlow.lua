@@ -14,7 +14,7 @@ local event_metatable = {
 		for _, func in pairs(funcs) do
 			func(self, ...)
 		end
-	end,
+end,
 }
 
 local oGlow = CreateFrame("Frame", "oGlow")

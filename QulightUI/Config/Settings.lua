@@ -46,6 +46,11 @@ C["general"] = {
 	["hide_maw_buffs"] = false,					-- Hide Maw Buffs frame in instances
 }
 
+if T.screenHeight == 1440 then
+	C.general.auto_scale = false
+	C.general.uiscale = 0.64
+end
+
 ----------------------------------------------------------------------------------------
 --	Skins options
 ----------------------------------------------------------------------------------------
@@ -201,6 +206,8 @@ C["raidframe"] = {
 	["plugins_debuffhighlight_icon"] = true,	-- Show dispellable debuff icon (texture will be shown anyway)
 	["plugins_pvp_debuffs"] = true,			-- Show PvP debuff icons (from the list)
 	["plugins_healcomm"] = true,						-- Incoming heal bar on raid frame
+	["plugins_over_absorb"] = false,			-- Show over absorb bar on raid frame
+	["plugins_over_heal_absorb"] = false,		-- Show over heal absorb on raid frame (from enemy debuffs)
 	["plugins_auto_resurrection"] = false,					-- Auto cast resurrection on middle-click (doesn't work with Clique)
 	-- Heal layout size
 	["heal_party_width"] = 60.2,				-- Party width
@@ -464,11 +471,11 @@ C["minimap"] = {
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,							-- Enable loot frame
-	["rolllootframe"] = true,						-- Enable group roll frame
+	["rolllootframe"] = false,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
 	["icon_size"] = 32,							-- Icon size
 	["width"] = 221,							-- Loot window width
-	["auto_greed"] = true,							-- Push "greed" or "disenchant" button when green item roll at max level
-	["auto_confirm_de"] = true,						-- Auto confirm disenchant
+	["auto_greed"] = false,						-- Push "greed" or "disenchant" button when green item roll at max level (Blizzard doesn't use roll system anymore)
+	["auto_confirm_de"] = true,					-- Auto confirm disenchant and take BoP loot
 	["faster_loot"] = true,							-- Faster auto looting
 }
 
