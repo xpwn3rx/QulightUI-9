@@ -34,6 +34,11 @@ if C.combattext.merge_aoe_spam then
 	T.aoespam[355829] = 3			-- Chaos Bane (Unholy Shard)
 	T.aoespam[355605] = 3			-- Fusion Amplification (Trinket)
 	T.aoespam[351687] = 3			-- Mnemonic Equipment (Maldraxxus)
+	T.aoespam[353248] = 3			-- Effusive Anima Accelerator
+	T.aoespam[368651] = 3			-- Vicious Wound
+	T.aoespam[336463] = 5			-- Shadowcore Oil Blast
+	T.aoespam[353466] = 4			-- Sadistic Glee
+	T.aoespam[321937] = 4			-- Phantom Fire
 end
 
 -- Class config
@@ -145,6 +150,8 @@ elseif T.class == "DEMONHUNTER" then
 		T.aoespam[345423] = 6		-- The Hunt (Heal)
 		T.aoespam[342857] = 3		-- Glaive Tempest
 		T.aoespam[346278] = 3		-- Burning Wound (Legendary)
+		T.aoespam[346503] = 3		-- Fel Devastation
+		T.aoespam[317009] = 3		-- Sinful Brand (Venthyr)
 	end
 elseif T.class == "DRUID" then
 	if C.combattext.merge_aoe_spam then
@@ -187,6 +194,7 @@ elseif T.class == "DRUID" then
 		T.aoespam[124991] = 3		-- Nature's Vigil
 		T.aoespam[202347] = 3		-- Stellar Flare
 		T.aoespam[155625] = 3		-- Moonfire (Cat Form)
+		T.aoespam[365640] = 4		-- Fury of Elune
 	end
 	if C.combattext.healing then
 		T.healfilter[145109] = true	-- Ysera's Gift (Self)
@@ -457,17 +465,19 @@ elseif T.class == "ROGUE" then
 		T.aoespam[192760] = 0.5		-- Kingsbane
 		T.merge[222062] = 192760	-- Kingsbane Off-Hand
 		T.aoespam[192759] = 5		-- Kingsbane DoT
-		T.aoespam[703] = 5		-- Garrote
-		T.aoespam[8680] = 3		-- Wound Poison
+		T.aoespam[703] = 5			-- Garrote
+		T.aoespam[8680] = 3			-- Wound Poison
 		T.aoespam[22482] = 3		-- Blade Flurry
 		T.aoespam[16511] = 3		-- Hemorrhage
-		T.aoespam[5374] = 0		-- Mutilate
+		T.aoespam[5374] = 0			-- Mutilate
 		T.aoespam[86392] = 3		-- Main Gauche
 		T.aoespam[57841] = 3		-- Killing Spree
-		T.aoespam[1943] = 5		-- Rupture
+		T.aoespam[1943] = 5			-- Rupture
 		T.aoespam[152150] = 3		-- Death from Above
 		T.aoespam[114014] = 3		-- Shuriken Toss
 		T.aoespam[319175] = 3		-- Black Powder
+		T.aoespam[279043] = 3		-- Shadow Blades
+		T.aoespam[315585] = 3		-- Instant Poison
 		T.aoespam[358126] = 3		-- Banshee's Blight [Edge of Night, Dagger]
 		T.merge[27576] = 5374		-- Mutilate Off-Hand
 		T.merge[113780] = 2818		-- Deadly Poison

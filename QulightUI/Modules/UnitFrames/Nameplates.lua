@@ -718,7 +718,7 @@ local function style(self, unit)
 		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\QulightUI\Media\Textures\glowTex.tga]], edgeSize = 4 * T.noscalemult})
 		self.Glow:SetPoint("TOPLEFT", -7 * T.noscalemult, 7 * T.noscalemult)
 		self.Glow:SetPoint("BOTTOMRIGHT", 7 * T.noscalemult, -7 * T.noscalemult)
-		self.Glow:SetBackdropBorderColor(0.8, 0.8, 0.8)
+		self.Glow:SetBackdropBorderColor(0, 0, 0)
 		self.Glow:SetFrameLevel(0)
 		self.Glow:Hide()
 	end

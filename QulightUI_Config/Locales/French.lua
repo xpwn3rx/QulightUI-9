@@ -3,7 +3,7 @@ if GetLocale() ~= "frFR" then return end
 
 ----------------------------------------------------------------------------------------
 --	Localization for frFR client
---	Translation: Cranan, Puree, AlbertDuval
+--	Translation: Cranan, Puree, AlbertDuval, Skyzo-be
 ----------------------------------------------------------------------------------------
 L_GUI_SET_SAVED_SETTTINGS = "Définir les paramètres par personnage"
 L_GUI_SET_SAVED_SETTTINGS_DESC = "Basculez entre un profil qui s’applique à tous les personnages et un profil qui est unique à ce personnage."
@@ -140,7 +140,7 @@ L_GUI_UF_PLUGINS_POWER_PREDICTION = "Prédiction du coût des sorts sur le cadre
 L.unitframe_plugins_absorbs = "Valeur d'absorption sur le cadre du joueur"
 L.unitframe_subheader_player_width = "Taille du cadre du joueur et de la cible"
 L.unitframe_player_width = "Largeur"
-L.unitframe_subheader_boss_width = "Taille du cadre du boss et de l’aréne" 
+L.unitframe_subheader_boss_width = "Taille du cadre du boss et de l’aréne"
 L.unitframe_extra_height_auto = "Hauteur automatique pour la santé/puissance"
 L.unitframe_extra_height_auto_desc = "Ajustement intelligent en fonction de la taille de la police"
 L.unitframe_extra_health_height = "Hauteur supplémentaire pour la santé"
@@ -150,7 +150,7 @@ L.unitframe_castbar_height = "Hauteur"
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Barres de classe"
-L_GUI_UF_PLUGINS_CLASS_BAR_SUBTEXT = "Contrôle des ressources spéciales des classes." 
+L_GUI_UF_PLUGINS_CLASS_BAR_SUBTEXT = "Contrôle des ressources spéciales des classes."
 L_GUI_UF_PLUGINS_COMBO_BAR = "Afficher la barre des points de combo pour les Voleurs/Druides"
 L_GUI_UF_PLUGINS_COMBO_BAR_ALWAYS = "Toujours montrer la barre des points de combo pour la classe Druide"
 L_GUI_UF_PLUGINS_COMBO_BAR_OLD = "Activer les points de Combo sur la cible"
@@ -203,8 +203,8 @@ L.raidframe_plugins_aura_watch = "Icônes d'affaiblissement de raid (de la liste
 L.raidframe_plugins_aura_watch_timer = "Durée sur les icônes d'affaiblissement du raid"
 L.raidframe_plugins_pvp_debuffs = "Afficher les icônes d'affaiblissement JcJ (de la liste)"
 L_GUI_UF_PLUGINS_HEALCOMM = "Afficher l'estimation des soins entrant sur le cadre"
-L.raidframe_plugins_over_absorb = "Show over absorb bar on frame" -- Need review
-L.raidframe_plugins_over_heal_absorb = "Show over heal absorb on frame" -- Need review
+L.raidframe_plugins_over_absorb = "Montrer la barre d'absorption sur le cadre"
+L.raidframe_plugins_over_heal_absorb = "Montrer l'excédent de soin absorber sur le cadre"
 L.raidframe_plugins_auto_resurrection = "Incantation automatique de résurrection"
 L.raidframe_plugins_auto_resurrection_desc = "Lance résurrection avec le clic du milieu de la souris (ne fonctionne pas avec l'addon Clique activé)"
 L.raidframe_hide_health_value = "Masquer la valeur de santé du raid"
@@ -325,6 +325,7 @@ L.nameplate_ad_width_desc = "LArgeur additionnelle pour la barre de Noms de la c
 L_GUI_NAMEPLATE_CASTBAR_NAME = "Afficher le nom du sort"
 L_GUI_NAMEPLATE_CLASS_ICON = "Icône de classe en JcJ"
 L_GUI_NAMEPLATE_NAME_ABBREV = "Afficher les noms abrégés"
+L.nameplate_short_name = "Remplacer les noms par des noms courts"
 L.nameplate_clamp = "Afficher les barres en haut de l'écran quand celles-ci sont hors champs"
 L.nameplate_clamp_desc = "Afficher les barres en haut de l'écran quand celles-ci sont hors champs"
 L_GUI_NAMEPLATE_SHOW_DEBUFFS = "Afficher vos debuffs (de la liste)"
@@ -402,8 +403,8 @@ L_GUI_AURA_PLAYER_AURA_ONLY = "Afficher seulement ses propres debuffs sur la cib
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Couleur de debuff par type"
 L_GUI_AURA_CAST_BY = "Montrer qui a lancé un buff/debuff dans son tooltip"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Activer la couleur de votre classe pour la bordure de vos buffs"
-L.aura_subheader_buffs = "Player buffs" -- Need review
-L.aura_subheader_debuffs = "Debuffs" -- Need review
+L.aura_subheader_buffs = "Les buffs des joueurs"
+L.aura_subheader_debuffs = "Les Débuffs des joueurs"
 
 -- Bag options
 L_GUI_BAGS = "Sacs"
@@ -525,7 +526,7 @@ L_GUI_REMINDER = "Contrôle des buffs"
 L_GUI_REMINDER_SUBTEXT = "Affichage des buffs manquants."
 L_GUI_REMINDER_SOLO_ENABLE = "Afficher les buffs personnelles manquants"
 L_GUI_REMINDER_SOLO_SOUND = "Notification sonore pour les buffs personnelles manquants"
-L_GUI_REMINDER_SOLO_SIZE = "Taille de l'icône" 
+L_GUI_REMINDER_SOLO_SIZE = "Taille de l'icône"
 L_GUI_REMINDER_SOLO_SIZE_DESC = "Taille de l'icône pour les buffs personnelles"
 L_GUI_REMINDER_SUBHEADER = "Buffs de raid"
 L_GUI_REMINDER_RAID_ENABLE = "Voir les buffs de raid manquants"
