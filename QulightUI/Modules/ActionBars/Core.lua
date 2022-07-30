@@ -202,6 +202,71 @@ if C.actionbar.bottombars_mouseover then
 	end
 end
 
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
+=======
+function Bar1MouseOver(alpha)
+	for i = 1, 12 do
+		local b = _G["ActionButton"..i]
+		b:SetAlpha(alpha)
+		local c = _G["ActionButton"..i.."Cooldown"]
+		T.HideSpiral(c, alpha)
+	end
+end
+
+function Bar2MouseOver(alpha)
+	if MultiBarBottomLeft:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBarBottomLeftButton"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBarBottomLeftButton"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
+	end
+end
+
+function Bar3MouseOver(alpha)
+	if MultiBarLeft:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBarLeftButton"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBarLeftButton"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
+	end
+end
+
+function Bar4MouseOver(alpha)
+	if MultiBarRight:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBarRightButton"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBarRightButton"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
+	end
+end
+
+function Bar5MouseOver(alpha)
+	if MultiBarBottomRight:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBarBottomRightButton"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
+	end
+end
+
+function CustomBarMouseOver(alpha)
+	for i = 1, 12 do
+		local b = _G["CustomBarButton"..i]
+		b:SetAlpha(alpha)
+		local c = _G["CustomBarButton"..i.."Cooldown"]
+		T.HideSpiral(c, alpha)
+	end
+end
+
+>>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Core.lua
 ----------------------------------------------------------------------------------------
 --	Fix cooldown spiral alpha (WoD bug)
 ----------------------------------------------------------------------------------------
