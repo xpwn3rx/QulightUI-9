@@ -283,6 +283,76 @@ local RestoreDefaults = function(self, button)
 	end
 end
 
+<<<<<<< HEAD:QulightUI/Core/Movers.lua
+=======
+local UpdatePosition = function(moveX, moveY)
+	moveX = moveX or 0
+	moveY = moveY or 0
+	local frame = controls._frame
+	if not frame then return end
+	local point, relativeTo, relativePoint, xOfs, yOfs = frame.frame:GetPoint()
+	SaveDefaultPosition(frame)
+	frame.frame:SetPoint(point, relativeTo, relativePoint, xOfs + (moveX * 1), yOfs + (moveY * 1))
+	local point, relativeTo, relativePoint, xOfs, yOfs = frame.frame:GetPoint()
+	if not relativeTo then
+		relativeTo = UIParent
+	end
+	ShestakUIPositions[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
+	frame:SetAllPoints(frame.frame)
+	controls.x:SetText(T.Round(xOfs))
+	controls.y:SetText(T.Round(yOfs))
+end
+
+local OnMouseWheel = function(self, offset)
+	if IsShiftKeyDown() then
+		UpdatePosition(0, offset)
+	elseif IsControlKeyDown() then
+		UpdatePosition(offset, 0)
+	end
+end
+
+local chatInfo = CreateFrame("Frame", nil, UIParent)
+chatInfo:SetFrameStrata("TOOLTIP")
+chatInfo:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -3, 1)
+chatInfo:SetSize(C.chat.width + 7, C.chat.height + 4)
+chatInfo:SetTemplate("Overlay")
+chatInfo:Hide()
+
+local title = chatInfo:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+title:SetPoint("TOP", chatInfo, "TOP", 0, -10)
+title:SetTextColor(0.40, 0.78, 1)
+
+local subTitle1 = chatInfo:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+subTitle1:SetPoint("TOP", title, "TOP", 0, -20)
+subTitle1:SetText(L_MOVE_RIGHT_CLICK)
+subTitle1:SetTextColor(0.75, 0.9, 1)
+
+local subTitle2 = chatInfo:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+subTitle2:SetPoint("TOP", subTitle1, "TOP", 0, -20)
+subTitle2:SetText(L_MOVE_MIDDLE_CLICK)
+subTitle2:SetTextColor(0.75, 0.9, 1)
+
+local ResetButton = CreateFrame("Button", nil, chatInfo, "UIPanelButtonTemplate")
+ResetButton:SetSize(100, 23)
+ResetButton:SetText(DEFAULT)
+ResetButton:SetPoint("BOTTOMLEFT", chatInfo, "BOTTOMLEFT", 10, 7)
+ResetButton:SetScript("OnClick", function()
+	StaticPopup_Show("MOVEUI_RESET")
+end)
+ResetButton:SkinButton()
+
+local CloseButton = CreateFrame("Button", nil, chatInfo, "UIPanelButtonTemplate")
+CloseButton:SetPoint("TOPRIGHT", chatInfo, "BOTTOMRIGHT", -10, 30)
+CloseButton:SetSize(100, 23)
+CloseButton:SetText(CLOSE)
+CloseButton:SetScript("OnClick", function()
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+	SlashCmdList.MOVING()
+end)
+CloseButton:SkinButton()
+
+local index = 200
+>>>>>>> 1ec538ce7 ([Move] Allow to move with Ctrl/Shift + mouse wheel.):ShestakUI/Core/Movers.lua
 local CreateMover = function(frame, unit)
 	local mover = CreateFrame("Frame", nil, UIParent)
 	if unit then
@@ -304,6 +374,7 @@ local CreateMover = function(frame, unit)
 	mover:SetScript("OnEnter", function(self) self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color)) ShowControls(self) end)
 	mover:SetScript("OnLeave", function(self) self.backdrop:SetBackdropBorderColor(1, 0, 0) if not MouseIsOver(controls) then controls:Hide() end end)
 	mover:SetScript("OnMouseUp", RestoreDefaults)
+	mover:SetScript("OnMouseWheel", OnMouseWheel)
 	mover.frame = frame
 
 	mover.name = mover:CreateFontString(nil, "OVERLAY")
