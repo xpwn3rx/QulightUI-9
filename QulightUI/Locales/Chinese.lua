@@ -173,8 +173,8 @@ L_INFO_SKIN_DISABLED2 = " 已禁用"
 <<<<<<< HEAD:QulightUI/Locales/Chinese.lua
 =======
 -- Moving elements
-L_MOVE_RIGHT_CLICK = "右键点击重置位置"
-L_MOVE_MIDDLE_CLICK = "中键点击临时隐藏"
+L_MOVE_RIGHT_CLICK = "右键重置位置"
+L_MOVE_MIDDLE_CLICK = "中键临时隐藏"
 
 >>>>>>> 54d6bab2b (Update Chinese.lua (#548)):ShestakUI/Locales/Chinese.lua
 -- Popups

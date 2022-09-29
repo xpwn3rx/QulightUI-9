@@ -170,6 +170,13 @@ L_INFO_NOT_INSTALLED = " 沒有安裝"
 L_INFO_SKIN_DISABLED1 = "界面美化啟用"
 L_INFO_SKIN_DISABLED2 = " 已禁用"
 
+<<<<<<< HEAD:QulightUI/Locales/Taiwan.lua
+=======
+-- Moving elements
+L_MOVE_RIGHT_CLICK = "右鍵重置位置"
+L_MOVE_MIDDLE_CLICK = "中鍵臨時隱藏"
+
+>>>>>>> 78c497bf4 (Update Chinese.lua and Taiwan.lua. (#549)):ShestakUI/Locales/Taiwan.lua
 -- Popups
 L_POPUP_INSTALLUI = "該角色首次使用QulightUI，你必須重新加載UI來配置。"
 L_POPUP_RESETUI = "你確定要重新加載QulightUI?"
@@ -294,5 +301,10 @@ L_SLASHCMD_HELP = {
 	"/threat - 仇恨欄測試模式",
 	"/testuf - 頭像框架測試模式",
 	"/moveui - 解鎖/鎖定 界面中所有可移動的框體，Ctrl+右鍵選中的框架重置到預設位置", -- Need review
+<<<<<<< HEAD:QulightUI/Locales/Taiwan.lua
 	"/cfg - 開啟QulightUI設置界面",
 }
+=======
+	"/cfg - 開啟ShestakUI設置界面",
+}
+>>>>>>> 78c497bf4 (Update Chinese.lua and Taiwan.lua. (#549)):ShestakUI/Locales/Taiwan.lua
