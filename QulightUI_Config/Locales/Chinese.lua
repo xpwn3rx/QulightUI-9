@@ -642,8 +642,4 @@ L.misc_click_cast_filter = "忽略玩家/目标框架点击施法"
 L.misc_chars_currency = "追踪所有角色的货币"
 L.misc_chars_currency_desc = "在货币界面中追踪所有角色的货币"
 L.misc_hide_raid_button = "输出布局最小化按钮"
-<<<<<<< HEAD:QulightUI_Config/Locales/Chinese.lua
-L.misc_hide_raid_button_desc = "按钮在团队框架左上方鼠标悬停显示" 
-=======
 L.misc_hide_raid_button_desc = "按钮在团队框架左上方鼠标悬停显示"
->>>>>>> a67482bc5 (Update Chinese.lua (#547)):ShestakUI_Config/Locales/Chinese.lua

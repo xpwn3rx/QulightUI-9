@@ -204,8 +204,6 @@ if C.actionbar.bottombars_mouseover then
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
-=======
 function Bar1MouseOver(alpha)
 	for i = 1, 12 do
 		local b = _G["ActionButton"..i]
@@ -268,7 +266,6 @@ function CustomBarMouseOver(alpha)
 	end
 end
 
->>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Core.lua
 ----------------------------------------------------------------------------------------
 --	Fix cooldown spiral alpha (WoD bug)
 ----------------------------------------------------------------------------------------
