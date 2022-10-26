@@ -5,6 +5,7 @@ if C.actionbar.enable ~= true then return end
 --	Style ActionBars buttons(by Tukz)
 ----------------------------------------------------------------------------------------
 <<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
 local gsub = string.gsub
 local function UpdateHotkey(self)
 	local hotkey = _G[self:GetName().."HotKey"]
@@ -42,6 +43,9 @@ end
 
 local function StyleNormalButton(button)
 =======
+=======
+local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS or 10
+>>>>>>> b326b8d23 (First fixes for pre-patch.):ShestakUI/Modules/ActionBars/Style.lua
 local function StyleNormalButton(button, size)
 >>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Style.lua
 	if not button.isSkinned then
@@ -50,7 +54,7 @@ local function StyleNormalButton(button, size)
 		local count = _G[name.."Count"]
 		local flash = _G[name.."Flash"]
 		local hotkey = _G[name.."HotKey"]
-		local border = _G[name.."Border"]
+		local border = button.Border or _G[name..'Border']
 		local btname = _G[name.."Name"]
 		local normal = _G[name.."NormalTexture"]
 		local float = _G[name.."FloatingBG"]
@@ -59,6 +63,33 @@ local function StyleNormalButton(button, size)
 		local isFlyout = name:match("Flyout")
 		local flyoutBorder = _G[name.."FlyoutBorder"]
 		local flyoutBorderShadow = _G[name.."FlyoutBorderShadow"]
+
+		local normal = button.NormalTexture or _G[name..'NormalTexture']
+		local normal2 = button:GetNormalTexture()
+
+		if button.IconMask then
+			button.IconMask:Hide()
+		end
+
+		if button.SlotArt then
+			button.SlotArt:Hide()
+		end
+
+		if button.SlotBackground then
+			button.SlotBackground:Hide()
+		end
+
+		if button.NewActionTexture then
+			button.NewActionTexture:SetAlpha(0)
+		end
+
+		if normal then normal:SetTexture() normal:Hide() normal:SetAlpha(0) end
+		if normal2 then normal2:SetTexture() normal2:Hide() normal2:SetAlpha(0) end
+
+		-- _G[button:GetName().."NormalTexture"]:SetAlpha(0)
+		-- _G[button:GetName().."NormalTexture"]:Hide()
+		-- button:GetNormalTexture():SetAlpha(0)
+		-- button:GetNormalTexture():Hide()
 
 		flash:SetTexture("")
 
@@ -69,7 +100,7 @@ local function StyleNormalButton(button, size)
 		end
 
 		if border then
-			border:SetTexture("")
+			border:Kill()
 		end
 
 		if not isExtraAction then
@@ -192,10 +223,10 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		icon:SetDrawLayer("BACKGROUND", 7)
 
 		if pet then
-			local autocast = _G[name.."AutoCastable"]
-			autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
-			autocast:ClearAllPoints()
-			autocast:SetPoint("CENTER", button, 0, 0)
+			--BETA local autocast = _G[name.."AutoCastable"]
+			-- autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
+			-- autocast:ClearAllPoints()
+			-- autocast:SetPoint("CENTER", button, 0, 0)
 
 			local shine = _G[name.."Shine"]
 			shine:SetSize(C.actionbar.button_size, C.actionbar.button_size)
@@ -360,10 +391,10 @@ local function StyleFlyoutButton(self)
 end
 
 SpellFlyout:HookScript("OnShow", StyleFlyoutButton)
-hooksecurefunc("SpellButton_OnClick", StyleFlyoutButton)
-SpellFlyoutHorizontalBackground:SetAlpha(0)
-SpellFlyoutVerticalBackground:SetAlpha(0)
-SpellFlyoutBackgroundEnd:SetAlpha(0)
+--BETA hooksecurefunc("SpellButton_OnClick", StyleFlyoutButton)
+-- SpellFlyoutHorizontalBackground:SetAlpha(0)
+-- SpellFlyoutVerticalBackground:SetAlpha(0)
+-- SpellFlyoutBackgroundEnd:SetAlpha(0)
 
 if C.actionbar.hotkey == true then
 	local gsub = string.gsub
