@@ -32,7 +32,7 @@ local function CreateButton(element, index)
 
 	local cd = CreateFrame('Cooldown', '$parentCooldown', button, 'CooldownFrameTemplate')
 	cd:SetAllPoints()
-	cd:SetDrawEdge(false) -- QulightUI
+	cd:SetDrawEdge(false) -- ShestakUI
 	button.Cooldown = cd
 
 	local icon = button:CreateTexture(nil, 'BORDER')
@@ -344,12 +344,10 @@ local function UpdateAuras(self, event, unit, updateInfo)
 					end
 				end
 			end
-		end
 
-		if(buffsChanged or debuffsChanged) then
+			-- instead of removing auras one by one, just wipe the tables entirely
+			-- and repopulate them, multiple table.remove calls are insanely slow
 			if(buffsChanged) then
-				-- instead of removing auras one by one, just wipe the tables entirely
-				-- and repopulate them, multiple table.remove calls are insanely slow
 				auras.sortedBuffs = table.wipe(auras.sortedBuffs or {})
 
 				for _, data in next, auras.activeBuffs do
@@ -369,45 +367,6 @@ local function UpdateAuras(self, event, unit, updateInfo)
 				Overridden by the more specific SortBuffs and/or SortDebuffs overrides if they are defined.
 				--]]
 				table.sort(auras.sortedBuffs, auras.SortBuffs or auras.SortAuras or SortAuras)
-
-				for i = 1, #auras.sortedBuffs do
-					updateAura(auras, unit, auras.sortedBuffs[i], i)
-				end
-			end
-
-			local offset = #auras.sortedBuffs
-
-			if(auras.gap and #auras.sortedDebuffs > 0) then
-				offset = offset + 1
-
-				local button = auras[offset]
-				if(not button) then
-					button = (auras.CreateButton or CreateButton) (auras, offset)
-					table.insert(auras, button)
-					auras.createdButtons = auras.createdButtons + 1
-				end
-
-				-- prevent the button from displaying anything
-				if(button.Cooldown) then button.Cooldown:Hide() end
-				if(button.Icon) then button.Icon:SetTexture() end
-				if(button.Overlay) then button.Overlay:Hide() end
-				if(button.Stealable) then button.Stealable:Hide() end
-				if(button.Count) then button.Count:SetText() end
-
-				button:EnableMouse(false)
-				button:Hide() -- ShestakUI
-
-				--[[ Callback: Auras:PostUpdateGapButton(unit, gapButton, offset)
-				Called after an invisible aura button has been created. Only used by Auras when the `gap` option is enabled.
-
-				* self      - the widget holding the aura buttons
-				* unit      - the unit that has the invisible aura button (string)
-				* gapButton - the invisible aura button (Button)
-				* offset    - the position of the invisible aura button (number)
-				--]]
-				if(auras.PostUpdateGapButton) then
-					auras:PostUpdateGapButton(unit, button, offset)
-				end
 			end
 
 			if(debuffsChanged) then
@@ -424,6 +383,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 				--]]
 				table.sort(auras.sortedDebuffs, auras.SortDebuffs or auras.SortAuras or SortAuras)
 			end
+		end
 
 		if(not (buffsChanged or debuffsChanged)) then return end
 
@@ -453,16 +413,15 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			if(button.Count) then button.Count:SetText("") end
 
 			button:EnableMouse(false)
-			button:Hide()	-- QulightUI
+			button:Hide()	-- ShestakUI
 
 			--[[ Callback: Auras:PostUpdateGapButton(unit, gapButton, offset)
 			Called after an invisible aura button has been created. Only used by Auras when the `gap` option is enabled.
 
-			--[[ Callback: Auras:PostUpdate(unit)
-			Called after the element has been updated.
-
-			* self - the widget holding the aura buttons
-			* unit - the unit for which the update has been triggered (string)
+			* self      - the widget holding the aura buttons
+			* unit      - the unit that has the invisible aura button (string)
+			* gapButton - the invisible aura button (Button)
+			* offset    - the position of the invisible aura button (number)
 			--]]
 			if(auras.PostUpdateGapButton) then
 				auras:PostUpdateGapButton(unit, button, offset)
@@ -570,31 +529,16 @@ local function UpdateAuras(self, event, unit, updateInfo)
 					end
 				end
 			end
-		end
 
-		if(buffsChanged) then
-			buffs.sorted = table.wipe(buffs.sorted or {})
+			if(buffsChanged) then
+				buffs.sorted = table.wipe(buffs.sorted or {})
 
-			for _, data in next, buffs.active do
-				table.insert(buffs.sorted, data)
+				for _, data in next, buffs.active do
+					table.insert(buffs.sorted, data)
+				end
+
+				table.sort(buffs.sorted, buffs.SortBuffs or buffs.SortAuras or SortAuras)
 			end
-
-			table.sort(buffs.sorted, buffs.SortBuffs or buffs.SortAuras or SortAuras)
-
-			for i = 1, #buffs.sorted do
-				updateAura(buffs, unit, buffs.sorted[i], i)
-			end
-
-			for i = #buffs.sorted + 1, #buffs do
-				buffs[i]:Hide()
-			end
-
-			if(buffs.createdButtons > buffs.anchoredButtons) then
-				(buffs.SetPosition or SetPosition) (buffs, buffs.anchoredButtons + 1, buffs.createdButtons)
-				buffs.anchoredButtons = buffs.createdButtons
-			end
-
-			if(buffs.PostUpdate) then buffs:PostUpdate(unit) end
 		end
 
 		if(not buffsChanged) then return end
@@ -685,31 +629,16 @@ local function UpdateAuras(self, event, unit, updateInfo)
 					end
 				end
 			end
-		end
 
-		if(debuffsChanged) then
-			debuffs.sorted = table.wipe(debuffs.sorted or {})
+			if(debuffsChanged) then
+				debuffs.sorted = table.wipe(debuffs.sorted or {})
 
-			for _, data in next, debuffs.active do
-				table.insert(debuffs.sorted, data)
+				for _, data in next, debuffs.active do
+					table.insert(debuffs.sorted, data)
+				end
+
+				table.sort(debuffs.sorted, debuffs.SortDebuffs or debuffs.SortAuras or SortAuras)
 			end
-
-			table.sort(debuffs.sorted, debuffs.SortDebuffs or debuffs.SortAuras or SortAuras)
-
-			for i = 1, #debuffs.sorted do
-				updateAura(debuffs, unit, debuffs.sorted[i], i)
-			end
-
-			for i = #debuffs.sorted + 1, #debuffs do
-				debuffs[i]:Hide()
-			end
-
-			if(debuffs.createdButtons > debuffs.anchoredButtons) then
-				(debuffs.SetPosition or SetPosition) (debuffs, debuffs.anchoredButtons + 1, debuffs.createdButtons)
-				debuffs.anchoredButtons = debuffs.createdButtons
-			end
-
-			if(debuffs.PostUpdate) then debuffs:PostUpdate(unit) end
 		end
 
 		if(not debuffsChanged) then return end
@@ -800,7 +729,7 @@ local function Enable(self)
 			auras.anchoredButtons = 0
 			auras.tooltipAnchor = auras.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- auras:Show() -- QulightUI
+			-- auras:Show() -- ShestakUI
 		end
 
 		local buffs = self.Buffs
@@ -814,7 +743,7 @@ local function Enable(self)
 			buffs.anchoredButtons = 0
 			buffs.tooltipAnchor = buffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- buffs:Show() -- QulightUI
+			-- buffs:Show() -- ShestakUI
 		end
 
 		local debuffs = self.Debuffs
@@ -828,7 +757,7 @@ local function Enable(self)
 			debuffs.anchoredButtons = 0
 			debuffs.tooltipAnchor = debuffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- debuffs:Show() -- QulightUI
+			-- debuffs:Show() -- ShestakUI
 		end
 
 		return true

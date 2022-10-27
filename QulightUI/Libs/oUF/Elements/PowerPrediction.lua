@@ -113,12 +113,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 
 		if(element.mainBar) then
-<<<<<<< HEAD:QulightUI/Libs/oUF/Elements/PowerPrediction.lua
-			if(element.mainBar:IsObjectType('StatusBar')
-			and not (element.mainBar:GetStatusBarTexture() or element.mainBar:GetStatusBarAtlas())) then
-=======
 			if(element.mainBar:IsObjectType('StatusBar') and not element.mainBar:GetStatusBarTexture()) then
->>>>>>> 014e09bcc (Updated oUF.):ShestakUI/Libs/oUF/Elements/PowerPrediction.lua
 				element.mainBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 			end
 		end

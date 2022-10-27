@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 
 local backdropr, backdropg, backdropb, backdropa = unpack(C.media.backdrop_color)
 local borderr, borderg, borderb, bordera = unpack(C.media.border_color)
@@ -43,7 +43,7 @@ end
 local function CreateOverlay(f)
 	if f.overlay then return end
 
-	local overlay = f:CreateTexture("$parentOverlay", "BORDER", f)
+	local overlay = f:CreateTexture("$parentOverlay", "BORDER")
 	overlay:SetInside()
 	overlay:SetTexture(C.media.texture)
 	overlay:SetVertexColor(0, 0, 0, .4)
@@ -54,11 +54,11 @@ local function CreateBorder(f, i, o)
 	if i then
 		if f.iborder then return end
 		local border = CreateFrame("Frame", "$parentInnerBorder", f, "BackdropTemplate")
-		border:SetPoint("TOPLEFT", 0, 0)
-		border:SetPoint("BOTTOMRIGHT", 0)
+		border:SetPoint("TOPLEFT", Mult, -Mult)
+		border:SetPoint("BOTTOMRIGHT", -Mult, Mult)
 		border:SetBackdrop({
-			edgeFile = C.media.glow, edgeSize = T.mult,
-			insets = {left = T.mult, right = T.mult, top = T.mult, bottom = T.mult}
+			edgeFile = C.media.blank, edgeSize = Mult,
+			insets = {left = Mult, right = Mult, top = Mult, bottom = Mult}
 		})
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
 		f.iborder = border
@@ -67,21 +67,16 @@ local function CreateBorder(f, i, o)
 	if o then
 		if f.oborder then return end
 		local border = CreateFrame("Frame", "$parentOuterBorder", f, "BackdropTemplate")
-		border:SetPoint("TOPLEFT", 0, 0)
-		border:SetPoint("BOTTOMRIGHT", 0, 0)
+		border:SetPoint("TOPLEFT", -Mult, Mult)
+		border:SetPoint("BOTTOMRIGHT", Mult, -Mult)
 		border:SetFrameLevel(f:GetFrameLevel() + 1)
 		border:SetBackdrop({
-			edgeFile = C.media.shadow, edgeSize = T.mult,
-			insets = {left = T.mult, right = T.mult, top = T.mult, bottom = T.mult}
+			edgeFile = C.media.blank, edgeSize = Mult,
+			insets = {left = Mult, right = Mult, top = Mult, bottom = Mult}
 		})
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
 		f.oborder = border
 	end
-	f.shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
-	f.shadow:SetOutside(f, 4, 4)
-	f.shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
-	f.shadow:SetBackdropBorderColor(0, 0, 0, 1)
-	--f.shadow:SetFrameLevel(1)
 end
 
 local function GetTemplate(t)
@@ -99,7 +94,7 @@ local function SetTemplate(f, t)
 	GetTemplate(t)
 
 	f:SetBackdrop({
-		bgFile = C.media.texture, edgeFile = C.media.glow, edgeSize = Mult,
+		bgFile = C.media.blank, edgeFile = C.media.blank, edgeSize = Mult,
 		insets = {left = -Mult, right = -Mult, top = -Mult, bottom = -Mult}
 	})
 
@@ -115,12 +110,6 @@ local function SetTemplate(f, t)
 
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
-	if f.Shadow then return end
-	f.Shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
-	f.Shadow:SetOutside(self, 4, 4)
-	f.Shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
-	f.Shadow:SetBackdropBorderColor(0, 0, 0, 1)
-	--f.Shadow:SetFrameLevel(1)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
@@ -232,7 +221,6 @@ end
 ----------------------------------------------------------------------------------------
 local function StyleButton(button, t, size)
 	if not size then size = 2 end
-
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture()
 		hover:SetColorTexture(1, 1, 1, 0.3)
@@ -240,16 +228,6 @@ local function StyleButton(button, t, size)
 		hover:SetPoint("BOTTOMRIGHT", button, -size, size)
 		button.hover = hover
 		button:SetHighlightTexture(hover)
-	end
-
-	if not t and button.SetNormalTexture then
-		local normal = button:CreateTexture()
-		normal:SetTexture(C.media.texture)
-		normal:SetPoint("TOPLEFT", button, size, -size)
-		normal:SetPoint("BOTTOMRIGHT", button, -size, size)
-		normal:SetVertexColor(0,0,0,.5)
-		button.normal = normal
-		button:SetNormalTexture(normal)
 	end
 
 	if not t and button.SetPushedTexture and not button.pushed then
@@ -293,7 +271,6 @@ end
 
 T.SetOriginalBackdrop = function(self)
 	self:SetBackdropBorderColor(unpack(C.media.border_color))
-	self:SetBackdropBorderColor(unpack(C.media.border_color))
 	if self.overlay then
 		self.overlay:SetVertexColor(0, 0, 0, .4)
 	end
@@ -301,14 +278,13 @@ end
 
 local function SkinButton(f, strip)
 	f:SetTemplate("Transparent")
-
 	if strip then f:StripTextures() end
 
 	if f.SetNormalTexture then f:SetNormalTexture("") end
-	if f.SetHighlightTexture then f:SetHighlightTexture("") end
+	if f.SetHighlightTexture then f:SetHighlightTexture(C.media.empty) end
 	if f.SetPushedTexture then f:SetPushedTexture("") end
 	if f.SetDisabledTexture then f:SetDisabledTexture("") end
-	
+
 	if f.Left then f.Left:SetAlpha(0) end
 	if f.Right then f.Right:SetAlpha(0) end
 	if f.Middle then f.Middle:SetAlpha(0) end
@@ -686,8 +662,8 @@ function T.SkinCheckBox(frame, size)
 	if size then
 		frame:SetSize(size, size)
 	end
-	frame:SetNormalTexture("")
-	frame:SetPushedTexture("")
+	frame:SetNormalTexture(C.media.empty)
+	frame:SetPushedTexture(C.media.empty)
 	frame:CreateBackdrop("Overlay")
 	frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 	frame.backdrop:SetPoint("TOPLEFT", 4, -4)
@@ -758,7 +734,7 @@ function T.SkinCloseButton(f, point, text, pixel)
 end
 
 function T.SkinSlider(f)
-	f:SetBackdrop(nil)
+	f:StripTextures()
 
 	local bd = CreateFrame("Frame", nil, f)
 	bd:SetTemplate("Overlay")
@@ -943,4 +919,4 @@ LoadBlizzardSkin:SetScript("OnEvent", function(self, _, addon)
 			end
 		end
 	end
-end) 
+end)
