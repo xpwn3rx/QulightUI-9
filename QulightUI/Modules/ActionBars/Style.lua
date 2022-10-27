@@ -72,6 +72,10 @@ local function StyleNormalButton(button, size)
 			button.SlotArt:Hide()
 		end
 
+		if button.RightDivider then
+			button.RightDivider:Kill()
+		end
+
 		if button.SlotBackground then
 			button.SlotBackground:Hide()
 		end
@@ -121,7 +125,8 @@ local function StyleNormalButton(button, size)
 
 		if C.actionbar.hotkey == true then
 			hotkey:ClearAllPoints()
-			hotkey:SetPoint("TOPRIGHT", 0, 0)
+			hotkey:SetPoint("TOPRIGHT", 0, -1)
+			hotkey.SetPoint = T.dummy -- BETA It's bad way but work while I find better
 			hotkey:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
 			hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 			hotkey:SetWidth(C.actionbar.button_size - 1)
@@ -386,6 +391,7 @@ SpellFlyout:HookScript("OnShow", StyleFlyoutButton)
 -- SpellFlyoutHorizontalBackground:SetAlpha(0)
 -- SpellFlyoutVerticalBackground:SetAlpha(0)
 -- SpellFlyoutBackgroundEnd:SetAlpha(0)
+SpellFlyout.Background:Hide()
 
 if C.actionbar.hotkey == true then
 	local gsub = string.gsub
