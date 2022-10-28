@@ -417,7 +417,7 @@ function Stuffing:CreateReagentContainer()
 
 		button:StyleButton()
 		button:SetTemplate("Default")
-		button:SetNormalTexture("")
+		button:SetNormalTexture(C.media.empty)
 		button.IconBorder:SetAlpha(0)
 
 		button:ClearAllPoints()
@@ -542,7 +542,8 @@ function Stuffing:SlotNew(bag, slot)
 		end
 	end
 
-	local tpl = "ContainerFrameItemButtonTemplate"
+	-- local tpl = "ContainerFrameItemButtonTemplate"
+	local tpl = "BankItemButtonGenericTemplate"
 
 	if bag == -1 then
 		tpl = "BankItemButtonGenericTemplate"

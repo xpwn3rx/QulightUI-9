@@ -61,7 +61,7 @@ GameTimeFrame:Hide()
 -- MiniMapMailFrame:ClearAllPoints()
 -- MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 8, -10)
 -- MiniMapMailBorder:Hide()
--- MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+-- MiniMapMailIcon:SetTexture("Interface\\AddOns\\QulightUI\\Media\\Textures\\Mail.tga")
 -- MiniMapMailIcon:SetSize(16, 16)
 
 -- Move QueueStatus icon
@@ -69,7 +69,7 @@ QueueStatusFrame:SetClampedToScreen(true)
 QueueStatusFrame:SetFrameStrata("TOOLTIP")
 -- QueueStatusMinimapButton:ClearAllPoints()
 -- QueueStatusMinimapButton:SetPoint("TOP", Minimap, "TOP", 1, 6)
--- QueueStatusMinimapButton:SetHighlightTexture(nil)
+-- QueueStatusMinimapButton:SetHighlightTexture(C.media.empty)
 -- QueueStatusMinimapButtonBorder:Hide()
 
 -- Hide world map button
@@ -347,7 +347,7 @@ if C.minimap.tracking_icon then
 	--BETA MiniMapTrackingBackground:Hide()
 	-- MiniMapTracking:ClearAllPoints()
 	-- MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
-	-- MiniMapTrackingButton:SetHighlightTexture(nil)
+	-- MiniMapTrackingButton:SetHighlightTexture(C.media.empty)
 	-- MiniMapTrackingButtonBorder:Hide()
 	-- MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	-- MiniMapTrackingIcon:SetSize(16, 16)
@@ -386,15 +386,15 @@ if C.minimap.on_top then
 			TeleportMenu:ClearAllPoints()
 			TeleportMenu:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -13)
 		end
-		if RaidBuffsAnchor and not ShestakUIPositions[RaidBuffsAnchor:GetName()] then
+		if RaidBuffsAnchor and not QulightUIPositions[RaidBuffsAnchor:GetName()] then
 			RaidBuffsAnchor:ClearAllPoints()
 			RaidBuffsAnchor:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -3)
 		end
-		if not ShestakUIPositions[VehicleAnchor:GetName()] then
+		if not QulightUIPositions[VehicleAnchor:GetName()] then
 			VehicleAnchor:ClearAllPoints()
 			VehicleAnchor:SetPoint("TOP", Minimap, "BOTTOM", 0, -27)
 		end
-		if TooltipAnchor and not ShestakUIPositions[TooltipAnchor:GetName()] then
+		if TooltipAnchor and not QulightUIPositions[TooltipAnchor:GetName()] then
 			TooltipAnchor:ClearAllPoints()
 			TooltipAnchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20)
 		end
@@ -407,17 +407,17 @@ if C.minimap.on_top then
 			stArchaeologyFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", 2, -5)
 		end
 
-		if AutoButtonAnchor and not ShestakUIPositions[AutoButtonAnchor:GetName()] then
+		if AutoButtonAnchor and not QulightUIPositions[AutoButtonAnchor:GetName()] then
 			AutoButtonAnchor:ClearAllPoints()
 			AutoButtonAnchor:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -2, -27)
 		end
 
-		if AutoButtonAnchor and not ShestakUIPositions[AutoButtonAnchor:GetName()] then
+		if AutoButtonAnchor and not QulightUIPositions[AutoButtonAnchor:GetName()] then
 			AutoButtonAnchor:ClearAllPoints()
 			AutoButtonAnchor:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -2, -27)
 		end
 
-		if StuffingFrameBags and not ShestakUIPositions[StuffingFrameBags:GetName()] then
+		if StuffingFrameBags and not QulightUIPositions[StuffingFrameBags:GetName()] then
 			StuffingFrameBags:ClearAllPoints()
 			StuffingFrameBags:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20)
 		end
