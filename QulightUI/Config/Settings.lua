@@ -479,7 +479,7 @@ C["minimap"] = {
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,							-- Enable loot frame
-	["rolllootframe"] = false,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
+	["rolllootframe"] = true,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
 	["icon_size"] = 32,							-- Icon size
 	["width"] = 221,							-- Loot window width
 	["auto_greed"] = false,						-- Push "greed" or "disenchant" button when green item roll at max level (Blizzard doesn't use roll system anymore)
