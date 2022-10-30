@@ -280,10 +280,10 @@ local function SkinButton(f, strip)
 	f:SetTemplate("Transparent")
 	if strip then f:StripTextures() end
 
-	if f.SetNormalTexture then f:SetNormalTexture("") end
-	if f.SetHighlightTexture then f:SetHighlightTexture(C.media.empty) end
-	if f.SetPushedTexture then f:SetPushedTexture("") end
-	if f.SetDisabledTexture then f:SetDisabledTexture("") end
+	if f.SetNormalTexture then f:SetNormalTexture(0) end
+	if f.SetHighlightTexture then f:SetHighlightTexture(0) end
+	if f.SetPushedTexture then f:SetPushedTexture(0) end
+	if f.SetDisabledTexture then f:SetDisabledTexture(0) end
 
 	if f.Left then f.Left:SetAlpha(0) end
 	if f.Right then f.Right:SetAlpha(0) end
@@ -662,8 +662,8 @@ function T.SkinCheckBox(frame, size)
 	if size then
 		frame:SetSize(size, size)
 	end
-	frame:SetNormalTexture(C.media.empty)
-	frame:SetPushedTexture(C.media.empty)
+	frame:SetNormalTexture(0)
+	frame:SetPushedTexture(0)
 	frame:CreateBackdrop("Overlay")
 	frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 	frame.backdrop:SetPoint("TOPLEFT", 4, -4)
@@ -830,8 +830,8 @@ function T.SkinMaxMinFrame(frame, point)
 end
 
 function T.SkinExpandOrCollapse(f)
-	f:SetHighlightTexture("")
-	f:SetPushedTexture("")
+	f:SetHighlightTexture(0)
+	f:SetPushedTexture(0)
 
 	local bg = CreateFrame("Frame", nil, f)
 	bg:SetSize(13, 13)
@@ -853,7 +853,7 @@ function T.SkinExpandOrCollapse(f)
 	hooksecurefunc(f, "SetNormalTexture", function(self, texture)
 		if self.settingTexture then return end
 		self.settingTexture = true
-		self:SetNormalTexture("")
+		self:SetNormalTexture(0)
 
 		if texture and texture ~= "" then
 			if texture:find("Plus") then
