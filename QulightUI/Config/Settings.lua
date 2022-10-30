@@ -449,7 +449,7 @@ C["combattext"] = {
 --	Bag options
 ----------------------------------------------------------------------------------------
 C["bag"] = {
-	["enable"] = true,							-- Enable bags
+	["enable"] = false,							-- Enable bags
 	["ilvl"] = true,							-- Show item level for weapons and armor
 	["new_items"] = true,							-- Show animation for new items
 	["button_size"] = 32,							-- Buttons size
