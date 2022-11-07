@@ -478,11 +478,6 @@ local function LoadSkin()
 		T.SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
 		T.SkinEditBox(PremadeGroupsFilterDialog.Expression)
 		PremadeGroupsFilterDialog.Difficulty.DropDown:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.Difficulty, "TOPRIGHT", 5, 1)
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/PvE.lua
-		PremadeGroupsFilterDialog.ResetButton:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog, "BOTTOMLEFT", 9, 2)
-		PremadeGroupsFilterDialog.RefreshButton:SetPoint("BOTTOMRIGHT", PremadeGroupsFilterDialog, "BOTTOMRIGHT", -11, 2)
-=======
->>>>>>> b5440bfca (PVE & PVP Skin updated):ShestakUI/Modules/Skins/Blizzard/PvE.lua
 
 		local checkButtons = {
 			PremadeGroupsFilterDialog.Difficulty.Act,
