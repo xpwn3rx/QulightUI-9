@@ -64,7 +64,7 @@ frame:SetScript("OnEvent", function(self, event)
 	-- Move Mail icon
 	MinimapCluster.MailFrame:ClearAllPoints()
 	MinimapCluster.MailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
-	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+	MiniMapMailIcon:SetTexture("Interface\\AddOns\\QulightUI\\Media\\Textures\\Mail.tga")
 	MiniMapMailIcon:SetSize(16, 16)
 end)
 

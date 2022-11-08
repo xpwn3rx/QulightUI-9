@@ -32,7 +32,7 @@ local function CreateButton(element, index)
 
 	local cd = CreateFrame('Cooldown', '$parentCooldown', button, 'CooldownFrameTemplate')
 	cd:SetAllPoints()
-	cd:SetDrawEdge(false) -- ShestakUI
+	cd:SetDrawEdge(false) -- QulightUI
 	button.Cooldown = cd
 
 	local icon = button:CreateTexture(nil, 'BORDER')
@@ -413,7 +413,7 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			if(button.Count) then button.Count:SetText("") end
 
 			button:EnableMouse(false)
-			button:Hide()	-- ShestakUI
+			button:Hide()	-- QulightUI
 
 			--[[ Callback: Auras:PostUpdateGapButton(unit, gapButton, offset)
 			Called after an invisible aura button has been created. Only used by Auras when the `gap` option is enabled.
@@ -729,7 +729,7 @@ local function Enable(self)
 			auras.anchoredButtons = 0
 			auras.tooltipAnchor = auras.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- auras:Show() -- ShestakUI
+			-- auras:Show() -- QulightUI
 		end
 
 		local buffs = self.Buffs
@@ -743,7 +743,7 @@ local function Enable(self)
 			buffs.anchoredButtons = 0
 			buffs.tooltipAnchor = buffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- buffs:Show() -- ShestakUI
+			-- buffs:Show() -- QulightUI
 		end
 
 		local debuffs = self.Debuffs
@@ -757,7 +757,7 @@ local function Enable(self)
 			debuffs.anchoredButtons = 0
 			debuffs.tooltipAnchor = debuffs.tooltipAnchor or 'ANCHOR_BOTTOMRIGHT'
 
-			-- debuffs:Show() -- ShestakUI
+			-- debuffs:Show() -- QulightUI
 		end
 
 		return true

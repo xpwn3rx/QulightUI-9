@@ -295,7 +295,7 @@ local UpdatePosition = function(moveX, moveY)
 	if not relativeTo then
 		relativeTo = UIParent
 	end
-	ShestakUIPositions[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
+	QulightUIPositions[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
 	frame:SetAllPoints(frame.frame)
 	controls.x:SetText(T.Round(xOfs))
 	controls.y:SetText(T.Round(yOfs))
