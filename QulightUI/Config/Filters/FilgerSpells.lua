@@ -1927,7 +1927,7 @@ C["filger_spells"] = {
 			-- Fury of Air
 			{spellID = 197211, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Windsong
-			{spellID = 201898, unitID = "player", caster = "player", filter = "BUFF"},
+			--BETA {spellID = 201898, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -1952,7 +1952,7 @@ C["filger_spells"] = {
 			-- Crash Lightning
 			{spellID = 187878, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Frostbrand
-			{spellID = 196834, unitID = "player", caster = "player", filter = "BUFF"},
+			--BETA {spellID = 196834, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flametongue
 			{spellID = 194084, unitID = "player", caster = "player", filter = "BUFF"},
 		},
@@ -1974,7 +1974,7 @@ C["filger_spells"] = {
 			-- Earthgrab
 			{spellID = 64695, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Earthen Spike
-			{spellID = 188089, unitID = "target", caster = "player", filter = "DEBUFF"},
+			--BETA {spellID = 188089, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -2035,7 +2035,7 @@ C["filger_spells"] = {
 			-- Elemental Blast
 			{spellID = 117014, filter = "CD"},
 			-- Flametongue
-			{spellID = 193796, filter = "CD"},
+			--BETA {spellID = 193796, filter = "CD"},
 			-- Feral Lunge
 			{spellID = 196884, filter = "CD"},
 			-- Cloudburst Totem
@@ -2045,7 +2045,7 @@ C["filger_spells"] = {
 			-- Thunderstorm
 			{spellID = 51490, filter = "CD"},
 			-- Windsong
-			{spellID = 201898, filter = "CD"},
+			--BETA {spellID = 201898, filter = "CD"},
 			-- Stone Bulwark Totem
 			{spellID = 108270, filter = "CD"},
 			-- Capacitor Totem
