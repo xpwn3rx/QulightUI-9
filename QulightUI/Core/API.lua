@@ -463,7 +463,10 @@ function T.SkinScrollBar(frame)
 			if frame.Background then
 				frame.Background:Hide()
 			end
-			newThumb:DisableDrawLayer('BACKGROUND')
+			if frame.Track then
+				frame.Track:DisableDrawLayer("ARTWORK")
+			end
+			newThumb:DisableDrawLayer("BACKGROUND")
 			if not frame.thumbbg then
 				frame.thumbbg = CreateFrame("Frame", nil, frame)
 				frame.thumbbg:SetPoint("TOPLEFT", newThumb, "TOPLEFT", 0, -3)
@@ -515,8 +518,8 @@ function T.SkinTab(tab, bg)
 		tab.backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
 	else
 		tab.backdrop:SetTemplate("Transparent")
-		tab.backdrop:SetPoint("TOPLEFT", 10, -3)
-		tab.backdrop:SetPoint("BOTTOMRIGHT", -10, 3)
+		tab.backdrop:SetPoint("TOPLEFT", 0, -3)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", 0, 3)
 	end
 end
 
