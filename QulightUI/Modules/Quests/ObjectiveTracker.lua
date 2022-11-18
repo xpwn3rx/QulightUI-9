@@ -13,6 +13,13 @@ ObjectiveTrackerFrame:SetHeight(T.screenHeight / 1.6)
 
 ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
+hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
+	if parent ~= frame then
+		ObjectiveTrackerFrame:ClearAllPoints()
+		ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -20)
+	end
+end)
+
 local headers = {
 	SCENARIO_CONTENT_TRACKER_MODULE,
 	BONUS_OBJECTIVE_TRACKER_MODULE,
@@ -564,4 +571,4 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderClick", function(_, block)
 		CloseDropDownMenus()
 		QuestMapQuestOptions_ShareQuest(block.id)
 	end
-end) 
+end)
