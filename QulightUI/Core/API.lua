@@ -498,7 +498,7 @@ function T.SkinTab(tab, bg)
 	if not tab then return end
 
 	for _, object in pairs(tabs) do
-		local tex = _G[tab:GetName()..object]
+		local tex = tab:GetName() and _G[tab:GetName()..object]
 		if tex then
 			tex:SetTexture(nil)
 		end
@@ -543,6 +543,14 @@ function T.SkinNextPrevButton(btn, left, scroll)
 	end
 
 	btn:StripTextures()
+
+	if btn.Texture then
+		btn.Texture:SetAlpha(0)
+
+		if btn.Overlay then
+			btn.Overlay:SetAlpha(0)
+		end
+	end
 
 	if scroll == "Up" or scroll == "Down" or scroll == "Any" then
 		normal = nil
@@ -933,6 +941,32 @@ function T.SkinHelpBox(frame)
 	if frame.Arrow then
 		frame.Arrow:Hide()
 	end
+end
+
+function T.SkinFrame(frame, backdrop, x, y)
+	local name = frame and frame.GetName and frame:GetName()
+	local portraitFrame = name and _G[name.."Portrait"] or frame.Portrait or frame.portrait
+	local portraitFrameOverlay = name and _G[name.."PortraitOverlay"] or frame.PortraitOverlay
+	local artFrameOverlay = name and _G[name.."ArtOverlayFrame"] or frame.ArtOverlayFrame
+
+	frame:StripTextures()
+	if backdrop then
+		frame:CreateBackdrop("Transparent")
+		if x and y then
+			frame.backdrop:SetPoint("TOPLEFT", x, -y)
+			frame.backdrop:SetPoint("BOTTOMRIGHT", -x, y)
+		end
+	else
+		frame:SetTemplate("Transparent")
+	end
+
+	if frame.CloseButton then
+		T.SkinCloseButton(frame.CloseButton)
+	end
+
+	if portraitFrame then portraitFrame:SetAlpha(0) end
+	if portraitFrameOverlay then portraitFrameOverlay:SetAlpha(0) end
+	if artFrameOverlay then artFrameOverlay:SetAlpha(0) end
 end
 
 local LoadBlizzardSkin = CreateFrame("Frame")
