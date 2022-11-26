@@ -197,11 +197,7 @@ end
 function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	texture = texture or 0
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
-	local clink = C_Container.GetContainerItemLink(b.bag, b.slot)
-=======
 	local clink = GetContainerItemLink(b.bag, b.slot)
->>>>>>> 62fbdb028 ([Bags] Fixed quest item color.):ShestakUI/Modules/Blizzard/Bags.lua
 	local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	local itemIsUpgrade
@@ -1087,36 +1083,11 @@ function Stuffing:InitBags()
 		button.Icon:SetPoint("TOPLEFT", button, 2, -2)
 		button.Icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
 		button:SetScript("OnClick", function(self)
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
-			if editbox:GetText() == text then
-				Stuffing:SearchReset()
-			else
-				detail:Hide()
-				editbox:Show()
-				editbox:SetText(text)
-				Stuffing:SearchUpdate(text)
-			end
-		end)
-
-		local tooltip_hide = function()
-			GameTooltip:Hide()
-		end
-
-		local tooltip_show = function(self)
-			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", -5, 5)
-			GameTooltip:ClearLines()
-			GameTooltip:SetText(text)
-		end
-
-		button:SetScript("OnEnter", tooltip_show)
-		button:SetScript("OnLeave", tooltip_hide)
-=======
 			detail:Hide()
 			editbox:Show()
 			editbox:SetText(text)
 			Stuffing:SearchUpdate(text)
 		end)
->>>>>>> e76944208 ([Bags] Added filter buttons for search and new option "Always show filter buttons"):ShestakUI/Modules/Blizzard/Bags.lua
 	end
 
 	local button = CreateFrame("Button", nil, f)
@@ -1687,9 +1658,9 @@ function Stuffing:SortBags()
 					-- Hearthstone
 					if n == GetItemInfo(6948) or n == GetItemInfo(110560) or n == GetItemInfo(140192) then
 						p = 99
-					elseif n == GetItemInfo(141605) then -- Flight Master's Whistle
+					elseif n == GetItemInfo(141605) then
 						p = 98
-					elseif n == GetItemInfo(128353) then -- Admiral's Compass
+					elseif n == GetItemInfo(128353) then
 						p = 97
 					end
 					-- Fix for battle pets
@@ -1701,12 +1672,6 @@ function Stuffing:SortBags()
 						c1 = "Pet"
 						c2 = "Pet"
 						Sl = ""
-					end
-
-					-- Keystone
-					local ks = strmatch(itemLink, "keystone:(%d+)")
-					if ks then
-						p = 10
 					end
 
 					if classID == 0 then	-- Consumable
