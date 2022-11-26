@@ -283,8 +283,6 @@ local RestoreDefaults = function(self, button)
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-=======
 local UpdatePosition = function(moveX, moveY)
 	moveX = moveX or 0
 	moveY = moveY or 0
@@ -352,7 +350,6 @@ end)
 CloseButton:SkinButton()
 
 local index = 200
->>>>>>> 1ec538ce7 ([Move] Allow to move with Ctrl/Shift + mouse wheel.):ShestakUI/Core/Movers.lua
 local CreateMover = function(frame, unit)
 	local mover = CreateFrame("Frame", nil, UIParent)
 	if unit then
