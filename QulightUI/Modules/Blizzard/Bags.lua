@@ -1083,6 +1083,7 @@ function Stuffing:InitBags()
 		button.Icon:SetPoint("TOPLEFT", button, 2, -2)
 		button.Icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
 		button:SetScript("OnClick", function(self)
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
 			if editbox:GetText() == text then
 				Stuffing:SearchReset()
 			else
@@ -1105,6 +1106,13 @@ function Stuffing:InitBags()
 
 		button:SetScript("OnEnter", tooltip_show)
 		button:SetScript("OnLeave", tooltip_hide)
+=======
+			detail:Hide()
+			editbox:Show()
+			editbox:SetText(text)
+			Stuffing:SearchUpdate(text)
+		end)
+>>>>>>> e76944208 ([Bags] Added filter buttons for search and new option "Always show filter buttons"):ShestakUI/Modules/Blizzard/Bags.lua
 	end
 
 	local button = CreateFrame("Button", nil, f)

@@ -465,6 +465,7 @@ C["bag"] = {
 	["enable"] = false,							-- Enable bags
 	["ilvl"] = true,							-- Show item level for weapons and armor
 	["new_items"] = true,							-- Show animation for new items
+	["filter"] = false,							-- Always show filter buttons
 	["button_size"] = 32,							-- Buttons size
 	["button_space"] = 3,							-- Buttons space
 	["bank_columns"] = 17,							-- Horizontal number of columns in bank
