@@ -356,13 +356,7 @@ if C.minimap.tracking_icon then
 	MiniMapTracking.backdrop:SetPoint("TOPLEFT", MiniMapTrackingIcon, -2, 2)
 	MiniMapTracking.backdrop:SetPoint("BOTTOMRIGHT", MiniMapTrackingIcon, 2, -2)
 else
-<<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
-	MiniMapTracking:Hide()
-<<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
-=======
-=======
 	--BETA MiniMapTracking:Hide()
->>>>>>> b326b8d23 (First fixes for pre-patch.):ShestakUI/Modules/Maps/MiniMap.lua
 end
 
 ----------------------------------------------------------------------------------------
@@ -438,5 +432,4 @@ if C.minimap.on_top then
 			TTMenuAddOnBackground:SetPoint("TOP", TTMenuBackground, "TOP", 0, 0)
 		end
 	end)
->>>>>>> 4f3339a80 ([Minimap] Added new option "Move minimap on top right corner".):ShestakUI/Modules/Maps/MiniMap.lua
 end

@@ -4,8 +4,7 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Style ActionBars buttons(by Tukz)
 ----------------------------------------------------------------------------------------
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
+
 local gsub = string.gsub
 local function UpdateHotkey(self)
 	local hotkey = _G[self:GetName().."HotKey"]
@@ -45,9 +44,7 @@ local function StyleNormalButton(button)
 =======
 =======
 local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS or 10
->>>>>>> b326b8d23 (First fixes for pre-patch.):ShestakUI/Modules/ActionBars/Style.lua
 local function StyleNormalButton(button, size)
->>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Style.lua
 	if not button.isSkinned then
 		local name = button:GetName()
 		local icon = _G[name.."Icon"]
@@ -165,9 +162,7 @@ local function StyleNormalButton(button, size)
 			button.QuickKeybindHighlightTexture:SetTexture("")
 		end
 
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
 		button:StyleButton(button, button.size, true)
-=======
 		if flyoutBorder then
 			flyoutBorder:SetTexture("")
 		end
@@ -176,7 +171,6 @@ local function StyleNormalButton(button, size)
 		end
 
 		button:StyleButton()
->>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Style.lua
 
 		button.isSkinned = true
 	end
@@ -271,7 +265,6 @@ function T.StylePet()
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Style.lua
 local buttons = 0
 local function SetupFlyoutButton()
 	for i = 1, buttons do
@@ -335,8 +328,6 @@ local function HideHighlightButton(self)
 	end
 end
 
-=======
->>>>>>> dced7176a ([ActionBars] Added custom Bar6.):ShestakUI/Modules/ActionBars/Style.lua
 do
 	for i = 1, 12 do
 		StyleNormalButton(_G["ActionButton"..i])

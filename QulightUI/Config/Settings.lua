@@ -19,6 +19,7 @@ C["media"] = {
 	["glow"] = [[Interface\AddOns\QulightUI\Media\Textures\glowTex.tga]],			-- Qulight glow texture
 	["shadow"] = [[Interface\AddOns\QulightUI\Media\Textures\shadow.blp]],			-- Shadow texture
 	["highlight"] = [[Interface\AddOns\QulightUI\Media\Textures\Highlight.tga]],		-- Texture for debuffs highlight
+	["empty"] = [[Interface\AddOns\ShestakUI\Media\Textures\Invisible.tga]],		-- Invisible texture
 	["whisp_sound"] = [[Interface\AddOns\QulightUI\Media\Sounds\Whisper.ogg]],		-- Sound for whispers
 	["warning_sound"] = [[Interface\AddOns\QulightUI\Media\Sounds\Warning.ogg]],		-- Sound for warning
 	["proc_sound"] = [[Interface\AddOns\QulightUI\Media\Sounds\Proc.ogg]],			-- Sound for procs
