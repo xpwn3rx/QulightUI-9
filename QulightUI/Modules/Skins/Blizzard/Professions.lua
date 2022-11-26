@@ -113,4 +113,4 @@ local function LoadSkin()
 	GuildFrame.Container:CreateBackdrop("Overlay")
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+tinsert(T.SkinFuncs["QulightUI"], LoadSkin)
