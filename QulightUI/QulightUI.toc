@@ -2,7 +2,7 @@
 ## Title: |cff1784d1QulightUI|r
 ## Notes: A total UI overhaul for World of Warcraft
 ## Author: Shestak - Modified by Warrior- & PWn3R
-## Version: 9.0.6
+## Version: 10.0.0
 ## OptionalDeps: Blizzard_CombatText, QulightUI_Config, QulightUI_Profile, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, _NPCScan.Overlay, ls_Toasts, Mapster, Omen, OPie, oUF_Freebgrid, PitBull4, Postal, Prat-3.0, Quartz, Recount, Rematch, ShadowedUnitFrames, Stuf, TidyPlates, TipTac, TipTacTalents, TradeSkillMaster_Mailing, tullaCC, VuhDo, WeakAuras, QulightUI_Profile
 ## SavedVariables: QulightUISettings, QulightUIStats, QulightUIBindings, QulightUICurrency, QulightUIPositions
 ## SavedVariablesPerCharacter: QulightUISettingsPerChar
