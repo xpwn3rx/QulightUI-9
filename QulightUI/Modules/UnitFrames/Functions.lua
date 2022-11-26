@@ -676,12 +676,7 @@ local playerUnits = {
 	vehicle = true,
 }
 
-<<<<<<< HEAD:QulightUI/Modules/UnitFrames/Functions.lua
-T.PostUpdateIcon = function(_, unit, button, _, _, duration, expiration, debuffType, isStealable)
-
-=======
 T.PostUpdateIcon = function(_, button, unit, data)
->>>>>>> 014e09bcc (Updated oUF.):ShestakUI/Modules/UnitFrames/Functions.lua
 	if button.isDebuff then
 		if not UnitIsFriend("player", unit) and not playerUnits[button.caster] then
 			if not C.aura.player_aura_only then
@@ -708,13 +703,8 @@ T.PostUpdateIcon = function(_, button, unit, data)
 
 	if data.duration and data.duration > 0 and C.aura.show_timer == true then
 		button.remaining:Show()
-<<<<<<< HEAD:QulightUI/Modules/UnitFrames/Functions.lua
-		button.timeLeft = expiration
-		button:SetScript("OnUpdate", CreateAuraTimer)
-=======
 		button.timeLeft = data.expirationTime
 		button:SetScript("OnUpdate", T.CreateAuraTimer)
->>>>>>> 014e09bcc (Updated oUF.):ShestakUI/Modules/UnitFrames/Functions.lua
 	else
 		button.remaining:Hide()
 		button.timeLeft = math.huge
