@@ -197,7 +197,11 @@ end
 function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	texture = texture or 0
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
 	local clink = C_Container.GetContainerItemLink(b.bag, b.slot)
+=======
+	local clink = GetContainerItemLink(b.bag, b.slot)
+>>>>>>> 62fbdb028 ([Bags] Fixed quest item color.):ShestakUI/Modules/Blizzard/Bags.lua
 	local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	local itemIsUpgrade
