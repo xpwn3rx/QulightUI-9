@@ -523,8 +523,8 @@ function T.SkinTab(tab, bg)
 	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 	if bg then
 		tab.backdrop:SetTemplate("Overlay")
-		tab.backdrop:SetPoint("TOPLEFT", 3, -7)
-		tab.backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
+		tab.backdrop:SetPoint("TOPLEFT", 2, -9)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", -2, -2)
 	else
 		tab.backdrop:SetTemplate("Transparent")
 		tab.backdrop:SetPoint("TOPLEFT", 0, -3)
@@ -807,11 +807,7 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 	frame.backdrop:SetPoint("TOPLEFT", 3, 1)
 	frame:SetHeight(frame:GetHeight() + 13)
 
-	scrollFrame:StripTextures()
-	scrollFrame:CreateBackdrop("Overlay")
-	scrollFrame.backdrop:SetPoint("TOPLEFT", 15, 5)
-	scrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 31, -8)
-	scrollFrame:SetHeight(scrollFrame:GetHeight() + 12)
+	T.SkinScrollBar(frame.IconSelector.ScrollBar)
 
 	okayButton:SkinButton()
 	cancelButton:SkinButton()
@@ -991,18 +987,19 @@ local iconColors = {
 
 function T.SkinIconBorder(frame, border)
 	local backdrop = border or frame:GetParent().backdrop
+	frame:SetAlpha(0)
 	hooksecurefunc(frame, "SetVertexColor", function(self, r, g, b)
 		if r ~= BAG_ITEM_QUALITY_COLORS[1].r ~= r and g ~= BAG_ITEM_QUALITY_COLORS[1].g then
 			backdrop:SetBackdropBorderColor(r, g, b)
 		else
 			backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
-		frame:SetAlpha(0)
+		-- frame:SetAlpha(0)
 	end)
 
 	hooksecurefunc(frame, "SetAtlas", function(self, atlas)
 		local color = iconColors[atlas]
-		frame:SetAlpha(0)
+		-- frame:SetAlpha(0)
 		if color then
 			backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
