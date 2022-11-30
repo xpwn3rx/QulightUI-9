@@ -1,7 +1,7 @@
 ﻿local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
---	QulightUI personal configuration file
+--	ShestakUI personal configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!
 --	ATTENTION: When saving changes to a file encoded file should be in UTF8
 ----------------------------------------------------------------------------------------
@@ -275,6 +275,8 @@ if IsWetxius then
 		xCT3:SetPoint("CENTER", 0, 305)
 		xCT3:SetWidth(400)
 		C["combattext"].heal_treshold = UnitHealthMax("player")/100
+		PTR_IssueReporter:SetAlpha(0)
+		PTR_IssueReporter:SetScale(0.001)
 	end)
 
 	T.CustomFilgerSpell = {
@@ -284,8 +286,8 @@ if IsWetxius then
 end
 
 ----------------------------------------------------------------------------------------
---	Load external profile https://github.com/Wetxius/QulightUI_Profile
+--	Load external profile https://github.com/Wetxius/ShestakUI_Profile
 ----------------------------------------------------------------------------------------
-if QulightUICustomProfile then
-	QulightUICustomProfile()
+if ShestakUICustomProfile then
+	ShestakUICustomProfile()
 end
