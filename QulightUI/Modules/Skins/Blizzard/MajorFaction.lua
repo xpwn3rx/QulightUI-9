@@ -11,4 +11,4 @@ local function LoadSkin()
 	frame.Background:SetAlpha(0)
 end
 
-T.SkinFuncs["Blizzard_MajorFactions"] = LoadSkin
+T.SkinFuncs["Blizzard_MajorFactions"] = LoadSkin
