@@ -449,25 +449,6 @@ local RestoreUI = function(self)
 		return
 	end
 	if QulightUIPositions then
-		-- TODO: delete after while
-			if QulightUIPositions.UnitFrame then
-				for frame_name, point in pairs(QulightUIPositions.UnitFrame) do
-					if _G[frame_name] then
-						for _, frame in pairs(unitFrames) do
-							print(frame:GetName(), _G[frame_name]:GetName())
-							if frame:GetName() and frame:GetName() == _G[frame_name]:GetName() then
-								_G[frame_name]:ClearAllPoints()
-								_G[frame_name]:SetPoint(unpack(point))
-								QulightUIPositions[frame_name] = point
-							end
-						end
-					end
-				end
-				QulightUIPositions.UnitFrame = nil
-				QulightUIPositions.UFPos = nil
-			end
-			-- End of block to delete
-	
 		for frame_name, point in pairs(QulightUIPositions) do
 			if _G[frame_name] then
 				_G[frame_name]:ClearAllPoints()
