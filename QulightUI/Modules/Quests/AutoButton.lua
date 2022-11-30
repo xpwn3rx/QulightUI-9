@@ -177,9 +177,3 @@ Scanner:RegisterEvent("UNIT_INVENTORY_CHANGED")
 Scanner:SetScript("OnEvent", function()
 	startScanningBags()
 end)
-
--- Temp hide quest item by middle-click
-T.startScanningBags = startScanningBags
-
-local macro = "/run local T = unpack(ShestakUI) T.ABItemsIgnore[AutoButton:GetID()] = true T.startScanningBags() C_Timer.After(0.05, function() AutoButton:SetButtonState('NORMAL') end)"
-AutoButton:SetAttribute("macrotext3", macro)
