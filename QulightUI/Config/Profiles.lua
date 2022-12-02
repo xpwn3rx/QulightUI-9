@@ -1,4 +1,4 @@
-﻿﻿local T, C, L, _ = unpack(select(2, ...))
+﻿﻿﻿local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
 --	QulightUI personal configuration file
@@ -275,8 +275,10 @@ if IsWetxius then
 		xCT3:SetPoint("CENTER", 0, 305)
 		xCT3:SetWidth(400)
 		C["combattext"].heal_treshold = UnitHealthMax("player")/100
-		PTR_IssueReporter:SetAlpha(0)
-		PTR_IssueReporter:SetScale(0.001)
+		if PTR_IssueReporter then
+			PTR_IssueReporter:SetAlpha(0)
+			PTR_IssueReporter:SetScale(0.001)
+		end
 	end)
 
 	T.CustomFilgerSpell = {
