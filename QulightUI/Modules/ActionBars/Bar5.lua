@@ -65,6 +65,7 @@ bar:SetScript("OnEvent", function(self, event)
 				end
 			end
 		end
+		b.SetPoint = T.dummy -- Prevent moving by EditMode
 	end
 end)
 
