@@ -17,7 +17,11 @@ MultiBarLeft:SetParent(bar)
 
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:SetScript("OnEvent", function(self, event)
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar3.lua
 	Settings.SetValue("PROXY_SHOW_ACTIONBAR_3", true)
+=======
+	self:UnregisterAllEvents()
+>>>>>>> c055c83db ([ActionBars] Unregister PLAYER_ENTERING_WORLD event.):ShestakUI/Modules/ActionBars/Bar3.lua
 	local NumPerRows = C.actionbar.bar3_row
 	local NextRowButtonAnchor = _G["MultiBarLeftButton1"]
 	for i = 1, 12 do
