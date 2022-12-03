@@ -57,7 +57,7 @@ local function CreateBorder(f, i, o)
 		border:SetPoint("TOPLEFT", Mult, -Mult)
 		border:SetPoint("BOTTOMRIGHT", -Mult, Mult)
 		border:SetBackdrop({
-			edgeFile = C.media.blank, edgeSize = Mult,
+			edgeFile = C.media.glow, edgeSize = Mult,
 			insets = {left = Mult, right = Mult, top = Mult, bottom = Mult}
 		})
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
@@ -71,12 +71,16 @@ local function CreateBorder(f, i, o)
 		border:SetPoint("BOTTOMRIGHT", Mult, -Mult)
 		border:SetFrameLevel(f:GetFrameLevel() + 1)
 		border:SetBackdrop({
-			edgeFile = C.media.blank, edgeSize = Mult,
+			edgeFile = C.media.shadow, edgeSize = Mult,
 			insets = {left = Mult, right = Mult, top = Mult, bottom = Mult}
 		})
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
 		f.oborder = border
 	end
+	f.shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.shadow:SetOutside(f, 4, 4)
+	f.shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
+	f.shadow:SetBackdropBorderColor(0, 0, 0, 1)
 end
 
 local function GetTemplate(t)

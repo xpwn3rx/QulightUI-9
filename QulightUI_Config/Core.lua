@@ -678,7 +678,7 @@ ns.addCategory = function(name, text, subText, num)
 			elseif panel.currentPage == 4 then
 				PrevPageButton:Enable()
 				NextPageButton:Disable()
-				panel_3:Show()
+				panel[4]:Show()
 			end
 		end
 
