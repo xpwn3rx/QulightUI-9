@@ -1,7 +1,7 @@
 ﻿local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
---	ShestakUI personal configuration file
+--	QulightUI personal configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!
 --	ATTENTION: When saving changes to a file encoded file should be in UTF8
 ----------------------------------------------------------------------------------------
@@ -286,8 +286,8 @@ if IsWetxius then
 end
 
 ----------------------------------------------------------------------------------------
---	Load external profile https://github.com/Wetxius/ShestakUI_Profile
+--	Load external profile https://github.com/Wetxius/QulightUI_Profile
 ----------------------------------------------------------------------------------------
-if ShestakUICustomProfile then
-	ShestakUICustomProfile()
+if QulightUICustomProfile then
+	QulightUICustomProfile()
 end
