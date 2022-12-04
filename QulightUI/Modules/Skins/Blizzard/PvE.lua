@@ -243,6 +243,7 @@ local function LoadSkin()
 	RaidFinderQueueFramePartyBackfill.backdrop:SetPoint("BOTTOMRIGHT", 0, 8)
 
 	T.SkinDropDownBox(LFDQueueFrameTypeDropDown, 300)
+	LFDQueueFrameTypeDropDown.backdrop:SetParent(LFDQueueFrame) -- fixed SetFrameLevel raise to 10000
 	LFDQueueFrameTypeDropDown:SetPoint("RIGHT", -10, 0)
 
 	T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown, 300)
