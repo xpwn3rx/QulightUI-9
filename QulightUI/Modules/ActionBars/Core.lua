@@ -381,87 +381,53 @@ end
 ----------------------------------------------------------------------------------------
 --	Show grid function
 ----------------------------------------------------------------------------------------
-local actionFrame = {
-	MultiBarBottomLeft,
-	MultiBarLeft,
-	MultiBarRight,
-	MultiBarBottomRight,
-	MultiBar5,
-	MultiBar6,
-	MultiBar7,
-}
+-- local actionFrame = {
+	-- MultiBarBottomLeft,
+	-- MultiBarLeft,
+	-- MultiBarRight,
+	-- MultiBarBottomRight,
+	-- MultiBar5,
+	-- MultiBar6,
+	-- MultiBar7,
+-- }
 
-EditModeUtil.GetRightContainerAnchor = T.dummy -- Prevent error with offset
+-- EditModeUtil.GetRightContainerAnchor = T.dummy -- Prevent error with offset
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function(self)
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+-- local frame = CreateFrame("Frame")
+-- frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+-- frame:SetScript("OnEvent", function(self)
+	-- self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	-- Fix errors from EditMode
-	for i = 1, #actionFrame do
-		actionFrame[i].SetPointBase = T.dummy
-		actionFrame[i].SetScaleBase = T.dummy
-		actionFrame[i].ShowBase = T.dummy
-		actionFrame[i].HideBase = T.dummy
-	end
-	if C.actionbar.show_grid == true then
-		SetCVar("alwaysShowActionBars", 1)
-	else
-		SetCVar("alwaysShowActionBars", 0)
-		for i = 1, 12 do
-			local button = _G[format("MultiBarRightButton%d", i)]
-			button:SetAttribute("showgrid", 0)
+	-- -- Fix errors from EditMode
+	-- for i = 1, #actionFrame do
+		-- actionFrame[i].SetPointBase = T.dummy
+		-- actionFrame[i].SetScaleBase = T.dummy
+		-- actionFrame[i].ShowBase = T.dummy
+		-- actionFrame[i].HideBase = T.dummy
+	-- end
+	-- if C.actionbar.show_grid == true then
+		-- SetCVar("alwaysShowActionBars", 1)
+	-- else
+		-- SetCVar("alwaysShowActionBars", 0)
+		-- for i = 1, 12 do
+			-- local button = _G[format("MultiBarRightButton%d", i)]
+			-- button:SetAttribute("showgrid", 0)
 
-			button = _G[format("MultiBarBottomRightButton%d", i)]
-			button:SetAttribute("showgrid", 0)
+			-- button = _G[format("MultiBarBottomRightButton%d", i)]
+			-- button:SetAttribute("showgrid", 0)
 
-			button = _G[format("MultiBarLeftButton%d", i)]
-			button:SetAttribute("showgrid", 0)
+			-- button = _G[format("MultiBarLeftButton%d", i)]
+			-- button:SetAttribute("showgrid", 0)
 
-			button = _G[format("MultiBarBottomLeftButton%d", i)]
-			button:SetAttribute("showgrid", 0)
-		end
-		local reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT
-		for i = 1, #actionFrame do
-			actionFrame[i]:SetShowGrid(false, reason)
-		end
-	end
-
-	local frame = CreateFrame("Frame")
-	frame:RegisterEvent("ACTIONBAR_SHOWGRID")
-	frame:RegisterEvent("ACTIONBAR_HIDEGRID")
-	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	frame:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
-	frame:RegisterEvent("ACTIONBAR_UPDATE_STATE")
-	frame:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	frame:SetScript("OnEvent", function(self, event)
-		if event == "ACTIONBAR_SHOWGRID" then
-			for i = 1, #allButtons do
-				allButtons[i]:SetAlpha(1)
-			end
-		elseif event == "ACTIONBAR_PAGE_CHANGED" or event == "ACTIONBAR_UPDATE_STATE" or event == "UPDATE_VEHICLE_ACTIONBAR" then
-			C_Timer.After(0.02, function()
-				for i = 1, #allButtons do
-					local button = allButtons[i]
-					button:SetAlpha(1)
-					if not button:HasAction() then
-						button:SetAlpha(0)
-					end
-				end
-			end)
-		else
-			C_Timer.After(0.05, function()
-				for i = 1, #allButtons do
-					local button = allButtons[i]
-					if not button:HasAction() then
-						button:SetAlpha(0)
-					end
-				end
-			end)
-		end
-	end)
-end
+			-- button = _G[format("MultiBarBottomLeftButton%d", i)]
+			-- button:SetAttribute("showgrid", 0)
+		-- end
+		-- local reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT
+		-- for i = 1, #actionFrame do
+			-- actionFrame[i]:SetShowGrid(false, reason)
+		-- end
+	-- end
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Pet/StanceBar style functions

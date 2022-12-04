@@ -18,10 +18,14 @@ MultiBarBottomLeft:SetParent(bar)
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:SetScript("OnEvent", function(self, event)
 <<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar2.lua
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar2.lua
 	Settings.SetValue("PROXY_SHOW_ACTIONBAR_2", true)
 =======
 	self:UnregisterAllEvents()
 >>>>>>> c055c83db ([ActionBars] Unregister PLAYER_ENTERING_WORLD event.):ShestakUI/Modules/ActionBars/Bar2.lua
+=======
+	-- self:UnregisterAllEvents()
+>>>>>>> 758b5f1ce (Revert action bar changes, still taints.):ShestakUI/Modules/ActionBars/Bar2.lua
 	local NumPerRows = C.actionbar.bar2_row
 	local NextRowButtonAnchor = _G["MultiBarBottomLeftButton1"]
 	for i = 1, 12 do
@@ -50,7 +54,7 @@ bar:SetScript("OnEvent", function(self, event)
 				b:SetPoint("LEFT", b2, "RIGHT", T.Scale(C.actionbar.button_space), 0)
 			end
 		end
-		b.SetPoint = T.dummy -- Prevent moving by EditMode
+		-- b.SetPoint = T.dummy -- Prevent moving by EditMode
 	end
 end)
 
