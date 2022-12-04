@@ -203,9 +203,19 @@ function button:PLAYER_LOGIN()
 			elseif prospect and GetItemCount(itemID) >= 5 and ores[itemID] then
 				spell, r, g, b = GetSpellInfo(31252), 1, 0.33, 0.33
 			elseif disenchanter then
-				local _, _, itemRarity, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(link)
-				if not (class == Enum.ItemClass.Weapon or class == Enum.ItemClass.Armor or (class == 3 and subClass == 11)) or not (itemRarity and (itemRarity > 1 and (itemRarity < 5 or itemRarity == 6))) then return end
-				spell, r, g, b = GetSpellInfo(13262), 0.5, 0.5, 1
+				if enchantingItems[itemID] then
+					spell, r, g, b = GetSpellInfo(13262), 0.5, 0.5, 1
+				else
+					local _, _, quality, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(link)
+					if quality and ((quality >= Enum.ItemQuality.Uncommon and quality <= Enum.ItemQuality.Epic)
+						and C_Item.GetItemInventoryTypeByID(itemID) ~= Enum.InventoryType.IndexBodyType
+						and (class == Enum.ItemClass.Weapon
+							or (class == Enum.ItemClass.Armor and subClass ~= Enum.ItemClass.Cosmetic)
+							or (class == Enum.ItemClass.Gem and subClass == 11)
+							or class == Enum.ItemClass.Profession)) then
+						spell, r, g, b = GetSpellInfo(13262), 0.5, 0.5, 1
+					end
+				end
 			elseif rogue then
 				for index = 1, self:NumLines() do
 					if string.match(_G["GameTooltipTextLeft"..index]:GetText() or "", rogue) then
