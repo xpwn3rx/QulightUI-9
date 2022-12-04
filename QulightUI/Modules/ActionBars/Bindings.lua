@@ -245,6 +245,12 @@ SlashCmdList.MOUSEOVERBIND = function()
 				if C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
 					Bar8MouseOver(1)
 				end
+				if C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
+					Bar7MouseOver(1)
+				end
+				if C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
+					Bar8MouseOver(1)
+				end
 			end
 		end
 
@@ -273,6 +279,12 @@ SlashCmdList.MOUSEOVERBIND = function()
 				end
 				if C.actionbar.petbar_mouseover == true and C.actionbar.petbar_horizontal == true then
 					PetBarMouseOver(0)
+				end
+				if C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
+					Bar7MouseOver(0)
+				end
+				if C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
+					Bar8MouseOver(0)
 				end
 				if C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
 					Bar7MouseOver(0)
@@ -314,6 +326,20 @@ SlashCmdList.MOUSEOVERBIND = function()
 
 			b = _G["MultiBar5Button"..i]
 			b:HookScript("OnEnter", function(self) bind:Update(self) end)
+		end
+
+		if C.actionbar.bar7_enable then
+			for i = 1, 12 do
+				local b = _G["MultiBar6Button"..i]
+				b:HookScript("OnEnter", function(self) bind:Update(self) end)
+			end
+		end
+
+		if C.actionbar.bar8_enable then
+			for i = 1, 12 do
+				local b = _G["MultiBar7Button"..i]
+				b:HookScript("OnEnter", function(self) bind:Update(self) end)
+			end
 		end
 
 		if C.actionbar.bar7_enable then

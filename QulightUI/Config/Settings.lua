@@ -143,6 +143,7 @@ C["unitframe"] = {
 	["boss_width"] = 150,							-- Boss and Arena width
 	-- Size
 	["player_width"] = 220,							-- Player and Target width
+	["boss_width"] = 150,						-- Boss and Arena width
 	["extra_height_auto"] = true,						-- Auto height for health/power depending on font size
 	["extra_health_height"] = 0,						-- Additional height for health
 	["extra_power_height"] = 0,						-- Additional height for power
@@ -204,7 +205,6 @@ C["raidframe"] = {
 	-- Plugins
 	["plugins_aura_watch"] = true,						-- Raid debuff icons (from the list)
 	["plugins_aura_watch_timer"] = false,					-- Timer on raid debuff icons
-	["plugins_pvp_debuffs"] = true,						-- Show also PvP debuff icons (from the list)
 	["plugins_debuffhighlight_icon"] = true,	-- Show dispellable debuff icon (texture will be shown anyway)
 	["plugins_pvp_debuffs"] = true,			-- Show PvP debuff icons (from the list)
 	["plugins_healcomm"] = true,						-- Incoming heal bar on raid frame
@@ -400,6 +400,7 @@ C["nameplate"] = {
 	["show_castbar_name"] = false,				-- Show castbar name
 	["class_icons"] = false,					-- Icons by class in PvP
 	["name_abbrev"] = false,					-- Display abbreviated names
+	["short_name"] = false,						-- Replace names with short ones
 	["clamp"] = false,							-- Clamp nameplates to the top of the screen when outside of view
 	["track_debuffs"] = true,					-- Show your debuffs (from the list)
 	["track_buffs"] = false,					-- Show dispellable enemy buffs and buffs from the list
@@ -437,6 +438,7 @@ C["combattext"] = {
 	["healing"] = true,							-- Show outgoing healing
 	["show_hots"] = true,							-- Show periodic healing effects in healing frame
 	["show_overhealing"] = true,						-- Show outgoing overhealing
+	["incoming"] = true,						-- Show incoming damage and healing
 	["damage_color"] = true,						-- Display damage numbers depending on school of magic
 	["dispel"] = true,							-- Tells you about your dispels (works only with ["damage"] = true)
 	["interrupt"] = true,						-- Tells you about your interrupts (works only with ["damage"] = true)

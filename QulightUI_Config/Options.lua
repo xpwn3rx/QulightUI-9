@@ -1766,9 +1766,18 @@ do
 	local bar6_mouseover = ns.CreateCheckBox(parent, "bar6_mouseover", L.actionbar_bar1_mouseover)
 	bar6_mouseover:SetPoint("LEFT", bar6_size, "RIGHT", 130, 0)
 
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	-- Bar 7
 	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 7")
 	subheader:SetPoint("TOPLEFT", bar6_size, "BOTTOMLEFT", 0, -10)
+=======
+	local custom_bar_mouseover = ns.CreateCheckBox(parent, "custom_bar_mouseover", L.actionbar_bar1_mouseover)
+	custom_bar_mouseover:SetPoint("LEFT", custom_bar_size, "RIGHT", 130, 0)
+
+	-- Bar 7
+	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 7")
+	subheader:SetPoint("TOPLEFT", custom_bar_size, "BOTTOMLEFT", 0, -10)
+>>>>>>> 86e10c28a ([ActionBars] Added Bar7 and Bar8. Need to enable in Blizzard option also.):ShestakUI_Config/Options.lua
 
 	local bar7_enable = ns.CreateCheckBox(parent, "bar7_enable", ENABLE)
 	bar7_enable:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
