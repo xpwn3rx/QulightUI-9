@@ -4,11 +4,10 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Hide Blizzard ActionBars stuff(by Tukz)
 ----------------------------------------------------------------------------------------
-local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS or 10
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	MainMenuBar:SetScale(0.00001)
+	-- MainMenuBar:SetScale(0.00001)
 	MainMenuBar:EnableMouse(false)
 	OverrideActionBar:SetScale(0.00001)
 	OverrideActionBar:EnableMouse(false)
@@ -123,11 +122,19 @@ function RightBarMouseOver(alpha)
 
 	if C.actionbar.stancebar_horizontal == false and C.actionbar.stancebar_hide == false then
 		if StanceHolder:IsShown() then
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
 			for i = 1, NUM_STANCE_SLOTS do
 				local pb = _G["StanceButton"..i]
 				pb:SetAlpha(alpha)
 				local f = _G["StanceButton"..i.."Cooldown"]
 				T.HideSpiral(f, alpha)
+=======
+			for i = 1, 10 do
+				local b = _G["StanceButton"..i]
+				b:SetAlpha(alpha)
+				local c = _G["StanceButton"..i.."Cooldown"]
+				T.HideSpiral(c, alpha)
+>>>>>>> 67b2bf25a (Cleanup.):ShestakUI/Modules/ActionBars/Core.lua
 			end
 			StanceHolder:SetAlpha(alpha)
 		end
@@ -135,11 +142,19 @@ function RightBarMouseOver(alpha)
 end
 
 function StanceBarMouseOver(alpha)
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
 	for i = 1, NUM_STANCE_SLOTS do
 		local pb = _G["StanceButton"..i]
 		pb:SetAlpha(alpha)
 		local f = _G["StanceButton"..i.."Cooldown"]
 		T.HideSpiral(f, alpha)
+=======
+	for i = 1, 10 do
+		local b = _G["StanceButton"..i]
+		b:SetAlpha(alpha)
+		local c = _G["StanceButton"..i.."Cooldown"]
+		T.HideSpiral(c, alpha)
+>>>>>>> 67b2bf25a (Cleanup.):ShestakUI/Modules/ActionBars/Core.lua
 	end
 	StanceHolder:SetAlpha(alpha)
 end
@@ -376,15 +391,15 @@ EventSpiral:SetScript("OnEvent", function()
 			Bar6MouseOver(0)
 		end
 	end
-
-	if C.actionbar.bar7_mouseover then
+	if C.actionbar.custom_bar_enable and C.actionbar.custom_bar_mouseover then
+		CustomBarMouseOver(0)
+	end
+	if C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
 		Bar7MouseOver(0)
 	end
-
-	if C.actionbar.bar8_mouseover then
+	if C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
 		Bar8MouseOver(0)
 	end
-
 	EventSpiral:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
@@ -459,7 +474,7 @@ T.ShiftBarUpdate = function()
 	local texture, isActive, isCastable
 	local button, icon, cooldown
 	local start, duration, enable
-	for i = 1, NUM_STANCE_SLOTS do
+	for i = 1, 10 do
 		button = _G["StanceButton"..i]
 		icon = _G["StanceButton"..i.."Icon"]
 		if i <= numForms then
