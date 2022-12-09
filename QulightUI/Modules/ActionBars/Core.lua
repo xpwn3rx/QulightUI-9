@@ -77,6 +77,7 @@ function RightBarMouseOver(alpha)
 		MultiBarLeft:SetAlpha(alpha)
 	end
 
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
 	if C.actionbar.rightbars > 2 then
 		if MultiBarBottomRight:IsShown() then
 			for i = 1, 12 do
@@ -89,6 +90,8 @@ function RightBarMouseOver(alpha)
 		end
 	end
 
+=======
+>>>>>>> 0bab1b43f ([ActionBars] Replace CustomBar with new Blizzard bar6.):QulightUI/Modules/ActionBars/Core.lua
 	if MultiBarRight:IsShown() then
 		for i = 1, 12 do
 			local pb = _G["MultiBarRightButton"..i]
@@ -97,6 +100,18 @@ function RightBarMouseOver(alpha)
 			T.HideSpiral(g, alpha)
 		end
 		MultiBarRight:SetAlpha(alpha)
+	end
+
+	if C.actionbar.rightbars > 2 then
+		if MultiBar5:IsShown() then
+			for i = 1, 12 do
+				local b = _G["MultiBar5Button"..i]
+				b:SetAlpha(alpha)
+				local c = _G["MultiBar5Button"..i.."Cooldown"]
+				T.HideSpiral(c, alpha)
+			end
+			MultiBar5:SetAlpha(alpha)
+		end
 	end
 
 	if C.actionbar.petbar_horizontal == false and C.actionbar.petbar_hide == false then
@@ -167,7 +182,7 @@ function BottomBarMouseOver(alpha)
 		end
 	end
 
-	if C.actionbar.rightbars < 3 and MultiBarBottomRight:IsShown() then
+	if C.actionbar.bottombars > 2 and MultiBarBottomRight:IsShown() then
 		if C.actionbar.toggle_mode == true and QulightUISettingsPerChar.BottomBars == 1 then
 			for i = 4, 6 do
 				local b = _G["MultiBarBottomRightButton"..i]
@@ -259,17 +274,19 @@ function Bar5MouseOver(alpha)
 	end
 end
 
-function CustomBarMouseOver(alpha)
-	for i = 1, 12 do
-		local b = _G["CustomBarButton"..i]
-		b:SetAlpha(alpha)
-		local c = _G["CustomBarButton"..i.."Cooldown"]
-		T.HideSpiral(c, alpha)
+function Bar6MouseOver(alpha)
+	if MultiBar5:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBar6Button"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBar6Button"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
 	end
 end
 
 function Bar7MouseOver(alpha)
-	if MultiBarBottomRight:IsShown() then
+	if MultiBar6:IsShown() then
 		for i = 1, 12 do
 			local b = _G["MultiBar6Button"..i]
 			b:SetAlpha(alpha)
@@ -280,7 +297,7 @@ function Bar7MouseOver(alpha)
 end
 
 function Bar8MouseOver(alpha)
-	if MultiBarBottomRight:IsShown() then
+	if MultiBar7:IsShown() then
 		for i = 1, 12 do
 			local b = _G["MultiBar7Button"..i]
 			b:SetAlpha(alpha)
@@ -316,6 +333,42 @@ EventSpiral:SetScript("OnEvent", function()
 	if C.actionbar.bottombars_mouseover then
 		BottomBarMouseOver(0)
 	end
+
+	if C.actionbar.editor then
+		if C.actionbar.bar1_mouseover then
+			Bar1MouseOver(0)
+		end
+
+		if C.actionbar.bar2_mouseover then
+			Bar2MouseOver(0)
+		end
+
+		if C.actionbar.bar3_mouseover then
+			Bar3MouseOver(0)
+		end
+
+		if C.actionbar.bar4_mouseover then
+			Bar4MouseOver(0)
+		end
+
+		if C.actionbar.bar5_mouseover then
+			Bar5MouseOver(0)
+		end
+
+		if C.actionbar.bar6_mouseover then
+			Bar6MouseOver(0)
+		end
+	end
+
+	if C.actionbar.bar7_mouseover then
+		Bar7MouseOver(0)
+	end
+
+	if C.actionbar.bar8_mouseover then
+		Bar8MouseOver(0)
+	end
+
+	EventSpiral:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
 if (C.actionbar.rightbars_mouseover == true and C.actionbar.petbar_horizontal == false and C.actionbar.petbar_hide == false) or (C.actionbar.petbar_mouseover == true and C.actionbar.petbar_horizontal == true and C.actionbar.petbar_hide == false) then
