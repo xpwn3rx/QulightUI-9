@@ -122,19 +122,11 @@ function RightBarMouseOver(alpha)
 
 	if C.actionbar.stancebar_horizontal == false and C.actionbar.stancebar_hide == false then
 		if StanceHolder:IsShown() then
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
-			for i = 1, NUM_STANCE_SLOTS do
-				local pb = _G["StanceButton"..i]
-				pb:SetAlpha(alpha)
-				local f = _G["StanceButton"..i.."Cooldown"]
-				T.HideSpiral(f, alpha)
-=======
 			for i = 1, 10 do
 				local b = _G["StanceButton"..i]
 				b:SetAlpha(alpha)
 				local c = _G["StanceButton"..i.."Cooldown"]
 				T.HideSpiral(c, alpha)
->>>>>>> 67b2bf25a (Cleanup.):ShestakUI/Modules/ActionBars/Core.lua
 			end
 			StanceHolder:SetAlpha(alpha)
 		end
@@ -142,19 +134,11 @@ function RightBarMouseOver(alpha)
 end
 
 function StanceBarMouseOver(alpha)
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
-	for i = 1, NUM_STANCE_SLOTS do
-		local pb = _G["StanceButton"..i]
-		pb:SetAlpha(alpha)
-		local f = _G["StanceButton"..i.."Cooldown"]
-		T.HideSpiral(f, alpha)
-=======
 	for i = 1, 10 do
 		local b = _G["StanceButton"..i]
 		b:SetAlpha(alpha)
 		local c = _G["StanceButton"..i.."Cooldown"]
 		T.HideSpiral(c, alpha)
->>>>>>> 67b2bf25a (Cleanup.):ShestakUI/Modules/ActionBars/Core.lua
 	end
 	StanceHolder:SetAlpha(alpha)
 end
@@ -193,7 +177,7 @@ function BottomBarMouseOver(alpha)
 	end
 
 	if C.actionbar.bottombars > 2 and MultiBarBottomRight:IsShown() then
-		if C.actionbar.toggle_mode == true and QulightUISettingsPerChar.BottomBars == 1 then
+		if C.actionbar.toggle_mode == true and ShestakUISettingsPerChar.BottomBars == 1 then
 			for i = 4, 6 do
 				local b = _G["MultiBarBottomRightButton"..i]
 				b:SetAlpha(alpha)
@@ -317,28 +301,6 @@ function Bar8MouseOver(alpha)
 	end
 end
 
-function Bar7MouseOver(alpha)
-	if MultiBarBottomRight:IsShown() then
-		for i = 1, 12 do
-			local b = _G["MultiBar6Button"..i]
-			b:SetAlpha(alpha)
-			local c = _G["MultiBar6Button"..i.."Cooldown"]
-			T.HideSpiral(c, alpha)
-		end
-	end
-end
-
-function Bar8MouseOver(alpha)
-	if MultiBarBottomRight:IsShown() then
-		for i = 1, 12 do
-			local b = _G["MultiBar7Button"..i]
-			b:SetAlpha(alpha)
-			local c = _G["MultiBar7Button"..i.."Cooldown"]
-			T.HideSpiral(c, alpha)
-		end
-	end
-end
-
 ----------------------------------------------------------------------------------------
 --	Fix cooldown spiral alpha (WoD bug)
 ----------------------------------------------------------------------------------------
@@ -391,15 +353,15 @@ EventSpiral:SetScript("OnEvent", function()
 			Bar6MouseOver(0)
 		end
 	end
-	if C.actionbar.custom_bar_enable and C.actionbar.custom_bar_mouseover then
-		CustomBarMouseOver(0)
-	end
-	if C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
+
+	if C.actionbar.bar7_mouseover then
 		Bar7MouseOver(0)
 	end
-	if C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
+
+	if C.actionbar.bar8_mouseover then
 		Bar8MouseOver(0)
 	end
+
 	EventSpiral:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 

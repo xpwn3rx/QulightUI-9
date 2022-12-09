@@ -267,14 +267,9 @@ frame:SetScript("OnEvent", function(self, event)
 		StyleNormalButton(_G["MultiBarLeftButton"..i], C.actionbar.editor and C.actionbar.bar3_size)
 		StyleNormalButton(_G["MultiBarRightButton"..i], C.actionbar.editor and C.actionbar.bar4_size)
 		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
+		StyleNormalButton(_G["MultiBar5Button"..i], C.actionbar.editor and C.actionbar.bar6_size)
 		StyleNormalButton(_G["MultiBar6Button"..i], C.actionbar.bar7_size)
 		StyleNormalButton(_G["MultiBar7Button"..i], C.actionbar.bar8_size)
-	end
-
-	if C.actionbar.custom_bar_enable then
-		for i = 1, 12 do
-			StyleNormalButton(_G["CustomBarButton"..i], C.actionbar.custom_bar_size)
-		end
 	end
 
 	StyleNormalButton(ExtraActionButton1)
