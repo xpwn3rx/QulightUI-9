@@ -98,7 +98,7 @@ local function SetTemplate(f, t)
 	GetTemplate(t)
 
 	f:SetBackdrop({
-		bgFile = C.media.blank, edgeFile = C.media.blank, edgeSize = Mult,
+		bgFile = C.media.texture, edgeFile = C.media.glow, edgeSize = Mult,
 		insets = {left = -Mult, right = -Mult, top = -Mult, bottom = -Mult}
 	})
 
@@ -114,6 +114,11 @@ local function SetTemplate(f, t)
 
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	if f.Shadow then return end
+	f.Shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.Shadow:SetOutside(self, 4, 4)
+	f.Shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
+	f.Shadow:SetBackdropBorderColor(0, 0, 0, 1)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
