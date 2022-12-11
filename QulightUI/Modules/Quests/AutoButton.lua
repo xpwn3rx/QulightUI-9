@@ -52,9 +52,7 @@ AutoButton:SetPoint("CENTER", AutoButtonAnchor, "CENTER", 0, 0)
 AutoButton:SetTemplate("Default")
 AutoButton:StyleButton()
 AutoButton:RegisterForClicks("AnyUp", "AnyDown")
-AutoButton:SetAttribute("type1", "item")
-AutoButton:SetAttribute("type2", "item")
-AutoButton:SetAttribute("type3", "macro")
+AutoButton:SetAttribute("type", "item")
 AutoButtonHide()
 
 -- Texture for our button
