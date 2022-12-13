@@ -28,8 +28,7 @@ C["position"] = {
 	["bg_score"] = {"BOTTOMLEFT", ActionButton12, "BOTTOMRIGHT", 10, -2},					-- BG stats
 	["player_buffs"] = {"TOPRIGHT", Minimap, "TOPLEFT", -7, 2},			-- Player buffs
 	["self_buffs"] = {"CENTER", UIParent, "CENTER", 0, 190},						-- Self buff reminder
-	["raid_buffs"] = {"TOPLEFT", Minimap, "BOTTOMLEFT", 3, -6
-},						-- Raid buff reminder
+	["raid_buffs"] = {"TOPLEFT", Minimap, "BOTTOMLEFT", 3, -6},						-- Raid buff reminder
 	["top_panel"] = {"TOP", UIParent, "TOP", 0, -21},							-- Top panel
 	["raid_utility"] = {"TOP", UIParent, "TOP", -280, 1},							-- Raid utility
 	["archaeology"] = {"BOTTOMRIGHT", Minimap, "TOPRIGHT", 2, 5},						-- Archaeology frame
