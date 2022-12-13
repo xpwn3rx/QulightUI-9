@@ -476,6 +476,7 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent(event)
 	RestoreUI(self)
+	C_EditMode.SetActiveLayout(1) -- BETA Remove after while
 end)
 
 SlashCmdList.MOVING = InitMove
@@ -505,3 +506,30 @@ StaticPopupDialogs.RESET_UF = {
 
 SlashCmdList.RESETUF = function() StaticPopup_Show("RESET_UF") end
 SLASH_RESETUF1 = "/resetuf"
+
+StaticPopupDialogs.MOVEUI_RESET = {
+	text = L_POPUP_RESETUI,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else
+		QulightUIPositions = {}
+		for _, v in pairs(placed) do
+			if _G[v] then
+				_G[v]:SetUserPlaced(false)
+			end
+		end
+		ReloadUI()
+		end
+	end,
+	timeout = 0,
+	whileDead = 1,
+	hideOnEscape = true,
+	preferredIndex = 5,
+}
+
+-- Replace EditMode with our moving system
+GameMenuButtonEditMode:SetScript("OnClick", function()
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+	SlashCmdList.MOVING()
+	HideUIPanel(GameMenuFrame)
+end)
