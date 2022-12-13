@@ -205,14 +205,8 @@ for i = 1, 6 do
 end
 
 local function SkinVigorBar(widget)
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
-	local widgetInfo = C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo(4460)
-	if not widgetInfo then return end
-	VigorBar:Show()
-=======
 	VigorBar:Show()
 	local widgetInfo = C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo(4460)
->>>>>>> 4722719e8 ([UIWidget] Added skin for dragonriding bar.):ShestakUI/Modules/Blizzard/UIWidget.lua
 	local total = widgetInfo.numTotalFrames
 	for i = 1, total do
 		local value = 0
@@ -228,12 +222,18 @@ local function SkinVigorBar(widget)
 	end
 
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 	if total < 6 and IsPlayerSpell(377922) then total = 6 end -- sometimes it return 5
 
 	if total < 6 then
 =======
 	if total ~= 6 then
 >>>>>>> 4722719e8 ([UIWidget] Added skin for dragonriding bar.):ShestakUI/Modules/Blizzard/UIWidget.lua
+=======
+	if total < 6 and IsPlayerSpell(377922) then total = 6 end -- sometimes it return 5
+
+	if total < 6 then
+>>>>>>> c4d6b5546 ([UIWidget] Try to fix wrong max bar for Vigor.):ShestakUI/Modules/Blizzard/UIWidget.lua
 		for i = total + 1, 6 do
 			VigorBar[i]:Hide()
 			VigorBar[i]:SetValue(0)
