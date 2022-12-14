@@ -89,7 +89,7 @@ else
 end
 
 StanceAnchor:RegisterEvent("PLAYER_LOGIN")
-StanceAnchor:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player")
+StanceAnchor:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 StanceAnchor:SetScript("OnEvent", function()
 	local forms = GetNumShapeshiftForms()
 	if forms > 0 then
