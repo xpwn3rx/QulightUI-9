@@ -12,7 +12,7 @@ local staminabuffs = T.ReminderBuffs["Stamina"]
 local versbuffs = T.ReminderBuffs["Vers"]
 local reducebuffs = T.ReminderBuffs["Reduce"]
 local custombuffs = T.ReminderBuffs["Custom"]
-local visible, flask, battleelixir, guardianelixir, food, stamina, vers, spell4, reduce, custom, weapon, armor
+local visible, flask, battleelixir, guardianelixir, food, stamina, vers, spell4, reduce, custom, weapon
 local playerBuff = {}
 local icons = {}
 local UpdatePositions
@@ -217,7 +217,7 @@ local function OnAuraChange(_, event, arg1)
 	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
 		RaidBuffReminder:SetAlpha(0)
 		visible = false
-	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and armor == true and vers == true and reduce == true then
+	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and vers == true and reduce == true then
 		if not visible then
 			RaidBuffReminder:SetAlpha(0)
 			visible = false
