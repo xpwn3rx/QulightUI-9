@@ -11,7 +11,7 @@ local foodbuffs = T.ReminderBuffs["Food"]
 local staminabuffs = T.ReminderBuffs["Stamina"]
 local versbuffs = T.ReminderBuffs["Vers"]
 local custombuffs = T.ReminderBuffs["Custom"]
-local visible, flask, battleelixir, guardianelixir, food, stamina, vers, spell4, custom, weapon, armor
+local visible, flask, battleelixir, guardianelixir, food, stamina, vers, spell4, reduce, custom, weapon
 local playerBuff = {}
 local icons = {}
 local UpdatePositions
@@ -77,44 +77,6 @@ local function CheckWeaponBuff()
 	end
 end
 
-local scanner = CreateFrame("GameTooltip", "ArmorScanningTooltip", nil, "GameTooltipTemplate")
-scanner:SetOwner(UIParent, "ANCHOR_NONE")
-
-local KitPattern = "(.+) %(%d+ .+%)$"
-if T.client == "zhTW" then
-	KitPattern = "%(%+%d+.+"
-elseif T.client == "zhCN" then
-	KitPattern = "%（%+%d+ .+"
-elseif T.client == "koKR" then
-	KitPattern = "%(.+ %+%d+%)"
-end
-
-local function CheckArmorBuff()
-	local armorBuff = false
-	local hasItem = scanner:SetInventoryItem("player", 5)
-	if hasItem then
-		for i = 2, scanner:NumLines() do
-			local tooltipLine = _G["ArmorScanningTooltipTextLeft"..i]
-			local text = tooltipLine:GetText()
-			if text and text ~= "" then
-				if text:find(KitPattern) then
-					armorBuff = true
-					break
-				end
-			end
-		end
-	end
-
-	if armorBuff == true then
-		ArmorFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-		armor = true
-		return
-	else
-		ArmorFrame:SetAlpha(1)
-		armor = false
-	end
-end
-
 local function OnAuraChange(_, event, arg1)
 	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
 
@@ -165,13 +127,8 @@ local function OnAuraChange(_, event, arg1)
 	end
 
 	do
-		WeaponFrame.t:SetTexture(463543)
+		WeaponFrame.t:SetTexture(135250)
 		CheckWeaponBuff()
-	end
-
-	do
-		ArmorFrame.t:SetTexture(3528447)
-		CheckArmorBuff()
 	end
 
 	for i = 1, #staminabuffs do
@@ -244,7 +201,11 @@ local function OnAuraChange(_, event, arg1)
 	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
 		RaidBuffReminder:SetAlpha(0)
 		visible = false
+<<<<<<< HEAD:QulightUI/Modules/Auras/RaidBuffsReminder.lua
 	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and armor == true and vers == true then
+=======
+	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and vers == true and reduce == true then
+>>>>>>> fbd30c6f1 ([RaidBuffsReminder] Remove armor buff and change icon for weapon buff.):QulightUI/Modules/Auras/RaidBuffsReminder.lua
 		if not visible then
 			RaidBuffReminder:SetAlpha(0)
 			visible = false
@@ -283,7 +244,6 @@ local buffButtons = {
 	"FlaskFrame",
 	"FoodFrame",
 	"WeaponFrame",
-	"ArmorFrame",
 	"StaminaFrame",
 	"VersFrame",
 	"Spell4Frame",
