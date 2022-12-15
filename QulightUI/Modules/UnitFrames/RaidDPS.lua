@@ -431,7 +431,6 @@ end
 ----------------------------------------------------------------------------------------
 if C.raidframe.layout == "AUTO" then
 	local function CheckSpec(self, event, unit)
-		if event == "PLAYER_SPECIALIZATION_CHANGED" and unit ~= "player" then return end
 		if T.IsHealerSpec() then
 			-- Disable DPS
 			for _, party in pairs({oUF_PartyDPS, oUF_PartyTargetDPS, oUF_PartyPetDPS}) do
@@ -506,7 +505,7 @@ end
 
 local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	frame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+	frame:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player")
 	frame:SetScript("OnEvent", CheckSpec)
 end
 
