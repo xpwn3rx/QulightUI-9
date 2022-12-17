@@ -13,7 +13,7 @@ T.RaidBuffs = {
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
 		{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
 		{102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
-		{155777, "RIGHT", {0.4, 0.9, 0.4}},				-- Rejuvenation (Germination)
+		{155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
 	},
 	EVOKER = {
 		{355941, "TOPRIGHT", {0.20, 0.58, 0.50}},			-- Dream Breath
@@ -34,9 +34,9 @@ T.RaidBuffs = {
 		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Faith
 		{200025, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Virtue
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
-		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},			-- Blessing of Freedom
-		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},			-- Blessing of Sacrifice
-		{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},			-- Blessing of Spellwarding
+		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
+		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
+		{204018, "BOTTOMRIGHT", {0.4, 0.6, 0.8}, true},		-- Blessing of Spellwarding
 		{287280, "BOTTOMLEFT", {0.9, 0.5, 0.1}},			-- Glimmer of Light
 		{223306, "TOPLEFT", {0.8, 0.8, 0.1}},				-- Bestow Faith
 	},
@@ -54,7 +54,7 @@ T.RaidBuffs = {
 		{204288, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Earth Shield
 	},
 	HUNTER = {
-		{35079, "TOPRIGHT", {0.2, 0.2, 1}},				-- Misdirection
+		{35079, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
 	},
 	ROGUE = {
 		{57934, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
@@ -63,9 +63,9 @@ T.RaidBuffs = {
 		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
 	},
 	ALL = {
-		{23333, "LEFT", {1, 0, 0}, true}, 				-- Warsong flag, Horde
-		{23335, "LEFT", {0, 0, 1}, true},				-- Warsong flag, Alliance
-		{34976, "LEFT", {1, 0, 0}, true}, 				-- Netherstorm Flag
+		{23333, "LEFT", {1, 0, 0}, true},					-- Warsong flag, Horde
+		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
+		{34976, "LEFT", {1, 0, 0}, true},					-- Netherstorm Flag
 	},
 }
 
@@ -162,8 +162,6 @@ T.RaidDebuffs = {
 	[SpellName(198944)] = 3,	-- Breach Armor
 	[SpellName(215429)] = 3,	-- Thunderstrike
 	[SpellName(203963)] = 3,	-- Eye of the Storm
-	[SpellName(196497)] = 3,	-- Ravenous Leap
-	[SpellName(193660)] = 3,	-- Felblaze Rush
 	-- Shadowmoon Burial Grounds
 	[SpellName(156776)] = 3,	-- Rending Voidlash
 	[SpellName(153692)] = 3,	-- Necrotic Pitch
@@ -249,7 +247,6 @@ T.RaidDebuffs = {
 	[SpellName(371007)] = 3,	-- Splintering Shards
 	[SpellName(375591)] = 3,	-- Sappy Burst
 	[SpellName(385409)] = 3,	-- Ouch, ouch, ouch!
-	[SpellName(386549)] = 3,	-- Waking Bane
 	-- Algeth'ar Academy
 	[SpellName(389033)] = 3,	-- Lasher Toxin
 	[SpellName(391977)] = 3,	-- Oversurge
@@ -307,8 +304,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(22570)] = 4,		-- Maim
 		[SpellName(78675)] = 3,		-- Solar Beam
 		[SpellName(339)] = 2,		-- Entangling Roots
-		-- Evoker
-		[SpellName(360806)] = 4,	-- Sleep Walk
 		-- Hunter
 		[SpellName(3355)] = 4,		-- Freezing Trap
 		[SpellName(24394)] = 4,		-- Intimidation
