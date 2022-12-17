@@ -1,4 +1,4 @@
-﻿﻿﻿local T, C, L, _ = unpack(select(2, ...))
+﻿﻿﻿﻿local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
 --	QulightUI personal configuration file
@@ -282,7 +282,6 @@ if IsWetxius then
 	end)
 
 	T.CustomFilgerSpell = {
-		{"P_PROC_ICON", {spellID = 328908, unitID = "player", caster = "player", filter = "BUFF"}}, -- Combat Meditation {Kyrian)
 		{"P_PROC_ICON", {spellID = 26573, filter = "ICD", trigger = "NONE", totem = true}}, 		-- Consecration
 	}
 end
