@@ -4,9 +4,16 @@ if C.bag.enable == true then return end
 local _E
 
 local update = function(self)
+<<<<<<< HEAD:QulightUI/Libs/oGlow/Pipes/Bank.lua
 	for i = 1, NUM_BANKGENERIC_SLOTS or 28 do
 		local slotFrame = _G["BankFrameItem"..i]
 		local slotLink = C_Container.GetContainerItemLink(-1, i)
+=======
+	if BankFrame:IsShown() then
+		for i = 1, NUM_BANKGENERIC_SLOTS or 28 do
+			local slotFrame = _G["BankFrameItem"..i]
+			local slotLink = C_Container.GetContainerItemLink(-1, i)
+>>>>>>> e09f100a4 (Cleanup.):ShestakUI/Libs/oGlow/Pipes/Bank.lua
 
 		self:CallFilters("bank", slotFrame, _E and slotLink)
 	end

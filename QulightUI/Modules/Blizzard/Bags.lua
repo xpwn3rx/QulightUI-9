@@ -197,7 +197,7 @@ end
 function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	texture = texture or 0
-	local clink = GetContainerItemLink(b.bag, b.slot)
+	local clink = C_Container.GetContainerItemLink(b.bag, b.slot)
 	local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	local itemIsUpgrade
@@ -1666,12 +1666,17 @@ function Stuffing:SortBags()
 		group.itemList = {}
 		for _, bagSlot in pairs(group.bagSlotNumbers) do
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
 			for itemSlot = 1, C_Container.GetContainerNumSlots(bagSlot) do
 				local itemLink = C_Container.GetContainerItemLink(bagSlot, itemSlot)
 =======
 			for itemSlot = 1, GetContainerNumSlots(bagSlot) do
 				local itemLink = GetContainerItemLink(bagSlot, itemSlot)
 >>>>>>> b93fdd567 ([Bags] Added tooltip for filter buttons and allow to reset after repeat click. Raise priority for Keystone.):ShestakUI/Modules/Blizzard/Bags.lua
+=======
+			for itemSlot = 1, C_Container.GetContainerNumSlots(bagSlot) do
+				local itemLink = C_Container.GetContainerItemLink(bagSlot, itemSlot)
+>>>>>>> e09f100a4 (Cleanup.):ShestakUI/Modules/Blizzard/Bags.lua
 				if itemLink ~= nil then
 					local newItem = {}
 
