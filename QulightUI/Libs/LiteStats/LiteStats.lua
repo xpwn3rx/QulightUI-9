@@ -1733,8 +1733,8 @@ if gold.enabled then
 				if conf.AutoSell and not (IsAltKeyDown() or IsShiftKeyDown()) then
 					-- local profit = 0
 					local numItem = 0
-					for bag = 0, NUM_BAG_SLOTS do for slot = 0, GetContainerNumSlots(bag) do
-						local link = GetContainerItemLink(bag, slot)
+					for bag = 0, NUM_BAG_SLOTS do for slot = 0, C_Container.GetContainerNumSlots(bag) do
+						local link = C_Container.GetContainerItemLink(bag, slot)
 						if link then
 							local itemstring, ignore = strmatch(link, "|Hitem:(%d-):"), false
 							for _, exception in pairs(QulightUIStats.JunkIgnore) do
@@ -1746,10 +1746,10 @@ if gold.enabled then
 								-- profit = profit + (itemSellPrice * itemCount)
 								numItem = numItem + 1
 								if numItem < 12 then
-									UseContainerItem(bag, slot)
+									C_Container.UseContainerItem(bag, slot)
 								else
 									C_Timer.After(numItem/8, function()
-										UseContainerItem(bag, slot)
+										C_Container.UseContainerItem(bag, slot)
 									end)
 								end
 							end
@@ -2064,7 +2064,7 @@ if bags.enabled then
 		OnEvent = function(self)
 			local free, total = 0, 0
 			for i = 0, NUM_BAG_SLOTS do
-				free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
+				free, total = free + C_Container.GetContainerNumFreeSlots(i), total + C_Container.GetContainerNumSlots(i)
 			end
 			self.text:SetText(format(bags.fmt, free, total))
 		end,
@@ -2072,7 +2072,7 @@ if bags.enabled then
 		OnEnter = function(self)
 			local free, total = 0, 0
 			for i = 0, NUM_BAG_SLOTS do
-				free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
+				free, total = free + C_Container.GetContainerNumFreeSlots(i), total + C_Container.GetContainerNumSlots(i)
 			end
 			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)
 			GameTooltip:ClearLines()
