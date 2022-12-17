@@ -19,6 +19,7 @@ bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:SetScript("OnEvent", function(self, event)
 <<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar4.lua
 <<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar4.lua
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/Bar4.lua
 	Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", true)
 =======
 	self:UnregisterAllEvents()
@@ -26,6 +27,8 @@ bar:SetScript("OnEvent", function(self, event)
 =======
 	-- self:UnregisterAllEvents()
 >>>>>>> 758b5f1ce (Revert action bar changes, still taints.):ShestakUI/Modules/ActionBars/Bar4.lua
+=======
+>>>>>>> ff6cf367f (Cleanup.):ShestakUI/Modules/ActionBars/Bar4.lua
 	local NumPerRows = C.actionbar.bar4_row
 	local NextRowButtonAnchor = _G["MultiBarRightButton1"]
 	for i = 1, 12 do
@@ -54,7 +57,6 @@ bar:SetScript("OnEvent", function(self, event)
 				b:SetPoint("TOP", b2, "BOTTOM", 0, -C.actionbar.button_space)
 			end
 		end
-		-- b.SetPoint = T.dummy -- Prevent moving by EditMode
 	end
 end)
 
