@@ -38,8 +38,6 @@ T.MoverFrames = {
 	T_DE_BUFF_BAR_Anchor,
 	SplitBarLeft,
 	SplitBarRight,
-	Bar7Holder,
-	Bar8Holder,
 	UIWidgetPowerBarAnchor
 }
 
