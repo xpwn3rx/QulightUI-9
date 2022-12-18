@@ -119,11 +119,6 @@ local function LoadSkin()
 		if button.QualityStripe then
 			button.QualityStripe:SetAlpha(0)
 		end
-		if button.IconQuestTexture:IsShown() then
-			item:SetBackdropBorderColor(1, 1, 0)
-		else
-			item:SetBackdropBorderColor(unpack(C.media.border_color))
-		end
 	end)
 end
 
