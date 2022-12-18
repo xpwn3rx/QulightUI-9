@@ -70,13 +70,10 @@ local function LoadSkin()
 		frame.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
 		frame.Bg:Hide()
 
-		frame.TitleContainer:SetPoint("TOPLEFT", frame, "TOPLEFT", 40, -1)
-
 		local portrait = _G["ContainerFrame"..i.."Portrait"]
-		portrait:SetSize(28, 28)
+		portrait:SetSize(30, 30)
 		portrait:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -8)
 		portrait:SetTexCoord(0.2, 0.85, 0.2, 0.85)
-		if frame.PortraitContainer.CircleMask then frame.PortraitContainer.CircleMask:Hide() end
 
 		frame.b = CreateFrame("Frame", nil, frame)
 		frame.b:SetTemplate("Default")
@@ -105,9 +102,18 @@ local function LoadSkin()
 		end
 
 		-- Color QuestItem
-		hooksecurefunc(frame, "UpdateItems", function(self)
-			updateQuestItems(self)
-		end)
+		--BETA hooksecurefunc(frame, "UpdateItems", function()
+			-- local name = frame:GetName()
+			-- local item
+			-- for i = 1, 36 do
+				-- item = _G[name.."Item"..i]
+				-- if _G[name.."Item"..i.."IconQuestTexture"]:IsShown() then
+					-- item:SetBackdropBorderColor(1, 1, 0)
+				-- else
+					-- item:SetBackdropBorderColor(unpack(C.media.border_color))
+				-- end
+			-- end
+		-- end)
 	end
 
 	BackpackTokenFrame:StripTextures(true)
