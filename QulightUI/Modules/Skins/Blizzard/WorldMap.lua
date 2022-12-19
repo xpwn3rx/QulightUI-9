@@ -198,18 +198,10 @@ local function LoadSkin()
 	WorldMapTrackingOptionsButton(WorldMapFrame.overlayFrames[2])
 	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
 
-	for i = 1, 10 do
+	for i = 1, 3 do
 		local button = _G["Krowi_WorldMapButtons"..i]
 		if button then
 			HandyNotesButton(button)
-		end
-	end
-
-	for i = 3, #WorldMapFrame.overlayFrames do
-		local frame = WorldMapFrame.overlayFrames[i]
-		if frame.BountyDropdownButton then
-			T.SkinNextPrevButton(frame.BountyDropdownButton)
-			break
 		end
 	end
 
