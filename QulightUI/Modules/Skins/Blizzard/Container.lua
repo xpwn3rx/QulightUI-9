@@ -49,11 +49,7 @@ local function LoadSkin()
 	local function updateQuestItems(self)
 		for _, button in self:EnumerateValidItems() do
 			if button.IconQuestTexture:IsShown() then
-				if button.IconQuestTexture:GetTexture() == 368362 then
-					button:SetBackdropBorderColor(1, 0.3, 0.3)
-				else
-					button:SetBackdropBorderColor(1, 1, 0)
-				end
+				button:SetBackdropBorderColor(1, 1, 0)
 			else
 				button:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
@@ -102,18 +98,9 @@ local function LoadSkin()
 		end
 
 		-- Color QuestItem
-		--BETA hooksecurefunc(frame, "UpdateItems", function()
-			-- local name = frame:GetName()
-			-- local item
-			-- for i = 1, 36 do
-				-- item = _G[name.."Item"..i]
-				-- if _G[name.."Item"..i.."IconQuestTexture"]:IsShown() then
-					-- item:SetBackdropBorderColor(1, 1, 0)
-				-- else
-					-- item:SetBackdropBorderColor(unpack(C.media.border_color))
-				-- end
-			-- end
-		-- end)
+		hooksecurefunc(frame, "UpdateItems", function(self)
+			updateQuestItems(self)
+		end)
 	end
 
 	BackpackTokenFrame:StripTextures(true)
@@ -241,15 +228,9 @@ local function LoadSkin()
 
 	hooksecurefunc("BankFrameItemButton_Update", function(frame)
 		if not frame.isBag and frame.IconQuestTexture:IsShown() then
-			if frame.IconQuestTexture:GetTexture() == 368362 then
-				frame:SetBackdropBorderColor(1, 0.3, 0.3)
-			else
-				frame:SetBackdropBorderColor(1, 1, 0)
-			end
+			frame:SetBackdropBorderColor(1, 1, 0)
 		else
-			if frame.SetBackdropBorderColor then -- ReagentBank
-				frame:SetBackdropBorderColor(unpack(C.media.border_color))
-			end
+			frame:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 	end)
 
