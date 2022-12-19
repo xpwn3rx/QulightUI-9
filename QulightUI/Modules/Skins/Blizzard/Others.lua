@@ -128,12 +128,59 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["PetBattleQueueReadyFrame"].DeclineButton:SkinButton()
 
 		-- Reskin Dropdown menu
+		local dropdowns = {"DropDownList", "L_DropDownList", "Lib_DropDownList"}
 		hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
-			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
-				_G["DropDownList"..i.."MenuBackdrop"].NineSlice:SetAlpha(0)
-				_G["DropDownList"..i]["Border"]:StripTextures()
-				_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
-				_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
+			for _, name in next, dropdowns do
+				for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+					local backdrop = _G[name..i.."Backdrop"]
+					if backdrop then
+						backdrop:SetTemplate("Transparent")
+						_G[name..i.."MenuBackdrop"].NineSlice:SetTemplate("Transparent")
+					end
+				end
+			end
+		end)
+
+		hooksecurefunc("ToggleDropDownMenu", function(level)
+			if not level then
+				level = 1
+			end
+
+			for i = 1, _G.UIDROPDOWNMENU_MAXBUTTONS do
+				local button = _G["DropDownList"..level.."Button"..i]
+				local check = _G["DropDownList"..level.."Button"..i.."Check"]
+				local uncheck = _G["DropDownList"..level.."Button"..i.."UnCheck"]
+
+				if not button.backdrop then
+					button:CreateBackdrop("Transparent")
+					button.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], 0.3)
+				end
+
+				button.backdrop:Hide()
+
+				local texture = check:GetTexture()
+				if not button.notCheckable and texture == 375502 then
+					uncheck:SetTexture()
+					local _, co = check:GetTexCoord()
+					if co == 0 then
+						check:SetTexture([[Interface\Buttons\UI-CheckBox-Check]])
+						check:SetVertexColor(1, 0.9, 0, 1)
+						check:SetSize(18, 18)
+						check:SetDesaturated(true)
+						button.backdrop:SetInside(check, 4, 4)
+					else
+						check:SetTexture(C.media.blank)
+						check:SetVertexColor(1, 0.82, 0, 0.8)
+						check:SetSize(6, 6)
+						check:SetDesaturated(false)
+						button.backdrop:SetOutside(check)
+					end
+
+					button.backdrop:Show()
+					check:SetTexCoord(0, 1, 0, 1)
+				else
+					check:SetSize(16, 16)
+				end
 			end
 		end)
 
