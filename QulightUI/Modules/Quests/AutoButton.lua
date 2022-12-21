@@ -68,22 +68,18 @@ AutoButton.c:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.fo
 AutoButton.c:SetPoint("BOTTOMRIGHT", 1, -2)
 
 -- Hotkey text for our button
-AutoButton.k = AutoButton:CreateFontString(nil, "OVERLAY")
-AutoButton.k:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
-AutoButton.k:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
-AutoButton.k:SetTextColor(0.7, 0.7, 0.7)
-AutoButton.k:SetPoint("TOPRIGHT", 0, -2)
-AutoButton.k:SetJustifyH("RIGHT")
-AutoButton.k:SetWidth(AutoButton:GetWidth() - 1)
-AutoButton.k:SetWordWrap(false)
-
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("UPDATE_BINDINGS")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function()
+C_Timer.After(0.05, function()
 	local bind = GetBindingKey("QUEST_BUTTON")
 	if bind then
 		SetOverrideBinding(AutoButton, false, bind, "CLICK AutoButton:LeftButton")
+		AutoButton.k = AutoButton:CreateFontString(nil, "OVERLAY")
+		AutoButton.k:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+		AutoButton.k:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
+		AutoButton.k:SetTextColor(0.8, 0.8, 0.8)
+		AutoButton.k:SetPoint("TOPRIGHT", 0, 0)
+		AutoButton.k:SetJustifyH("RIGHT")
+		AutoButton.k:SetWidth(AutoButton:GetWidth() - 1)
+		AutoButton.k:SetWordWrap(false)
 
 		bind = gsub(bind, "(ALT%-)", "A")
 		bind = gsub(bind, "(CTRL%-)", "C")
@@ -105,8 +101,9 @@ frame:SetScript("OnEvent", function()
 		bind = gsub(bind, KEY_NUMLOCK, "NuL")
 		bind = gsub(bind, KEY_MOUSEWHEELDOWN, "MWD")
 		bind = gsub(bind, KEY_MOUSEWHEELUP, "MWU")
+
+		AutoButton.k:SetText(bind)
 	end
-	AutoButton.k:SetText(bind or "")
 end)
 
 -- Cooldown
