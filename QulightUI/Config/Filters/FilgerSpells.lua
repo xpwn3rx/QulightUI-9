@@ -2408,8 +2408,8 @@ C["filger_spells"] = {
 			{spellID = 80353, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fury of the Aspects
 			{spellID = 390386, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Drums of Deathly Ferocity
-			{spellID = 309658, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Feral Hide Drums
+			{spellID = 381301, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mallet of Thunderous Skins
 			{spellID = 292686, unitID = "player", caster = "all", filter = "BUFF"},
 
