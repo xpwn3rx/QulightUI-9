@@ -49,7 +49,11 @@ local function LoadSkin()
 	local function updateQuestItems(self)
 		for _, button in self:EnumerateValidItems() do
 			if button.IconQuestTexture:IsShown() then
-				button:SetBackdropBorderColor(1, 1, 0)
+				if button.IconQuestTexture:GetTexture() == 368362 then
+					button:SetBackdropBorderColor(1, 0.3, 0.3)
+				else
+					button:SetBackdropBorderColor(1, 1, 0)
+				end
 			else
 				button:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
@@ -66,10 +70,13 @@ local function LoadSkin()
 		frame.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
 		frame.Bg:Hide()
 
+		frame.TitleContainer:SetPoint("TOPLEFT", frame, "TOPLEFT", 40, -1)
+
 		local portrait = _G["ContainerFrame"..i.."Portrait"]
-		portrait:SetSize(30, 30)
+		portrait:SetSize(28, 28)
 		portrait:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -8)
 		portrait:SetTexCoord(0.2, 0.85, 0.2, 0.85)
+		frame.PortraitContainer.CircleMask:Hide()
 
 		frame.b = CreateFrame("Frame", nil, frame)
 		frame.b:SetTemplate("Default")
@@ -228,9 +235,15 @@ local function LoadSkin()
 
 	hooksecurefunc("BankFrameItemButton_Update", function(frame)
 		if not frame.isBag and frame.IconQuestTexture:IsShown() then
-			frame:SetBackdropBorderColor(1, 1, 0)
+			if frame.IconQuestTexture:GetTexture() == 368362 then
+				frame:SetBackdropBorderColor(1, 0.3, 0.3)
+			else
+				frame:SetBackdropBorderColor(1, 1, 0)
+			end
 		else
-			frame:SetBackdropBorderColor(unpack(C.media.border_color))
+			if frame.SetBackdropBorderColor then -- ReagentBank
+				frame:SetBackdropBorderColor(unpack(C.media.border_color))
+			end
 		end
 	end)
 
