@@ -423,11 +423,6 @@ local function LoadSkin()
 				end
 			end
 		end)
-		local frame = CreateFrame("Frame")
-		frame:RegisterEvent("TRADE_SKILL_SHOW")
-		frame:SetScript("OnEvent", function(_, event)
-			AuctionatorCraftingInfoProfessionsFrame.SearchButton:SkinButton()
-		end)
 	end
 end
 
