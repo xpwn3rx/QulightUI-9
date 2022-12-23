@@ -128,21 +128,11 @@ T.InterruptCast = {
 	-- The Nokhud Offensive
 	[386024] = true,	-- Tempest
 	[373395] = true,	-- Bloodcurdling Shout
-	-- Halls of Valor
-	[215433] = true,	-- Holy Radiance
-	-- Shadowmoon Burial Grounds
-	[152818] = true,	-- Shadow Mend
-	-- Temple of the Jade Serpent
-	[395859] = true,	-- Haunting Scream
 }
 
 T.ImportantCast = {
 	-- The Nokhud Offensive
 	[383823] = true,	-- Rally the Clan
-	-- Ruby Life Pools
-	[372743] = true,	-- Ice Shield
-	-- Court of Stars
-	[210261] = true,	-- Sound Alarm
 }
 
 local color = C.nameplate.mob_color
@@ -177,10 +167,4 @@ T.ShortNames = {
 	["Громовой кулак из клана Нокхуд"] = "Кулак",
 	["Псарь из клана Нокхуд"] = "Псарь",
 	["Заступник из клана Нокхуд"] = "Заступник",
-	-- Квартал Звезд
-	["Караульный из Сумеречной стражи"] = "Караульный",
-	["Часовой из Сумеречной стражи"] = "Часовой",
-	["Бдительный инквизитор"] = "Инквизитор",
-	["Пылающий бес"] = "Бес",
-	["Порабощенная Скверной карательница"] = "Карательница",
 }
