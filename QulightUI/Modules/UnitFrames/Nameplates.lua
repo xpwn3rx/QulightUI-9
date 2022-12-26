@@ -65,9 +65,10 @@ function frame:PLAYER_LOGIN()
 end
 
 local healList, exClass, healerSpecs = {}, {}, {}
-local testing = false
 
 exClass.DEATHKNIGHT = true
+exClass.DEMONHUNTER = true
+exClass.HUNTER = true
 exClass.MAGE = true
 exClass.ROGUE = true
 exClass.WARLOCK = true
@@ -80,6 +81,7 @@ if C.nameplate.healer_icon == true then
 	}
 	local healerSpecIDs = {
 		105,	-- Druid Restoration
+		1468,	-- Evoker Preservation
 		270,	-- Monk Mistweaver
 		65,		-- Paladin Holy
 		256,	-- Priest Discipline
@@ -122,6 +124,10 @@ if C.nameplate.healer_icon == true then
 					local _, talentSpec = GetSpecializationInfoByID(specID)
 					if name and healerSpecs[talentSpec] then
 						healList[name] = talentSpec
+						local nameplate = C_NamePlate.GetNamePlateForUnit(format("arena%d", i))
+						if nameplate then
+							nameplate.unitFrame:UpdateAllElements("UNIT_NAME_UPDATE")
+						end
 					end
 				end
 			end
@@ -339,18 +345,14 @@ local function UpdateName(self)
 	if C.nameplate.healer_icon == true then
 		local name = self.unitName
 		if name then
-			if testing then
-				self.HPHeal:Show()
-			else
-				if healList[name] then
-					if exClass[healList[name]] then
-						self.HPHeal:Hide()
-					else
-						self.HPHeal:Show()
-					end
+			if healList[name] then
+				if exClass[healList[name]] then
+					self.HealerIcon:Hide()
 				else
-					self.HPHeal:Hide()
+					self.HealerIcon:Show()
 				end
+			else
+				self.HealerIcon:Hide()
 			end
 		end
 	end
@@ -818,28 +820,30 @@ local function style(self, unit)
 
 	-- Healer Icon
 	if C.nameplate.healer_icon == true then
-		self.HPHeal = self.Health:CreateFontString(nil, "OVERLAY")
-		self.HPHeal:SetFont(C.font.nameplates_font, 32, C.font.nameplates_font_style)
-		self.HPHeal:SetText("|cFFD53333+|r")
-		self.HPHeal:SetPoint("BOTTOM", self.Name, "TOP", 0, C.nameplate.track_debuffs == true and 13 or 0)
+		self.HealerIcon = self.Health:CreateFontString(nil, "OVERLAY")
+		self.HealerIcon:SetFont(C.font.nameplates_font, 32, C.font.nameplates_font_style)
+		self.HealerIcon:SetText("|cFFD53333+|r")
+		self.HealerIcon:SetPoint("BOTTOM", self.Name, "TOP", 0, C.nameplate.track_debuffs == true and 13 or 0)
 	end
-		-- Quest Icon
-		if C.nameplate.quests then
-			self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
-			self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
-			self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)
-	
-			self.QuestIcon.Text = self:CreateFontString(nil, "OVERLAY")
-			self.QuestIcon.Text:SetPoint("RIGHT", self.QuestIcon, "LEFT", -1, 0)
-			self.QuestIcon.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult * 2, C.font.nameplates_font_style)
-			self.QuestIcon.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
-	
-			self.QuestIcon.Item = self:CreateTexture(nil, "OVERLAY")
-			self.QuestIcon.Item:SetSize((C.nameplate.height * 2 * T.noscalemult) - 2, (C.nameplate.height * 2 * T.noscalemult) - 2)
-			self.QuestIcon.Item:SetPoint("RIGHT", self.QuestIcon.Text, "LEFT", -2, 0)
-			self.QuestIcon.Item:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		end
-	
+
+	-- Quest Icon
+	if C.nameplate.quests then
+		self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
+		self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
+		self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)
+		self.QuestIcon:Hide()
+
+		self.QuestIcon.Text = self:CreateFontString(nil, "OVERLAY")
+		self.QuestIcon.Text:SetPoint("RIGHT", self.QuestIcon, "LEFT", -1, 0)
+		self.QuestIcon.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult * 2, C.font.nameplates_font_style)
+		self.QuestIcon.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
+
+		self.QuestIcon.Item = self:CreateTexture(nil, "OVERLAY")
+		self.QuestIcon.Item:SetSize((C.nameplate.height * 2 * T.noscalemult) - 2, (C.nameplate.height * 2 * T.noscalemult) - 2)
+		self.QuestIcon.Item:SetPoint("RIGHT", self.QuestIcon.Text, "LEFT", -2, 0)
+		self.QuestIcon.Item:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	end
+
 	-- Aura tracking
 	if C.nameplate.track_debuffs == true or C.nameplate.track_buffs == true then
 		self.Auras = CreateFrame("Frame", nil, self)
