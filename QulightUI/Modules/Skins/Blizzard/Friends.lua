@@ -25,11 +25,11 @@ local function LoadSkin()
 		FriendsFrameBattlenetFrame,
 		BattleTagInviteFrame,
 		QuickJoinRoleSelectionFrame,
-		FriendsFrameBattlenetFrame.BroadcastFrame,
-		FriendsFrameBattlenetFrame.UnavailableInfoFrame,
-		RecruitAFriendFrame.RecruitList.Header,
-		RecruitAFriendFrame.RecruitList.ScrollFrameInset,
-		RecruitAFriendFrame.RewardClaiming,
+--		FriendsFrameBattlenetFrame.BroadcastFrame,
+--		FriendsFrameBattlenetFrame.UnavailableInfoFrame,
+--		RecruitAFriendFrame.RecruitList.Header,
+--		RecruitAFriendFrame.RecruitList.ScrollFrameInset,
+--		RecruitAFriendFrame.RewardClaiming,
 		RecruitAFriendRecruitmentFrame,
 		RecruitAFriendRewardsFrame
 	}

@@ -53,12 +53,12 @@ local mawAnchor = CreateFrame("Frame", "UIWidgetMawAnchor", UIParent)
 mawAnchor:SetSize(210, 30)
 mawAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
 
-hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
-	if anchor and anchor ~= mawAnchor then
-		self:ClearAllPoints()
-		self:SetPoint("TOPRIGHT", mawAnchor)
-	end
-end)
+--hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
+--	if anchor and anchor ~= mawAnchor then
+--		self:ClearAllPoints()
+--		self:SetPoint("TOPRIGHT", mawAnchor)
+--	end
+--end)
 
 -- Mover for all widgets
 for _, frame in pairs({top, below, maw}) do
@@ -129,7 +129,17 @@ local function SkinStatusBar(widget)
 		bar.BorderRight:SetAlpha(0)
 		bar.BorderCenter:SetAlpha(0)
 		bar.Spark:SetAlpha(0)
-		bar:CreateBackdrop("Overlay")
+		local parent = widget:GetParent():GetParent()
+		if parent.castBar or parent.UnitFrame then -- nameplate
+			Mixin(bar, BackdropTemplateMixin)
+			bar:SetBackdrop({
+				bgFile = C.media.blank,
+				insets = {left = 0, right = 0, top = 0, bottom = 0}
+			})
+			bar:SetBackdropColor(0.1, 0.1, 0.1, 1)
+		else
+			bar:CreateBackdrop("Overlay")
+		end
 		bar.styled = true
 	end
 end
@@ -177,7 +187,7 @@ local function SkinCaptureBar(widget)
 	end
 end
 
-local VigorBar = CreateFrame("Frame", "VigotBar", UIParent)
+local VigorBar = CreateFrame("Frame", "VigorBar", UIParent)
 VigorBar:CreateBackdrop("Default")
 VigorBar:SetPoint("TOP", powerAnchor, "TOP", 0, -2)
 VigorBar:SetSize(250, 12)
@@ -222,19 +232,9 @@ local function SkinVigorBar(widget)
 		VigorBar[i]:SetValue(value)
 	end
 
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 	if total < 6 and IsPlayerSpell(377922) then total = 6 end -- sometimes it return 5
 
 	if total < 6 then
-=======
-	if total ~= 6 then
->>>>>>> 4722719e8 ([UIWidget] Added skin for dragonriding bar.):ShestakUI/Modules/Blizzard/UIWidget.lua
-=======
-	if total < 6 and IsPlayerSpell(377922) then total = 6 end -- sometimes it return 5
-
-	if total < 6 then
->>>>>>> c4d6b5546 ([UIWidget] Try to fix wrong max bar for Vigor.):ShestakUI/Modules/Blizzard/UIWidget.lua
 		for i = total + 1, 6 do
 			VigorBar[i]:Hide()
 			VigorBar[i]:SetValue(0)
@@ -277,6 +277,7 @@ frame:SetScript("OnEvent", function()
 			SkinDoubleStatusBar(widget)
 		end
 	end
+
 	for _, widget in pairs(UIWidgetBelowMinimapContainerFrame.widgetFrames) do
 		if widget.widgetType == Enum.UIWidgetVisualizationType.CaptureBar then
 			SkinCaptureBar(widget)
@@ -297,6 +298,11 @@ hooksecurefunc(UIWidgetTemplateScenarioHeaderCurrenciesAndBackgroundMixin, "Setu
 	end
 end)
 
+hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", function(widget)
+	SkinStatusBar(widget)
+end)
+
+--[[
 -- Maw Buffs skin
 maw:SetSize(210, 40)
 maw.Container:SkinButton()
@@ -326,4 +332,6 @@ end)
 if C.general.hide_maw_buffs then
 	maw:SetAlpha(0)
 	maw:SetScale(0.001)
-end 
+end
+
+]]

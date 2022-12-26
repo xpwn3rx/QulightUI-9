@@ -243,6 +243,7 @@ function Stuffing:SlotUpdate(b)
 			b.name = clink:match('%[(.-)%]') or ""
 		end
 
+
 		if C.bag.ilvl == true and b.itemlevel and quality > 1 and (b.itemClassID == 2 or b.itemClassID == 4 or (b.itemClassID == 3 and b.itemSubClassID == 11)) then
 			b.itemlevel = _getRealItemLevel(clink, b.bag, b.slot) or b.itemlevel
 			b.frame.text:SetText(b.itemlevel)
@@ -1665,18 +1666,8 @@ function Stuffing:SortBags()
 	for _, group in pairs(BS_bagGroups) do
 		group.itemList = {}
 		for _, bagSlot in pairs(group.bagSlotNumbers) do
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Bags.lua
-			for itemSlot = 1, C_Container.GetContainerNumSlots(bagSlot) do
-				local itemLink = C_Container.GetContainerItemLink(bagSlot, itemSlot)
-=======
 			for itemSlot = 1, GetContainerNumSlots(bagSlot) do
 				local itemLink = GetContainerItemLink(bagSlot, itemSlot)
->>>>>>> b93fdd567 ([Bags] Added tooltip for filter buttons and allow to reset after repeat click. Raise priority for Keystone.):ShestakUI/Modules/Blizzard/Bags.lua
-=======
-			for itemSlot = 1, C_Container.GetContainerNumSlots(bagSlot) do
-				local itemLink = C_Container.GetContainerItemLink(bagSlot, itemSlot)
->>>>>>> e09f100a4 (Cleanup.):ShestakUI/Modules/Blizzard/Bags.lua
 				if itemLink ~= nil then
 					local newItem = {}
 

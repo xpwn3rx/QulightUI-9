@@ -21,6 +21,17 @@ L_GUI_EXPERT_MODE = "专家模式"
 L_GUI_EXPERT_MODE_DESC = "编写你的插件代码"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左键重置列表"
 
+-- Profile
+L.profile = "Profile" -- Need review
+L.profile_title = "Profile options" -- Need review
+L.profile_choose = "Choose profile" -- Need review
+L.profile_options = "Settings" -- Need review
+L.profile_movers = "Moving elements" -- Need review
+L.profile_export = "Export" -- Need review
+L.profile_import = "Import" -- Need review
+L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
+L.profile_error_code = "Error in imported code!" -- Need review
+
 -- General options
 L_GUI_GENERAL_SUBTEXT = "一般用戶界面设置，键入 /uihelp 获取更多可用命令。"
 L_GUI_GENERAL_WELCOME_MESSAGE = "欢迎信息"
@@ -74,7 +85,7 @@ L.font_subheader_bag = "背包"
 L.font_subheader_blizzard = "系统"
 L.font_tooltip_header_font_size = "鼠标提示标题"
 L.font_tooltip_font_size = "鼠标提示信息"
-L.font_global_font = "Disable Pixel font" -- Need review
+L.font_global_font = "禁用像素字体"
 
 -- Skins options
 L_GUI_SKINS = "界面美化"
@@ -83,6 +94,7 @@ L_GUI_SKINS_BLIZZARD = "美化暴雪默认界面"
 L_GUI_SKINS_MINIMAP_BUTTONS = "小地图插件图标"
 L_GUI_SKINS_SUBHEADER = "单体插件"
 L.skins_minimap_buttons_mouseover = "鼠标悬停显示插件图标"
+L.skins_bubbles = "美化聊天泡泡"
 
 -- Unit Frames options
 L_GUI_UF_SUBTEXT = "定制玩家/目标框架/其他框架"
@@ -145,8 +157,8 @@ L.unitframe_extra_height_auto = "血量/能量框架自动增高"
 L.unitframe_extra_height_auto_desc = "按字体大小智能调节框架高度"
 L.unitframe_extra_health_height = "血量框架额外增高"
 L.unitframe_extra_power_height = "能量框架额外增高"
-L.unitframe_subheader_castbar = "Size of player and target castbar" -- Need review
-L.unitframe_castbar_height = "Height" -- Need review
+L.unitframe_subheader_castbar = "玩家/目标施法条大小"
+L.unitframe_castbar_height = "高度"
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "职业资源栏"
@@ -286,25 +298,24 @@ L.tooltip_instance_lock = "副本进度比较"
 L.tooltip_mount = "坐骑来源"
 
 -- Chat options
-L_GUI_CHAT_SUBTEXT = "这里可以设置你的聊天框"
-L_GUI_CHAT_ENABLE = "聊天框增强"
-L_GUI_CHAT_BACKGROUND = "聊天框背景"
-L_GUI_CHAT_BACKGROUND_ALPHA = "聊天框背景透明度"
+L.chat_subtext = "这里可以设置你的聊天框"
+L.chat_enable = "聊天框增强"
+L.chat_background = "聊天框背景"
+L.chat_background_alpha = "聊天框背景透明度"
 L.chat_filter = "屏蔽无用系统信息"
 L.chat_filter_desc = "决斗, 切换专精, 城中NPC对话"
 L.chat_spam = "屏蔽玩家垃圾信息"
 L.chat_spam_list = "过滤词列表"
 L.chat_spam_list_desc = "添加过滤词 (中文词用空格分隔，英文词用小写分隔)"
-L_GUI_CHAT_WIDTH = "聊天框宽度"
-L_GUI_CHAT_HEIGHT = "聊天框高度"
-L_GUI_CHAT_BAR = "聊天频道快捷键"
-L_GUI_CHAT_BAR_MOUSEOVER = "鼠标悬停显示聊天频道快捷键"
-L_GUI_CHAT_WHISP = "接受密语时声音提示"
-L_GUI_CHAT_SKIN_BUBBLE = "美化聊天泡泡"
-L_GUI_CHAT_CL_TAB = "战斗记录标签"
-L_GUI_CHAT_TABS_MOUSEOVER = "鼠标悬停显示频道标签"
-L_GUI_CHAT_STICKY = "记住上一次使用的频道"
-L_GUI_CHAT_DAMAGE_METER_SPAM = "在链接中合并垃圾邮件"
+L.chat_width = "聊天框宽度"
+L.chat_height = "聊天框高度"
+L.chat_chat_bar = "聊天频道快捷键"
+L.chat_chat_bar_mouseover = "鼠标悬停显示聊天频道快捷键"
+L.chat_whisp_sound = "接受密语时声音提示"
+L.chat_combatlog = "战斗记录标签"
+L.chat_tabs_mouseover = "鼠标悬停显示频道标签"
+L.chat_sticky = "记住上一次使用的频道"
+L.chat_damage_meter_spam = "在链接中合并垃圾邮件"
 L.chat_loot_icons = "拾取信息带图标"
 L.chat_hide_combat = "战斗中隐藏"
 L.chat_custom_time_color = "自定义时间标签颜色"
@@ -480,8 +491,8 @@ L.announcements_interrupts = "断法"
 L.announcements_interrupts_desc = "当你打断成功时在队伍/团队中进行通告"
 L.announcements_spells = "施法"
 L.announcements_spells_desc = "当你施放指定法术时在队伍/团队中进行通告"
-L.announcements_spells_from_all = "檢查所有队员"
-L.announcements_spells_from_all_desc = "檢查来源包括所有队员"
+L.announcements_spells_from_all = "检查所有队员"
+L.announcements_spells_from_all_desc = "检查来源包括所有队员"
 L.announcements_toys = "使用玩具火车/烈酒的遥控器时进行通告"
 L.announcements_pull_countdown = "倒计时通告"
 L.announcements_pull_countdown_desc = "倒计时通告(/pc #)"
@@ -491,6 +502,7 @@ L.announcements_flask_food_raid = "在团队频道通告"
 L.announcements_flask_food_auto = "当团队就位确认时进行检查"
 L.announcements_feasts = "放置食物/大锅/灵魂井/修理机器人时进行通告"
 L.announcements_portals = "开启传送门/召唤仪式时进行通告"
+L.announcements_subheader_self = "个人通告"
 L.announcements_bad_gear = "检查装备"
 L.announcements_bad_gear_desc = "进入副本时提醒非副本装备(鱼竿等装备)"
 L.announcements_safari_hat = "狩猎帽"

@@ -9,7 +9,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
 	-- Stuff not in Blizzard load-on-demand
-	if addon == "QulightUI" then
+	if addon == "ShestakUI" then
 		-- Skin checkButtons
 		local checkButtons = {
 			"LFDRoleCheckPopupRoleButtonTank",
@@ -26,7 +26,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"GameMenuFrame",
 			"BNToastFrame",
 			"TicketStatusFrameButton",
-			"AutoCompleteBox",
 			"ReadyCheckFrame",
 			"ColorPickerFrame",
 			"LFDRoleCheckPopup",
@@ -46,6 +45,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		RolePollPopup:StripTextures()
 		OpacityFrame:StripTextures()
 		ColorPickerFrame.Border:Hide()
+		AutoCompleteBox.NineSlice:SetTemplate("Transparent")
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
@@ -103,8 +103,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["StaticPopup1ExtraButton"]:SkinButton()
 
 		T.SkinCloseButton(_G["RolePollPopupCloseButton"])
-
-
 
 		-- Cinematic popup
 		_G["CinematicFrameCloseDialog"]:SetScale(C.general.uiscale)

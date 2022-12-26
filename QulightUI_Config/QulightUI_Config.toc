@@ -1,9 +1,10 @@
-## Interface: 90005
+## Interface: 100100
 ## Title: |cff1784d1QulightUI Config|r
 ## Notes: In-game configuration for QulightUI
 ## Author: Shestak - Modified by PWn3R
-## Version: 10.0.0
+## Version: 10.2.0
 ## RequiredDeps: QulightUI
+## Interface: 100100
 ## SavedVariables: QulightUIOptionsGlobal, QulightUIOptions
 ## SavedVariablesPerCharacter: QulightUIOptionsPerChar
 

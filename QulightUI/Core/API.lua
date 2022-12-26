@@ -190,6 +190,7 @@ local StripTexturesBlizzFrames = {
 	"Portrait",
 	"portrait",
 	"ScrollFrameBorder",
+	"ScriptErrorsFrame"
 }
 
 local function StripTextures(object, kill)
@@ -432,80 +433,82 @@ T.SkinFuncs = {}
 T.SkinFuncs["QulightUI"] = {}
 
 function T.SkinScrollBar(frame)
-	frame:StripTextures()
+	if frame then
+		frame:StripTextures()
 
-	local frameName = frame.GetName and frame:GetName()
-	local UpButton = frame.ScrollUpButton or frame.ScrollUp or frame.UpButton or frame.Back or _G[frameName and frameName.."ScrollUpButton"] or frame:GetParent().scrollUp
-	local DownButton = frame.ScrollDownButton or frame.ScrollDown or frame.DownButton or frame.Forward or _G[frameName and frameName.."ScrollDownButton"] or frame:GetParent().scrollDown
-	local ThumbTexture = frame.ThumbTexture or frame.thumbTexture or _G[frameName and frameName.."ThumbTexture"]
-	local newThumb = frame.Back and frame:GetThumb()
+		local frameName = frame.GetName and frame:GetName()
+		local UpButton = frame.ScrollUpButton or frame.ScrollUp or frame.UpButton or frame.Back or _G[frameName and frameName.."ScrollUpButton"] or frame:GetParent().scrollUp
+		local DownButton = frame.ScrollDownButton or frame.ScrollDown or frame.DownButton or frame.Forward or _G[frameName and frameName.."ScrollDownButton"] or frame:GetParent().scrollDown
+		local ThumbTexture = frame.ThumbTexture or frame.thumbTexture or _G[frameName and frameName.."ThumbTexture"]
+		local newThumb = frame.Back and frame:GetThumb()
 
-	if UpButton and DownButton then
-		if not UpButton.icon then
-			T.SkinNextPrevButton(UpButton, nil, "Up")
-			UpButton:SetSize(UpButton:GetWidth() + 7, UpButton:GetHeight() + 7)
-		end
+		if UpButton and DownButton then
+			if not UpButton.icon then
+				T.SkinNextPrevButton(UpButton, nil, "Up")
+				UpButton:SetSize(UpButton:GetWidth() + 7, UpButton:GetHeight() + 7)
+			end
 
-		if not DownButton.icon then
-			T.SkinNextPrevButton(DownButton, nil, "Down")
-			DownButton:SetSize(DownButton:GetWidth() + 7, DownButton:GetHeight() + 7)
-		end
+			if not DownButton.icon then
+				T.SkinNextPrevButton(DownButton, nil, "Down")
+				DownButton:SetSize(DownButton:GetWidth() + 7, DownButton:GetHeight() + 7)
+			end
 
-		if ThumbTexture then
-			ThumbTexture:SetTexture(nil)
-			if not frame.thumbbg then
-				frame.thumbbg = CreateFrame("Frame", nil, frame)
-				frame.thumbbg:SetPoint("TOPLEFT", ThumbTexture, "TOPLEFT", 0, -3)
-				frame.thumbbg:SetPoint("BOTTOMRIGHT", ThumbTexture, "BOTTOMRIGHT", 0, 3)
-				frame.thumbbg:SetTemplate("Overlay")
+			if ThumbTexture then
+				ThumbTexture:SetTexture(nil)
+				if not frame.thumbbg then
+					frame.thumbbg = CreateFrame("Frame", nil, frame)
+					frame.thumbbg:SetPoint("TOPLEFT", ThumbTexture, "TOPLEFT", 0, -3)
+					frame.thumbbg:SetPoint("BOTTOMRIGHT", ThumbTexture, "BOTTOMRIGHT", 0, 3)
+					frame.thumbbg:SetTemplate("Overlay")
 
-				frame:HookScript("OnShow", function()
-					local _, maxValue = frame:GetMinMaxValues()
-					if maxValue == 0 then
+					frame:HookScript("OnShow", function()
+						local _, maxValue = frame:GetMinMaxValues()
+						if maxValue == 0 then
+							frame:SetAlpha(0)
+						else
+							frame:SetAlpha(1)
+						end
+					end)
+
+					frame:HookScript("OnMinMaxChanged", function()
+						local _, maxValue = frame:GetMinMaxValues()
+						if maxValue == 0 then
+							frame:SetAlpha(0)
+						else
+							frame:SetAlpha(1)
+						end
+					end)
+
+					frame:HookScript("OnDisable", function()
 						frame:SetAlpha(0)
-					else
-						frame:SetAlpha(1)
-					end
-				end)
+					end)
 
-				frame:HookScript("OnMinMaxChanged", function()
-					local _, maxValue = frame:GetMinMaxValues()
-					if maxValue == 0 then
+					frame:HookScript("OnEnable", function()
+						frame:SetAlpha(1)
+					end)
+				end
+			elseif newThumb then
+				if frame.Background then
+					frame.Background:Hide()
+				end
+				if frame.Track then
+					frame.Track:DisableDrawLayer("ARTWORK")
+				end
+				newThumb:DisableDrawLayer("BACKGROUND")
+				if not frame.thumbbg then
+					frame.thumbbg = CreateFrame("Frame", nil, frame)
+					frame.thumbbg:SetPoint("TOPLEFT", newThumb, "TOPLEFT", 0, -3)
+					frame.thumbbg:SetPoint("BOTTOMRIGHT", newThumb, "BOTTOMRIGHT", 0, 3)
+					frame.thumbbg:SetTemplate("Overlay")
+
+					hooksecurefunc(newThumb, "Hide", function(self)
 						frame:SetAlpha(0)
-					else
+					end)
+
+					hooksecurefunc(newThumb, "Show", function(self)
 						frame:SetAlpha(1)
-					end
-				end)
-
-				frame:HookScript("OnDisable", function()
-					frame:SetAlpha(0)
-				end)
-
-				frame:HookScript("OnEnable", function()
-					frame:SetAlpha(1)
-				end)
-			end
-		elseif newThumb then
-			if frame.Background then
-				frame.Background:Hide()
-			end
-			if frame.Track then
-				frame.Track:DisableDrawLayer("ARTWORK")
-			end
-			newThumb:DisableDrawLayer("BACKGROUND")
-			if not frame.thumbbg then
-				frame.thumbbg = CreateFrame("Frame", nil, frame)
-				frame.thumbbg:SetPoint("TOPLEFT", newThumb, "TOPLEFT", 0, -3)
-				frame.thumbbg:SetPoint("BOTTOMRIGHT", newThumb, "BOTTOMRIGHT", 0, 3)
-				frame.thumbbg:SetTemplate("Overlay")
-
-				hooksecurefunc(newThumb, "Hide", function(self)
-					frame:SetAlpha(0)
-				end)
-
-				hooksecurefunc(newThumb, "Show", function(self)
-					frame:SetAlpha(1)
-				end)
+					end)
+				end
 			end
 		end
 	end
@@ -813,7 +816,7 @@ end
 
 function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
 	local frameName = frameNameOverride or frame:GetName()
-	-- local scrollFrame = frame.ScrollFrame or _G[frameName.."ScrollFrame"]
+	local scrollFrame = frame.ScrollFrame or _G[frameName.."ScrollFrame"]
 	local editBox = frame.BorderBox.IconSelectorEditBox
 	local okayButton = frame.OkayButton or frame.BorderBox.OkayButton or _G[frameName.."Okay"]
 	local cancelButton = frame.CancelButton or frame.BorderBox.CancelButton or _G[frameName.."Cancel"]

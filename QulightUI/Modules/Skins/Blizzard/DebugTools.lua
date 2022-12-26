@@ -22,11 +22,11 @@ local function LoadSecondarySkin()
 
 	T.SkinNextPrevButton(ScriptErrorsFrame.PreviousError, true)
 	T.SkinNextPrevButton(ScriptErrorsFrame.NextError)
-	T.SkinScrollBar(ScriptErrorsFrameScrollBar)
+	T.SkinScrollBar(ScriptErrorsFrame.ScrollFrame.ScrollBar)
 	T.SkinCloseButton(ScriptErrorsFrameClose)
 
 	ScriptErrorsFrame.ScrollFrame:CreateBackdrop("Overlay")
-	ScriptErrorsFrame.ScrollFrame:SetSize(ScriptErrorsFrame:GetWidth() - 45, ScriptErrorsFrame:GetHeight() - 72)
+	ScriptErrorsFrame.ScrollFrame:SetSize(ScriptErrorsFrame:GetWidth() - 35, ScriptErrorsFrame:GetHeight() - 72)
 	ScriptErrorsFrame.ScrollFrame.Text:SetFont(C.media.normal_font, 12, "")
 end
 

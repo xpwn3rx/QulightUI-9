@@ -48,7 +48,7 @@ end
 ----------------------------------------------------------------------------------------
 local TaintFix = CreateFrame("Frame")
 TaintFix:SetScript("OnUpdate", function()
-	if LFRBrowseFrame.timeToClear then
+	if LFRBrowseFrame and LFRBrowseFrame.timeToClear then
 		LFRBrowseFrame.timeToClear = nil
 	end
 end)

@@ -37,16 +37,6 @@ OkayButton:Disable()
 tinsert(ns.buttons, CloseButton)
 tinsert(ns.buttons, OkayButton)
 
-local ProfileBox = CreateFrame("CheckButton", nil, options, "InterfaceOptionsCheckButtonTemplate")
-ProfileBox:SetPoint("TOPRIGHT", -6, -6)
-
-local label = ProfileBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-label:SetText(L_GUI_SET_SAVED_SETTTINGS)
-label:SetPoint("RIGHT", ProfileBox, "LEFT")
-
-ProfileBox.tooltipText = L_GUI_SET_SAVED_SETTTINGS_DESC
-options.ProfileBox = ProfileBox
-
 local reloadText = options:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 reloadText:SetPoint("BOTTOM", 0, 11)
 reloadText:SetText("|cffff2735"..L_GUI_NEED_RELOAD.."|r")
@@ -58,8 +48,9 @@ StaticPopupDialogs.QulightUI_RESET_PERCHAR = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		QulightUIOptionsPerChar = {}
-		C.options = QulightUIOptionsPerChar
+		local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+		QulightUIOptionsPerChar[i] = {}
+		C.options = QulightUIOptionsPerChar[i]
 		ReloadUI()
 	end,
 	whileDead = true,
@@ -72,8 +63,9 @@ StaticPopupDialogs.QulightUI_RESET = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		QulightUIOptions = {}
-		C.options = QulightUIOptions
+		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+		QulightUIOptions[i] = {}
+		C.options = QulightUIOptions[i]
 		ReloadUI()
 	end,
 	whileDead = true,
@@ -295,6 +287,12 @@ SpellList.makeSpellsList = function(_, db, double)
 				bf:Show()
 				oldb = bf
 				i = i + 1
+
+				-- Remove outdated spells
+				if not name then
+					tremove(db, k)
+					SpellList:makeSpellsList(db, double)
+				end
 			end
 		end
 	end
@@ -388,6 +386,7 @@ InputArg:Hide()
 
 local curOption
 local function BuildSpellList(option, double, hiding)
+	if ProfileList:IsVisible() then ProfileList:Hide() end
 	if not hiding and SpellList:IsVisible() then SpellList:Hide() return end
 	curOption = option
 	doubleInput = double
@@ -625,7 +624,7 @@ ns.addCategory("raidframe", RAID_FRAMES_LABEL, L_GUI_UF_RAIDFRAMES_SUBTEXT, 2)
 ns.addCategory("aura", BUFFOPTIONS_LABEL, BUFFOPTIONS_SUBTEXT)
 ns.addCategory("actionbar", L_GUI_ACTIONBAR, ACTIONBARS_SUBTEXT, 3)
 ns.addCategory("tooltip", L.tooltip, L.tooltip_subtext)
-ns.addCategory("chat", SOCIALS, L_GUI_CHAT_SUBTEXT)
+ns.addCategory("chat", SOCIALS, L.chat_subtext)
 ns.addCategory("nameplate", UNIT_NAMEPLATES, L_GUI_NAMEPLATE_SUBTEXT, 2)
 ns.addCategory("combattext", L_GUI_COMBATTEXT, COMBATTEXT_SUBTEXT.." "..L_GUI_COMBATTEXT_SUBTEXT, 2)
 ns.addCategory("bag", L_GUI_BAGS, L_GUI_BAGS_SUBTEXT)
@@ -720,7 +719,7 @@ do
 	backdrop_alpha:SetPoint("TOPLEFT", backdrop_color, "BOTTOMLEFT", 0, -28)
 
 	local texture = ns.CreateDropDown(parent, "texture", true, nil, TextureTable, LSM and true)
-	
+	texture:SetPoint("TOPLEFT", backdrop_alpha, "BOTTOMLEFT", -20, -15)
 
 	local texturePreview = CreateFrame("Frame", nil, parent)
 	texturePreview:SetSize(100, 30)
@@ -743,7 +742,7 @@ do
 
 	local normal_font = ns.CreateDropDown(parent, "normal_font", true, L.font_stats_font, FontTable, LSM and true, true)
 	normal_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
-	
+
 	-- Pixel Font
 	local subheader = ns.addSubCategory(parent, L.media_subheader_pixel)
 	subheader:SetPoint("TOPLEFT", normal_font, "BOTTOMLEFT", 16, -10)
@@ -783,6 +782,414 @@ do
 	end)
 
 	tinsert(ns.buttons, LuaButton)
+
+	-- Profile list frame
+	local ProfileList = CreateFrame("Frame", "ProfileList", QulightUIOptionsPanel, "ButtonFrameTemplate")
+	ProfileList:SetPoint("TOPLEFT", QulightUIOptionsPanel, "TOPRIGHT", 22, 0)
+	ProfileList:SetSize(290, 420)
+	ProfileList:Hide()
+	ProfileListPortrait:SetAlpha(0)
+
+	ProfileList.title = ProfileList:CreateFontString("ProfileListTitle", "OVERLAY", "GameFontNormal")
+	ProfileList.title:SetPoint("TOP", _G["ProfileList"], "TOP", 0, -5)
+	ProfileList.title:SetText(L.profile_title)
+
+	local ProfileButton = CreateFrame("Button", "QulightUIOptionsPanelProfileButton", options, "UIPanelButtonTemplate")
+	ProfileButton:SetPoint("TOPRIGHT", -10, -8)
+	ProfileButton:SetSize(100, 23)
+	ProfileButton:SetText(L.profile)
+	ProfileButton:SetScript("OnClick", function()
+		if SpellList:IsVisible() then SpellList:Hide() end
+		if ProfileList:IsVisible() then ProfileList:Hide() return end
+		ProfileList:Show()
+	end)
+
+	tinsert(ns.buttons, ProfileButton)
+
+	local ProfileListPanel = CreateFrame("Frame", "ProfileListPanel", _G["ProfileListInset"])
+	ProfileListPanel:SetPoint("TOPLEFT", _G["ProfileListInset"], "TOPLEFT", -10, 20)
+	ProfileListPanel:SetPoint("BOTTOMRIGHT", _G["ProfileListInset"], "BOTTOMRIGHT", -6, -5)
+
+	local ProfileBox = CreateFrame("CheckButton", nil, ProfileList, "InterfaceOptionsCheckButtonTemplate")
+	ProfileBox:SetPoint("TOPLEFT", ProfileList, "TOPLEFT", 1, -78)
+	ProfileBox.tooltipText = L_GUI_SET_SAVED_SETTTINGS_DESC
+	ProfileBox:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 0, 0)
+		GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, true)
+	end)
+
+	ProfileBox:SetScript("OnLeave", function()
+		GameTooltip:Hide()
+	end)
+	options.ProfileBox = ProfileBox
+
+	local label = ProfileBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+	label:SetText(L_GUI_SET_SAVED_SETTTINGS)
+	label:SetTextColor(1, 1, 1)
+	label:SetPoint("LEFT", ProfileBox, "RIGHT", 10, 0)
+
+	local profileName
+	StaticPopupDialogs.QulightUI_RENAME_PROFILE = {
+		text = PET_RENAME.." "..strlower(L.profile),
+		button1 = ACCEPT,
+		button2 = CANCEL,
+		hasEditBox = true,
+		editBoxWidth = 350,
+		OnShow = function(self, text)
+			self.editBox:SetMaxLetters(0)
+			self.editBox:SetText(text)
+			self.editBox:HighlightText()
+			profileName = text
+		end,
+		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+		EditBoxOnTextChanged = function(self)
+			profileName = self:GetText()
+		end,
+		OnAccept = function()
+			if not profileName or profileName == "" then return end
+			if QulightUIOptionsGlobal[realm][name] then
+				local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+				if QulightUIOptionsPerChar[i] then
+					if not QulightUIOptionsPerChar[i]["general"] then
+						QulightUIOptionsPerChar[i]["general"] = {}
+					end
+					QulightUIOptionsPerChar[i]["general"]["profile_name"] = profileName
+				end
+			else
+				local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+				if QulightUIOptions[i] then
+					if not QulightUIOptions[i]["general"] then
+						QulightUIOptions[i]["general"] = {}
+					end
+					QulightUIOptions[i]["general"]["profile_name"] = profileName
+				end
+			end
+			UIDropDownMenu_SetText(QulightUIOptionsPanelgeneralchoose_profileDropDown, profileName)
+		end,
+		whileDead = true,
+		hideOnEscape = true,
+	}
+
+	local RenameButton = CreateFrame("Button", "ProfileListPaneRenameButton", ProfileList, "UIPanelButtonTemplate")
+	RenameButton:SetPoint("TOPLEFT", ProfileBox, "TOPLEFT", 4, -34)
+	RenameButton:SetSize(100, 23)
+	RenameButton:SetText(PET_RENAME)
+	RenameButton:SetWidth(RenameButton.Text:GetWidth() + 15)
+	RenameButton:SetScript("OnClick", function()
+		if QulightUIOptionsGlobal then
+			if QulightUIOptionsGlobal[realm][name] then
+				local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+				profileName = QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"] or i
+			else
+				local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+				profileName = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"] or i
+			end
+			StaticPopup_Show("QulightUI_RENAME_PROFILE", _, _, profileName)
+		end
+	end)
+	tinsert(ns.buttons, RenameButton)
+
+	local status = ProfileListPanel:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	status:SetPoint("BOTTOM", ProfileListPanel, "BOTTOM", 0, 35)
+	status:SetWidth(200)
+	status:SetTextColor(0.8, 0.2, 0)
+
+	local selfTextExport
+	StaticPopupDialogs.QulightUI_EXPORT_PROFILE = {
+		text = L.profile_export,
+		button1 = OKAY,
+		timeout = 0,
+		whileDead = true,
+		hasEditBox = true,
+		editBoxWidth = 350,
+		OnShow = function(self, text)
+			self.editBox:SetMaxLetters(0)
+			self.editBox:SetText(text)
+			self.editBox:HighlightText()
+			selfTextExport = text
+		end,
+		EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
+		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+		EditBoxOnTextChanged = function(self)
+			if self:GetText():len() < 1 then
+				self:GetParent():Hide()
+			else
+				self:SetText(selfTextExport)
+				self:HighlightText()
+			end
+		end,
+		preferredIndex = 5,
+	}
+
+	local profileVar = "General"
+	local function startExport()
+		local Prefix = "QulightUI:Profile:"
+		local LibDeflate = LibStub:GetLibrary("LibDeflate")
+		local LibSerialize = LibStub("LibSerialize")
+
+		local Serialized
+		if profileVar == "General" then
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			Serialized = LibSerialize:Serialize(QulightUIOptions[i])
+		elseif profileVar == "Personal" then
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			Serialized = LibSerialize:Serialize(QulightUIOptionsPerChar[i])
+		elseif profileVar == "Mover" then
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			Serialized = LibSerialize:Serialize(QulightUIPositions[i])
+		elseif profileVar == "Mover_Personal" then
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			Serialized = LibSerialize:Serialize(QulightUIPositionsPerChar[i])
+		end
+
+		local Compressed = LibDeflate:CompressDeflate(Serialized)
+		local Encoded = LibDeflate:EncodeForPrint(Compressed)
+		local Result = Prefix..Encoded
+		StaticPopup_Show("QulightUI_EXPORT_PROFILE", _, _, Result)
+	end
+
+	local selfTextImport
+	local importVar = "General"
+	StaticPopupDialogs.QulightUI_IMPORT_PROFILE = {
+		text = L.profile_import,
+		button1 = ACCEPT,
+		button2 = CANCEL,
+		timeout = 0,
+		whileDead = true,
+		hasEditBox = true,
+		editBoxWidth = 350,
+		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+		EditBoxOnTextChanged = function(self)
+			selfTextImport = self:GetText()
+		end,
+		OnAccept = function(self)
+			local Code = selfTextImport
+			local Prefix = "QulightUI:Profile:"
+			local LibDeflate = LibStub:GetLibrary("LibDeflate")
+			local LibSerialize = LibStub("LibSerialize")
+
+			local LibCode = string.gsub(Code, Prefix, "")
+			local Decoded = LibDeflate:DecodeForPrint(LibCode)
+
+			if Decoded then
+				local Decompressed = LibDeflate:DecompressDeflate(Decoded)
+				local Success, Table = LibSerialize:Deserialize(Decompressed)
+				if Success then
+					if profileVar == "General" then
+						local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+						QulightUIOptions[i] = Table
+					elseif profileVar == "Personal" then
+						local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+						QulightUIOptionsPerChar[i] = Table
+					elseif profileVar == "Mover" then
+						local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+						QulightUIPositions[i] = Table
+					elseif profileVar == "Mover_Personal" then
+						local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+						QulightUIPositionsPerChar[i] = Table
+					end
+					ReloadUI()
+				else
+					status:SetText(L.profile_error_code)
+				end
+			else
+				status:SetText(L.profile_error_code)
+			end
+		end,
+		preferredIndex = 5,
+	}
+
+	local subheader = ProfileListPanel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+	subheader:SetPoint("TOPLEFT", RenameButton, 15, -40)
+	subheader:SetText(L.profile_options)
+	subheader:SetTextColor(179/255, 211/255, 243/255)
+
+	local ExportButton = CreateFrame("Button", "ProfileListPanelExportButton", ProfileList, "UIPanelButtonTemplate")
+	ExportButton:SetPoint("TOPLEFT", subheader, 10, -20)
+	ExportButton:SetSize(100, 23)
+	ExportButton:SetText(L.profile_export)
+	ExportButton:SetScript("OnClick", function()
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Personal" or "General"
+		startExport()
+	end)
+
+	tinsert(ns.buttons, ExportButton)
+
+	local ImportButton = CreateFrame("Button", "ProfileListPaneImportButton", ProfileList, "UIPanelButtonTemplate")
+	ImportButton:SetPoint("LEFT", ExportButton, "RIGHT", 10, 0)
+	ImportButton:SetSize(100, 23)
+	ImportButton:SetText(L.profile_import)
+	ImportButton:SetScript("OnClick", function()
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Personal" or "General"
+		StaticPopup_Show("QulightUI_IMPORT_PROFILE")
+	end)
+
+	tinsert(ns.buttons, ImportButton)
+
+	local subheader = ProfileListPanel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+	subheader:SetPoint("TOPLEFT", ExportButton, -10, -35)
+	subheader:SetText(L.profile_movers)
+	subheader:SetTextColor(179/255, 211/255, 243/255)
+
+	local ExportMoveButton = CreateFrame("Button", "ProfileListPanelExportMoveButton", ProfileList, "UIPanelButtonTemplate")
+	ExportMoveButton:SetPoint("TOPLEFT", subheader, 10, -20)
+	ExportMoveButton:SetSize(100, 23)
+	ExportMoveButton:SetText(L.profile_export)
+	ExportMoveButton:SetScript("OnClick", function()
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
+		startExport()
+	end)
+
+	tinsert(ns.buttons, ExportMoveButton)
+
+	local ImportMoveButton = CreateFrame("Button", "ProfileListPaneImportMoveButton", ProfileList, "UIPanelButtonTemplate")
+	ImportMoveButton:SetPoint("LEFT", ExportMoveButton, "RIGHT", 10, 0)
+	ImportMoveButton:SetSize(100, 23)
+	ImportMoveButton:SetText(L.profile_import)
+	ImportMoveButton:SetScript("OnClick", function()
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
+		StaticPopup_Show("QulightUI_IMPORT_PROFILE")
+	end)
+
+	tinsert(ns.buttons, ImportMoveButton)
+
+	C_Timer.After(0.3, function() -- need to grab SavedVariables and loaded libraries
+		local LibDeflate = LibStub and LibStub:GetLibrary("LibDeflate", true)
+		local LibSerialize = LibStub and LibStub:GetLibrary("LibSerialize", true)
+		local LibsExist = LibDeflate and LibSerialize
+
+		if not LibsExist then
+			ExportButton:Disable()
+			ImportButton:Disable()
+			ExportMoveButton:Disable()
+			ImportMoveButton:Disable()
+			status:SetText(L.profile_error_lib)
+		end
+
+		-- Use existing function in Core.lua to create dropdown with name via SavedVariables
+		local function SaveValue(f, value)
+			if not C.options[f.group] then C.options[f.group] = {} end
+			if not C.options[f.group][f.option] then C.options[f.group][f.option] = {} end
+
+			C.options[f.group][f.option] = value -- these are the saved variables
+			C[f.group][f.option] = value -- and this is from the lua options
+		end
+
+		local old = {}
+		local function checkIsReloadNeeded()
+			for frame, value in pairs(old) do
+				if C[frame.group][frame.option] ~= value then
+					ns.setReloadNeeded(true)
+					return
+				end
+			end
+
+			ns.setReloadNeeded(false)
+		end
+
+		local function GetProfileName(key)
+			if QulightUIOptionsGlobal[realm][name] then
+				local i = tostring(key)
+				if QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"] then
+					return QulightUIOptionsPerChar[i]["general"]["profile_name"]
+				end
+			else
+				local i = tostring(key)
+				if QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"] then
+					return QulightUIOptions[i]["general"]["profile_name"]
+				end
+			end
+		end
+
+		local CreateDropDown = function(parent, option, needsReload, text, tableValue)
+			local f = CreateFrame("Frame", parent:GetName()..option.."DropDown", parent, "UIDropDownMenuTemplate")
+			UIDropDownMenu_SetWidth(f, 110)
+
+			UIDropDownMenu_Initialize(f, function(self)
+				local info = UIDropDownMenu_CreateInfo()
+				info.func = self.SetValue
+				for key, value in pairs(tableValue) do
+					info.text = GetProfileName(key) or value
+					info.arg1 = value
+					info.arg2 = key
+					info.checked = value == f.selectedValue
+
+					if isFont then
+						local fObject = CreateFont(info.text)
+						fObject:SetFont(value, 12, "")
+						info.fontObject = fObject
+					end
+					UIDropDownMenu_AddButton(info)
+				end
+			end)
+
+			function f:SetValue(newValue, newkey)
+				f.selectedValue = newValue
+				local text = GetProfileName(newkey) or newValue
+				UIDropDownMenu_SetText(f, text)
+				if QulightUIOptionsGlobal[realm][name] then
+					QulightUIOptionsGlobal[realm]["Current_Profile"][name] = newValue
+				else
+					QulightUIOptionsGlobal["Current_Profile"] = newValue
+				end
+				SaveValue(f, newValue)
+				old[f] = f.oldValue
+				checkIsReloadNeeded()
+				CloseDropDownMenus()
+			end
+
+			local label = f:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+			if text then
+				label:SetText(text)
+			else
+				label:SetText(ns[parent.tag.."_"..option])
+			end
+			label:SetHeight(20)
+			label:SetJustifyH("LEFT")
+			label:SetPoint("LEFT", 160, 4)
+			f.label = label
+
+			f.tooltipText = ns[parent.tag.."_"..option.."_desc"]
+			if f.tooltipText then
+				f:SetScript("OnEnter", function()
+					GameTooltip:SetOwner(f, "ANCHOR_RIGHT", 0, 0)
+					GameTooltip:SetText(f.tooltipText, nil, nil, nil, nil, true)
+				end)
+
+				f:SetScript("OnLeave", function()
+					GameTooltip:Hide()
+				end)
+			end
+
+			f.group = parent.tag
+			f.option = option
+
+			f.needsReload = needsReload
+
+			parent[option] = f
+
+			return f
+		end
+
+		local choose_profile = CreateDropDown(QulightUIOptionsPanel.general, "choose_profile", true, L.profile_choose, {1, 2, 3})
+		choose_profile:SetPoint("TOPLEFT", ProfileList, "TOPLEFT", -15, -46)
+		choose_profile:SetParent(ProfileListPanel)
+
+		local value = QulightUIOptionsGlobal[realm][name] and QulightUIOptionsGlobal[realm]["Current_Profile"][name] or QulightUIOptionsGlobal["Current_Profile"]
+		choose_profile.selectedValue = value
+		choose_profile.oldValue = value
+
+		local text
+		if QulightUIOptionsGlobal[realm][name] then
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			text = QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"]
+		else
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			text = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"]
+		end
+		text = text or value
+		UIDropDownMenu_SetText(choose_profile, text)
+	end)
 end
 
 -- Font
@@ -1043,7 +1450,7 @@ do
 	local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
 	blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local bubbles = ns.CreateCheckBox(parent, "bubbles", L_GUI_CHAT_SKIN_BUBBLE)
+	local bubbles = ns.CreateCheckBox(parent, "bubbles")
 	bubbles:SetPoint("TOPLEFT", blizzard_frames, "BOTTOMLEFT", 0, 0)
 
 	local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons", L_GUI_SKINS_MINIMAP_BUTTONS)
@@ -1225,9 +1632,6 @@ do
 	local plugins_reputation_bar = ns.CreateCheckBox(parent, "plugins_reputation_bar")
 	plugins_reputation_bar:SetPoint("TOPLEFT", plugins_experience_bar, "BOTTOMLEFT", 0, 0)
 
-	local plugins_artifact_bar = ns.CreateCheckBox(parent, "plugins_artifact_bar")
-	plugins_artifact_bar:SetPoint("TOPLEFT", plugins_experience_bar, "BOTTOMLEFT", 0, 0)
-
 	local plugins_smooth_bar = ns.CreateCheckBox(parent, "plugins_smooth_bar", L_GUI_UF_PLUGINS_SMOOTH_BAR)
 	plugins_smooth_bar:SetPoint("TOPLEFT", plugins_reputation_bar, "BOTTOMLEFT", 0, 0)
 
@@ -1272,6 +1676,15 @@ do
 
 	local extra_power_height = ns.CreateNumberSlider(parent, "extra_power_height", nil, nil, 0, 20, 1, true)
 	extra_power_height:SetPoint("LEFT", extra_health_height, "RIGHT", 120, 0)
+
+	local subheader = ns.addSubCategory(parent, L.unitframe_subheader_castbar)
+	subheader:SetPoint("TOPLEFT", extra_health_height, "BOTTOMLEFT", 0, -10)
+
+	local castbar_width = ns.CreateNumberSlider(parent, "castbar_width", nil, nil, 190, 450, 1, true, L.unitframe_player_width)
+	castbar_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -28)
+
+	local castbar_height = ns.CreateNumberSlider(parent, "castbar_height", nil, nil, 16, 40, 1, true)
+	castbar_height:SetPoint("LEFT", castbar_width, "RIGHT", 120, 0)
 
 	local function toggleOptions()
 		local shown = not extra_height_auto:GetChecked()
@@ -1321,7 +1734,7 @@ do
 
 	local totem = ns.CreateCheckBox(parent, "totem", L_GUI_UF_PLUGINS_TOTEM_BAR)
 	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", 0, 0)
-	
+
 	local totem_other = ns.CreateCheckBox(parent, "totem_other")
 	totem_other:SetPoint("TOPLEFT", totem, "BOTTOMLEFT", 20, 0)
 
@@ -1459,7 +1872,7 @@ do
 	plugins_aura_watch.children = {plugins_aura_watch_timer, plugins_debuffhighlight_icon, plugins_pvp_debuffs}
 
 	local plugins_healcomm = ns.CreateCheckBox(parent, "plugins_healcomm", L_GUI_UF_PLUGINS_HEALCOMM)
-	plugins_healcomm:SetPoint("TOPLEFT", plugins_pvp_debuffs, "BOTTOMLEFT", 0, 0)
+	plugins_healcomm:SetPoint("TOPLEFT", plugins_pvp_debuffs, "BOTTOMLEFT", -20, 0)
 
 	local plugins_over_absorb = ns.CreateCheckBox(parent, "plugins_over_absorb")
 	plugins_over_absorb:SetPoint("TOPLEFT", plugins_healcomm, "BOTTOMLEFT", 20, 0)
@@ -1513,7 +1926,6 @@ do
 
 	local dps_raid_power_height = ns.CreateNumberSlider(parent, "dps_raid_power_height", nil, nil, 0, 10, 1, true)
 	dps_raid_power_height:SetPoint("LEFT", dps_party_power_height, "RIGHT", 120, 0)
-
 end
 
 -- Auras/Buffs/Debuffs
@@ -1660,7 +2072,6 @@ do
 
 	micromenu.children = {micromenu_mouseover}
 
-
 	-- Panel 2
 	local parent = QulightUIOptionsPanel.actionbar2
 
@@ -1765,26 +2176,10 @@ do
 
 	local bar6_mouseover = ns.CreateCheckBox(parent, "bar6_mouseover", L.actionbar_bar1_mouseover)
 	bar6_mouseover:SetPoint("LEFT", bar6_size, "RIGHT", 130, 0)
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-	-- Bar 7
-	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 7")
-	subheader:SetPoint("TOPLEFT", bar6_size, "BOTTOMLEFT", 0, -10)
-=======
-	local custom_bar_mouseover = ns.CreateCheckBox(parent, "custom_bar_mouseover", L.actionbar_bar1_mouseover)
-	custom_bar_mouseover:SetPoint("LEFT", custom_bar_size, "RIGHT", 130, 0)
-
-	-- Bar 7
-	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 7")
-	subheader:SetPoint("TOPLEFT", custom_bar_size, "BOTTOMLEFT", 0, -10)
->>>>>>> 86e10c28a ([ActionBars] Added Bar7 and Bar8. Need to enable in Blizzard option also.):ShestakUI_Config/Options.lua
-=======
 
 	-- Bar 7
 	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 7")
 	subheader:SetPoint("TOPLEFT", bar6_size, "BOTTOMLEFT", 0, -10)
->>>>>>> 0bab1b43f ([ActionBars] Replace CustomBar with new Blizzard bar6.):ShestakUI_Config/Options.lua
 
 	local bar7_enable = ns.CreateCheckBox(parent, "bar7_enable", ENABLE)
 	bar7_enable:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
@@ -1844,7 +2239,7 @@ do
 	hidebuttons:SetPoint("TOPLEFT", health_value, "BOTTOMLEFT", 0, 0)
 
 	local hide_combat = ns.CreateCheckBox(parent, "hide_combat")
-	hide_combat:SetPoint("TOPLEFT", history, "BOTTOMLEFT", 0, 0)
+	hide_combat:SetPoint("TOPLEFT", hidebuttons, "BOTTOMLEFT", 0, 0)
 
 	-- Plugins
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_PLUGINS)
@@ -1900,19 +2295,19 @@ end
 do
 	local parent = QulightUIOptionsPanel.chat
 
-	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_CHAT_ENABLE)
+	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 750, 1, true, L_GUI_CHAT_WIDTH)
+	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 750, 1, true)
 	width:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 300, 1, true, L_GUI_CHAT_HEIGHT)
+	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 300, 1, true)
 	height:SetPoint("LEFT", width, "RIGHT", 120, 0)
 
-	local background = ns.CreateCheckBox(parent, "background", L_GUI_CHAT_BACKGROUND)
+	local background = ns.CreateCheckBox(parent, "background")
 	background:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -10)
 
-	local background_alpha = ns.CreateNumberSlider(parent, "background_alpha", nil, nil, 0, 1, 0.05, true, L_GUI_CHAT_BACKGROUND_ALPHA)
+	local background_alpha = ns.CreateNumberSlider(parent, "background_alpha", nil, nil, 0, 1, 0.05, true)
 	background_alpha:SetPoint("TOPLEFT", background, "BOTTOMLEFT", 0, -20)
 
 	local filter = ns.CreateCheckBox(parent, "filter")
@@ -1921,33 +2316,32 @@ do
 	local spam = ns.CreateCheckBox(parent, "spam")
 	spam:SetPoint("TOPLEFT", filter, "BOTTOMLEFT", 0, 0)
 
-
 	local spam_list = ns.CreateEditBox(parent, "spam_list", true)
 	spam_list:SetPoint("TOPLEFT", spam, "BOTTOMLEFT", 6, -10)
 	spam_list:SetWidth(200)
 	spam_list:SetMaxLetters(40)
 
-	local chat_bar = ns.CreateCheckBox(parent, "chat_bar", L_GUI_CHAT_BAR)
+	local chat_bar = ns.CreateCheckBox(parent, "chat_bar")
 	chat_bar:SetPoint("TOPLEFT", spam_list, "BOTTOMLEFT", -6, -10)
 
-	local chat_bar_mouseover = ns.CreateCheckBox(parent, "chat_bar_mouseover", L_GUI_CHAT_BAR_MOUSEOVER)
+	local chat_bar_mouseover = ns.CreateCheckBox(parent, "chat_bar_mouseover")
 	chat_bar_mouseover:SetPoint("TOPLEFT", chat_bar, "BOTTOMLEFT", 20, 0)
 
 	chat_bar.children = {chat_bar_mouseover}
 
-	local whisp_sound = ns.CreateCheckBox(parent, "whisp_sound", L_GUI_CHAT_WHISP)
+	local whisp_sound = ns.CreateCheckBox(parent, "whisp_sound")
 	whisp_sound:SetPoint("TOPLEFT", chat_bar_mouseover, "BOTTOMLEFT", -20, 0)
 
-	local combatlog = ns.CreateCheckBox(parent, "combatlog", L_GUI_CHAT_CL_TAB)
+	local combatlog = ns.CreateCheckBox(parent, "combatlog")
 	combatlog:SetPoint("TOPLEFT", whisp_sound, "BOTTOMLEFT", 0, 0)
 
-	local tabs_mouseover = ns.CreateCheckBox(parent, "tabs_mouseover", L_GUI_CHAT_TABS_MOUSEOVER)
+	local tabs_mouseover = ns.CreateCheckBox(parent, "tabs_mouseover")
 	tabs_mouseover:SetPoint("TOPLEFT", combatlog, "BOTTOMLEFT", 0, 0)
 
-	local sticky = ns.CreateCheckBox(parent, "sticky", L_GUI_CHAT_STICKY)
+	local sticky = ns.CreateCheckBox(parent, "sticky")
 	sticky:SetPoint("TOPLEFT", tabs_mouseover, "BOTTOMLEFT", 0, 0)
 
-	local damage_meter_spam = ns.CreateCheckBox(parent, "damage_meter_spam", L_GUI_CHAT_DAMAGE_METER_SPAM)
+	local damage_meter_spam = ns.CreateCheckBox(parent, "damage_meter_spam")
 	damage_meter_spam:SetPoint("TOPLEFT", sticky, "BOTTOMLEFT", 0, 0)
 
 	local loot_icons = ns.CreateCheckBox(parent, "loot_icons")
@@ -1958,6 +2352,9 @@ do
 
 	local history = ns.CreateCheckBox(parent, "history", HISTORY)
 	history:SetPoint("TOPLEFT", role_icons, "BOTTOMLEFT", 0, 0)
+
+	local hide_combat = ns.CreateCheckBox(parent, "hide_combat")
+	hide_combat:SetPoint("TOPLEFT", history, "BOTTOMLEFT", 0, 0)
 
 	local custom_time_color = ns.CreateCheckBox(parent, "custom_time_color")
 	custom_time_color:SetPoint("TOPLEFT", hide_combat, "BOTTOMLEFT", 0, 0)
@@ -1970,29 +2367,28 @@ end
 do
 	local parent = QulightUIOptionsPanel.nameplate
 
+	local multScale = 768 / select(2, GetPhysicalScreenSize())
+
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_NAMEPLATE_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local distance = ns.CreateNumberSlider(parent, "distance", nil, nil, 0, 200, 1, true, L_GUI_NAMEPLATE_DISTANCE)
-	distance:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
+	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 150 / multScale, 1, true, L_GUI_NAMEPLATE_WIDTH)
+	width:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
+
+	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 20 / multScale, 1, true, L_GUI_NAMEPLATE_HEIGHT)
+	height:SetPoint("LEFT", width, "RIGHT", 120, 0)
+
+	local ad_width = ns.CreateNumberSlider(parent, "ad_width", nil, nil, 0, 80 / multScale, 1, true)
+	ad_width:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -20)
+
+	local ad_height = ns.CreateNumberSlider(parent, "ad_height", nil, nil, 0, 15 / multScale, 1, true)
+	ad_height:SetPoint("LEFT", ad_width, "RIGHT", 120, 0)
 
 	local alpha = ns.CreateNumberSlider(parent, "alpha", nil, nil, 0, 1, 0.05, true)
-	alpha:SetPoint("LEFT", distance, "RIGHT", 120, 0)
-
-	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 20, 1, true, L_GUI_NAMEPLATE_HEIGHT)
-	height:SetPoint("TOPLEFT", distance, "BOTTOMLEFT", 0, -20)
-
-	local ad_height = ns.CreateNumberSlider(parent, "ad_height", nil, nil, 0, 30, 1, true)
-	ad_height:SetPoint("LEFT", height, "RIGHT", 120, 0)
-
-	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 200, 1, true, L_GUI_NAMEPLATE_WIDTH)
-	width:SetPoint("TOPLEFT", height, "BOTTOMLEFT", 0, -20)
-
-	local ad_width = ns.CreateNumberSlider(parent, "ad_width", nil, nil, 0, 50, 1, true)
-	ad_width:SetPoint("LEFT", width, "RIGHT", 120, 0)
+	alpha:SetPoint("TOPLEFT", ad_width, "BOTTOMLEFT", 0, -20)
 
 	local combat = ns.CreateCheckBox(parent, "combat", L_GUI_NAMEPLATE_COMBAT)
-	combat:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -10)
+	combat:SetPoint("TOPLEFT", alpha, "BOTTOMLEFT", 0, -10)
 
 	local health_value = ns.CreateCheckBox(parent, "health_value", L_GUI_NAMEPLATE_HEALTH)
 	health_value:SetPoint("TOPLEFT", combat, "BOTTOMLEFT", 0, 0)
@@ -2006,11 +2402,15 @@ do
 	local name_abbrev = ns.CreateCheckBox(parent, "name_abbrev", L_GUI_NAMEPLATE_NAME_ABBREV)
 	name_abbrev:SetPoint("TOPLEFT", class_icons, "BOTTOMLEFT", 0, 0)
 
+	local short_name = ns.CreateCheckBox(parent, "short_name")
+	short_name:SetPoint("TOPLEFT", name_abbrev, "BOTTOMLEFT", 0, 0)
+
 	local clamp = ns.CreateCheckBox(parent, "clamp")
-	clamp:SetPoint("TOPLEFT", name_abbrev, "BOTTOMLEFT", 0, 0)
+	clamp:SetPoint("TOPLEFT", short_name, "BOTTOMLEFT", 0, 0)
 
 	local track_debuffs = ns.CreateCheckBox(parent, "track_debuffs", L_GUI_NAMEPLATE_SHOW_DEBUFFS)
-	
+	track_debuffs:SetPoint("TOPLEFT", clamp, "BOTTOMLEFT", 0, 0)
+
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("LEFT", track_debuffs, "RIGHT", 400, 0)
 	ListButton:SetSize(100, 23)
@@ -2037,7 +2437,7 @@ do
 
 	local track_buffs = ns.CreateCheckBox(parent, "track_buffs", L_GUI_NAMEPLATE_SHOW_BUFFS)
 	track_buffs:SetPoint("TOPLEFT", track_debuffs, "BOTTOMLEFT", 0, 0)
-	
+
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("LEFT", track_buffs, "RIGHT", 400, 0)
 	ListButton:SetSize(100, 23)
@@ -2062,7 +2462,7 @@ do
 	track_buffs:HookScript("OnClick", toggleListButton)
 	ListButton:HookScript("OnShow", toggleListButton)
 
-	local auras_size = ns.CreateNumberSlider(parent, "auras_size", nil, nil, 0, 50, 1, true, L_GUI_NAMEPLATE_DEBUFFS_SIZE)
+	local auras_size = ns.CreateNumberSlider(parent, "auras_size", nil, nil, 0, 35 / multScale, 1, true, L_GUI_NAMEPLATE_DEBUFFS_SIZE)
 	auras_size:SetPoint("TOPLEFT", track_buffs, "BOTTOMLEFT", 0, -20)
 
 	local healer_icon = ns.CreateCheckBox(parent, "healer_icon", L_GUI_NAMEPLATE_HEALER_ICON)
@@ -2074,20 +2474,23 @@ do
 	local target_glow = ns.CreateCheckBox(parent, "target_glow")
 	target_glow:SetPoint("TOPLEFT", totem_icons, "BOTTOMLEFT", 0, 0)
 
+	local only_name = ns.CreateCheckBox(parent, "only_name")
+	only_name:SetPoint("TOPLEFT", target_glow, "BOTTOMLEFT", 0, 0)
+
 	local quests = ns.CreateCheckBox(parent, "quests")
 	quests:SetPoint("TOPLEFT", only_name, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 2
 	local parent = QulightUIOptionsPanel.nameplate2
 
-	local only_name = ns.CreateCheckBox(parent, "only_name")
-	only_name:SetPoint("TOPLEFT", target_glow, "BOTTOMLEFT", 0, 0)
-
 	local low_health_value = ns.CreateNumberSlider(parent, "low_health_value", nil, nil, 0.1, 1, 0.05, true)
 	low_health_value:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, -20)
 
+	local low_health_color = ns.CreateColourPicker(parent, "low_health_color", true)
+	low_health_color:SetPoint("LEFT", low_health_value, "RIGHT", 85, 0)
+
 	local low_health = ns.CreateCheckBox(parent, "low_health")
-	low_health:SetPoint("LEFT", low_health_value, "RIGHT", 70, 0)
+	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
@@ -2109,10 +2512,10 @@ do
 
 	local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true, L_GUI_NAMEPLATE_OFFTANK_COLOR)
 	offtank_color:SetPoint("TOPLEFT", bad_color, "BOTTOMLEFT", 0, -8)
-	
+
 	local extra_color = ns.CreateColourPicker(parent, "extra_color", true)
 	extra_color:SetPoint("TOPLEFT", offtank_color, "BOTTOMLEFT", 0, -8)
-	
+
 	local mob_color_enable = ns.CreateCheckBox(parent, "mob_color_enable")
 	mob_color_enable:SetPoint("TOPLEFT", extra_color, "BOTTOMLEFT", -24, -8)
 
@@ -2188,7 +2591,6 @@ do
 	ListButton:SetSize(100, 23)
 	ListButton:SetText(ADD)
 	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
-	ListButton.tooltipText = "|cffFFD100"..L_GUI_RESET_SPELLS_DESC.."|r"
 	ListButton:SetScript("OnClick", function()
 		if not C.options["combattext"] then
 			C.options["combattext"] = {}
@@ -2437,7 +2839,7 @@ do
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("LEFT", spells, "RIGHT", 400, 0)
 	ListButton:SetSize(100, 23)
-	ListButton:SetText(">>")
+	ListButton:SetText(ADD)
 	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
 	ListButton:SetScript("OnClick", function()
 		if not C.options["announcements"] then
@@ -2453,7 +2855,10 @@ do
 	local function toggleListButton()
 		local shown = spells:GetChecked()
 		ListButton:SetEnabled(shown)
-		if not T.announce_spells then ListButton:Disable() return end
+		if not T.announce_spells then
+			ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
+			ListButton:SetScript("OnClick", nil)
+		end
 	end
 
 	spells:HookScript("OnClick", toggleListButton)
@@ -2644,6 +3049,10 @@ do
 		if IsControlKeyDown() then
 			C.options["raidcooldown"]["spells_list"] = nil
 			ns.setReloadNeeded(true)
+			ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
+			ListButton:SetScript("OnClick", nil)
+			GameTooltip:Hide()
+			SpellList:Hide()
 			return
 		end
 		BuildSpellList(C.options["raidcooldown"]["spells_list"], true)
@@ -2705,6 +3114,10 @@ do
 		if IsControlKeyDown() then
 			C.options["enemycooldown"]["spells_list"] = nil
 			ns.setReloadNeeded(true)
+			ListButton.tooltipText = "|cffFFD100"..REQUIRES_RELOAD.."|r"
+			ListButton:SetScript("OnClick", nil)
+			GameTooltip:Hide()
+			SpellList:Hide()
 			return
 		end
 		BuildSpellList(C.options["enemycooldown"]["spells_list"], true)
@@ -2837,8 +3250,19 @@ do
 	local currency_raid = ns.CreateCheckBox(parent, "currency_raid", L_GUI_STATS_CURRENCY_RAID)
 	currency_raid:SetPoint("TOPLEFT", currency_cooking, "BOTTOMLEFT", 0, 0)
 
-	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME8)
+	local currency_misc = ns.CreateCheckBox(parent, "currency_misc", CURRENCY.. " "..EXPANSION_NAME9)
 	currency_misc:SetPoint("TOPLEFT", currency_raid, "BOTTOMLEFT", 0, 0)
+
+	local ResetGoldButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	ResetGoldButton:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -20, 5)
+	ResetGoldButton:SetSize(100, 23)
+	ResetGoldButton:SetText(RESET.." "..strlower(WORLD_QUEST_REWARD_FILTERS_GOLD))
+	ResetGoldButton:SetWidth(ResetGoldButton.Text:GetWidth() + 15)
+	ResetGoldButton:SetScript("OnClick", function()
+		StaticPopup_Show("RESET_STATS")
+	end)
+
+	tinsert(ns.buttons, ResetGoldButton)
 end
 
 -- Trade
@@ -2928,6 +3352,14 @@ f:SetScript("OnEvent", function()
 	T.SkinEditBox(SpellListTextInput)
 	T.SkinEditBox(SpellListTextInput2)
 
+	ProfileList:StripTextures()
+	ProfileList:CreateBackdrop("Transparent")
+	ProfileList.backdrop:SetPoint("TOPLEFT", -18, 0)
+	ProfileList.backdrop:SetPoint("BOTTOMRIGHT", 0, 9)
+	T.SkinCloseButton(ProfileListCloseButton)
+
+	ProfileListPanel:CreateBackdrop("Overlay")
+
 	QulightUIInfoFrame:SetTemplate("Overlay")
 
 	QulightUIProfileFrame:SetTemplate("Transparent")
@@ -2935,6 +3367,13 @@ f:SetScript("OnEvent", function()
 	QulightUIProfileFrameScroll:CreateBackdrop("Overlay")
 	QulightUIProfileFrameScroll.backdrop:SetPoint("TOPLEFT", -4, 4)
 	QulightUIProfileFrameScroll.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
+
+	C_Timer.After(3, function()
+		local dropdown = QulightUIOptionsPanelgeneralchoose_profileDropDown
+		if dropdown then
+			T.SkinDropDownBox(dropdown)
+		end
+	end)
 end)
 
 ----------------------------------------------------------------------------------------
@@ -2968,35 +3407,6 @@ end
 ----------------------------------------------------------------------------------------
 --	Button in GameMenuButton frame
 ----------------------------------------------------------------------------------------
-
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_LOGIN")
-f:SetScript("OnEvent", function()
-	if not QulightUI then return end
-	T, C = unpack(QulightUI)
-
-	SpellList:StripTextures()
-	SpellList:CreateBackdrop("Transparent")
-	SpellList.backdrop:SetPoint("TOPLEFT", -18, 0)
-	SpellList.backdrop:SetPoint("BOTTOMRIGHT", 0, 9)
-
-	SpellListScrollFrameSpellList:StripTextures()
-	SpellListScrollFrameSpellList:CreateBackdrop("Overlay")
-	SpellListScrollFrameSpellList.backdrop:SetPoint("TOPLEFT", 2, 3)
-	SpellListScrollFrameSpellList.backdrop:SetPoint("BOTTOMRIGHT", 2, -3)
-	T.SkinCloseButton(SpellListCloseButton)
-
-	SpellListScrollFrameSpellListScrollBar:SetPoint("TOPLEFT", SpellListScrollFrameSpellList, "TOPRIGHT", 6, -13)
-	SpellListScrollFrameSpellListScrollBar:SetPoint("BOTTOMLEFT", SpellListScrollFrameSpellList, "BOTTOMRIGHT", 6, 13)
-	T.SkinScrollBar(SpellListScrollFrameSpellListScrollBar)
-
-	T.SkinEditBox(SpellListTextInput)
-	T.SkinEditBox(SpellListTextInput2)
-
-	QulightUIProfileFrame:SetTemplate("Transparent")
-	T.SkinScrollBar(QulightUIProfileFrameScrollScrollBar)
-end)
-
 local menuButton = CreateFrame("Button", "GameMenuButtonSettingsUI", GameMenuFrame, "GameMenuButtonTemplate")
 menuButton:SetText("QulightUI")
 menuButton:SetPoint("TOP", GetLocale() ~= "koKR" and "GameMenuButtonAddons" or "GameMenuButtonRatings", "BOTTOM", 0, -1)

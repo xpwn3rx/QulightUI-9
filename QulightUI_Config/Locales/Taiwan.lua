@@ -21,6 +21,17 @@ L_GUI_EXPERT_MODE = "專家模式"
 L_GUI_EXPERT_MODE_DESC = "編寫你的插件代碼"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左鍵重置列表"
 
+-- Profile
+L.profile = "Profile" -- Need review
+L.profile_title = "Profile options" -- Need review
+L.profile_choose = "Choose profile" -- Need review
+L.profile_options = "Settings" -- Need review
+L.profile_movers = "Moving elements" -- Need review
+L.profile_export = "Export" -- Need review
+L.profile_import = "Import" -- Need review
+L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
+L.profile_error_code = "Error in imported code!" -- Need review
+
 -- General options
 L_GUI_GENERAL_SUBTEXT = "一般用戶界面設置，鍵入 /uihelp 獲取更多可用命令。"
 L_GUI_GENERAL_WELCOME_MESSAGE = "歡迎信息"
@@ -74,7 +85,7 @@ L.font_subheader_bag = "背包"
 L.font_subheader_blizzard = "系統"
 L.font_tooltip_header_font_size = "滑鼠提示標題"
 L.font_tooltip_font_size = "滑鼠提示信息"
-L.font_global_font = "Disable Pixel font" -- Need review
+L.font_global_font = "禁用像素字體"
 
 -- Skins options
 L_GUI_SKINS = "界面美化"
@@ -83,6 +94,7 @@ L_GUI_SKINS_BLIZZARD = "美化暴雪默認界面"
 L_GUI_SKINS_MINIMAP_BUTTONS = "小地圖插件圖標"
 L_GUI_SKINS_SUBHEADER = "單體插件"
 L.skins_minimap_buttons_mouseover = "滑鼠懸停顯示"
+L.skins_bubbles = "美化聊天泡泡"
 
 -- Unit Frames options
 L_GUI_UF_SUBTEXT = "定制玩家/目標框架/其他框架"
@@ -145,8 +157,8 @@ L.unitframe_extra_height_auto = "血量/能量框架自動增高"
 L.unitframe_extra_height_auto_desc = "按字體大小智能調節框架高度"
 L.unitframe_extra_health_height = "血量框架額外增高"
 L.unitframe_extra_power_height = "能量框架額外增高"
-L.unitframe_subheader_castbar = "Size of player and target castbar" -- Need review
-L.unitframe_castbar_height = "Height" -- Need review
+L.unitframe_subheader_castbar = "玩家/目標施法條大小"
+L.unitframe_castbar_height = "高度"
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "職業資源欄"
@@ -286,25 +298,24 @@ L.tooltip_instance_lock = "副本進度比較"
 L.tooltip_mount = "坐騎來源"
 
 -- Chat options
-L_GUI_CHAT_SUBTEXT = "這裡可以設置你的聊天框"
-L_GUI_CHAT_ENABLE = "聊天框增強"
-L_GUI_CHAT_BACKGROUND = "聊天框背景"
-L_GUI_CHAT_BACKGROUND_ALPHA = "聊天框背景透明度"
+L.chat_subtext = "這裡可以設置你的聊天框"
+L.chat_enable = "聊天框增強"
+L.chat_background = "聊天框背景"
+L.chat_background_alpha = "聊天框背景透明度"
 L.chat_filter = "屏蔽無用系統信息"
 L.chat_filter_desc = "決鬥, 切換專精, 城中NPC對話"
 L.chat_spam = "屏蔽玩家垃圾信息"
 L.chat_spam_list = "過濾詞列表"
 L.chat_spam_list_desc = "添加過濾詞(中文詞用空格分隔，英文詞用小寫分隔)"
-L_GUI_CHAT_WIDTH = "聊天框寬度"
-L_GUI_CHAT_HEIGHT = "聊天框高度"
-L_GUI_CHAT_BAR = "聊天頻道快捷鍵"
-L_GUI_CHAT_BAR_MOUSEOVER = "滑鼠懸停顯示聊天頻道快捷鍵"
-L_GUI_CHAT_WHISP = "接受密語時聲音提示"
-L_GUI_CHAT_SKIN_BUBBLE = "美化聊天泡泡"
-L_GUI_CHAT_CL_TAB = "戰鬥記錄標籤"
-L_GUI_CHAT_TABS_MOUSEOVER = "滑鼠懸停顯示頻道標籤"
-L_GUI_CHAT_STICKY = "記住上一次使用的頻道"
-L_GUI_CHAT_DAMAGE_METER_SPAM = "在鏈接中合併垃圾郵件"
+L.chat_width = "聊天框寬度"
+L.chat_height = "聊天框高度"
+L.chat_chat_bar = "聊天頻道快捷鍵"
+L.chat_chat_bar_mouseover = "滑鼠懸停顯示聊天頻道快捷鍵"
+L.chat_whisp_sound = "接受密語時聲音提示"
+L.chat_combatlog = "戰鬥記錄標籤"
+L.chat_tabs_mouseover = "滑鼠懸停顯示頻道標籤"
+L.chat_sticky = "記住上一次使用的頻道"
+L.chat_damage_meter_spam = "在鏈接中合併垃圾郵件"
 L.chat_loot_icons = "拾取信息帶圖標"
 L.chat_hide_combat = "戰鬥中隱藏"
 L.chat_custom_time_color = "自定義時間標籤顏色"
@@ -380,7 +391,8 @@ L_GUI_COMBATTEXT_TIME_VISIBLE = "時間"
 L_GUI_COMBATTEXT_TIME_VISIBLE_DESC = "信息保留時間(秒)"
 L_GUI_COMBATTEXT_DK_RUNES = "死亡騎士符文恢復"
 L_GUI_COMBATTEXT_KILLINGBLOW = "擊殺信息"
-L_GUI_COMBATTEXT_MERGE_AOE_SPAM = "將AOE傷害合併為一條信息"
+L.combattext_merge_aoe_spam = "將AOE傷害合併為一條信息"
+L.combattext_merge_aoe_spam_desc = "將AOE傷害合併為一條信息"
 L_GUI_COMBATTEXT_MERGE_MELEE = "將多個自動攻擊傷害合併為一條信息"
 L.combattext_merge_all = "Merges all spells" -- Needs review
 L_GUI_COMBATTEXT_DISPEL = "當你驅散成功時提示"

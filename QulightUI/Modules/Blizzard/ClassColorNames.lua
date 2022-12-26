@@ -136,16 +136,16 @@ end
 hooksecurefunc(_G.WhoFrame.ScrollBox, "Update", whoFrame)
 
 -- LFRBrowseList
-hooksecurefunc("LFRBrowseFrameListButton_SetData", function(button, index)
-	local name, level, _, className, _, _, _, class = SearchLFGGetResults(index)
-
-	if index and class and name and level then
-		button.name:SetText(classColor[class]..name)
-		button.class:SetText(classColor[class]..className)
-		button.level:SetText(diffColor[level]..level)
-		button.level:SetWidth(30)
-	end
-end)
+-- hooksecurefunc("LFRBrowseFrameListButton_SetData", function(button, index)
+-- 	local name, level, _, className, _, _, _, class = SearchLFGGetResults(index)
+-- 
+-- 	if index and class and name and level then
+-- 		button.name:SetText(classColor[class]..name)
+-- 		button.class:SetText(classColor[class]..className)
+-- 		button.level:SetText(diffColor[level]..level)
+-- 		button.level:SetWidth(30)
+-- 	end
+-- end)
 
 -- PVPMatchResults
 hooksecurefunc(PVPCellNameMixin, "Populate", function(self, rowData)
@@ -256,17 +256,17 @@ local function update()
 	end
 end
 
-local loaded = false
-hooksecurefunc("GuildFrame_LoadUI", function()
-	if loaded then
-		return
-	else
-		loaded = true
-		hooksecurefunc("GuildRoster_SetView", viewChanged)
-		hooksecurefunc("GuildRoster_Update", update)
-		hooksecurefunc(GuildRosterContainer, "update", update)
-	end
-end)
+-- local loaded = false
+-- hooksecurefunc("GuildFrame_LoadUI", function()
+-- 	if loaded then
+-- 		return
+-- 	else
+-- 		loaded = true
+-- 		hooksecurefunc("GuildRoster_SetView", viewChanged)
+-- 		hooksecurefunc("GuildRoster_Update", update)
+-- 		hooksecurefunc(GuildRosterContainer, "update", update)
+-- 	end
+-- end)
 
 -- CommunitiesFrame
 local function RefreshList(self)

@@ -292,17 +292,17 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 
 	LootRollAnchor:UnregisterEvent("ADDON_LOADED")
 	LootRollAnchor:RegisterEvent("START_LOOT_ROLL")
-	LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
+	--LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
 
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
 
 	LootRollAnchor:SetScript("OnEvent", function(_, event, ...)
-		if event == "LOOT_HISTORY_ROLL_CHANGED" then
-			return LOOT_HISTORY_ROLL_CHANGED(...)
-		else
+		--if event == "M:LOOT_HISTORY_ROLL_CHANGED" then
+		--	return LOOT_HISTORY_ROLL_CHANGED(...)
+		--else
 			return START_LOOT_ROLL(...)
-		end
+		--end
 	end)
 
 	LootRollAnchor:SetPoint(unpack(C.position.group_loot))

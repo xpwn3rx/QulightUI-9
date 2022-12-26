@@ -182,6 +182,65 @@ local function onValueChanged(self, value)
 	end
 end
 
+local function onMouseWheel(self, delta)
+	if not IsControlKeyDown() and not IsShiftKeyDown() then
+		local script = self.parent:GetScript("OnMouseWheel")
+		if script then
+			script(self.parent, delta)
+		end
+		return
+	end
+
+	value = self.textInput:GetText()
+
+	local step = self.step
+	if IsControlKeyDown() then
+		step = self.step * 5
+	elseif IsShiftKeyDown() then
+		step = self.step
+	end
+
+	if delta < 0 then
+		value = value + step
+	else
+		value = value - step
+	end
+
+	if self.step < 1 then
+		if self.option == "uiscale" then
+			value = tonumber(string.format("%.3f", value))
+		else
+			value = tonumber(string.format("%.2f", value))
+		end
+	else
+		value = floor(value + 0.5)
+	end
+
+	if value < self.min then
+		value = self.min
+	elseif value > self.max then
+		value = self.max
+	end
+
+	if self.textInput then
+		self.textInput:SetText(value)
+	end
+
+	self:SetValue(value)
+
+	if userChangedSlider then
+		SaveValue(self, value)
+
+		if self.needsReload then
+			if self.step < 1 then
+				self.oldValue = tonumber(string.format("%.2f", self.oldValue))
+			end
+			old[self] = self.oldValue
+			checkIsReloadNeeded()
+		end
+	end
+end
+
 local function createSlider(parent, option, lowText, highText, low, high, step, needsReload, text, textDesc)
 	local sliderName = parent:GetName()..option
 	local f = CreateFrame("Slider", sliderName, parent, "OptionsSliderTemplate")
@@ -219,8 +278,12 @@ local function createSlider(parent, option, lowText, highText, low, high, step, 
 
 	f.needsReload = needsReload
 	f.step = step
+	f.min = low
+	f.max = high
+	f.parent = parent
 
 	f:SetScript("OnValueChanged", onValueChanged)
+	f:SetScript("OnMouseWheel", onMouseWheel)
 	parent[option] = f
 
 	tinsert(sliders, f)
@@ -487,10 +550,11 @@ ns.CreateDropDown = function(parent, option, needsReload, text, tableValue, LSM,
 	else
 		label:SetText(ns[parent.tag.."_"..option])
 	end
-	label:SetWidth(440)
+	-- label:SetWidth(440)
 	label:SetHeight(20)
 	label:SetJustifyH("LEFT")
 	label:SetPoint("LEFT", 160, 4)
+	f.label = label
 
 	f.tooltipText = ns[parent.tag.."_"..option.."_desc"]
 	if f.tooltipText then
@@ -599,7 +663,6 @@ ns.addCategory = function(name, text, subText, num)
 	offset = (offset + 24)
 
 	local tag = strlower(name)
-
 	local panel = CreateOptionPanel(baseName..name, text, subText)
 	panel[1] = panel
 	tinsert(panels, panel)
@@ -615,7 +678,6 @@ ns.addCategory = function(name, text, subText, num)
 		local tag2 = strlower(name2)
 		local panel_2 = CreateOptionPanel(baseName..name2, text, subText)
 		panel[2] = panel_2
-
 		tinsert(panels, panel_2)
 
 		if name == "general" then
@@ -711,7 +773,6 @@ ns.addCategory = function(name, text, subText, num)
 			local tag3 = strlower(name3)
 			local panel_3 = CreateOptionPanel(baseName..name3, text, subText)
 			panel[3] = panel_3
-
 			tinsert(panels, panel_3)
 
 			tab.panel_3 = panel_3
@@ -790,7 +851,7 @@ local function changeProfile()
 	for group, options in pairs(profile) do
 		if C[group] then
 			for option, value in pairs(options) do
-				if C[group][option] == nil or (group == "unitframes" and (tonumber(profile[group][option]) or type(profile[group][option]) == "table")) then
+				if C[group][option] == nil or C[group][option] == value then
 					profile[group][option] = nil
 				else
 					C[group][option] = value
@@ -814,11 +875,11 @@ local function displaySettings()
 
 	for _, slider in pairs(sliders) do
 		local value = C[slider.group][slider.option]
-		if T.screenHeight > 1200 and slider.group == "font" and slider.option ~= "nameplates_font_size" and value then
+		if T.screenHeight > 1200 and slider.group == "font" and slider.option ~= "nameplates_font_size" then
 			value = value / T.mult
 		end
 		slider:SetValue(value)
-		slider.textInput:SetText(floor(value*1000)/1000)
+		slider.textInput:SetText(floor(value * 1000) / 1000)
 		slider.textInput:SetCursorPosition(0)
 		slider.oldValue = value
 	end
@@ -832,7 +893,7 @@ local function displaySettings()
 	end
 
 	for _, dropdown in pairs(dropdowns) do
-		local text = DropDownText[C[dropdown.group][dropdown.option]] or C[dropdown.group][dropdown.option]
+		local text = DropDownText[C[dropdown.group][dropdown.option]] or C[dropdown.group][dropdown.option] or ""
 		UIDropDownMenu_SetText(dropdown, text)
 		dropdown.selectedValue = C[dropdown.group][dropdown.option]
 		dropdown.oldValue = C[dropdown.group][dropdown.option]
@@ -856,7 +917,7 @@ init:SetScript("OnEvent", function()
 			else
 				QulightUIOptionsGlobal[realm][name] = false
 			end
-			changeProfile()
+			-- changeProfile()
 			ReloadUI()
 		end,
 		OnCancel = function()
@@ -915,8 +976,10 @@ init:SetScript("OnEvent", function()
 	for _, picker in pairs(colourpickers) do
 		local value = C[picker.group][picker.option]
 		picker:SetTemplate("Transparent")
-		picker:SetBackdropBorderColor(unpack(value))
-		picker:SetBackdropColor(value[1], value[2], value[3], 0.3)
+		if value then
+			picker:SetBackdropBorderColor(unpack(value))
+			picker:SetBackdropColor(value[1], value[2], value[3], 0.3)
+		end
 	end
 
 	for _, editbox in pairs(editboxes) do
