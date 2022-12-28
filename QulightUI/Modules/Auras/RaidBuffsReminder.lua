@@ -201,11 +201,7 @@ local function OnAuraChange(_, event, arg1)
 	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
 		RaidBuffReminder:SetAlpha(0)
 		visible = false
-<<<<<<< HEAD:QulightUI/Modules/Auras/RaidBuffsReminder.lua
-	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and armor == true and vers == true then
-=======
 	elseif flask == true and food == true and stamina == true and spell4 == true and custom == true and weapon == true and vers == true and reduce == true then
->>>>>>> fbd30c6f1 ([RaidBuffsReminder] Remove armor buff and change icon for weapon buff.):QulightUI/Modules/Auras/RaidBuffsReminder.lua
 		if not visible then
 			RaidBuffReminder:SetAlpha(0)
 			visible = false

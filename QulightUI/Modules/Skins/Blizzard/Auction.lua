@@ -431,8 +431,4 @@ local function LoadSkin()
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Auction.lua
-tinsert(T.SkinFuncs["QulightUI"], LoadAuctionatorSkin) 
-=======
 T.SkinFuncs["Blizzard_AuctionHouseUI"] = LoadSkin
->>>>>>> 553333dbc ([Skins] Fixed Auctionator skin.):ShestakUI/Modules/Skins/Blizzard/Auction.lua

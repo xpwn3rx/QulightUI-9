@@ -87,21 +87,6 @@ function RightBarMouseOver(alpha)
 		MultiBarLeft:SetAlpha(alpha)
 	end
 
-<<<<<<< HEAD:QulightUI/Modules/ActionBars/Core.lua
-	if C.actionbar.rightbars > 2 then
-		if MultiBarBottomRight:IsShown() then
-			for i = 1, 12 do
-				local pb = _G["MultiBarBottomRightButton"..i]
-				pb:SetAlpha(alpha)
-				local d = _G["MultiBarBottomRightButton"..i.."Cooldown"]
-				T.HideSpiral(d, alpha)
-			end
-			MultiBarBottomRight:SetAlpha(alpha)
-		end
-	end
-
-=======
->>>>>>> 0bab1b43f ([ActionBars] Replace CustomBar with new Blizzard bar6.):QulightUI/Modules/ActionBars/Core.lua
 	if MultiBarRight:IsShown() then
 		for i = 1, 12 do
 			local pb = _G["MultiBarRightButton"..i]
