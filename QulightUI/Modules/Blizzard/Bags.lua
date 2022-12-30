@@ -12,75 +12,82 @@ local ST_SPECIAL = 3
 local bag_bars = 0
 local unusable
 
+-- Unfit-1.0 Library
 if T.class == "DEATHKNIGHT" then
 	unusable = { -- weapon, armor, dual-wield
-		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF,LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_SHIELD}
+		{Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Staff, Enum.ItemWeaponSubclass.Unarmed, Enum.ItemWeaponSubclass.Dagger, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Shield}
 	}
 elseif T.class == "DEMONHUNTER" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+		{Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Mace1H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Staff, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield}
 	}
 elseif T.class == "DRUID" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		{Enum.ItemWeaponSubclass.Axe1H, Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Sword1H, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
+		true
+	}
+elseif T.class == "EVOKER" then
+	unusable = {
+		{Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
 		true
 	}
 elseif T.class == "HUNTER" then
 	unusable = {
-		{LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+		{Enum.ItemWeaponSubclass.Mace1H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield}
 	}
 elseif T.class == "MAGE" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
-		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		{Enum.ItemWeaponSubclass.Axe1H, Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Mace1H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Unarmed, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow},
+		{Enum.ItemArmorSubclass.Leather, Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
 		true
 	}
 elseif T.class == "MONK" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+		{Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Dagger, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield}
 	}
 elseif T.class == "PALADIN" then
 	unusable = {
-		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Staff, Enum.ItemWeaponSubclass.Unarmed, Enum.ItemWeaponSubclass.Dagger, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
 		{},
 		true
 	}
 elseif T.class == "PRIEST" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
-		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		{Enum.ItemWeaponSubclass.Axe1H, Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword1H, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Unarmed, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow},
+		{Enum.ItemArmorSubclass.Leather, Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
 		true
 	}
 elseif T.class == "ROGUE" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+		{Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Staff, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield}
 	}
 elseif T.class == "SHAMAN" then
 	unusable = {
-		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
-		{LE_ITEM_ARMOR_PLATE}
+		{Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword1H, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Plate}
 	}
 elseif T.class == "WARLOCK" then
 	unusable = {
-		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
-		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		{Enum.ItemWeaponSubclass.Axe1H, Enum.ItemWeaponSubclass.Axe2H, Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Mace1H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Sword2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Unarmed, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow},
+		{Enum.ItemArmorSubclass.Leather, Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
 		true
 	}
 elseif T.class == "WARRIOR" then
-	unusable = {{LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_WAND}, {}}
+	unusable = {{Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Wand}, {}}
 else
 	unusable = {{}, {}}
 end
 
 local _unusable = {}
 
-for i, class in ipairs({LE_ITEM_CLASS_WEAPON, LE_ITEM_CLASS_ARMOR}) do
+for i, class in ipairs({Enum.ItemClass.Weapon, Enum.ItemClass.Armor}) do
 	local list = {}
 	for _, subclass in ipairs(unusable[i]) do
 		list[subclass] = true
@@ -158,7 +165,11 @@ local function Stuffing_Open()
 end
 
 local function Stuffing_Close()
-	Stuffing.frame:Hide()
+	C_Timer.After(0.01, function() -- fix showing GameMenu when pressing ESC
+		if Stuffing.frame:IsShown() then
+			Stuffing.frame:Hide()
+		end
+	end)
 end
 
 local function Stuffing_Toggle()
@@ -271,11 +282,10 @@ function Stuffing:SlotUpdate(b)
 				b.frame:SetBackdropBorderColor(R, G, B)
 			end
 		elseif questId and not isActiveQuest then
-			b.frame:SetBackdropBorderColor(1, 0.3, 0.3, 1)
+			b.frame:SetBackdropBorderColor(1, 0.3, 0.3)
 		elseif questId or isQuestItem then
-			b.frame:SetBackdropBorderColor(1, 1, 0, 1)
+			b.frame:SetBackdropBorderColor(1, 1, 0)
 		end
-		b.frame:SetFrameLevel(10000)
 	else
 		b.name, b.level = nil, nil
 	end
@@ -528,7 +538,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			self:GetParent():SetBackdropBorderColor(unpack(C.media.border_color))
 		end)
 
-		ret.frame.ID = ContainerIDToInventoryID(slot + 1)
+		ret.frame.ID = C_Container.ContainerIDToInventoryID(slot + 1)
 		local bag_tex = GetInventoryItemTexture("player", ret.frame.ID)
 		_G[ret.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
 		ret.frame:SetID(ret.frame.ID)
@@ -548,7 +558,13 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		local tooltip_show = function(self)
 			GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
 			GameTooltip:ClearLines()
-			GameTooltip:SetInventoryItem('player', self:GetID())
+			if ret.quality then
+				GameTooltip:SetInventoryItem('player', self:GetID())
+			else
+				local text = ret.slot == 4 and EQUIP_CONTAINER_REAGENT or EQUIP_CONTAINER
+				GameTooltip:AddLine(text)
+				GameTooltip:Show()
+			end
 		end
 
 		ret.frame:HookScript("OnEnter", tooltip_show)
@@ -755,7 +771,7 @@ function Stuffing:SearchUpdate(str)
 		if b.name then
 			local ilink = C_Container.GetContainerItemLink(b.bag, b.slot)
 			if ilink then
-				local _, setName = GetContainerItemEquipmentSetInfo(b.bag, b.slot)
+				local _, setName = C_Container.GetContainerItemEquipmentSetInfo(b.bag, b.slot)
 				setName = setName or ""
 				local _, _, _, _, minLevel, class, subclass, _, equipSlot, _, _, _, _, bindType = GetItemInfo(ilink)
 				class = class or ""
@@ -1535,16 +1551,10 @@ function Stuffing:BAG_UPDATE_COOLDOWN()
 	end
 end
 
--- function Stuffing:SCRAPPING_MACHINE_SHOW()
-	-- for i = 0, #BAGS_BACKPACK - 1 do
-		-- Stuffing:BAG_UPDATE(i)
-	-- end
--- end
-
 function Stuffing:BAG_CONTAINER_UPDATE()
 	for _, v in ipairs(self.bagframe_buttons) do
 		if v.frame and v.slot < 5 then -- exclude bank
-			v.frame.ID = ContainerIDToInventoryID(v.slot + 1)
+			v.frame.ID = C_Container.ContainerIDToInventoryID(v.slot + 1)
 
 			local slotLink = GetInventoryItemLink("player", v.frame.ID)
 			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
@@ -1606,8 +1616,8 @@ function Stuffing:SortOnUpdate(elapsed)
 			if locked1 or locked2 then
 				blocked = true
 			elseif bagIndex ~= destinationBag or slotIndex ~= destinationSlot then
-				PickupContainerItem(bagIndex, slotIndex)
-				PickupContainerItem(destinationBag, destinationSlot)
+				C_Container.PickupContainerItem(bagIndex, slotIndex)
+				C_Container.PickupContainerItem(destinationBag, destinationSlot)
 
 				local tempItem = BS_itemSwapGrid[destinationBag][destinationSlot]
 				BS_itemSwapGrid[destinationBag][destinationSlot] = BS_itemSwapGrid[bagIndex][slotIndex]
@@ -1771,8 +1781,8 @@ function Stuffing:Restack()
 					if l1 or l2 then
 						did_restack = true
 					else
-						PickupContainerItem(-3, a.item)
-						PickupContainerItem(-3, b.item)
+						C_Container.PickupContainerItem(-3, a.item)
+						C_Container.PickupContainerItem(-3, b.item)
 						did_restack = true
 					end
 				end
@@ -1805,8 +1815,8 @@ function Stuffing:Restack()
 					if l1 or l2 then
 						did_restack = true
 					else
-						PickupContainerItem(a.item.bag, a.item.slot)
-						PickupContainerItem(b.item.bag, b.item.slot)
+						C_Container.PickupContainerItem(a.item.bag, a.item.slot)
+						C_Container.PickupContainerItem(b.item.bag, b.item.slot)
 						did_restack = true
 					end
 				end
@@ -1857,11 +1867,11 @@ function Stuffing.Menu(self, level)
 	info.notCheckable = 1
 	info.func = function()
 		if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
-			SortReagentBankBags()
+			C_Container.SortReagentBankBags()
 		elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-			SortBankBags()
+			C_Container.SortBankBags()
 		else
-			SortBags()
+			C_Container.SortBags()
 		end
 	end
 	UIDropDownMenu_AddButton(info, level)

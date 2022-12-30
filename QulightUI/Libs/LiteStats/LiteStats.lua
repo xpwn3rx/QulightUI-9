@@ -1019,8 +1019,6 @@ end
 if durability.enabled then
 	Inject("Durability", {
 		OnLoad = function(self)
-			CreateFrame("GameTooltip", "LPDURA", nil, "GameTooltipTemplate")
-			LPDURA:SetOwner(WorldFrame, "ANCHOR_NONE")
 			if durability.man then DurabilityFrame.Show = DurabilityFrame.Hide end
 			RegEvents(self, "UPDATE_INVENTORY_DURABILITY MERCHANT_SHOW PLAYER_LOGIN")
 		end,
@@ -1042,11 +1040,17 @@ if durability.enabled then
 								total = GetRepairAllCost(); RepairAllItems()
 							else
 								for id = 1, 18 do
-									local cost = select(3, LPDURA:SetInventoryItem(P, id))
-									if cost ~= 0 and cost <= GetMoney() then
-										if not InRepairMode() then ShowRepairCursor() end
-										PickupInventoryItem(id)
-										total = total + cost
+									local data = C_TooltipInfo.GetInventoryItem(P, id)
+									if data then
+										local argVal = data.args and data.args[7]
+										if argVal and argVal.field == "repairCost" then
+											local cost = argVal.intVal
+											if cost ~= 0 and cost <= GetMoney() then
+												if not InRepairMode() then ShowRepairCursor() end
+												PickupInventoryItem(id)
+												total = total + cost
+											end
+										end
 									end
 								end
 							end
@@ -1079,12 +1083,15 @@ if durability.enabled then
 					local perc = dur ~= 0 and dur/dmax or 0
 					local hex = gradient(perc)
 					GameTooltip:AddDoubleLine(durability.gear_icons and format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t %s", GetInventoryItemTexture(P, slot), t_icon, string) or string,format("|cffaaaaaa%s/%s | %s%s%%", dur, dmax, hex, floor(perc * 100)), 1, 1, 1)
-					if T.newPatch then
-						local data = LPDURA:GetTooltipData()
-						repairCost = data and data.repairCost or 0
-						totalcost, nodur = totalcost + repairCost
-					else
-						totalcost, nodur = totalcost + select(3, LPDURA:SetInventoryItem(P, slot))
+					local data = C_TooltipInfo.GetInventoryItem(P, slot)
+					if data then
+						local argVal = data.args and data.args[7]
+						if argVal and argVal.field == "repairCost" then
+							totalcost = totalcost + argVal.intVal
+							if totalcost > 0 then
+								nodur = false
+							end
+						end
 					end
 				end
 			end
@@ -1802,10 +1809,10 @@ if gold.enabled then
 				Currency(402)	-- Ironpaw Token
 			end
 
-			--if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
-			--	titleName = L_STATS_CURRENCY_RAID
-			--	Currency(1580, false, true)	-- Seal of Wartorn Fate
-			--end
+			-- if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+				-- titleName = L_STATS_CURRENCY_RAID
+				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
+			-- end
 
 			if C.stats.currency_misc then
 				titleName = EXPANSION_NAME9
