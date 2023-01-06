@@ -19,6 +19,8 @@ C.combattext.spells_list = {}
 C.chat.spam_list = ""
 C.font.global_font = false
 C.media.profile = "-- Insert Your code here\n"
+C.general.choose_profile = 1
+C.general.profile_name = "1"
 C.options = {}
 
 if not IsAddOnLoaded("QulightUI_Config") then return end
@@ -30,6 +32,7 @@ if not IsAddOnLoaded("QulightUI_Config") then return end
 if not QulightUIOptionsGlobal then QulightUIOptionsGlobal = {} end
 if QulightUIOptionsGlobal[T.realm] == nil then QulightUIOptionsGlobal[T.realm] = {} end
 if QulightUIOptionsGlobal[T.realm][T.name] == nil then QulightUIOptionsGlobal[T.realm][T.name] = false end
+if QulightUIOptionsGlobal[T.realm]["Current_Profile"] == nil then QulightUIOptionsGlobal[T.realm]["Current_Profile"] = {} end
 
 -- Create the main options table
 if QulightUIOptions == nil then QulightUIOptions = {} end
@@ -38,11 +41,33 @@ if QulightUIOptions == nil then QulightUIOptions = {} end
 local profile
 if QulightUIOptionsGlobal[T.realm][T.name] == true then
 	if QulightUIOptionsPerChar == nil then
-		QulightUIOptionsPerChar = {}
+		QulightUIOptionsPerChar = QulightUIOptions
+		QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name] = QulightUIOptionsGlobal["Current_Profile"] or 1
 	end
-	profile = QulightUIOptionsPerChar
+
+	if not QulightUIOptionsPerChar.merged and not QulightUIOptionsPerChar["1"] then	-- TODO delete after while
+		local backup = QulightUIOptionsPerChar
+		QulightUIOptionsPerChar = {}
+		QulightUIOptionsPerChar["1"] = backup
+		QulightUIOptionsPerChar.merged = true
+	end
+
+	QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name] = QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name] or 1
+	local i = tostring(QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name])
+	QulightUIOptionsPerChar[i] = QulightUIOptionsPerChar[i] or {}
+	profile = QulightUIOptionsPerChar[i]
 else
-	profile = QulightUIOptions
+	if not QulightUIOptions.merged and not QulightUIOptions["1"] then	-- TODO delete after while
+		local backup = QulightUIOptions
+		QulightUIOptions = {}
+		QulightUIOptions["1"] = backup
+		QulightUIOptions.merged = true
+	end
+
+	QulightUIOptionsGlobal["Current_Profile"] = QulightUIOptionsGlobal["Current_Profile"] or 1
+	local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+	QulightUIOptions[i] = QulightUIOptions[i] or {}
+	profile = QulightUIOptions[i]
 end
 
 -- Apply or remove saved settings as needed
@@ -57,7 +82,7 @@ for group, options in pairs(profile) do
 			end
 		end
 	else
-		profile[group] = nil
+		-- profile[group] = nil
 	end
 end
 

@@ -48,9 +48,15 @@ StaticPopupDialogs.QulightUI_RESET_PERCHAR = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 		local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
 		QulightUIOptionsPerChar[i] = {}
 		C.options = QulightUIOptionsPerChar[i]
+=======
+		local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+		QulightUIOptionsPerChar[i] = {}
+		C.options = QulightUIOptionsPerChar[i]
+>>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):QulightUI_Config/Options.lua
 		ReloadUI()
 	end,
 	whileDead = true,
@@ -63,9 +69,15 @@ StaticPopupDialogs.QulightUI_RESET = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
 		QulightUIOptions[i] = {}
 		C.options = QulightUIOptions[i]
+=======
+		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+		QulightUIOptions[i] = {}
+		C.options = QulightUIOptions[i]
+>>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):QulightUI_Config/Options.lua
 		ReloadUI()
 	end,
 	whileDead = true,

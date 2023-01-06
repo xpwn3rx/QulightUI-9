@@ -117,7 +117,22 @@ C["font"] = {
 ----------------------------------------------------------------------------------------
 --	Pixel font replacement
 ----------------------------------------------------------------------------------------
-if (QulightUIOptions and QulightUIOptions["font"] and QulightUIOptions["font"]["global_font"] == true) or (QulightUIOptionsPerChar and QulightUIOptionsPerChar["font"] and QulightUIOptionsPerChar["font"]["global_font"] == true) then
+local disablePixel
+if QulightUIOptionsGlobal then
+	if QulightUIOptionsGlobal[T.realm] and QulightUIOptionsGlobal[T.realm][T.name] and QulightUIOptionsGlobal[T.realm]["Current_Profile"] then
+		local i = tostring(QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name])
+		if QulightUIOptionsPerChar and QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["font"] and QulightUIOptionsPerChar[i]["font"]["global_font"] then
+			disablePixel = true
+		end
+	else
+		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+		if QulightUIOptions and QulightUIOptions[i] and QulightUIOptions[i]["font"] and QulightUIOptions[i]["font"]["global_font"] then
+			disablePixel = true
+		end
+	end
+end
+
+if disablePixel then
 	C["media"].pixel_font = C.media.normal_font
 	C["media"].pixel_font_size = 11
 	C["media"].pixel_font_style = "OUTLINE"

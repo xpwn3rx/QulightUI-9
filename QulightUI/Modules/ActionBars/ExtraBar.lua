@@ -55,7 +55,12 @@ C_Timer.After(0.1, function()
 end)
 
 hooksecurefunc("ExtraActionBar_Update", function()
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/ExtraBar.lua
 	if QulightUIPositions["ZoneButtonAnchor"] then return end
+=======
+	local positionTable = T.CurrentProfile()
+	if positionTable["ZoneButtonAnchor"] then return end
+>>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Modules/ActionBars/ExtraBar.lua
 	if HasExtraActionBar() then
 		zoneAnchor:SetPoint("BOTTOMRIGHT", anchor, "BOTTOMLEFT", -3, 0)
 	else
