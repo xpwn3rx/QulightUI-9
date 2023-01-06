@@ -181,5 +181,5 @@ end)
 -- Temp hide quest item by middle-click
 T.startScanningBags = startScanningBags
 
-local macro = "/run local T = unpack(QulightUI) T.ABItemsIgnore[AutoButton.id] = true T.startScanningBags() C_Timer.After(0.05, function() AutoButton:SetButtonState('NORMAL') end)"
+local macro = "/run local T = unpack(QulightuiUI) T.ABItemsIgnore[AutoButton.id] = true T.startScanningBags() C_Timer.After(0.05, function() AutoButton:SetButtonState('NORMAL') end)"
 AutoButton:SetAttribute("macrotext3", macro)
