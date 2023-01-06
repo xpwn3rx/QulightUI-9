@@ -1196,14 +1196,6 @@ do
 		else
 			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
 			text = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"]
-		end
-		text = text or value
-		UIDropDownMenu_SetText(choose_profile, text)
-	end)
-end
-
--- Font
-do
 	local parent = QulightUIOptionsPanel.font
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_unit)

@@ -22,6 +22,7 @@ L_GUI_EXPERT_MODE_DESC = "編寫你的插件代碼"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左鍵重置列表"
 
 -- Profile
+<<<<<<< HEAD:QulightUI_Config/Locales/Taiwan.lua
 L.profile = "設定檔"
 L.profile_title = "設置面板"
 L.profile_choose = "選擇設定檔"
@@ -31,6 +32,17 @@ L.profile_export = "滙出"
 L.profile_import = "滙入"
 L.profile_error_lib = "要啓用滙入和滙出，請安裝WeakAuras"
 L.profile_error_code = "滙入的代碼有錯誤！"
+=======
+L.profile = "Profile" -- Need review
+L.profile_title = "Profile options" -- Need review
+L.profile_choose = "Choose profile" -- Need review
+L.profile_options = "Settings" -- Need review
+L.profile_movers = "Moving elements" -- Need review
+L.profile_export = "Export" -- Need review
+L.profile_import = "Import" -- Need review
+L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
+L.profile_error_code = "Error in imported code!" -- Need review
+>>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI_Config/Locales/Taiwan.lua
 
 -- General options
 L_GUI_GENERAL_SUBTEXT = "一般用戶界面設置，鍵入 /uihelp 獲取更多可用命令。"

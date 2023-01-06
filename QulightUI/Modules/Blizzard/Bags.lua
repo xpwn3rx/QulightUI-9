@@ -259,6 +259,8 @@ function Stuffing:SlotUpdate(b)
 					b.frame.text:SetText(b.itemlevel)
 				end
 			end
+		if not b.name then	-- Keystone bug
+			b.name = clink:match("%[(.-)%]") or ""
 		end
 
 
@@ -1458,6 +1460,19 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 end
 
 function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
+	if id > 28 then
+		for _, v in ipairs(self.bagframe_buttons) do
+			if v.frame and v.frame.GetInventorySlot then
+				BankFrameItemButton_Update(v.frame)
+				BankFrameItemButton_UpdateLocked(v.frame)
+
+				if not v.frame.tooltipText then
+					v.frame.tooltipText = ""
+				end
+			end
+		end
+	end
+
 	if self.bankFrame and self.bankFrame:IsShown() then
 		self:BagSlotUpdate(-1)
 	end

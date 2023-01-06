@@ -45,6 +45,17 @@ L.profile_import = "Импорт"
 L.profile_error_lib = "Для включения импорта и экспорта - установите WeakAuras"
 L.profile_error_code = "Ошибка в импортируемом коде!"
 
+-- Profile
+L.profile = "Профиль"
+L.profile_title = "Настройка профиля"
+L.profile_choose = "Выбор профиля"
+L.profile_options = "Настройки"
+L.profile_movers = "Перемещение элементов"
+L.profile_export = "Экспорт"
+L.profile_import = "Импорт"
+L.profile_error_lib = "Для включения импорта и экспорта - установите WeakAuras"
+L.profile_error_code = "Ошибка в импортируемом коде!"
+
 -- General options
 L_GUI_GENERAL_SUBTEXT = "Эти настройки контролируют общие параметры UI. Наберите в чат '/uihelp' для помощи."
 L_GUI_GENERAL_WELCOME_MESSAGE = "Приветственное сообщение в чате"
