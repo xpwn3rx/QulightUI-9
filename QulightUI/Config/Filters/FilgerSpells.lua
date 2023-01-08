@@ -626,7 +626,7 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Snapfire
 			{spellID = 370818, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Essence burst
+			-- Essence Burst
 			{spellID = 359618, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Leaping Flames
 			{spellID = 370901, unitID = "player", caster = "player", filter = "BUFF"},
