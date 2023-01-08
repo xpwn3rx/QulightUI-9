@@ -113,6 +113,7 @@ frame:SetScript("OnEvent", function(self, event)
 	end)
 
 	-- Move Mail icon
+<<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
 	local MailFrame = MinimapCluster.IndicatorFrame.MailFrame
 	hooksecurefunc(MailFrame, "SetPoint", function(self, _, anchor)
 		if anchor ~= Minimap then
@@ -121,6 +122,21 @@ frame:SetScript("OnEvent", function(self, event)
 		end
 	end)
 	MiniMapMailIcon:SetTexture("Interface\\AddOns\\QulightUI\\Media\\Textures\\Mail.tga")
+=======
+	local MailFrame = T.newPatch and MinimapCluster.IndicatorFrame.MailFrame or MinimapCluster.MailFrame
+	if T.newPatch then
+		hooksecurefunc(MailFrame, "SetPoint", function(self, _, anchor)
+			if anchor ~= Minimap then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
+			end
+		end)
+	else
+		MailFrame:ClearAllPoints()
+		MailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
+	end
+	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+>>>>>>> d89006fa3 ([MiniMap] Fixed mail frame for 10.0.5.):ShestakUI/Modules/Maps/MiniMap.lua
 	MiniMapMailIcon:SetSize(16, 16)
 
 	-- Move crafting order icon
