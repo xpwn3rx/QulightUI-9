@@ -48,7 +48,14 @@ local function GetReputation()
 		standingID = MAX_REPUTATION_REACTION + 2
 		standingText = RENOWN_LEVEL_LABEL..majorFactionData.renownLevel
 	elseif friendshipID and friendshipID > 0 then
-		standingText = repInfo.reaction
+		local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(factionID)
+		local currentRank = rankInfo and rankInfo.currentLevel
+		local maxRank = rankInfo and rankInfo.maxLevel
+		local rankText
+		if currentRank and maxRank and currentRank > 0 and maxRank > 0 then
+			rankText = (' %s / %s'):format(currentRank, maxRank)
+		end
+		standingText = repInfo.reaction..rankText
 		if repInfo.nextThreshold then
 			min, max, cur = repInfo.reactionThreshold, repInfo.nextThreshold, repInfo.standing
 		else
