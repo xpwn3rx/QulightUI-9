@@ -1,4 +1,4 @@
-local T, C, L = unpack(QulightUI)
+local T, C, L, _ = unpack(select(2, ...))
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, #scrollbars do
-		T.SkinScrollBar(scrollbars[i])
+		T.SkinScrollBar(scrollbars[i], true)
 	end
 
 	local tabs = {
@@ -139,9 +139,7 @@ local function LoadSkin()
 	form.RightPanelBackground:StripTextures()
 
 	T.SkinCheckBox(form.TrackRecipeCheckBox.Checkbox, 20)
-	if form.AllocateBestQualityCheckBox then
-		T.SkinCheckBox(form.AllocateBestQualityCheckBox)
-	end
+	T.SkinCheckBox(form.AllocateBestQualityCheckBox)
 	T.SkinDropDownBox(form.OrderRecipientDropDown)
 
 	form.OrderRecipientDropDown:SetPoint("TOPRIGHT", form, "TOPRIGHT", -3, -10)
@@ -156,36 +154,6 @@ local function LoadSkin()
 	T.SkinIconBorder(OutputIcon.IconBorder, OutputIcon.Icon:GetParent().backdrop)
 	OutputIcon:GetHighlightTexture():Hide()
 	OutputIcon.CircleMask:Hide()
-
-	local qualityDialog = form.QualityDialog
-	qualityDialog:StripTextures()
-	qualityDialog:SetTemplate("Transparent")
-	T.SkinCloseButton(qualityDialog.ClosePanelButton)
-	qualityDialog.AcceptButton:SkinButton()
-	qualityDialog.CancelButton:SkinButton()
-
-	local function ReskinQualityContainer(container)
-		local button = container.Button
-		button:StripTextures()
-		button:SetNormalTexture(0)
-		button:SetPushedTexture(0)
-		button:GetHighlightTexture():Hide()
-		button.Icon:SkinIcon()
-		T.SkinIconBorder(button.IconBorder, button.Icon:GetParent().backdrop)
-
-		local box = container.EditBox
-		box:DisableDrawLayer("BACKGROUND")
-		T.SkinEditBox(box, nil, 18)
-		T.SkinNextPrevButton(box.DecrementButton, true)
-		T.SkinNextPrevButton(box.IncrementButton)
-		box.DecrementButton:SetSize(22, 22)
-		box.IncrementButton:SetSize(22, 22)
-		box.IncrementButton:SetPoint("LEFT", box, "RIGHT", 6, 0)
-	end
-
-	ReskinQualityContainer(qualityDialog.Container1)
-	ReskinQualityContainer(qualityDialog.Container2)
-	ReskinQualityContainer(qualityDialog.Container3)
 
 	hooksecurefunc(form, "Init", function(self)
 		for slot in self.reagentSlotPool:EnumerateActive() do
@@ -206,12 +174,6 @@ local function LoadSkin()
 
 				T.SkinCheckBox(slot.Checkbox)
 				button.styled = true
-			end
-
-			if button then
-				button:SetNormalTexture(0)
-				button:SetPushedTexture(0)
-				button:GetHighlightTexture():Hide()
 			end
 		end
 	end)
