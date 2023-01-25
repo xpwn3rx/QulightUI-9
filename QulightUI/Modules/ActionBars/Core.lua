@@ -24,8 +24,6 @@ frame:SetScript("OnEvent", function()
 
 	if not C.actionbar.micromenu then
 		MicroMenu:Hide()
-		TalentMicroButton:ClearAllPoints()
-		TalentMicroButton:SetPoint("TOP", UIParent, "TOP", 0, 100) -- hide missing talent alert
 	end
 
 	MainMenuBar:SetMovable(true)
