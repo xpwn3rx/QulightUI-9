@@ -8,11 +8,7 @@ local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider)
 frame:SetPoint(unpack(C.position.micro_menu))
 frame:SetSize(250, 25)
 
-if C.actionbar.micromenu_mouseover then
-	frame:SetAlpha(0)
-	frame:SetScript("OnEnter", function() frame:SetAlpha(1) end)
-	frame:SetScript("OnLeave", function() frame:SetAlpha(0) end)
-end
+if C.actionbar.micromenu_mouseover == true then frame:SetAlpha(0) end
 
 local MICRO_BUTTONS = {
 	"CharacterMicroButton",
@@ -27,6 +23,21 @@ local MICRO_BUTTONS = {
 	"StoreMicroButton",
 	"MainMenuMicroButton",
 	"HelpMicroButton",
+}
+
+local colors = {
+	[1]	= {0.35, 0.65, 1},
+	[2]	= {1, 0.58, 0.65},
+	[3]	= {0.21, 1, 0.95},
+	[4]	= {1, 0.62, 0.1},
+	[5]	= {0.96, 1, 0},
+	[6]	= {0, 1, 0.1},
+	[7]	= {0.7, 0.7, 1},
+	[8]	= {1, 1, 1},
+	[9]	= {1, 0.7, 0.58},
+	[10] = {1, 0.4, 0.4},
+	[11] = {1, 1, 1},
+	[12] = {1, 0.83, 0.50},
 }
 
 for i, button in pairs(MICRO_BUTTONS) do
@@ -45,9 +56,6 @@ for i, button in pairs(MICRO_BUTTONS) do
 			bu:SetPoint("TOPLEFT", frame, "TOPLEFT", ((i - 1) * 23) - 1, 2)
 		end
 	end
-
-	bu:SetParent(frame)
-	bu.SetParent = T.dummy
 
 	bu:SetHighlightTexture(0)
 	bu.SetHighlightTexture = T.dummy
@@ -71,7 +79,6 @@ for i, button in pairs(MICRO_BUTTONS) do
 	local highlight = bu:GetHighlightTexture()
 	if highlight then
 		highlight:SetAlpha(0)
-		highlight:SetTexCoord(0.1, 0.9, 0.12, 0.9)
 	end
 
 	if normal then
@@ -119,12 +126,3 @@ end
 MainMenuMicroButton.MainMenuBarPerformanceBar:SetTexture(C.media.texture)
 MainMenuMicroButton.MainMenuBarPerformanceBar:SetSize(16, 2)
 MainMenuMicroButton.MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 4)
-
-if CharacterMicroButton then
-	local function SkinCharacterPortrait(self)
-		self.Portrait:SetInside(self, 4, 4)
-	end
-
-	hooksecurefunc(CharacterMicroButton, "SetPushed", SkinCharacterPortrait)
-	hooksecurefunc(CharacterMicroButton, "SetNormal", SkinCharacterPortrait)
-end
