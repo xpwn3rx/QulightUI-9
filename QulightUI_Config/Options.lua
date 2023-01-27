@@ -2504,7 +2504,10 @@ do
 
 	local low_health = ns.CreateCheckBox(parent, "low_health")
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	low_health.Text:SetWidth(250)
+=======
+>>>>>>> d328e9e94 ([Nameplates] Added option to set custom color for low health border.):ShestakUI_Config/Options.lua
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
