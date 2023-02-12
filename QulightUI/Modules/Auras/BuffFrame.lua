@@ -37,31 +37,18 @@ hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(self, auras
 		aura:SetSize(C.aura.player_buff_size, C.aura.player_buff_size)
 		aura:SetTemplate("Default")
 
-		if T.newPatch then
-			aura.TempEnchantBorder:SetAlpha(0)
-			hooksecurefunc(aura.TempEnchantBorder, "Show", function(self)
-				aura:SetBackdropBorderColor(0.6, 0.1, 0.6)
-			end)
+		aura.TempEnchantBorder:SetAlpha(0)
+		hooksecurefunc(aura.TempEnchantBorder, "Show", function(self)
+			aura:SetBackdropBorderColor(0.6, 0.1, 0.6)
+		end)
 
-			hooksecurefunc(aura.TempEnchantBorder, "Hide", function(self)
-				if C.aura.classcolor_border == true then
-					aura:SetBackdropBorderColor(unpack(C.media.classborder_color))
-				else
-					aura:SetBackdropBorderColor(unpack(C.media.border_color))
-				end
-			end)
-		else
-			if aura.Border then
-				aura.Border:SetAlpha(0)
-				aura:SetBackdropBorderColor(0.6, 0.1, 0.6)
+		hooksecurefunc(aura.TempEnchantBorder, "Hide", function(self)
+			if C.aura.classcolor_border == true then
+				aura:SetBackdropBorderColor(unpack(C.media.classborder_color))
 			else
-				if C.aura.classcolor_border == true then
-					aura:SetBackdropBorderColor(unpack(C.media.classborder_color))
-				else
-					aura:SetBackdropBorderColor(unpack(C.media.border_color))
-				end
+				aura:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
-		end
+		end)
 
 		aura:ClearAllPoints()
 		if (index > 1) and (mod(index, rowbuffs) == 1) then
