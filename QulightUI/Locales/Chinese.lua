@@ -186,8 +186,13 @@ L_POPUP_SETTINGS_BW = "需要改变BigWigs锚点及样式元素"
 L_POPUP_ARMORY = "英雄榜"
 
 -- Welcome message
+<<<<<<< HEAD:QulightUI/Locales/Chinese.lua
 L_WELCOME_LINE_1 = "欢迎使用QulightUI "
 L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问https://www.wowinterface.com/downloads/info16324-QulightUI.html"
+=======
+L_WELCOME_LINE_1 = "欢迎使用ShestakUI "
+L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问https://github.com/Wetxius/ShestakUI_Help/wiki/English"
+>>>>>>> cce06a348 (Updated GitHub link and replace site page.):ShestakUI/Locales/Chinese.lua
 L_WELCOME_LINE_2_2 = "获取更多信息。"
 
 -- Combat text

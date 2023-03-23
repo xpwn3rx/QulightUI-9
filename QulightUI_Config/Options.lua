@@ -479,7 +479,11 @@ do
 	GithubButton:SetSize(100, 23)
 	GithubButton:SetText("Github")
 	GithubButton:SetWidth(GithubButton.Text:GetWidth() + 15)
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	local url = "https://github.com/Wetxius/QulightUI"
+=======
+	local url = "https://github.com/Wetxius/ShestakUI"
+>>>>>>> cce06a348 (Updated GitHub link and replace site page.):ShestakUI_Config/Options.lua
 	GithubButton:SetScript("OnClick", function()
 		StaticPopup_Show("LINK_URL", _, _, url)
 	end)
