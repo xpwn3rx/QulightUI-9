@@ -47,7 +47,10 @@ L_TOOLTIP_INSPECT_OPEN = "Il riquadro 'Ispeziona' è aperto"
 L_MISC_UNDRESS = "Senza vestiti"
 L_MISC_DRINKING = " sta bevendo."
 L_MISC_BUY_STACK = "Alt + click per comprarne una pila"
+<<<<<<< HEAD:QulightUI/Locales/Italian.lua
 L_MISC_UI_OUTDATED = "La tua versione della QulightUI non è aggiornata: puoi scaricare la nuova versione da https://www.wowinterface.com/downloads/info16324-QulightUI.html."
+=======
+>>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/Italian.lua
 L_MISC_HEADER_MARK = "Marchi d'incursione al passaggio del mouse"
 L_MISC_BINDER_OPEN = "Assegnazione pulsanti mouse"
 L_MISC_SCROLL = "Pergamena"

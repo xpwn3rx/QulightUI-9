@@ -47,7 +47,10 @@ L_TOOLTIP_INSPECT_OPEN = "Открыто окно осмотра"
 L_MISC_UNDRESS = "Раздеть"
 L_MISC_DRINKING = " пьёт."
 L_MISC_BUY_STACK = "Зажмите Alt и щелкните мышью, чтобы купить связку"
+<<<<<<< HEAD:QulightUI/Locales/Russian.lua
 L_MISC_UI_OUTDATED = "Ваша версия QulightUI устарела. Вы можете скачать последнюю версию с https://www.wowinterface.com/downloads/info16324-QulightUI.html"
+=======
+>>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/Russian.lua
 L_MISC_HEADER_MARK = "Метки по наведению курсора"
 L_MISC_BINDER_OPEN = "Назначения мыши"
 L_MISC_SCROLL = "Свиток"

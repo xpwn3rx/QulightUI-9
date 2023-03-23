@@ -47,7 +47,10 @@ L_TOOLTIP_INSPECT_OPEN = "Inspect Frame is open" -- Needs review
 L_MISC_UNDRESS = "Desvestir"
 L_MISC_DRINKING = " esta bebiendo."
 L_MISC_BUY_STACK = "Alt-Click para comprar un lote"
+<<<<<<< HEAD:QulightUI/Locales/Spanish.lua
 L_MISC_UI_OUTDATED = "Tu versión de QulightUI no está actualizada. Puedes descargar la última versión de https://www.wowinterface.com/downloads/info16324-QulightUI.html"
+=======
+>>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/Spanish.lua
 L_MISC_HEADER_MARK = "Mouseover Raid Icons" -- Needs review
 L_MISC_BINDER_OPEN = "Mouse Bindings" -- Needs review
 L_MISC_SCROLL = "Pergamino"

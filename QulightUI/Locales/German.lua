@@ -47,7 +47,10 @@ L_TOOLTIP_INSPECT_OPEN = "Betrachtungsfenster offen"
 L_MISC_UNDRESS = "Ausziehen"
 L_MISC_DRINKING = " trinkt."
 L_MISC_BUY_STACK = "Alt-Klick um einen Stapel zu kaufen"
+<<<<<<< HEAD:QulightUI/Locales/German.lua
 L_MISC_UI_OUTDATED = "Deine Version von QulightUI ist veraltet. Du kannst die aktuelle Version von https://www.wowinterface.com/downloads/info16324-QulightUI.html laden"
+=======
+>>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/German.lua
 L_MISC_HEADER_MARK = "Mausdrüber Raid Icon"
 L_MISC_BINDER_OPEN = "Maus gebunden"
 L_MISC_SCROLL = "Rolle"

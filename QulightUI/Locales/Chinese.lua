@@ -47,7 +47,10 @@ L_TOOLTIP_INSPECT_OPEN = "检查框体已开启"
 L_MISC_UNDRESS = "无装备"
 L_MISC_DRINKING = " 进食中..."
 L_MISC_BUY_STACK = "Alt+右键批量购买"
+<<<<<<< HEAD:QulightUI/Locales/Chinese.lua
 L_MISC_UI_OUTDATED = "QulightUI 版本已过期，请至 https://www.wowinterface.com/downloads/info16324-QulightUI.html 下载最新版。"
+=======
+>>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/Chinese.lua
 L_MISC_HEADER_MARK = "鼠标悬停显示团队图标"
 L_MISC_BINDER_OPEN = "鼠标绑定"
 L_MISC_SCROLL = "附魔羊皮纸"
