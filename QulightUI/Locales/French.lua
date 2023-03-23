@@ -47,10 +47,7 @@ L_TOOLTIP_INSPECT_OPEN = "La fenêtre d'inspection est ouverte"
 L_MISC_UNDRESS = "Déshabillé"
 L_MISC_DRINKING = " est entrain de boire."
 L_MISC_BUY_STACK = "Alt-Clic pour acheter une pile d'objet"
-<<<<<<< HEAD:QulightUI/Locales/French.lua
 L_MISC_UI_OUTDATED = "Une version plus récente de QulightUI est disponible. Vous pouvez la télécharger sur https://www.wowinterface.com/downloads/info16324-QulightUI.html"
-=======
->>>>>>> e413ff862 (Removed CheckVersion function.):ShestakUI/Locales/French.lua
 L_MISC_HEADER_MARK = "Icône de raid au survol de la souris"
 L_MISC_BINDER_OPEN = "Assignations des boutons de la souris"
 L_MISC_SCROLL = "Parchemin"
