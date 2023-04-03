@@ -56,7 +56,13 @@ local function LoadSecondarySkin()
 
 	T.SkinNextPrevButton(ScriptErrorsFrame.PreviousError, true)
 	T.SkinNextPrevButton(ScriptErrorsFrame.NextError)
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/DebugTools.lua
 	T.SkinScrollBar(ScriptErrorsFrame.ScrollFrame.ScrollBar)
+=======
+	if not T.newPatch then
+		T.SkinScrollBar(ScriptErrorsFrameScrollBar)
+	end
+>>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Skins/Blizzard/DebugTools.lua
 	T.SkinCloseButton(ScriptErrorsFrameClose)
 
 	ScriptErrorsFrame.ScrollFrame:CreateBackdrop("Overlay")

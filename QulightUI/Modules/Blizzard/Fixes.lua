@@ -46,12 +46,23 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix SearchLFGLeave() taint
 ----------------------------------------------------------------------------------------
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
 local TaintFix = CreateFrame("Frame")
 TaintFix:SetScript("OnUpdate", function()
 	if LFRBrowseFrame and LFRBrowseFrame.timeToClear then
 		LFRBrowseFrame.timeToClear = nil
 	end
 end)
+=======
+if not T.newPatch then
+	local TaintFix = CreateFrame("Frame")
+	TaintFix:SetScript("OnUpdate", function()
+		if LFRBrowseFrame.timeToClear then
+			LFRBrowseFrame.timeToClear = nil
+		end
+	end)
+end
+>>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Blizzard/Fixes.lua
 
 ----------------------------------------------------------------------------------------
 --	Fix Keybind taint
