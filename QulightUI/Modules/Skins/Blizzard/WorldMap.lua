@@ -46,7 +46,9 @@ local function LoadSkin()
 	local CampaignOverview = QuestMapFrame.CampaignOverview
 	CampaignOverview:StripTextures()
 	CampaignOverview.ScrollFrame:StripTextures()
-	T.SkinScrollBar(CampaignOverview.ScrollFrame.ScrollBar)
+	if not T.newPatch then
+		T.SkinScrollBar(QuestMapFrameScrollBar)
+	end
 	CampaignOverview:CreateBackdrop("Overlay")
 	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
 	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)

@@ -14,13 +14,10 @@ local function LoadSkin()
 	T.SkinScrollBar(frame.ScrollBar)
 	T.SkinDropDownBox(frame.EncounterDropDown)
 
-	frame.Timer:StripTextures()
-	frame.Timer:CreateBackdrop("Default")
-	frame.Timer.Fill:SetTexture(C.media.texture)
-	frame.Timer.Fill:SetVertexColor(1, 0.8, 0)
-	frame.Timer.Fill:SetPoint("LEFT", 0, 0)
-	frame.Timer.Background:SetTexture(C.media.texture)
-	frame.Timer.Background:SetVertexColor(1, 0.8, 0, 0.2)
+	if not T.newPatch then
+		LootHistoryFrameScrollFrame:GetRegions():Hide()
+		T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
+	end
 
 	frame.ResizeButton:StripTextures()
 	frame.ResizeButton:SetHeight(13)

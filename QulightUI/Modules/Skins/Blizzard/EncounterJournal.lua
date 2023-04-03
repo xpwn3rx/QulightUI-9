@@ -80,6 +80,7 @@ local function LoadSkin()
 		EncounterJournalDungeonTab,
 		EncounterJournalRaidTab,
 		EncounterJournalLootJournalTab,
+		EncounterJournalMonthlyActivitiesTab
 	}
 
 	for _, tab in pairs(mainTabs) do

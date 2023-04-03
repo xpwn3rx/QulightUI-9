@@ -114,6 +114,9 @@ frame:SetScript("OnEvent", function(self, event)
 
 	-- Move Mail icon
 <<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
+<<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
+=======
+>>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Maps/MiniMap.lua
 	local MailFrame = MinimapCluster.IndicatorFrame.MailFrame
 	hooksecurefunc(MailFrame, "SetPoint", function(self, _, anchor)
 		if anchor ~= Minimap then
@@ -121,6 +124,7 @@ frame:SetScript("OnEvent", function(self, event)
 			self:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
 		end
 	end)
+<<<<<<< HEAD:QulightUI/Modules/Maps/MiniMap.lua
 	MiniMapMailIcon:SetTexture("Interface\\AddOns\\QulightUI\\Media\\Textures\\Mail.tga")
 =======
 	local MailFrame = T.newPatch and MinimapCluster.IndicatorFrame.MailFrame or MinimapCluster.MailFrame
@@ -135,6 +139,8 @@ frame:SetScript("OnEvent", function(self, event)
 		MailFrame:ClearAllPoints()
 		MailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
 	end
+=======
+>>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Maps/MiniMap.lua
 	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
 >>>>>>> d89006fa3 ([MiniMap] Fixed mail frame for 10.0.5.):ShestakUI/Modules/Maps/MiniMap.lua
 	MiniMapMailIcon:SetSize(16, 16)
