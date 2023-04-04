@@ -326,6 +326,7 @@ maw.Container.List:HookScript("OnHide", function(self)
 	self.button:SetPushedTexture(0)
 	self.button:SetHighlightTexture(0)
 	self.button:SetWidth(200)
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 end)
 
 -- Hide Maw Buffs
@@ -335,3 +336,6 @@ if C.general.hide_maw_buffs then
 end
 
 ]]
+=======
+end)
+>>>>>>> 1e282008f (Removed "Hide Maw Buffs frame in instances" option.):ShestakUI/Modules/Blizzard/UIWidget.lua
