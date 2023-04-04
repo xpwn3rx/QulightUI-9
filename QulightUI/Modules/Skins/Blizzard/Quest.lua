@@ -257,10 +257,11 @@ local function LoadSkin()
 		local isQuestLog = QuestInfoFrame.questLog ~= nil
 		local isMapQuest = rewardsFrame == MapQuestInfoRewardsFrame
 
-		local questID = isQuestLog and C_QuestLog.GetSelectedQuest() or GetQuestID()
-		local spellRewards = C_QuestInfoSystem.GetQuestRewardSpells(questID) or {}
-		local numSpellRewards = #spellRewards
-		if numSpellRewards and numSpellRewards > 0 then
+		local numSpellRewards = 0
+		if not T.newPatch then
+			numSpellRewards = isQuestLog and GetNumQuestLogRewardSpells() or GetNumRewardSpells()
+		end
+		if numSpellRewards > 0 then
 			-- Spell Headers
 			for spellHeader in rewardsFrame.spellHeaderPool:EnumerateActive() do
 				spellHeader:SetVertexColor(1, 1, 1)

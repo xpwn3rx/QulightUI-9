@@ -146,8 +146,11 @@ local function LoadSkin()
 	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.LootContainer.ScrollBar)
 	T.SkinScrollBar(EncounterJournalEncounterFrameInstanceFrame.LoreScrollBar)
 	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.BossesScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrame.ScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrame.ScrollBar)
+
+	if not T.newPatch then
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar)
+	end
 
 	for i = 1, AJ_MAX_NUM_SUGGESTIONS do
 		local suggestion = EncounterJournal.suggestFrame["Suggestion"..i]
@@ -405,7 +408,9 @@ local function LoadSkin()
 
 	local itemSetsFrame = EncounterJournal.LootJournalItems.ItemSetsFrame
 	itemSetsFrame.ClassButton:SkinButton(true)
-	T.SkinScrollBar(itemSetsFrame.ScrollBar)
+	if not T.newPatch then
+		T.SkinScrollBar(itemSetsFrame.scrollBar)
+	end
 
 	hooksecurefunc(itemSetsFrame.ScrollBox, "Update", function(self)
 		self:ForEachFrame(function(bar)
@@ -434,6 +439,18 @@ local function LoadSkin()
 			end
 		end)
 	end)
+
+	if not T.newPatch then
+		local button = itemSetsFrame.buttons
+		for i = 1, #button do
+			local button = button[i]
+			button:CreateBackdrop("Overlay")
+			button.backdrop:SetPoint("TOPLEFT", 2, 2)
+			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+			button.Background:Hide()
+			button.ItemLevel:SetTextColor(1, 1, 1)
+		end
+	end
 
 	T.SkinScrollBar(EncounterJournal.LootJournal.ScrollBar)
 
