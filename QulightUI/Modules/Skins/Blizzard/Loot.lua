@@ -10,9 +10,12 @@ local function LoadSkin()
 	frame:StripTextures()
 	frame:CreateBackdrop("Transparent")
 
-	T.SkinCloseButton(frame.ClosePanelButton)
-	T.SkinScrollBar(frame.ScrollBar)
-	T.SkinDropDownBox(frame.EncounterDropDown)
+	if LootHistoryFrame.CloseButton then
+		T.SkinCloseButton(LootHistoryFrame.CloseButton)
+	elseif LootHistoryFrame.ClosePanelButton then
+		T.SkinCloseButton(LootHistoryFrame.ClosePanelButton)
+	end
+	T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
 
 	if not T.newPatch then
 		LootHistoryFrameScrollFrame:GetRegions():Hide()
@@ -39,72 +42,10 @@ local function LoadSkin()
 		end
 		tinsert(lines, l)
 	end
-
-	frame.ResizeButton:HookScript("OnEnter", function()
-		for i = 1, #lines do
-			lines[i]:SetVertexColor(unpack(C.media.classborder_color))
-		end
-	end)
-
-	frame.ResizeButton:HookScript("OnLeave", function()
-		for i = 1, #lines do
-			lines[i]:SetVertexColor(0.8, 0.8, 0.8)
-		end
-	end)
-
-	hooksecurefunc(LootHistoryElementMixin, "Init", function(button)
-		local item = button.Item
-		if item and not item.styled then
-			item:StyleButton()
-			item:SetNormalTexture(0)
-			item:SetTemplate("Default")
-			item:SetSize(35, 35)
-
-			item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			item.icon:ClearAllPoints()
-			item.icon:SetPoint("TOPLEFT", 2, -2)
-			item.icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-			button:CreateBackdrop("Overlay")
-			button.backdrop:SetPoint("TOPLEFT", 0, 0)
-			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
-
-			item.IconBorder:SetAlpha(0)
-			button.NameFrame:Hide()
-
-			item.styled = true
-		end
-
-		button.BorderFrame:SetAlpha(0)
-	end)
-
-	-- FIXME local function UpdateLoots(self)
-		-- local numItems = C_LootHistory.GetNumItems()
-		-- for i = 1, numItems do
-			-- local frame = self.itemFrames[i]
-
-			-- if not frame.isSkinned then
-				-- local Icon = frame.Icon:GetTexture()
-
-				-- frame:StripTextures()
-
-				-- frame:CreateBackdrop("Default")
-				-- frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
-				-- frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
-
-				-- frame.Icon:SetTexture(Icon)
-				-- frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				-- frame.Icon:SetParent(frame.backdrop)
-
-				-- frame.isSkinned = true
-			-- end
-		-- end
-	-- end
-
-	-- if not T.newPatch then
-		-- hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
-		-- frame:HookScript("OnShow", UpdateLoots)
-	-- end
+	if not T.newPatch then
+		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+	end
+	LootHistoryFrame:HookScript("OnShow", UpdateLoots)
 
 	-- Master Looter frame
 	MasterLooterFrame:StripTextures()

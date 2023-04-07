@@ -277,6 +277,12 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 
 	LootRollAnchor:UnregisterEvent("ADDON_LOADED")
 	LootRollAnchor:RegisterEvent("START_LOOT_ROLL")
+<<<<<<< HEAD:QulightUI/Modules/Loot/GroupLoot.lua
+=======
+	if not T.newPatch then
+		LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
+	end
+>>>>>>> 1b12ed15c (Fixed loot in 10.1.0.):ShestakUI/Modules/Loot/GroupLoot.lua
 
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
