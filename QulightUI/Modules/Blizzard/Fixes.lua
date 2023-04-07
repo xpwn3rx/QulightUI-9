@@ -1,4 +1,4 @@
-local T, C, L = unpack(QulightUI)
+local T, C, L = unpack(ShestakUI)
 
 ----------------------------------------------------------------------------------------
 --	Fix blank tooltip
@@ -44,21 +44,6 @@ if T.client == "ruRU" then
 end
 
 ----------------------------------------------------------------------------------------
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
-=======
---	Fix SearchLFGLeave() taint
-----------------------------------------------------------------------------------------
-if not T.newPatch then
-	local TaintFix = CreateFrame("Frame")
-	TaintFix:SetScript("OnUpdate", function()
-		if LFRBrowseFrame.timeToClear then
-			LFRBrowseFrame.timeToClear = nil
-		end
-	end)
-end
-
-----------------------------------------------------------------------------------------
->>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Blizzard/Fixes.lua
 --	Fix Keybind taint
 ----------------------------------------------------------------------------------------
 _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
