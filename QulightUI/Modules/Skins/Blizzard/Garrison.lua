@@ -1,4 +1,4 @@
-local T, C, L = unpack(QulightUI)
+local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
 --	Garrison, OrderHall and BFA Mission skin
@@ -11,7 +11,7 @@ LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 		return
 	end
 
-	if addon == "QulightUI" then
+	if addon == "QulightuiUI" then
 		local Tooltips = {
 			FloatingGarrisonFollowerTooltip,
 			FloatingGarrisonFollowerAbilityTooltip,

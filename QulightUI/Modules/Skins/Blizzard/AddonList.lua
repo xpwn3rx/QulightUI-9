@@ -36,8 +36,10 @@ local function LoadSkin()
 			child.LoadAddonButton:SkinButton()
 			hooksecurefunc(child.Enabled:GetCheckedTexture(), "SetDesaturated", forceSaturation)
 
-			T.ReplaceIconString(child.Title)
-			hooksecurefunc(child.Title, "SetText", T.ReplaceIconString)
+			if T.newPatch then
+				T.ReplaceIconString(child.Title)
+				hooksecurefunc(child.Title, "SetText", T.ReplaceIconString)
+			end
 
 			child.styled = true
 		end
