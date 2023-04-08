@@ -163,7 +163,11 @@ local function setupIcons(self)
 
 			if watch.PostCreateIcon then watch:PostCreateIcon(icon, icon.spellID, name, self) end
 		else
+<<<<<<< HEAD:QulightUI/Libs/oUF/Modules/AuraWatch.lua
 			print("|cffff0000QulightUI: AuraWatch spell ID ["..tostring(icon.spellID).."] no longer exists!|r")
+=======
+			print("|cffff0000ShestakUI: AuraWatch spell ID ["..tostring(icon.spellID).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Libs/oUF/Modules/AuraWatch.lua
 		end
 	end
 end

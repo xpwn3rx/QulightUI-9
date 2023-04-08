@@ -208,7 +208,11 @@ end
 for spell in pairs(T.DiminishingSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
+<<<<<<< HEAD:QulightUI/Modules/Cooldowns/DiminishingCD.lua
 		print("|cffff0000QulightUI: DiminishingCD spell ID ["..tostring(spell).."] no longer exists!|r")
+=======
+		print("|cffff0000ShestakUI: DiminishingCD spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Cooldowns/DiminishingCD.lua
 	end
 end
 
