@@ -65,6 +65,16 @@ local function LoadSkin()
 	CommunitiesFrame.Chat.InsetFrame:SetTemplate("Overlay")
 	CommunitiesFrame.ChatTab:SetPoint("TOPLEFT", CommunitiesFrame, "TOPRIGHT", 5, -36)
 
+	if CommunitiesFrame.Chat.MessageFrame.ScrollBar then -- BETA
+		hooksecurefunc(CommunitiesFrame.Chat.MessageFrame.ScrollBar, "SetPoint", function(self, point, anchor, attachTo, x, y)
+			if anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -11 then
+				self:SetPoint(point, anchor, attachTo, 11, -7)
+			elseif anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -17 then
+				self:SetPoint(point, anchor, attachTo, 11, -14)
+			end
+		end)
+	end
+
 	-- CommunitiesFrame.MemberList.ScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrame.MemberList, "BOTTOMRIGHT", 0, 14)
 	CommunitiesFrame.MemberList:SetPoint("BOTTOMRIGHT", CommunitiesFrame, "BOTTOMRIGHT", -26, 31)
 
