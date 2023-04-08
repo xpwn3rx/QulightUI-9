@@ -2274,6 +2274,12 @@ do
 	local rank = ns.CreateCheckBox(parent, "rank")
 	rank:SetPoint("LEFT", target, "RIGHT", 320, 0)
 	rank.Text:SetWidth(200)
+<<<<<<< HEAD:QulightUI_Config/Options.lua
+=======
+
+	local talents = ns.CreateCheckBox(parent, "talents")
+	talents:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
+>>>>>>> 19709fd74 ([GUI] Tweak width for some text elements.):ShestakUI_Config/Options.lua
 
 	local average_lvl = ns.CreateCheckBox(parent, "average_lvl", STAT_AVERAGE_ITEM_LEVEL)
 	average_lvl:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
@@ -2509,9 +2515,13 @@ do
 	local low_health = ns.CreateCheckBox(parent, "low_health")
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
 <<<<<<< HEAD:QulightUI_Config/Options.lua
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	low_health.Text:SetWidth(250)
 =======
 >>>>>>> d328e9e94 ([Nameplates] Added option to set custom color for low health border.):ShestakUI_Config/Options.lua
+=======
+	low_health.Text:SetWidth(250)
+>>>>>>> 19709fd74 ([GUI] Tweak width for some text elements.):ShestakUI_Config/Options.lua
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
