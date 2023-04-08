@@ -1058,14 +1058,22 @@ if C.combattext.merge_aoe_spam then
 	for spell in pairs(T.aoespam) do
 		local name = GetSpellInfo(spell)
 		if not name then
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Qulight.|r")
+=======
+			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 
 	for spell in pairs(T.merge) do
 		local name = GetSpellInfo(spell)
 		if not name then
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Qulight.|r")
+=======
+			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 end
@@ -1074,7 +1082,11 @@ if C.combattext.healing then
 	for spell in pairs(T.healfilter) do
 		local name = GetSpellInfo(spell)
 		if not name then
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Qulight.|r")
+=======
+			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 end

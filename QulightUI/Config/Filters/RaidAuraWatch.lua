@@ -80,7 +80,11 @@ local function SpellName(id)
 	if name then
 		return name
 	else
+<<<<<<< HEAD:QulightUI/Config/Filters/RaidAuraWatch.lua
 		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to Qulight.|r")
+=======
+		print("|cffff0000ShestakUI: RaidAuraWatch spell ID ["..tostring(id).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Config/Filters/RaidAuraWatch.lua
 		return "Empty"
 	end
 end

@@ -167,7 +167,11 @@ end
 for spell in pairs(T.EnemySpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
+<<<<<<< HEAD:QulightUI/Modules/Cooldowns/EnemyCD.lua
 		print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Qulight.|r")
+=======
+		print("|cffff0000ShestakUI: EnemyCD spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Cooldowns/EnemyCD.lua
 	end
 end
 

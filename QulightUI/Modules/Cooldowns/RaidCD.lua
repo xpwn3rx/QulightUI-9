@@ -330,7 +330,11 @@ end
 for spell in pairs(T.RaidSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
+<<<<<<< HEAD:QulightUI/Modules/Cooldowns/RaidCD.lua
 		print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Qulight.|r")
+=======
+		print("|cffff0000ShestakUI: RaidCD spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Cooldowns/RaidCD.lua
 	end
 end
 
