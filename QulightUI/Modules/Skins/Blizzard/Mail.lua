@@ -53,7 +53,9 @@ local function LoadSkin()
 	SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
 	SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
 
-	if not T.newPatch then
+	if T.newPatch then
+		T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
+	else
 		T.SkinScrollBar(SendMailScrollFrameScrollBar)
 	end
 
@@ -128,7 +130,9 @@ local function LoadSkin()
 	T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
 =======
 
-	if not T.newPatch then
+	if T.newPatch then
+		T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
+	else
 		T.SkinScrollBar(OpenMailScrollFrameScrollBar)
 	end
 >>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Skins/Blizzard/Mail.lua

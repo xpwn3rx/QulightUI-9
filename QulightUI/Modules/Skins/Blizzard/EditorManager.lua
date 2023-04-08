@@ -4,7 +4,7 @@ local T, C, L = unpack(QulightUI)
 local T, C, L, _ = unpack(select(2, ...))
 >>>>>>> 8069f02c1 ([Skins] Added EditModeManager and QuickKeybind skins.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
 if C.skins.blizzard_frames ~= true then return end
-if T.newPatch then return end -- FIXME
+
 ----------------------------------------------------------------------------------------
 --	Edit Mode Manager skin
 ----------------------------------------------------------------------------------------
@@ -29,12 +29,31 @@ local function LoadSkin()
 	for _, frame in next, {frame.AccountSettings.SettingsContainer.ScrollChild.BasicOptionsContainer:GetChildren()} do
 =======
 
+	if T.newPatch then
+		T.SkinCheckBox(frame.EnableAdvancedOptionsCheckButton.Button, 30)
+		EditModeManagerFrame.AccountSettings.SettingsContainer.BorderArt:Hide()
+	end
+
 	T.SkinSliderStep(frame.GridSpacingSlider.Slider, true)
 
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/EditorManager.lua
 	for _, frame in next, {frame.AccountSettings.Settings:GetChildren()} do
 >>>>>>> 8069f02c1 ([Skins] Added EditModeManager and QuickKeybind skins.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
 		if frame.Button then
 			T.SkinCheckBox(frame.Button, 30)
+=======
+	if T.newPatch then
+		for _, frame in next, {frame.AccountSettings.SettingsContainer.ScrollChild.BasicOptionsContainer:GetChildren()} do
+			if frame.Button then
+				T.SkinCheckBox(frame.Button, 30)
+			end
+		end
+	else
+		for _, frame in next, {frame.AccountSettings.Settings:GetChildren()} do
+			if frame.Button then
+				T.SkinCheckBox(frame.Button, 30)
+			end
+>>>>>>> 2de63df15 ([10.1.0] Fixed Mail and EditorManager skins.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
 		end
 	end
 
