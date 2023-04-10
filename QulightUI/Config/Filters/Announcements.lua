@@ -36,6 +36,7 @@ end
 
 if C.announcements.toys == true then
 	T.AnnounceToys = {
+		[290154] = true,	-- Ethereal Transmorpher
 		[61031] = true,		-- Toy Train Set
 		[49844] = true,		-- Direbrew's Remote
 	}
