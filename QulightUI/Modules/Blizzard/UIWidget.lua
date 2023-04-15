@@ -53,12 +53,23 @@ local mawAnchor = CreateFrame("Frame", "UIWidgetMawAnchor", UIParent)
 mawAnchor:SetSize(210, 30)
 mawAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
 
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 --hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
 --	if anchor and anchor ~= mawAnchor then
 --		self:ClearAllPoints()
 --		self:SetPoint("TOPRIGHT", mawAnchor)
 --	end
 --end)
+=======
+if not T.newPatch then
+	hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
+		if anchor and anchor ~= mawAnchor then
+			self:ClearAllPoints()
+			self:SetPoint("TOPRIGHT", mawAnchor)
+		end
+	end)
+end
+>>>>>>> 25f457d88 (MawBuffsBelowMinimapFrame not exist in 10.1.0.):ShestakUI/Modules/Blizzard/UIWidget.lua
 
 -- Mover for all widgets
 for _, frame in pairs({top, below, maw}) do
@@ -302,26 +313,35 @@ hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", function(widget)
 	SkinStatusBar(widget)
 end)
 
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 --[[
 -- Maw Buffs skin
 maw:SetSize(210, 40)
 maw.Container:SkinButton()
 maw.Container:SetSize(200, 30)
+=======
+if not T.newPatch then
+	-- Maw Buffs skin
+	maw:SetSize(210, 40)
+	maw.Container:SkinButton()
+	maw.Container:SetSize(200, 30)
+>>>>>>> 25f457d88 (MawBuffsBelowMinimapFrame not exist in 10.1.0.):ShestakUI/Modules/Blizzard/UIWidget.lua
 
-maw.Container.List:StripTextures()
-maw.Container.List:SetTemplate("Overlay")
-maw.Container.List:ClearAllPoints()
-maw.Container.List:SetPoint("TOPRIGHT", maw.Container, "TOPLEFT", -15, 0)
+	maw.Container.List:StripTextures()
+	maw.Container.List:SetTemplate("Overlay")
+	maw.Container.List:ClearAllPoints()
+	maw.Container.List:SetPoint("TOPRIGHT", maw.Container, "TOPLEFT", -15, 0)
 
-maw.Container.List:HookScript("OnShow", function(self)
-	self.button:SetPushedTexture(0)
-	self.button:SetHighlightTexture(0)
-	self.button:SetWidth(200)
-	self.button:SetButtonState("NORMAL")
-	self.button:SetPushedTextOffset(0, 0)
-	self.button:SetButtonState("PUSHED", true)
-end)
+	maw.Container.List:HookScript("OnShow", function(self)
+		self.button:SetPushedTexture(0)
+		self.button:SetHighlightTexture(0)
+		self.button:SetWidth(200)
+		self.button:SetButtonState("NORMAL")
+		self.button:SetPushedTextOffset(0, 0)
+		self.button:SetButtonState("PUSHED", true)
+	end)
 
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/UIWidget.lua
 maw.Container.List:HookScript("OnHide", function(self)
 	self.button:SetPushedTexture(0)
 	self.button:SetHighlightTexture(0)
@@ -339,3 +359,11 @@ end
 =======
 end)
 >>>>>>> 1e282008f (Removed "Hide Maw Buffs frame in instances" option.):ShestakUI/Modules/Blizzard/UIWidget.lua
+=======
+	maw.Container.List:HookScript("OnHide", function(self)
+		self.button:SetPushedTexture(0)
+		self.button:SetHighlightTexture(0)
+		self.button:SetWidth(200)
+	end)
+end
+>>>>>>> 25f457d88 (MawBuffsBelowMinimapFrame not exist in 10.1.0.):ShestakUI/Modules/Blizzard/UIWidget.lua
