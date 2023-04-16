@@ -220,6 +220,7 @@ local function SkinVigorBar(widget)
 	if not widget:IsShown() then return end -- Hide our bar if Blizzard's not shown
 	local widgetInfo = C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo(4460)
 	if not widgetInfo then return end
+	if not widget:IsShown() then return end -- Hide our bar if Blizzard's not shown
 
 	VigorBar:Show()
 	local total = widgetInfo.numTotalFrames
