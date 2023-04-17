@@ -783,8 +783,6 @@ C["filger_spells"] = {
 			{spellID = 288613, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Survival of the Fittest
 			{spellID = 264735, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Fortitude of the Bear
-			{spellID = 272679, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
