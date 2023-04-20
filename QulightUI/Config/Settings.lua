@@ -60,6 +60,7 @@ C["skins"] = {
 	["minimap_buttons"] = true,					-- Skin addons icons on minimap
 	["minimap_buttons_mouseover"] = true,		-- Addons icons on mouseover
 	-- Addons
+<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["ace3"] = true,							-- Ace3 options elements skin
 	["atlasloot"] = true,						-- AtlasLoot skin
 	["bigwigs"] = true,							-- BigWigs skin
@@ -86,6 +87,35 @@ C["skins"] = {
 	["tiny_dps"] = true,						-- TinyDPS skin
 	["vanaskos"] = true,						-- VanasKoS skin
 	["weak_auras"] = true,						-- WeakAuras skin
+=======
+	["ace3"] = false,							-- Ace3 options elements skin
+	["atlasloot"] = false,						-- AtlasLoot skin
+	["bigwigs"] = false,						-- BigWigs skin
+	["blood_shield_tracker"] = false,			-- BloodShieldTracker skin
+	["capping"] = false,						-- Capping skin
+	["clique"] = false,							-- Clique skin
+	["cool_line"] = false,						-- CoolLine skin
+	["dbm"] = false,							-- DBM skin
+	["details"] = false,						-- Details skin
+	["dominos"] = false,						-- Dominos skin
+	["flyout_button"] = false,					-- FlyoutButtonCustom skin
+	["ls_toasts"] = false,						-- Is: Toasts skin
+	["mage_nuggets"] = false,					-- MageNuggets skin
+	["my_role_play"] = false,					-- MyRolePlay skin
+	["npcscan"] = false,						-- NPCScan skin
+	["nug_running"] = false,					-- NugRunning skin
+	["omen"] = false,							-- Omen skin
+	["opie"] = false,							-- OPie skin
+	["ovale"] = false,							-- OvaleSpellPriority skin
+	["plater"] = false,							-- Plater skin
+	["postal"] = false,							-- Postal skin
+	["recount"] = false,						-- Recount skin
+	["rematch"] = false,						-- Rematch skin
+	["skada"] = false,							-- Skada skin
+	["tiny_dps"] = false,						-- TinyDPS skin
+	["vanaskos"] = false,						-- VanasKoS skin
+	["weak_auras"] = false,						-- WeakAuras skin
+>>>>>>> cc162b39f ([Skins] Added base skin for Plater.):ShestakUI/Config/Settings.lua
 }
 
 ----------------------------------------------------------------------------------------
