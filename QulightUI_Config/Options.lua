@@ -479,11 +479,7 @@ do
 	GithubButton:SetSize(100, 23)
 	GithubButton:SetText("Github")
 	GithubButton:SetWidth(GithubButton.Text:GetWidth() + 15)
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-	local url = "https://github.com/Wetxius/QulightUI"
-=======
-	local url = "https://github.com/Wetxius/ShestakUI"
->>>>>>> cce06a348 (Updated GitHub link and replace site page.):ShestakUI_Config/Options.lua
+	local url = "https://github.com/xpwn3rx/QulightUI"
 	GithubButton:SetScript("OnClick", function()
 		StaticPopup_Show("LINK_URL", _, _, url)
 	end)
@@ -623,7 +619,11 @@ do
 	WikiPage:SetText("Wiki")
 	WikiPage:SetWidth(WikiPage.Text:GetWidth() + 15)
 
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	local url = "https://github.com/Wetxius/QulightUI_Profile/wiki/"
+=======
+	local url = "https://github.com/Wetxius/ShestakUI_Profile/wiki/"
+>>>>>>> f25e48e13 ([GUI] Added "Wiki" button for expert mode.):ShestakUI_Config/Options.lua
 	WikiPage:SetScript("OnClick", function()
 		editBox:ClearFocus()
 		StaticPopup_Show("LINK_URL", _, _, url)
