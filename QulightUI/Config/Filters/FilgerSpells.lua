@@ -783,6 +783,8 @@ C["filger_spells"] = {
 			{spellID = 288613, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Survival of the Fittest
 			{spellID = 264735, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fortitude of the Bear
+			{spellID = 272679, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -916,7 +918,7 @@ C["filger_spells"] = {
 			-- Freezing Trap
 			{spellID = 187650, filter = "CD"},
 			-- Tar Trap
-			{spellID = 187698, filter = "CD"},
+			{spellID = 187698, filter = "CD"},			
 			-- Binding Shot
 			{spellID = 117526, filter = "CD"},
 			-- Master's Call
@@ -946,7 +948,7 @@ C["filger_spells"] = {
 			-- Fortitude of the Bear
 			{spellID = 272679, filter = "CD"},
 			-- Volley
-			{spellID = 194386, filter = "CD"},
+			{spellID = 194386, filter = "CD"},									
 			-- Trueshot
 			{spellID = 288613, filter = "CD"},
 			-- Aimed Shot
@@ -956,7 +958,7 @@ C["filger_spells"] = {
 			-- Flare
 			{spellID = 1543, filter = "CD"},
 			-- Salvo
-			{spellID = 400456, filter = "CD"},
+			{spellID = 400456, filter = "CD"},			
 		},
 	},
 	["MAGE"] = {
