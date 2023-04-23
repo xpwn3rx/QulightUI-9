@@ -505,7 +505,7 @@ T.PostCastStart = function(Castbar, unit)
 		Castbar:SetStatusBarColor(0.8, 0, 0)
 		Castbar.bg:SetVertexColor(.5,.5,.5,.9)
 		Castbar.Overlay:SetBackdropBorderColor(0.8, 0, 0)
-		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
+		if (C.unitframe.castbar_icon == true and unit == "target") or (unit == "focus" and C.unitframe.castbar_focus_type ~= "NONE") then
 			Castbar.Button:SetBackdropBorderColor(0.8, 0, 0)
 		end
 	else
@@ -539,7 +539,7 @@ T.PostCastStart = function(Castbar, unit)
 		end
 		--Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		Castbar.Overlay:SetBackdropBorderColor(0,0,0,.2)
-		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
+		if (C.unitframe.castbar_icon == true and unit == "target") or (unit == "focus" and C.unitframe.castbar_focus_type ~= "NONE") then
 			Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 	end
