@@ -136,7 +136,11 @@ C["unitframe"] = {
 	["unit_castbar"] = true,					-- Show castbars
 	["castbar_icon"] = true,					-- Show castbar icons
 	["castbar_latency"] = true,					-- Castbar latency
+<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["castbar_ticks"] = true,					-- Castbar ticks
+=======
+	["castbar_ticks"] = false,					-- Castbar ticks
+>>>>>>> 3ff1580eb ([GUI} Added new option "Icon for focus castbar". Possible variants: icon, icon with bar, hide icon.):ShestakUI/Config/Settings.lua
 	["castbar_focus_type"] = "ICON",			-- Icon for focus castbar (ICON, BAR, NONE)
 	-- Frames
 	["show_pet"] = true,						-- Show pet frame
