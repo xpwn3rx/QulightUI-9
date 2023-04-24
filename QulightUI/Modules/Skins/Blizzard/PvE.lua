@@ -345,17 +345,11 @@ local function LoadSkin()
 	T.SkinCloseButton(LFGDungeonReadyStatusCloseButton, nil, "-")
 	T.SkinCloseButton(LFGDungeonReadyDialogCloseButton, LFGDungeonReadyDialog, "-")
 
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/PvE.lua
-	--LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
-	--LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
-	--LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
-=======
 	if not T.newPatch then
 		LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
 		LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
 		LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
 	end
->>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Skins/Blizzard/PvE.lua
 
 	LFGInvitePopup:StripTextures()
 	LFGInvitePopup:SetTemplate("Transparent")

@@ -11,11 +11,7 @@ local function SpellName(id)
 	if name then
 		return name
 	else
-<<<<<<< HEAD:QulightUI/Config/Filters/Nameplates.lua
-		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to Qulight.|r")
-=======
-		print("|cffff0000ShestakUI: Nameplates spell ID ["..tostring(id).."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Config/Filters/Nameplates.lua
+		print("|cffff0000QulightUI: Nameplates spell ID ["..tostring(id).."] no longer exists!|r")
 		return "Empty"
 	end
 end
