@@ -22,15 +22,15 @@ L_GUI_EXPERT_MODE_DESC = "编写你的插件代码"
 L_GUI_RESET_SPELLS_DESC = "Ctrl+左键重置列表"
 
 -- Profile
-L.profile = "Profile" -- Need review
-L.profile_title = "Profile options" -- Need review
-L.profile_choose = "Choose profile" -- Need review
-L.profile_options = "Settings" -- Need review
-L.profile_movers = "Moving elements" -- Need review
-L.profile_export = "Export" -- Need review
-L.profile_import = "Import" -- Need review
-L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
-L.profile_error_code = "Error in imported code!" -- Need review
+L.profile = "设定档"
+L.profile_title = "设置面板"
+L.profile_choose = "选择设定档"
+L.profile_options = "设置"
+L.profile_movers = "框架移动"
+L.profile_export = "导出"
+L.profile_import = "导入"
+L.profile_error_lib = "要启用导入和导出，请安装WeakAuras"
+L.profile_error_code = "导入的代码有错误!"
 
 -- General options
 L_GUI_GENERAL_SUBTEXT = "一般用戶界面设置，键入 /uihelp 获取更多可用命令。"
@@ -111,15 +111,9 @@ L_GUI_UF_UNIT_CASTBAR = "施法条增强"
 L_GUI_UF_CASTBAR_ICON = "法术图标"
 L_GUI_UF_CASTBAR_LATENCY = "施法延迟"
 L_GUI_UF_CASTBAR_TICKS = "施法跳数"
-<<<<<<< HEAD:QulightUI_Config/Locales/Chinese.lua
 L.unitframe_castbar_focus_type = "焦点施法条"
 L.unitframe_castbar_focus_type_icon = "图标"
 L.unitframe_castbar_focus_type_bar = "图标和施法条"
-=======
-L.unitframe_castbar_focus_type = "Icon for focus castbar" -- Needs review
-L.unitframe_castbar_focus_type_icon = "Icon" -- Needs review
-L.unitframe_castbar_focus_type_bar = "Icon with bar" -- Needs review
->>>>>>> 3ff1580eb ([GUI} Added new option "Icon for focus castbar". Possible variants: icon, icon with bar, hide icon.):ShestakUI_Config/Locales/Chinese.lua
 L_GUI_UF_SUBHEADER_FRAMES = "其他框架"
 L_GUI_UF_SHOW_PET = "宠物框架"
 L_GUI_UF_SHOW_FOCUS = "焦点框架"

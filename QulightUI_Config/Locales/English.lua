@@ -31,28 +31,6 @@ L.profile_import = "Import"
 L.profile_error_lib = "To enable export and import - install WeakAuras"
 L.profile_error_code = "Error in imported code!"
 
--- Profile
-L.profile = "Profile"
-L.profile_title = "Profile options"
-L.profile_choose = "Choose profile"
-L.profile_options = "Settings"
-L.profile_movers = "Moving elements"
-L.profile_export = "Export"
-L.profile_import = "Import"
-L.profile_error_lib = "To enable export and import - install WeakAuras"
-L.profile_error_code = "Error in imported code!"
-
--- Profile
-L.profile = "Profile"
-L.profile_title = "Profile options"
-L.profile_choose = "Choose profile"
-L.profile_options = "Settings"
-L.profile_movers = "Moving elements"
-L.profile_export = "Export"
-L.profile_import = "Import"
-L.profile_error_lib = "To enable export and import - install WeakAuras"
-L.profile_error_code = "Error in imported code!"
-
 -- General options
 L_GUI_GENERAL_SUBTEXT = "These settings control the general user interface settings. Type in chat '/uihelp' for help."
 L_GUI_GENERAL_WELCOME_MESSAGE = "Welcome message in chat"
