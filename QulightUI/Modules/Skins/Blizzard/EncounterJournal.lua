@@ -128,15 +128,11 @@ local function LoadSkin()
 		tab.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
 		tab:SetNormalTexture(0)
 		tab:SetPushedTexture(0)
-		tab:SetDisabledTexture(C.media.blank)
+		tab:SetDisabledTexture(0)
 
 		local hl = tab:GetHighlightTexture()
 		hl:SetColorTexture(1, 1, 1, 0.2)
-		hl:SetInside(tab.backdrop)
-
-		local d = tab:GetDisabledTexture()
-		d:SetVertexColor(0.8, 0, 0, 0.1)
-		d:SetInside(tab.backdrop)
+		hl:SetAllPoints(tab.backdrop)
 	end
 
 	EncounterJournalEncounterFrameInfoOverviewTab:SetPoint("TOPLEFT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", 8, -40)
