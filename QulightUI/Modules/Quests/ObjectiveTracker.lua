@@ -381,6 +381,8 @@ local function SkinProgressBar(_, _, line)
 			hooksecurefunc(bar.AnimIn, "Play", function()
 				bar.AnimIn:Stop()
 			end)
+
+			BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 		end
 
 		progressBar.styled = true
