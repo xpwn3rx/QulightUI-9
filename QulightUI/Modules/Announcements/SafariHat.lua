@@ -10,6 +10,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_Collections" then
 		if not PlayerHasToy(92738) then return end
 		local button = CreateFrame("Button", "PetJournalSafariButton", PetJournal, "SecureActionButtonTemplate, ActionButtonTemplate")
+		button:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 		button:SetSize(36, 36)
 		button:SetAttribute("type", "toy")
 		button:SetAttribute("toy", 92738)
@@ -34,7 +35,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			GameTooltip:SetToyByItemID(92738)
 		end)
 
-	button:SetScript("OnLeave", function()
+		button:SetScript("OnLeave", function()
 			GameTooltip:Hide()
 		end)
 	end
@@ -55,7 +56,7 @@ announceFrame:SetScript("OnEvent", function(_, event)
 				end
 			end
 			if maxlevel then return end
-			PlaySound(SOUNDKIT.RAID_WARNING, "master")
+			PlaySound(12867, "master")
 			RaidNotice_AddMessage(RaidWarningFrame, RESISTANCE_NONE.." "..GetSpellLink(158486).."!", ChatTypeInfo["RAID_WARNING"])
 			print("|cffff3300"..RESISTANCE_NONE.." "..GetSpellLink(158486).."|cffff3300!|r")
 		end
