@@ -5,27 +5,18 @@ if C.skins.blizzard_frames ~= true then return end
 --	Loot skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local LootHistoryFrame = LootHistoryFrame or GroupLootHistoryFrame -- FIXME
-
 	-- Loot History frame
-	local frame = GroupLootHistoryFrame
-	frame:StripTextures()
-	frame:CreateBackdrop("Transparent")
+	GroupLootHistoryFrame:StripTextures()
+	GroupLootHistoryFrame:SetTemplate("Transparent")
 
-	if LootHistoryFrame.CloseButton then
-		T.SkinCloseButton(LootHistoryFrame.CloseButton)
-	elseif LootHistoryFrame.ClosePanelButton then
-		T.SkinCloseButton(LootHistoryFrame.ClosePanelButton)
-	end
-	T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
+	T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
+	T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
+	T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
 
-	if not T.newPatch then
-		LootHistoryFrameScrollFrame:GetRegions():Hide()
-		T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
-	end
-
-	frame.ResizeButton:StripTextures()
-	frame.ResizeButton:SetHeight(13)
+	GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
+	GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
+	GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
+	GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
 
 	local lines = {}
 	for i = 1, 3 do
@@ -46,8 +37,8 @@ local function LoadSkin()
 	end
 
 	if not T.newPatch then
-		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
-		LootHistoryFrame:HookScript("OnShow", UpdateLoots)
+		hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
+		GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	end
 
 	-- Master Looter frame

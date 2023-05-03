@@ -108,6 +108,7 @@ local function LoadSkin()
 	end
 
 <<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/PvE.lua
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/PvE.lua
 =======
 	if T.newPatch then
 		T.SkinScrollBar(LFDQueueFrameRandomScrollFrame.ScrollBar)
@@ -116,6 +117,8 @@ local function LoadSkin()
 	end
 
 >>>>>>> 901f1a948 ([10.1.0] Added some changed scrollbars.):ShestakUI/Modules/Skins/Blizzard/PvE.lua
+=======
+>>>>>>> 6db25859a (Cleanup.):ShestakUI/Modules/Skins/Blizzard/PvE.lua
 	-- Set texture to hide circle
 	_G.GroupFinderFrame.groupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
 	_G.GroupFinderFrame.groupButton2.icon:SetTexture("Interface\\LFGFrame\\UI-LFR-PORTRAIT")
