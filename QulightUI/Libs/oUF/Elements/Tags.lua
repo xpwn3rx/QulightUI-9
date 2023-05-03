@@ -501,7 +501,7 @@ eventFrame:SetScript('OnEvent', function(self, event, unit)
 end)
 
 local eventTimer = 0
-local eventTimerThreshold = 0.25
+local eventTimerThreshold = 0.1
 
 eventFrame:SetScript('OnUpdate', function(self, elapsed)
 	eventTimer = eventTimer + elapsed
@@ -879,15 +879,9 @@ oUF.Tags = {
 	end,
 	SetEventUpdateTimer = function(self, timer)
 		if(not timer) then return end
-<<<<<<< HEAD:QulightUI/Libs/oUF/Elements/Tags.lua
 		if(type(timer) ~= 'number') then return end
 
 		eventTimerThreshold = math.max(0.05, timer)
-=======
-		if(not type(timer) == 'number') then return end
-
-		eventTimerThreshold = math.max(0.1, timer)
->>>>>>> eb79357b1 (Updated oUF.):ShestakUI/Libs/oUF/Elements/Tags.lua
 	end,
 }
 
