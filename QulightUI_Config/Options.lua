@@ -496,7 +496,11 @@ do
 	subtitle2:SetWidth(750)
 	subtitle2:SetPoint("TOPLEFT", title2, "BOTTOMLEFT", 0, -8)
 	subtitle2:SetJustifyH("LEFT")
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle2:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Credits"))
+=======
+	subtitle2:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Credits"))
+>>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local title3 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title3:SetPoint("TOPLEFT", subtitle2, "BOTTOMLEFT", 0, -16)
@@ -506,7 +510,11 @@ do
 	subtitle3:SetWidth(750)
 	subtitle3:SetPoint("TOPLEFT", title3, "BOTTOMLEFT", 0, -8)
 	subtitle3:SetJustifyH("LEFT")
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle3:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Translation"))
+=======
+	subtitle3:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Translation"))
+>>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local title4 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title4:SetPoint("TOPLEFT", subtitle3, "BOTTOMLEFT", 0, -16)
@@ -516,7 +524,11 @@ do
 	subtitle4:SetWidth(750)
 	subtitle4:SetPoint("TOPLEFT", title4, "BOTTOMLEFT", 0, -8)
 	subtitle4:SetJustifyH("LEFT")
+<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle4:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Thanks"))
+=======
+	subtitle4:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Thanks"))
+>>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local CancelButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	CancelButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)

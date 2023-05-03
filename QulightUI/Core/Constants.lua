@@ -3,8 +3,6 @@
 ----------------------------------------------------------------------------------------
 --	QulightUI variables
 ----------------------------------------------------------------------------------------
-GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata -- BETA
-
 T.dummy = function() return end
 T.name = UnitName("player")
 T.class = select(2, UnitClass("player"))

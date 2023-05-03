@@ -52,12 +52,7 @@ local function LoadSkin()
 	SendMailScrollFrame:CreateBackdrop("Overlay")
 	SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
 	SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
-
-	if T.newPatch then
-		T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
-	else
-		T.SkinScrollBar(SendMailScrollFrameScrollBar)
-	end
+	T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
 
 	select(3, SendMailNameEditBox:GetRegions()):SetDrawLayer("OVERLAY")
 	select(3, SendMailSubjectEditBox:GetRegions()):SetDrawLayer("OVERLAY")
@@ -127,6 +122,7 @@ local function LoadSkin()
 	OpenMailScrollFrame.backdrop:SetPoint("TOPLEFT", 5, 5)
 	OpenMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, -5)
 <<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Mail.lua
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Mail.lua
 	T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
 =======
 
@@ -136,6 +132,9 @@ local function LoadSkin()
 		T.SkinScrollBar(OpenMailScrollFrameScrollBar)
 	end
 >>>>>>> d8c5448f8 (Prepare for 10.1.0.):ShestakUI/Modules/Skins/Blizzard/Mail.lua
+=======
+	T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
+>>>>>>> d9e25ac60 (Cleanup.):ShestakUI/Modules/Skins/Blizzard/Mail.lua
 
 	SendMailBodyEditBox:SetTextColor(1, 1, 1)
 	MailTextFontNormal:SetTextColor(1, 1, 1)

@@ -21,6 +21,7 @@ local function LoadSkin()
 	T.SkinCheckBox(frame.ShowGridCheckButton.Button, 30)
 	T.SkinCheckBox(frame.EnableSnapCheckButton.Button, 30)
 <<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/EditorManager.lua
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/EditorManager.lua
 	T.SkinCheckBox(frame.EnableAdvancedOptionsCheckButton.Button, 30)
 	EditModeManagerFrame.AccountSettings.SettingsContainer.BorderArt:Hide()
 
@@ -54,6 +55,16 @@ local function LoadSkin()
 				T.SkinCheckBox(frame.Button, 30)
 			end
 >>>>>>> 2de63df15 ([10.1.0] Fixed Mail and EditorManager skins.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
+=======
+	T.SkinCheckBox(frame.EnableAdvancedOptionsCheckButton.Button, 30)
+	EditModeManagerFrame.AccountSettings.SettingsContainer.BorderArt:Hide()
+
+	T.SkinSliderStep(frame.GridSpacingSlider.Slider, true)
+
+	for _, frame in next, {frame.AccountSettings.SettingsContainer.ScrollChild.BasicOptionsContainer:GetChildren()} do
+		if frame.Button then
+			T.SkinCheckBox(frame.Button, 30)
+>>>>>>> d9e25ac60 (Cleanup.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
 		end
 	end
 
