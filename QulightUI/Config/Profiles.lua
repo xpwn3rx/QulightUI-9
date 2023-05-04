@@ -1,4 +1,4 @@
-﻿﻿﻿﻿local T, C, L, _ = unpack(select(2, ...))
+﻿local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
 --	QulightUI personal configuration file
@@ -272,13 +272,16 @@ if IsWetxius then
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:SetScript("OnEvent", function()
-		xCT3:SetPoint("CENTER", 0, 305)
-		xCT3:SetWidth(400)
 		C["combattext"].heal_treshold = UnitHealthMax("player")/100
+		if xCT3 then
+			xCT3:SetPoint("CENTER", 0, 305)
+			xCT3:SetWidth(400)
+		end
 		if PTR_IssueReporter then
 			PTR_IssueReporter:SetAlpha(0)
 			PTR_IssueReporter:SetScale(0.001)
 		end
+		SetCVar("lootUnderMouse", 1)
 	end)
 
 	T.CustomFilgerSpell = {
