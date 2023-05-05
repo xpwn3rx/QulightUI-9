@@ -18,10 +18,14 @@
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory, ShestakUIPositionsPerChar
 <<<<<<< HEAD:QulightUI/QulightUI.toc
+<<<<<<< HEAD:QulightUI/QulightUI.toc
 >>>>>>> 84d493cea (Updated version to 9.2.2.):ShestakUI/ShestakUI.toc
 =======
 ## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Healer.tga
 >>>>>>> 2ee4bc431 ([10.1.0] Added skin for new AddonList icons. Reduce scrollbar width.):ShestakUI/ShestakUI.toc
+=======
+## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Logo.tga
+>>>>>>> 05beebe16 (Added new logo icon.):ShestakUI/ShestakUI.toc
 
 ## X-Website: https://www.wowinterface.com/downloads/info16324-QulightUI.html
 ## X-Credits: AcidWeb, Aezay, Affli, Ailae, Allez, ALZA, Ammo, Astromech, Beoko, Bitbyte, Blamdarot, Bozo, Caellian, Califpornia, Camealion, Chiril, CrusaderHeimdall, Cybey, Dawn, Dencer, Don Kaban, Dridzt, Duffed, Durcyn, Eclipse, Egingell, Elv22, Evilpaul, Evl, Favorit, Fernir, Foof, Freebaser, g0st, Gethe, Gorlasch, Gsuz, Haleth, Haste, Hoochie, Hungtar, Hydra, HyPeRnIcS, Ildyria, iSpawnAtHome, Jaslm, Kanegasi, Karl_w_w, Karudon, Katae, Kellett, Kemayo, Killakhan, Kraftman, Leatrix, m2jest1c, Magdain, Monolit, MrRuben5, Nathanyel, Nefarion, Nightcracker, Nils Ruesch, p3lim, Partha, Phanx, Renstrom, RustamIrzaev, Safturento, Sanex, Sara.Festung, SDPhantom, Semlar, Sildor, Silverwind, SinaC, siweia, Slakah, Soeters, Starlon, Suicidal Katt, Syzgyn, Tekkub, Telroth, Thalyra, Thizzelle, Tia Lynn, Tohveli, Tukz, Tuller, Urtgard, Veev, Villiv, Wetxius, Woffle of Dark Iron, Wrug, Xuerian, Yleaf, Zork
