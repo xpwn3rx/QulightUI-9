@@ -658,4 +658,8 @@ L.misc_click_cast = "简单的点击施法绑定"
 L.misc_click_cast_desc = "开启后法术书有鼠标绑定界面可以进行设置"
 L.misc_click_cast_filter = "忽略玩家/目标框架点击施法"
 L.misc_chars_currency = "追踪所有角色的货币"
+<<<<<<< HEAD:QulightUI_Config/Locales/Chinese.lua
 L.misc_chars_currency_desc = "在货币界面中追踪所有角色的货币"
+=======
+L.misc_chars_currency_desc = "在货币界面中追踪所有角色的货币"
+>>>>>>> 12e5defb6 (Removed option "Button to hide raid frames in DPS layout"):ShestakUI_Config/Locales/Chinese.lua

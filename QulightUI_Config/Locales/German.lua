@@ -658,4 +658,8 @@ L.misc_click_cast = "Simpler 'click2cast' spell binder"
 L.misc_click_cast_desc = "Allows you to assign spells (analog Clique) to the mouse buttons. Setup through the side bookmark in the spell book" -- Need review
 L.misc_click_cast_filter = "Ignoriere Spieler- und Zielfenster für click2cast"
 L.misc_chars_currency = "Zeige deine Währungstoken über diverse Karaktere"
+<<<<<<< HEAD:QulightUI_Config/Locales/German.lua
 L.misc_chars_currency_desc = "Hover over the icon of the required currency in the character window to display information in the tooltip" -- Need review
+=======
+L.misc_chars_currency_desc = "Hover over the icon of the required currency in the character window to display information in the tooltip" -- Need review
+>>>>>>> 12e5defb6 (Removed option "Button to hide raid frames in DPS layout"):ShestakUI_Config/Locales/German.lua
