@@ -344,6 +344,8 @@ T.RaidDebuffs = {
 	[SpellName(388984)] = 3,	-- Vicious Ambush
 	[SpellName(388544)] = 3,	-- Barkbreaker
 	[SpellName(377008)] = 3,	-- Deafening Screech
+	-- Halls of Infusion
+	[SpellName(374389)] = 3,	-- Gulp Swog Toxin
 
 	-----------------------------------------------------------------
 	-- Dragonflight (Season 2)
