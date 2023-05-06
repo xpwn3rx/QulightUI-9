@@ -157,11 +157,6 @@ T.RaidDebuffs = {
 	[SpellName(408071)] = 3,	-- Shapeshifter's Fervor
 	[SpellName(410953)] = 3,	-- Volcanic Heart
 	-- Scalecommander Sarkareth
-	[SpellName(403520)] = 3,	-- Embrace of Nothingness
-	[SpellName(401383)] = 3,	-- Oppressing Howl
-	[SpellName(401951)] = 3,	-- Oblivion
-	[SpellName(407496)] = 3,	-- Infinite Duress
-	[SpellName(401680)] = 3,	-- Mass Disintegrate
 
 	-----------------------------------------------------------------
 	-- Vault of the Incarnates
@@ -344,8 +339,6 @@ T.RaidDebuffs = {
 	[SpellName(388984)] = 3,	-- Vicious Ambush
 	[SpellName(388544)] = 3,	-- Barkbreaker
 	[SpellName(377008)] = 3,	-- Deafening Screech
-	-- Halls of Infusion
-	[SpellName(374389)] = 3,	-- Gulp Swog Toxin
 
 	-----------------------------------------------------------------
 	-- Dragonflight (Season 2)
@@ -481,7 +474,10 @@ T.RaidDebuffs = {
 	[SpellName(372570)] = 3,	-- Bold Ambush
 	[SpellName(372459)] = 3,	-- Burning
 	[SpellName(372208)] = 3,	-- Djaradin Lava
+<<<<<<< HEAD:QulightUI/Config/Filters/RaidAuraWatch.lua
 	[SpellName(414585)] = 3,	-- Fiery Demise
+=======
+>>>>>>> b6ebcca58 ([RaidAuraWatch] Added new Dragonflight dungeons.):ShestakUI/Config/Filters/RaidAuraWatch.lua
 	-- Uldaman: Legacy of Tyr
 	[SpellName(368996)] = 3,	-- Purging Flames
 	[SpellName(369792)] = 3,	-- Skullcracker
