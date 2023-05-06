@@ -534,8 +534,13 @@ C["minimap"] = {
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,						-- Enable loot frame
+<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["rolllootframe"] = true,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
 	["icon_size"] = 32,							-- Icon size
+=======
+	["rolllootframe"] = true,					-- Enable group roll frame
+	["icon_size"] = 22,							-- Icon size
+>>>>>>> 42cb4b83b (Added support transmog roll in GroupLoot.):ShestakUI/Config/Settings.lua
 	["width"] = 221,							-- Loot window width
 	["auto_greed"] = false,						-- Push "greed" or "disenchant" button for green item roll at max level
 	["auto_confirm_de"] = true,					-- Auto confirm disenchant and take BoP loot

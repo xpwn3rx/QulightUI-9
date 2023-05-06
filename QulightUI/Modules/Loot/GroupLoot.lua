@@ -89,6 +89,14 @@ local function StatusUpdate(frame)
 	frame:SetValue(t)
 end
 
+local textpos = {
+	[1] = {0, 1},	-- need
+	[2] = {1, 0},	-- greed
+	[4] = {2, 0},	-- transmog
+	[3] = {1, 2},	-- disenchant
+	[0] = {1, -0.2},-- pass
+}
+
 local function CreateRollButton(parent, ntex, ptex, htex, rolltype, tiptext, ...)
 	local f = CreateFrame("Button", nil, parent)
 	f:SetPoint(...)
@@ -103,6 +111,10 @@ local function CreateRollButton(parent, ntex, ptex, htex, rolltype, tiptext, ...
 	f:SetScript("OnLeave", HideTip)
 	f:SetScript("OnClick", ClickRoll)
 	f:SetMotionScriptsWhileDisabled(true)
+	local txt = f:CreateFontString(nil, nil)
+	txt:SetFont(C.font.loot_font, C.font.loot_font_size, C.font.loot_font_style)
+	txt:SetShadowOffset(C.font.loot_font_shadow and 1 or 0, C.font.loot_font_shadow and -1 or 0)
+	txt:SetPoint("CENTER", textpos[rolltype][1] or 0, textpos[rolltype][2] or 0)
 	return f, txt
 end
 
@@ -148,12 +160,13 @@ local function CreateRollFrame()
 	status.bg:SetAllPoints()
 	status.bg:SetDrawLayer("BACKGROUND", 2)
 
-	local need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 8, -1)
+	local need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 6, -1)
 	local greed, greedText = CreateRollButton(frame, "lootroll-toast-icon-greed-up", "lootroll-toast-icon-greed-highlight", "lootroll-toast-icon-greed-down", 2, GREED, "LEFT", need, "RIGHT", 0, 1)
 	local transmog, transmogText = CreateRollButton(frame, "lootroll-toast-icon-transmog-up", "lootroll-toast-icon-transmog-highlight", "lootroll-toast-icon-transmog-down", 4, TRANSMOGRIFY, "LEFT", need, "RIGHT", -1, 1)
 	local de, deText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-DE-Up", "Interface\\Buttons\\UI-GroupLoot-DE-Highlight", "Interface\\Buttons\\UI-GroupLoot-DE-Down", 3, ROLL_DISENCHANT, "LEFT", greed, "RIGHT", -2, -2)
 	local pass, passText = CreateRollButton(frame, "lootroll-toast-icon-pass-up", "lootroll-toast-icon-pass-highlight", "lootroll-toast-icon-pass-down", 0, PASS, "LEFT", de or greed, "RIGHT", 0, 2.2)
 	frame.need, frame.greed, frame.disenchant, frame.transmog = need, greed, de, transmog
+	frame.needText, frame.greedText, frame.passText, frame.disenchantText, frame.transmogText = needText, greedText, passText, deText, transmogText
 
 	local bind = frame:CreateFontString()
 	bind:SetPoint("LEFT", pass, "RIGHT", 3, -1)
@@ -198,6 +211,12 @@ local function GetFrame()
 	return f
 end
 
+local function FindFrame(rollID)
+	for _, f in ipairs(frames) do
+		if f.rollID == rollID then return f end
+	end
+end
+
 local function START_LOOT_ROLL(rollID, time)
 	if cancelled_rolls[rollID] then return end
 
@@ -205,6 +224,11 @@ local function START_LOOT_ROLL(rollID, time)
 	f.rollID = rollID
 	f.time = time
 	for i in pairs(f.rolls) do f.rolls[i] = nil end
+	f.needText:SetText(0)
+	f.greedText:SetText(0)
+	f.transmogText:SetText(0)
+	f.disenchantText:SetText(0)
+	f.passText:SetText(0)
 
 	local texture, name, _, quality, bop, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired, canTransmog = GetLootRollItemInfo(rollID)
 	f.button.icon:SetTexture(texture)
@@ -215,10 +239,12 @@ local function START_LOOT_ROLL(rollID, time)
 	if canNeed then
 		f.need:Enable()
 		f.need:SetAlpha(1)
+		f.needText:SetAlpha(1)
 		SetDesaturation(f.need:GetNormalTexture(), false)
 	else
 		f.need:Disable()
 		f.need:SetAlpha(0.2)
+		f.needText:SetAlpha(0)
 		SetDesaturation(f.need:GetNormalTexture(), true)
 		f.need.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed]
 	end
@@ -232,10 +258,12 @@ local function START_LOOT_ROLL(rollID, time)
 		if canGreed then
 			f.greed:Enable()
 			f.greed:SetAlpha(1)
+			f.greedText:SetAlpha(1)
 			SetDesaturation(f.greed:GetNormalTexture(), false)
 		else
 			f.greed:Disable()
 			f.greed:SetAlpha(0.2)
+			f.greedText:SetAlpha(0)
 			SetDesaturation(f.greed:GetNormalTexture(), true)
 			f.greed.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed]
 		end
@@ -244,10 +272,12 @@ local function START_LOOT_ROLL(rollID, time)
 	if canDisenchant then
 		f.disenchant:Enable()
 		f.disenchant:SetAlpha(1)
+		f.disenchantText:SetAlpha(1)
 		SetDesaturation(f.disenchant:GetNormalTexture(), false)
 	else
 		f.disenchant:Disable()
 		f.disenchant:SetAlpha(0.2)
+		f.disenchantText:SetAlpha(0)
 		SetDesaturation(f.disenchant:GetNormalTexture(), true)
 		f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
 	end
@@ -278,11 +308,14 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 	LootRollAnchor:UnregisterEvent("ADDON_LOADED")
 	LootRollAnchor:RegisterEvent("START_LOOT_ROLL")
 <<<<<<< HEAD:QulightUI/Modules/Loot/GroupLoot.lua
+<<<<<<< HEAD:QulightUI/Modules/Loot/GroupLoot.lua
 =======
 	if not T.newPatch then
 		LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
 	end
 >>>>>>> 1b12ed15c (Fixed loot in 10.1.0.):ShestakUI/Modules/Loot/GroupLoot.lua
+=======
+>>>>>>> 42cb4b83b (Added support transmog roll in GroupLoot.):ShestakUI/Modules/Loot/GroupLoot.lua
 
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
@@ -318,6 +351,15 @@ local function testRoll(f)
 	f.backdrop:SetBackdropBorderColor(r, g, b, 0.7)
 	f.button.backdrop:SetBackdropBorderColor(r, g, b, 0.7)
 
+<<<<<<< HEAD:QulightUI/Modules/Loot/GroupLoot.lua
+=======
+	f.needText:SetText(1)
+	f.greedText:SetText(2)
+	f.transmogText:SetText(2)
+	f.disenchantText:SetText(0)
+	f.passText:SetText(0)
+
+>>>>>>> 42cb4b83b (Added support transmog roll in GroupLoot.):ShestakUI/Modules/Loot/GroupLoot.lua
 	f.button.link = "item:"..item..":0:0:0:0:0:0:0"
 	local greed = math.random(0, 1)
 	if greed == 0 then
