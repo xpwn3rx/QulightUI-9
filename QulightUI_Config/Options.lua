@@ -479,7 +479,7 @@ do
 	GithubButton:SetSize(100, 23)
 	GithubButton:SetText("Github")
 	GithubButton:SetWidth(GithubButton.Text:GetWidth() + 15)
-	local url = "https://github.com/xpwn3rx/QulightUI"
+	local url = "https://github.com/Wetxius/QulightUI"
 	GithubButton:SetScript("OnClick", function()
 		StaticPopup_Show("LINK_URL", _, _, url)
 	end)
@@ -496,11 +496,7 @@ do
 	subtitle2:SetWidth(750)
 	subtitle2:SetPoint("TOPLEFT", title2, "BOTTOMLEFT", 0, -8)
 	subtitle2:SetJustifyH("LEFT")
-<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle2:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Credits"))
-=======
-	subtitle2:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Credits"))
->>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local title3 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title3:SetPoint("TOPLEFT", subtitle2, "BOTTOMLEFT", 0, -16)
@@ -510,11 +506,7 @@ do
 	subtitle3:SetWidth(750)
 	subtitle3:SetPoint("TOPLEFT", title3, "BOTTOMLEFT", 0, -8)
 	subtitle3:SetJustifyH("LEFT")
-<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle3:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Translation"))
-=======
-	subtitle3:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Translation"))
->>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local title4 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title4:SetPoint("TOPLEFT", subtitle3, "BOTTOMLEFT", 0, -16)
@@ -524,11 +516,7 @@ do
 	subtitle4:SetWidth(750)
 	subtitle4:SetPoint("TOPLEFT", title4, "BOTTOMLEFT", 0, -8)
 	subtitle4:SetJustifyH("LEFT")
-<<<<<<< HEAD:QulightUI_Config/Options.lua
 	subtitle4:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Thanks"))
-=======
-	subtitle4:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Thanks"))
->>>>>>> d9e25ac60 (Cleanup.):ShestakUI_Config/Options.lua
 
 	local CancelButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	CancelButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)
@@ -631,11 +619,7 @@ do
 	WikiPage:SetText("Wiki")
 	WikiPage:SetWidth(WikiPage.Text:GetWidth() + 15)
 
-<<<<<<< HEAD:QulightUI_Config/Options.lua
 	local url = "https://github.com/Wetxius/QulightUI_Profile/wiki/"
-=======
-	local url = "https://github.com/Wetxius/ShestakUI_Profile/wiki/"
->>>>>>> f25e48e13 ([GUI] Added "Wiki" button for expert mode.):ShestakUI_Config/Options.lua
 	WikiPage:SetScript("OnClick", function()
 		editBox:ClearFocus()
 		StaticPopup_Show("LINK_URL", _, _, url)
@@ -2286,12 +2270,6 @@ do
 	local rank = ns.CreateCheckBox(parent, "rank")
 	rank:SetPoint("LEFT", target, "RIGHT", 320, 0)
 	rank.Text:SetWidth(200)
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-=======
-
-	local talents = ns.CreateCheckBox(parent, "talents")
-	talents:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
->>>>>>> 19709fd74 ([GUI] Tweak width for some text elements.):ShestakUI_Config/Options.lua
 
 	local average_lvl = ns.CreateCheckBox(parent, "average_lvl", STAT_AVERAGE_ITEM_LEVEL)
 	average_lvl:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
@@ -2526,14 +2504,6 @@ do
 
 	local low_health = ns.CreateCheckBox(parent, "low_health")
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-<<<<<<< HEAD:QulightUI_Config/Options.lua
-	low_health.Text:SetWidth(250)
-=======
->>>>>>> d328e9e94 ([Nameplates] Added option to set custom color for low health border.):ShestakUI_Config/Options.lua
-=======
-	low_health.Text:SetWidth(250)
->>>>>>> 19709fd74 ([GUI] Tweak width for some text elements.):ShestakUI_Config/Options.lua
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
