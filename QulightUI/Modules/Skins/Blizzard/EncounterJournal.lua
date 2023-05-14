@@ -80,7 +80,6 @@ local function LoadSkin()
 		EncounterJournalDungeonTab,
 		EncounterJournalRaidTab,
 		EncounterJournalLootJournalTab,
-		EncounterJournalMonthlyActivitiesTab
 	}
 
 	for _, tab in pairs(mainTabs) do
@@ -128,11 +127,15 @@ local function LoadSkin()
 		tab.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
 		tab:SetNormalTexture(0)
 		tab:SetPushedTexture(0)
-		tab:SetDisabledTexture(0)
+		tab:SetDisabledTexture(C.media.blank)
 
 		local hl = tab:GetHighlightTexture()
 		hl:SetColorTexture(1, 1, 1, 0.2)
-		hl:SetAllPoints(tab.backdrop)
+		hl:SetInside(tab.backdrop)
+
+		local d = tab:GetDisabledTexture()
+		d:SetVertexColor(0.8, 0, 0, 0.1)
+		d:SetInside(tab.backdrop)
 	end
 
 	EncounterJournalEncounterFrameInfoOverviewTab:SetPoint("TOPLEFT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", 8, -40)
