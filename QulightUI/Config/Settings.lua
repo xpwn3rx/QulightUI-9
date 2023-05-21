@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Config/Settings.lua
 local T, C, L = unpack(QulightUI)
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Config/Settings.lua
 
 ----------------------------------------------------------------------------------------
 --	QulightUI main configuration file

@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(QulightUI)
+﻿﻿local T, C, L = unpack(QulightUI)
 if C.automation.buff_on_scroll ~= true or T.level ~= MAX_PLAYER_LEVEL then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,8 +1,12 @@
 <<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/EditorManager.lua
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/EditorManager.lua
 local T, C, L = unpack(QulightUI)
 =======
 local T, C, L, _ = unpack(select(2, ...))
 >>>>>>> 8069f02c1 ([Skins] Added EditModeManager and QuickKeybind skins.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Skins/Blizzard/EditorManager.lua
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------

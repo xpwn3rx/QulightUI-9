@@ -11,11 +11,7 @@ local function SpellName(id)
 	if name then
 		return name
 	else
-<<<<<<< HEAD:QulightUI/Config/Filters/ArenaControl.lua
 		print("|cffff0000QulightUI: ArenaControl spell ID ["..tostring(id).."] no longer exists!|r")
-=======
-		print("|cffff0000ShestakUI: ArenaControl spell ID ["..tostring(id).."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Config/Filters/ArenaControl.lua
 		return "Empty"
 	end
 end

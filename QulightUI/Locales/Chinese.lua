@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Locales/Chinese.lua
 local T, C, L = unpack(QulightUI)
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/Chinese.lua
 if T.client ~= "zhCN" then return end
 
 ----------------------------------------------------------------------------------------

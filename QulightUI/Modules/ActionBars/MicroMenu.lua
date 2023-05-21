@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Modules/ActionBars/MicroMenu.lua
 ﻿local T, C, L = unpack(QulightUI)
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/ActionBars/MicroMenu.lua
 if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 
 ----------------------------------------------------------------------------------------

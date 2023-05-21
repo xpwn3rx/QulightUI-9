@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Modules/UnitFrames/Functions.lua
 local T, C, L = unpack(QulightUI)
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/UnitFrames/Functions.lua
 if C.unitframe.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

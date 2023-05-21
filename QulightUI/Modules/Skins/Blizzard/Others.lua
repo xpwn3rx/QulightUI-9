@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Others.lua
 local T, C, L = unpack(QulightUI)
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Skins/Blizzard/Others.lua
 
 ----------------------------------------------------------------------------------------
 --	Reskin Blizzard windows(by Tukz and Co)

@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Config/Filters/AutoButton.lua
 ﻿local T, C, L = unpack(QulightUI)
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Config/Filters/AutoButton.lua
 if C.misc.quest_auto_button ~= true then return end
 
 ----------------------------------------------------------------------------------------

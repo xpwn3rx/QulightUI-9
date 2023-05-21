@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/Skins/Plater.lua
-﻿local T, C, L = unpack(QulightUI)
-=======
-﻿local T, C, L, _ = unpack(select(2, ...))
->>>>>>> cc162b39f ([Skins] Added base skin for Plater.):ShestakUI/Modules/Skins/Plater.lua
+local T, C, L = unpack(QulightUI)
 if C.skins.plater ~= true or not IsAddOnLoaded("Plater") then return end
 
 ----------------------------------------------------------------------------------------

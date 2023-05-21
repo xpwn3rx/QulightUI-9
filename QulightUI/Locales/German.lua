@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Locales/German.lua
 ﻿local T, C, L = unpack(QulightUI)
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/German.lua
 if T.client ~= "deDE" then return end
 
 ----------------------------------------------------------------------------------------

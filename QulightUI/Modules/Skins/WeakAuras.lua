@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(QulightUI)
+﻿﻿local T, C, L = unpack(QulightUI)
 if C.skins.weak_auras ~= true then return end
 
 ----------------------------------------------------------------------------------------

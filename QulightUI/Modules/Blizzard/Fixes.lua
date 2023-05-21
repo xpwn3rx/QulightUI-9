@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
 local T, C, L = unpack(QulightUI)
+=======
+local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Blizzard/Fixes.lua
 
 ----------------------------------------------------------------------------------------
 --	Fix blank tooltip

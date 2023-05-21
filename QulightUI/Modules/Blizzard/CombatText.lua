@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(QulightUI)
+﻿﻿local T, C, L = unpack(QulightUI)
 if C.combattext.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -1061,8 +1061,8 @@ if C.combattext.merge_aoe_spam then
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000QulightUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
 =======
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
+			print("|cffff0000QulightuiUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):QulightuiUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 
@@ -1072,8 +1072,8 @@ if C.combattext.merge_aoe_spam then
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000QulightUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
 =======
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
+			print("|cffff0000QulightuiUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):QulightuiUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 end
@@ -1085,8 +1085,8 @@ if C.combattext.healing then
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/CombatText.lua
 			print("|cffff0000QulightUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
 =======
-			print("|cffff0000ShestakUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Blizzard/CombatText.lua
+			print("|cffff0000QulightuiUI: CombatText spell ID ["..tostring(spell).."] no longer exists!|r")
+>>>>>>> 9c91beaff (Change debug message when spell id incorrect.):QulightuiUI/Modules/Blizzard/CombatText.lua
 		end
 	end
 end

@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(QulightUI)
+﻿﻿local T, C, L = unpack(QulightUI)
 if C.pulsecooldown.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

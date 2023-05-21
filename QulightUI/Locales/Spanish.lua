@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Locales/Spanish.lua
 ﻿local T, C, L = unpack(QulightUI)
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/Spanish.lua
 if T.client ~= "esES" and T.client ~= "esMX" then return end
 
 ----------------------------------------------------------------------------------------

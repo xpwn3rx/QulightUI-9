@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Config/Filters/Announcements.lua
 ﻿local T, C, L = unpack(QulightUI)
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Config/Filters/Announcements.lua
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
