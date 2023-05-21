@@ -1,4 +1,8 @@
+<<<<<<< HEAD:QulightUI/Modules/Chat/FadeCombat.lua
 local T, C, L, _ = unpack(select(2, ...))
+=======
+﻿local T, C, L = unpack(ShestakUI)
+>>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Chat/FadeCombat.lua
 if C.chat.enable ~= true or C.chat.hide_combat ~= true then return end
 
 ----------------------------------------------------------------------------------------
