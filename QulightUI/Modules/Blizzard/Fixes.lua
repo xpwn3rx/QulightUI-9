@@ -54,6 +54,7 @@ _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
 
 ----------------------------------------------------------------------------------------
 <<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
+<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
 =======
@@ -78,6 +79,10 @@ end)
 -- Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui
 -------------------------------------------------------------------------
 >>>>>>> 4d1623dea (Return old Collect garbage code.):ShestakUI/Modules/Blizzard/Fixes.lua
+=======
+-- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
+----------------------------------------------------------------------------------------
+>>>>>>> be3e70647 (Revert garbage cleaning.):ShestakUI/Modules/Blizzard/Fixes.lua
 if IsAddOnLoaded("!!NoTaint2") then return end
 if not NoTaint2_Proc_ResetActionButtonAction then
     NoTaint2_Proc_ResetActionButtonAction = 1
