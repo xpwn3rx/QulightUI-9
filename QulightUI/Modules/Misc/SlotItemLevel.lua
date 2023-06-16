@@ -289,6 +289,8 @@ local function SetupFlyoutLevel(button, bag, slot)
 		if level then
 		button.iLvl:SetText("|cFFFFFF00"..level)
 	end
+
+	button.iLvl:SetText("|cFFFFFF00"..level)
 end
 
 hooksecurefunc("EquipmentFlyout_DisplayButton", function(button)
