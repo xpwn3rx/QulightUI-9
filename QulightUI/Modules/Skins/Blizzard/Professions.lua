@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -434,4 +434,4 @@ local function LoadSkin()
 	end
 end
 
-tinsert(T.SkinFuncs["QulightUI"], LoadSkin)
+--BETA tinsert(T.SkinFuncs["QulightUI"], LoadSkin)
