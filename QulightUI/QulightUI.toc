@@ -1,7 +1,11 @@
+<<<<<<< HEAD:QulightUI/QulightUI.toc
 ## Interface: 100100
 <<<<<<< HEAD:QulightUI/QulightUI.toc
 ## Title: |cff1784d1QulightUI|r
 =======
+=======
+## Interface: 100105
+>>>>>>> 0a9d51a85 (Updated version to 9.3.1.):ShestakUI/ShestakUI.toc
 ## Title: ShestakUI
 >>>>>>> 83aec6e31 (Updated version to 9.2.5.):ShestakUI/ShestakUI.toc
 ## Notes: A total UI overhaul for World of Warcraft
@@ -13,7 +17,7 @@
 ## SavedVariablesPerCharacter: QulightUISettingsPerChar
 =======
 ## Author: Shestak
-## Version: 9.30
+## Version: 9.31
 ## OptionalDeps: Blizzard_CombatText, ShestakUI_Config, ShestakUI_Profile, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, ls_Toasts, Mapster, Omen, OPie, PitBull4, Postal, Prat-3.0, Quartz, Recount, Rematch, ShadowedUnitFrames, TidyPlates, TipTac, TipTacTalents, tullaCC, VuhDo, WeakAuras
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory, ShestakUIPositionsPerChar
