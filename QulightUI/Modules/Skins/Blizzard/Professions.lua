@@ -1,4 +1,4 @@
-local T, C, L = unpack(QulightUI)
+local T, C, L = unpack(QulightuiUI)
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -434,8 +434,4 @@ local function LoadSkin()
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Professions.lua
 T.SkinFuncs["Blizzard_Professions"] = LoadSkin
-=======
---BETA tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
->>>>>>> f6364c61b (Quick fixes for 10.1.5.):ShestakUI/Modules/Skins/Blizzard/Professions.lua
