@@ -16,7 +16,7 @@ T.version = GetAddOnMetadata("QulightUI", "Version")
 T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 >>>>>>> d9e25ac60 (Cleanup.):ShestakUI/Core/Constants.lua
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
-T.newPatch = select(4, GetBuildInfo()) >= 100100
+T.newPatch = select(4, GetBuildInfo()) >= 100105
 
 -- BETA
 GetContainerItemInfo = function(bagIndex, slotIndex)
