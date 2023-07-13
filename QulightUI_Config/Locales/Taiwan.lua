@@ -589,8 +589,13 @@ L.pulsecooldown_anim_scale = "動畫縮放"
 L.pulsecooldown_hold_time = "持續時間"
 L.pulsecooldown_threshold = "持續時間最小閾值"
 L.pulsecooldown_threshold_desc = "持續時間最小閾值"
+<<<<<<< HEAD:QulightUI_Config/Locales/Taiwan.lua
 L.pulsecooldown_subheader_whitelist = "過濾列表"
 L.pulsecooldown_whitelist = "用白名單代替過濾列表"
+=======
+L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
+>>>>>>> 33122aa5c ([PulseCD] Allow to add ignore spell in GUI and added new option to change ignore list to whitelist.):ShestakUI_Config/Locales/Taiwan.lua
 
 -- Threat options
 L_GUI_THREAT = "仇恨欄"

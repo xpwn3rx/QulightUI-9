@@ -152,7 +152,11 @@ if C.pulsecooldown.enable == true then
 		if name then
 			return name
 		else
+<<<<<<< HEAD:QulightUI/Config/Filters/Cooldowns.lua
 			print("|cffff0000QulightUI: Pulse cooldown spell ID ["..tostring(id).."] no longer exists!|r")
+=======
+			print("|cffff0000ShestakUI: Pulse cooldown spell ID ["..tostring(id).."] no longer exists!|r")
+>>>>>>> 33122aa5c ([PulseCD] Allow to add ignore spell in GUI and added new option to change ignore list to whitelist.):ShestakUI/Config/Filters/Cooldowns.lua
 			return "Empty"
 		end
 	end
