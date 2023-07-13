@@ -344,9 +344,14 @@ C["tooltip"] = {
 	["realm"] = true,							-- Player realm name in tooltip
 	["rank"] = true,							-- Player guild-rank in tooltip
 	["target"] = true,							-- Target player in tooltip
+<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["talents"] = false,						-- Show specialization
 	["average_lvl"] = true,						-- Average items level
 	["show_shift"] = false,						-- Show items level and spec when Shift is pushed
+=======
+	["average_lvl"] = false,					-- Average items level
+	["show_shift"] = true,						-- Show items level and spec when Shift is pushed
+>>>>>>> c119f456c ([Tooltip] Removed Talents option. Now available by Blizzard.):ShestakUI/Config/Settings.lua
 	["raid_icon"] = false,						-- Raid icon
 	["unit_role"] = false,						-- Unit role in tooltip
 	["who_targetting"] = true,					-- Show who is targetting the unit (in raid or party)
