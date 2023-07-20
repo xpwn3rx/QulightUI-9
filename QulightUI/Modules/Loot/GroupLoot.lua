@@ -114,7 +114,8 @@ local function CreateRollFrame()
 	frame:SetFrameLevel(10)
 	frame:SetScript("OnEvent", OnEvent)
 	frame:RegisterEvent("CANCEL_LOOT_ROLL")
-	frame:RegisterEvent('CANCEL_ALL_LOOT_ROLLS')
+	frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
+	frame:RegisterEvent("MAIN_SPEC_NEED_ROLL")
 	frame:Hide()
 
 	local button = CreateFrame("Button", nil, frame)
@@ -320,8 +321,6 @@ local function testRoll(f)
 		f.transmog:Hide()
 		f.greed:Show()
 	end
-
-	f.rollID = 1
 
 	return name
 end
