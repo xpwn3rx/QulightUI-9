@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.announcements.spells ~= true then return end
 
 ----------------------------------------------------------------------------------------

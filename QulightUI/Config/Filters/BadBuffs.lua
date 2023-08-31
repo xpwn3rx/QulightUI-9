@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.automation.cancel_bad_buffs ~= true then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.general.color_picker ~= true then return end
 
 ----------------------------------------------------------------------------------------

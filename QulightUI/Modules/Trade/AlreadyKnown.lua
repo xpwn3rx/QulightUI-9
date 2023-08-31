@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.trade.already_known ~= true then return end
 
 ----------------------------------------------------------------------------------------

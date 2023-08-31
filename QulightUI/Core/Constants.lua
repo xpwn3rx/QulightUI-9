@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	QulightUI variables
@@ -10,11 +10,7 @@ T.level = UnitLevel("player")
 T.client = GetLocale()
 T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
-<<<<<<< HEAD:QulightUI/Core/Constants.lua
 T.version = GetAddOnMetadata("QulightUI", "Version")
-=======
-T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
->>>>>>> d9e25ac60 (Cleanup.):ShestakUI/Core/Constants.lua
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.newPatch = select(4, GetBuildInfo()) >= 100105
 

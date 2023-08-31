@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.tooltip.enable ~= true or C.tooltip.item_count ~= true then return end
 
 ----------------------------------------------------------------------------------------

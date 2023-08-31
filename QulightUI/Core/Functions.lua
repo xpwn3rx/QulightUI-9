@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	Number value function
@@ -218,26 +218,26 @@ T.IsFramePositionedLeft = function(frame)
 end
 
 T.CurrentProfile = function(reset)
-	if ShestakUIOptionsGlobal[T.realm][T.name] then
-		if ShestakUIPositionsPerChar == nil then
-			ShestakUIPositionsPerChar = ShestakUIPositions
+	if QulightUIOptionsGlobal[T.realm][T.name] then
+		if QulightUIPositionsPerChar == nil then
+			QulightUIPositionsPerChar = QulightUIPositions
 		end
-		if not ShestakUIPositionsPerChar then return {} end
-		local i = tostring(ShestakUIOptionsGlobal[T.realm]["Current_Profile"][T.name])
-		ShestakUIPositionsPerChar[i] = ShestakUIPositionsPerChar[i] or {}
+		if not QulightUIPositionsPerChar then return {} end
+		local i = tostring(QulightUIOptionsGlobal[T.realm]["Current_Profile"][T.name])
+		QulightUIPositionsPerChar[i] = QulightUIPositionsPerChar[i] or {}
 		if reset then
-			ShestakUIPositionsPerChar[i] = {}
+			QulightUIPositionsPerChar[i] = {}
 		else
-			return ShestakUIPositionsPerChar[i]
+			return QulightUIPositionsPerChar[i]
 		end
 	else
-		if not ShestakUIPositions then return {} end
-		local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-		ShestakUIPositions[i] = ShestakUIPositions[i] or {}
+		if not QulightUIPositions then return {} end
+		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+		QulightUIPositions[i] = QulightUIPositions[i] or {}
 		if reset then
-			ShestakUIPositions[i] = {}
+			QulightUIPositions[i] = {}
 		else
-			return ShestakUIPositions[i]
+			return QulightUIPositions[i]
 		end
 	end
 end

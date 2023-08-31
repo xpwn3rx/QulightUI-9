@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	Garrison, OrderHall and BFA Mission skin
@@ -11,7 +11,7 @@ LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 		return
 	end
 
-	if addon == "ShestakUI" then
+	if addon == "QulightUI" then
 		local Tooltips = {
 			FloatingGarrisonFollowerTooltip,
 			FloatingGarrisonFollowerAbilityTooltip,

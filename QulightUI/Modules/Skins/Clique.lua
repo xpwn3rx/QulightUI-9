@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.skins.blizzard_frames ~= true or C.skins.clique ~= true then return end
 
 ----------------------------------------------------------------------------------------

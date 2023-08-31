@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 -- Learn all available skills(TrainAll by SDPhantom)

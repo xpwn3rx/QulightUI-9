@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.misc.chars_currency ~= true then return end
 
 ----------------------------------------------------------------------------------------

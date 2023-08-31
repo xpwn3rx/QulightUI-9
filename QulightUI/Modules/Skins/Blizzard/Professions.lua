@@ -434,8 +434,4 @@ local function LoadSkin()
 	end
 end
 
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Professions.lua
---BETA tinsert(T.SkinFuncs["QulightUI"], LoadSkin)
-=======
 T.SkinFuncs["Blizzard_Professions"] = LoadSkin
->>>>>>> bec92a30f (More 10.1.5 fixes.):ShestakUI/Modules/Skins/Blizzard/Professions.lua

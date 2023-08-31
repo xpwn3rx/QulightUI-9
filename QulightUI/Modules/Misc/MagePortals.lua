@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if T.class ~= "MAGE" or T.level < 11 then return end
 
 ----------------------------------------------------------------------------------------

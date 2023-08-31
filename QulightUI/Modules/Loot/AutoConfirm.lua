@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.loot.auto_confirm_de ~= true then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if T.client ~= "ruRU" then return end
 
 ----------------------------------------------------------------------------------------

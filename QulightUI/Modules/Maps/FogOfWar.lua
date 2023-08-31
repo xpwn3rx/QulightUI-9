@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.minimap.fog_of_war ~= true then return end
 
 ----------------------------------------------------------------------------------------

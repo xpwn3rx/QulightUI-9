@@ -3,13 +3,13 @@ local _, ns = ...
 local L = ns
 
 ----------------------------------------------------------------------------------------
---	GUI for ShestakUI(by Haleth, Solor)
+--	GUI for QulightUI(by Haleth, Solor)
 ----------------------------------------------------------------------------------------
 local realm = GetRealmName()
 local name = UnitName("player")
 
 -- Main window
-local options = CreateFrame("Frame", "ShestakUIOptionsPanel", UIParent)
+local options = CreateFrame("Frame", "QulightUIOptionsPanel", UIParent)
 options:SetSize(800, 770)
 options:SetPoint("CENTER")
 options:SetFrameStrata("HIGH")
@@ -25,7 +25,7 @@ CloseButton:SetScript("OnClick", function()
 	options:Hide()
 end)
 
-local OkayButton = CreateFrame("Button", "ShestakUIOptionsPanelOkayButton", options, "UIPanelButtonTemplate")
+local OkayButton = CreateFrame("Button", "QulightUIOptionsPanelOkayButton", options, "UIPanelButtonTemplate")
 OkayButton:SetPoint("RIGHT", CloseButton, "LEFT", -4, 0)
 OkayButton:SetSize(100, 23)
 OkayButton:SetText(APPLY)
@@ -43,14 +43,14 @@ reloadText:SetText("|cffff2735"..L_GUI_NEED_RELOAD.."|r")
 reloadText:Hide()
 options.reloadText = reloadText
 
-StaticPopupDialogs.SHESTAKUI_RESET_PERCHAR = {
+StaticPopupDialogs.QulightUI_RESET_PERCHAR = {
 	text = L_GUI_RESET_CHAR,
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-		ShestakUIOptionsPerChar[i] = {}
-		C.options = ShestakUIOptionsPerChar[i]
+		local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+		QulightUIOptionsPerChar[i] = {}
+		C.options = QulightUIOptionsPerChar[i]
 		ReloadUI()
 	end,
 	whileDead = true,
@@ -58,14 +58,14 @@ StaticPopupDialogs.SHESTAKUI_RESET_PERCHAR = {
 	showAlert = true,
 }
 
-StaticPopupDialogs.SHESTAKUI_RESET = {
+StaticPopupDialogs.QulightUI_RESET = {
 	text = L_GUI_RESET_ALL,
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-		ShestakUIOptions[i] = {}
-		C.options = ShestakUIOptions[i]
+		local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+		QulightUIOptions[i] = {}
+		C.options = QulightUIOptions[i]
 		ReloadUI()
 	end,
 	whileDead = true,
@@ -73,12 +73,12 @@ StaticPopupDialogs.SHESTAKUI_RESET = {
 	showAlert = true,
 }
 
-StaticPopupDialogs.SHESTAKUI_RESET_CATEGORY = {
+StaticPopupDialogs.QulightUI_RESET_CATEGORY = {
 	text = L_GUI_RESET_CAT,
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function()
-		if ShestakUIOptionsPanelgeneral2:IsShown() then
+		if QulightUIOptionsPanelgeneral2:IsShown() then
 			C.options.media = {}
 			C.options.media.profile = C.media.profile
 		else
@@ -94,16 +94,16 @@ local ResetButton = CreateFrame("Button", nil, options, "UIPanelButtonTemplate")
 ResetButton:SetSize(100, 23)
 ResetButton:SetText(DEFAULT)
 ResetButton.tooltipText = "|cffFFD100"..L_GUI_RESET_CAT_DESC.."|r"
-ResetButton:SetPoint("BOTTOMLEFT", ShestakUIOptionsPanel, "BOTTOMLEFT", 10, 7)
+ResetButton:SetPoint("BOTTOMLEFT", QulightUIOptionsPanel, "BOTTOMLEFT", 10, 7)
 ResetButton:SetScript("OnClick", function()
 	if IsModifiedClick() then
-		if ShestakUIOptionsGlobal[realm][name] == true then
-			StaticPopup_Show("SHESTAKUI_RESET_PERCHAR")
+		if QulightUIOptionsGlobal[realm][name] == true then
+			StaticPopup_Show("QulightUI_RESET_PERCHAR")
 		else
-			StaticPopup_Show("SHESTAKUI_RESET")
+			StaticPopup_Show("QulightUI_RESET")
 		end
 	else
-		StaticPopup_Show("SHESTAKUI_RESET_CATEGORY")
+		StaticPopup_Show("QulightUI_RESET_CATEGORY")
 	end
 end)
 tinsert(ns.buttons, ResetButton)
@@ -115,8 +115,8 @@ if LSM then
 	FontTable = LSM:HashTable("font")
 else
 	FontTable = {
-		"Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Normal.ttf",
-		"Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Pixel.ttf",
+		"Interface\\AddOns\\QulightUI\\Media\\Fonts\\Normal.ttf",
+		"Interface\\AddOns\\QulightUI\\Media\\Fonts\\Pixel.ttf",
 		STANDARD_TEXT_FONT
 	}
 end
@@ -160,7 +160,7 @@ if LSM then
 	TextureTable = LSM:HashTable("statusbar")
 else
 	TextureTable = {
-		"Interface\\AddOns\\ShestakUI\\Media\\Textures\\Texture.tga"
+		"Interface\\AddOns\\QulightUI\\Media\\Textures\\Texture.tga"
 	}
 end
 
@@ -183,8 +183,8 @@ local FilgerDropDownText = {
 }
 
 -- Spell list frame
-local SpellList = CreateFrame("Frame", "SpellList", ShestakUIOptionsPanel, "ButtonFrameTemplate")
-SpellList:SetPoint("TOPLEFT", ShestakUIOptionsPanel, "TOPRIGHT", 22, 0)
+local SpellList = CreateFrame("Frame", "SpellList", QulightUIOptionsPanel, "ButtonFrameTemplate")
+SpellList:SetPoint("TOPLEFT", QulightUIOptionsPanel, "TOPRIGHT", 22, 0)
 SpellList:SetSize(290, 420)
 SpellList:Hide()
 
@@ -221,7 +221,7 @@ SpellList.makeSpellsList = function(_, db, double)
 	for k, spell in pairs(db) do
 		if spell then
 			if not isFilger or isFilger and spell[2] == T.class then
-				local sp = (double or ShestakUIOptionsPanelfilger:IsShown()) and spell[1] or spell
+				local sp = (double or QulightUIOptionsPanelfilger:IsShown()) and spell[1] or spell
 				local name, _, icon = GetSpellInfo(sp)
 				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, "BackdropTemplate")
 
@@ -398,8 +398,8 @@ ns.HideSpellList = function()
 	InputSpell:SetText("")
 	InputSpell.value = ""
 	InputArg:SetText("")
-	UIDropDownMenu_SetText(ShestakUIOptionsPanelfilgercategory_listDropDown, "")
-	ShestakUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
+	UIDropDownMenu_SetText(QulightUIOptionsPanelfilgercategory_listDropDown, "")
+	QulightUIOptionsPanelfilgercategory_listDropDown.selectedValue = nil
 	AddSpellButton:Disable()
 	SpellList:Hide()
 end
@@ -441,12 +441,12 @@ tinsert(ns.buttons, AddSpellButton)
 
 -- Info frame
 do
-	local frame = CreateFrame("Frame", "ShestakUIInfoFrame", UIParent)
+	local frame = CreateFrame("Frame", "QulightUIInfoFrame", UIParent)
 	frame:SetWidth(800)
 	frame:SetHeight(770)
 	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	frame:SetFrameStrata("DIALOG")
-	tinsert(UISpecialFrames, "ShestakUIInfoFrame")
+	tinsert(UISpecialFrames, "QulightUIInfoFrame")
 	frame:Hide()
 	frame:EnableMouse(true)
 
@@ -479,7 +479,7 @@ do
 	GithubButton:SetSize(100, 23)
 	GithubButton:SetText("Github")
 	GithubButton:SetWidth(GithubButton.Text:GetWidth() + 15)
-	local url = "https://github.com/Wetxius/ShestakUI"
+	local url = "https://github.com/Wetxius/QulightUI"
 	GithubButton:SetScript("OnClick", function()
 		StaticPopup_Show("LINK_URL", _, _, url)
 	end)
@@ -496,7 +496,7 @@ do
 	subtitle2:SetWidth(750)
 	subtitle2:SetPoint("TOPLEFT", title2, "BOTTOMLEFT", 0, -8)
 	subtitle2:SetJustifyH("LEFT")
-	subtitle2:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Credits"))
+	subtitle2:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Credits"))
 
 	local title3 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title3:SetPoint("TOPLEFT", subtitle2, "BOTTOMLEFT", 0, -16)
@@ -506,7 +506,7 @@ do
 	subtitle3:SetWidth(750)
 	subtitle3:SetPoint("TOPLEFT", title3, "BOTTOMLEFT", 0, -8)
 	subtitle3:SetJustifyH("LEFT")
-	subtitle3:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Translation"))
+	subtitle3:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Translation"))
 
 	local title4 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title4:SetPoint("TOPLEFT", subtitle3, "BOTTOMLEFT", 0, -16)
@@ -516,7 +516,7 @@ do
 	subtitle4:SetWidth(750)
 	subtitle4:SetPoint("TOPLEFT", title4, "BOTTOMLEFT", 0, -8)
 	subtitle4:SetJustifyH("LEFT")
-	subtitle4:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Thanks"))
+	subtitle4:SetText(C_AddOns.GetAddOnMetadata("QulightUI", "X-Thanks"))
 
 	local CancelButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	CancelButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)
@@ -558,16 +558,16 @@ end
 
 -- Expert mode
 do
-	local frame = CreateFrame("Frame", "ShestakUIProfileFrame", UIParent)
+	local frame = CreateFrame("Frame", "QulightUIProfileFrame", UIParent)
 	frame:SetWidth(650)
 	frame:SetHeight(520)
 	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	frame:SetFrameStrata("DIALOG")
-	tinsert(UISpecialFrames, "ShestakUIProfileFrame")
+	tinsert(UISpecialFrames, "QulightUIProfileFrame")
 	frame:Hide()
 	frame:EnableMouse(true)
 
-	local editBox = CreateFrame("EditBox", "ShestakUIProfileFrameEditBox", frame)
+	local editBox = CreateFrame("EditBox", "QulightUIProfileFrameEditBox", frame)
 	editBox:SetMultiLine(true)
 	editBox:SetMaxLetters(0)
 	editBox:SetAutoFocus(true)
@@ -576,12 +576,12 @@ do
 	editBox:SetHeight(500)
 	editBox:SetScript("OnEscapePressed", function() frame:Hide() end)
 
-	local scrollArea = CreateFrame("ScrollFrame", "ShestakUIProfileFrameScroll", frame, "ScrollFrameTemplate")
+	local scrollArea = CreateFrame("ScrollFrame", "QulightUIProfileFrameScroll", frame, "ScrollFrameTemplate")
 	scrollArea:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -10)
 	scrollArea:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -29, 34)
 	scrollArea:SetScrollChild(editBox)
-	ShestakUIProfileFrameScroll.ScrollBar:SetPoint("TOPLEFT", ShestakUIProfileFrameScroll, "TOPRIGHT", 11, 4)
-	ShestakUIProfileFrameScroll.ScrollBar:SetPoint("BOTTOMLEFT", ShestakUIProfileFrameScroll, "BOTTOMRIGHT", 11, -5)
+	QulightUIProfileFrameScroll.ScrollBar:SetPoint("TOPLEFT", QulightUIProfileFrameScroll, "TOPRIGHT", 11, 4)
+	QulightUIProfileFrameScroll.ScrollBar:SetPoint("BOTTOMLEFT", QulightUIProfileFrameScroll, "BOTTOMRIGHT", 11, -5)
 
 	local CancelButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	CancelButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -4, 4)
@@ -619,7 +619,7 @@ do
 	WikiPage:SetText("Wiki")
 	WikiPage:SetWidth(WikiPage.Text:GetWidth() + 15)
 
-	local url = "https://github.com/Wetxius/ShestakUI_Profile/wiki/"
+	local url = "https://github.com/Wetxius/QulightUI_Profile/wiki/"
 	WikiPage:SetScript("OnClick", function()
 		editBox:ClearFocus()
 		StaticPopup_Show("LINK_URL", _, _, url)
@@ -659,7 +659,7 @@ ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT)
 
 -- General
 do
-	local parent = ShestakUIOptionsPanel.general
+	local parent = QulightUIOptionsPanel.general
 
 	local welcome_message = ns.CreateCheckBox(parent, "welcome_message", L_GUI_GENERAL_WELCOME_MESSAGE)
 	welcome_message:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -709,13 +709,13 @@ do
 	InfoButton:SetText(L_GUI_INFO)
 	InfoButton:SetWidth(InfoButton.Text:GetWidth() + 15)
 	InfoButton:SetScript("OnClick", function()
-		ShestakUIInfoFrame:Show()
+		QulightUIInfoFrame:Show()
 	end)
 
 	tinsert(ns.buttons, InfoButton)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.general2
+	local parent = QulightUIOptionsPanel.general2
 
 	local border_color = ns.CreateColourPicker(parent, "border_color", true)
 	border_color:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 4, 0)
@@ -773,11 +773,11 @@ do
 	LuaButton:SetText(L_GUI_EXPERT_MODE)
 	LuaButton:SetWidth(LuaButton.Text:GetWidth() + 15)
 	LuaButton:SetScript("OnClick", function()
-		ShestakUIProfileFrameEditBox:SetText(C.media.profile)
+		QulightUIProfileFrameEditBox:SetText(C.media.profile)
 		C_Timer.After(0, function()
-			ShestakUIProfileFrameScroll:SetVerticalScroll(ShestakUIProfileFrameScroll:GetVerticalScrollRange() or 0)
+			QulightUIProfileFrameScroll:SetVerticalScroll(QulightUIProfileFrameScroll:GetVerticalScrollRange() or 0)
 		end)
-		ShestakUIProfileFrame:Show()
+		QulightUIProfileFrame:Show()
 	end)
 
 	LuaButton:SetScript("OnEnter", function()
@@ -792,8 +792,8 @@ do
 	tinsert(ns.buttons, LuaButton)
 
 	-- Profile list frame
-	local ProfileList = CreateFrame("Frame", "ProfileList", ShestakUIOptionsPanel, "ButtonFrameTemplate")
-	ProfileList:SetPoint("TOPLEFT", ShestakUIOptionsPanel, "TOPRIGHT", 22, 0)
+	local ProfileList = CreateFrame("Frame", "ProfileList", QulightUIOptionsPanel, "ButtonFrameTemplate")
+	ProfileList:SetPoint("TOPLEFT", QulightUIOptionsPanel, "TOPRIGHT", 22, 0)
 	ProfileList:SetSize(290, 420)
 	ProfileList:Hide()
 	ProfileListPortrait:SetAlpha(0)
@@ -802,7 +802,7 @@ do
 	ProfileList.title:SetPoint("TOP", _G["ProfileList"], "TOP", 0, -5)
 	ProfileList.title:SetText(L.profile_title)
 
-	local ProfileButton = CreateFrame("Button", "ShestakUIOptionsPanelProfileButton", options, "UIPanelButtonTemplate")
+	local ProfileButton = CreateFrame("Button", "QulightUIOptionsPanelProfileButton", options, "UIPanelButtonTemplate")
 	ProfileButton:SetPoint("TOPRIGHT", -10, -8)
 	ProfileButton:SetSize(100, 23)
 	ProfileButton:SetText(L.profile)
@@ -839,7 +839,7 @@ do
 	label:SetWidth(230)
 
 	local profileName
-	StaticPopupDialogs.SHESTAKUI_RENAME_PROFILE = {
+	StaticPopupDialogs.QulightUI_RENAME_PROFILE = {
 		text = PET_RENAME.." "..strlower(L.profile),
 		button1 = ACCEPT,
 		button2 = CANCEL,
@@ -857,24 +857,24 @@ do
 		end,
 		OnAccept = function()
 			if not profileName or profileName == "" then return end
-			if ShestakUIOptionsGlobal[realm][name] then
-				local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-				if ShestakUIOptionsPerChar[i] then
-					if not ShestakUIOptionsPerChar[i]["general"] then
-						ShestakUIOptionsPerChar[i]["general"] = {}
+			if QulightUIOptionsGlobal[realm][name] then
+				local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+				if QulightUIOptionsPerChar[i] then
+					if not QulightUIOptionsPerChar[i]["general"] then
+						QulightUIOptionsPerChar[i]["general"] = {}
 					end
-					ShestakUIOptionsPerChar[i]["general"]["profile_name"] = profileName
+					QulightUIOptionsPerChar[i]["general"]["profile_name"] = profileName
 				end
 			else
-				local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-				if ShestakUIOptions[i] then
-					if not ShestakUIOptions[i]["general"] then
-						ShestakUIOptions[i]["general"] = {}
+				local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+				if QulightUIOptions[i] then
+					if not QulightUIOptions[i]["general"] then
+						QulightUIOptions[i]["general"] = {}
 					end
-					ShestakUIOptions[i]["general"]["profile_name"] = profileName
+					QulightUIOptions[i]["general"]["profile_name"] = profileName
 				end
 			end
-			UIDropDownMenu_SetText(ShestakUIOptionsPanelgeneralchoose_profileDropDown, profileName)
+			UIDropDownMenu_SetText(QulightUIOptionsPanelgeneralchoose_profileDropDown, profileName)
 		end,
 		whileDead = true,
 		hideOnEscape = true,
@@ -886,15 +886,15 @@ do
 	RenameButton:SetText(PET_RENAME)
 	RenameButton:SetWidth(RenameButton.Text:GetWidth() + 15)
 	RenameButton:SetScript("OnClick", function()
-		if ShestakUIOptionsGlobal then
-			if ShestakUIOptionsGlobal[realm][name] then
-				local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-				profileName = ShestakUIOptionsPerChar[i] and ShestakUIOptionsPerChar[i]["general"] and ShestakUIOptionsPerChar[i]["general"]["profile_name"] or i
+		if QulightUIOptionsGlobal then
+			if QulightUIOptionsGlobal[realm][name] then
+				local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+				profileName = QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"] or i
 			else
-				local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-				profileName = ShestakUIOptions[i] and ShestakUIOptions[i]["general"] and ShestakUIOptions[i]["general"]["profile_name"] or i
+				local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+				profileName = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"] or i
 			end
-			StaticPopup_Show("SHESTAKUI_RENAME_PROFILE", _, _, profileName)
+			StaticPopup_Show("QulightUI_RENAME_PROFILE", _, _, profileName)
 		end
 	end)
 	tinsert(ns.buttons, RenameButton)
@@ -905,7 +905,7 @@ do
 	status:SetTextColor(0.8, 0.2, 0)
 
 	local selfTextExport
-	StaticPopupDialogs.SHESTAKUI_EXPORT_PROFILE = {
+	StaticPopupDialogs.QulightUI_EXPORT_PROFILE = {
 		text = L.profile_export,
 		button1 = OKAY,
 		timeout = 0,
@@ -933,34 +933,34 @@ do
 
 	local profileVar = "General"
 	local function startExport()
-		local Prefix = "ShestakUI:Profile:"
+		local Prefix = "QulightUI:Profile:"
 		local LibDeflate = LibStub:GetLibrary("LibDeflate")
 		local LibSerialize = LibStub("LibSerialize")
 
 		local Serialized
 		if profileVar == "General" then
-			local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-			Serialized = LibSerialize:Serialize(ShestakUIOptions[i])
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			Serialized = LibSerialize:Serialize(QulightUIOptions[i])
 		elseif profileVar == "Personal" then
-			local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-			Serialized = LibSerialize:Serialize(ShestakUIOptionsPerChar[i])
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			Serialized = LibSerialize:Serialize(QulightUIOptionsPerChar[i])
 		elseif profileVar == "Mover" then
-			local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-			Serialized = LibSerialize:Serialize(ShestakUIPositions[i])
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			Serialized = LibSerialize:Serialize(QulightUIPositions[i])
 		elseif profileVar == "Mover_Personal" then
-			local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-			Serialized = LibSerialize:Serialize(ShestakUIPositionsPerChar[i])
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			Serialized = LibSerialize:Serialize(QulightUIPositionsPerChar[i])
 		end
 
 		local Compressed = LibDeflate:CompressDeflate(Serialized)
 		local Encoded = LibDeflate:EncodeForPrint(Compressed)
 		local Result = Prefix..Encoded
-		StaticPopup_Show("SHESTAKUI_EXPORT_PROFILE", _, _, Result)
+		StaticPopup_Show("QulightUI_EXPORT_PROFILE", _, _, Result)
 	end
 
 	local selfTextImport
 	local importVar = "General"
-	StaticPopupDialogs.SHESTAKUI_IMPORT_PROFILE = {
+	StaticPopupDialogs.QulightUI_IMPORT_PROFILE = {
 		text = L.profile_import,
 		button1 = ACCEPT,
 		button2 = CANCEL,
@@ -974,7 +974,7 @@ do
 		end,
 		OnAccept = function(self)
 			local Code = selfTextImport
-			local Prefix = "ShestakUI:Profile:"
+			local Prefix = "QulightUI:Profile:"
 			local LibDeflate = LibStub:GetLibrary("LibDeflate")
 			local LibSerialize = LibStub("LibSerialize")
 
@@ -986,17 +986,17 @@ do
 				local Success, Table = LibSerialize:Deserialize(Decompressed)
 				if Success then
 					if profileVar == "General" then
-						local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-						ShestakUIOptions[i] = Table
+						local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+						QulightUIOptions[i] = Table
 					elseif profileVar == "Personal" then
-						local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-						ShestakUIOptionsPerChar[i] = Table
+						local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+						QulightUIOptionsPerChar[i] = Table
 					elseif profileVar == "Mover" then
-						local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-						ShestakUIPositions[i] = Table
+						local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+						QulightUIPositions[i] = Table
 					elseif profileVar == "Mover_Personal" then
-						local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-						ShestakUIPositionsPerChar[i] = Table
+						local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+						QulightUIPositionsPerChar[i] = Table
 					end
 					ReloadUI()
 				else
@@ -1019,7 +1019,7 @@ do
 	ExportButton:SetSize(100, 23)
 	ExportButton:SetText(L.profile_export)
 	ExportButton:SetScript("OnClick", function()
-		profileVar = ShestakUIOptionsGlobal[realm][name] and "Personal" or "General"
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Personal" or "General"
 		startExport()
 	end)
 
@@ -1030,8 +1030,8 @@ do
 	ImportButton:SetSize(100, 23)
 	ImportButton:SetText(L.profile_import)
 	ImportButton:SetScript("OnClick", function()
-		profileVar = ShestakUIOptionsGlobal[realm][name] and "Personal" or "General"
-		StaticPopup_Show("SHESTAKUI_IMPORT_PROFILE")
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Personal" or "General"
+		StaticPopup_Show("QulightUI_IMPORT_PROFILE")
 	end)
 
 	tinsert(ns.buttons, ImportButton)
@@ -1046,7 +1046,7 @@ do
 	ExportMoveButton:SetSize(100, 23)
 	ExportMoveButton:SetText(L.profile_export)
 	ExportMoveButton:SetScript("OnClick", function()
-		profileVar = ShestakUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
 		startExport()
 	end)
 
@@ -1057,8 +1057,8 @@ do
 	ImportMoveButton:SetSize(100, 23)
 	ImportMoveButton:SetText(L.profile_import)
 	ImportMoveButton:SetScript("OnClick", function()
-		profileVar = ShestakUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
-		StaticPopup_Show("SHESTAKUI_IMPORT_PROFILE")
+		profileVar = QulightUIOptionsGlobal[realm][name] and "Mover_Personal" or "Mover"
+		StaticPopup_Show("QulightUI_IMPORT_PROFILE")
 	end)
 
 	tinsert(ns.buttons, ImportMoveButton)
@@ -1098,15 +1098,15 @@ do
 		end
 
 		local function GetProfileName(key)
-			if ShestakUIOptionsGlobal[realm][name] then
+			if QulightUIOptionsGlobal[realm][name] then
 				local i = tostring(key)
-				if ShestakUIOptionsPerChar[i] and ShestakUIOptionsPerChar[i]["general"] and ShestakUIOptionsPerChar[i]["general"]["profile_name"] then
-					return ShestakUIOptionsPerChar[i]["general"]["profile_name"]
+				if QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"] then
+					return QulightUIOptionsPerChar[i]["general"]["profile_name"]
 				end
 			else
 				local i = tostring(key)
-				if ShestakUIOptions[i] and ShestakUIOptions[i]["general"] and ShestakUIOptions[i]["general"]["profile_name"] then
-					return ShestakUIOptions[i]["general"]["profile_name"]
+				if QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"] then
+					return QulightUIOptions[i]["general"]["profile_name"]
 				end
 			end
 		end
@@ -1137,10 +1137,10 @@ do
 				f.selectedValue = newValue
 				local text = GetProfileName(newkey) or newValue
 				UIDropDownMenu_SetText(f, text)
-				if ShestakUIOptionsGlobal[realm][name] then
-					ShestakUIOptionsGlobal[realm]["Current_Profile"][name] = newValue
+				if QulightUIOptionsGlobal[realm][name] then
+					QulightUIOptionsGlobal[realm]["Current_Profile"][name] = newValue
 				else
-					ShestakUIOptionsGlobal["Current_Profile"] = newValue
+					QulightUIOptionsGlobal["Current_Profile"] = newValue
 				end
 				SaveValue(f, newValue)
 				old[f] = f.oldValue
@@ -1181,21 +1181,21 @@ do
 			return f
 		end
 
-		local choose_profile = CreateDropDown(ShestakUIOptionsPanel.general, "choose_profile", true, L.profile_choose, {1, 2, 3})
+		local choose_profile = CreateDropDown(QulightUIOptionsPanel.general, "choose_profile", true, L.profile_choose, {1, 2, 3})
 		choose_profile:SetPoint("TOPLEFT", ProfileList, "TOPLEFT", -15, -46)
 		choose_profile:SetParent(ProfileListPanel)
 
-		local value = ShestakUIOptionsGlobal[realm][name] and ShestakUIOptionsGlobal[realm]["Current_Profile"][name] or ShestakUIOptionsGlobal["Current_Profile"]
+		local value = QulightUIOptionsGlobal[realm][name] and QulightUIOptionsGlobal[realm]["Current_Profile"][name] or QulightUIOptionsGlobal["Current_Profile"]
 		choose_profile.selectedValue = value
 		choose_profile.oldValue = value
 
 		local text
-		if ShestakUIOptionsGlobal[realm][name] then
-			local i = tostring(ShestakUIOptionsGlobal[realm]["Current_Profile"][name])
-			text = ShestakUIOptionsPerChar[i] and ShestakUIOptionsPerChar[i]["general"] and ShestakUIOptionsPerChar[i]["general"]["profile_name"]
+		if QulightUIOptionsGlobal[realm][name] then
+			local i = tostring(QulightUIOptionsGlobal[realm]["Current_Profile"][name])
+			text = QulightUIOptionsPerChar[i] and QulightUIOptionsPerChar[i]["general"] and QulightUIOptionsPerChar[i]["general"]["profile_name"]
 		else
-			local i = tostring(ShestakUIOptionsGlobal["Current_Profile"])
-			text = ShestakUIOptions[i] and ShestakUIOptions[i]["general"] and ShestakUIOptions[i]["general"]["profile_name"]
+			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
+			text = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"]
 		end
 		text = text or value
 		UIDropDownMenu_SetText(choose_profile, text)
@@ -1204,7 +1204,7 @@ end
 
 -- Font
 do
-	local parent = ShestakUIOptionsPanel.font
+	local parent = QulightUIOptionsPanel.font
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_unit)
 	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1285,7 +1285,7 @@ do
 	global_font:SetPoint("TOPLEFT", cooldown_timers_font_size, "BOTTOMLEFT", 0, -30)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.font2
+	local parent = QulightUIOptionsPanel.font2
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_combat)
 	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1363,7 +1363,7 @@ do
 	loot_font_shadow:SetPoint("LEFT", loot_font_size, "RIGHT", 160, 0)
 
 	-- Panel 3
-	local parent = ShestakUIOptionsPanel.font3
+	local parent = QulightUIOptionsPanel.font3
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_bag)
 	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1438,7 +1438,7 @@ do
 	stats_font_shadow:SetPoint("LEFT", stats_font_size, "RIGHT", 160, 0)
 
 	-- Panel 3
-	local parent = ShestakUIOptionsPanel.font4
+	local parent = QulightUIOptionsPanel.font4
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_blizzard)
 	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1455,7 +1455,7 @@ end
 
 -- Skins
 do
-	local parent = ShestakUIOptionsPanel.skins
+	local parent = QulightUIOptionsPanel.skins
 
 	local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
 	blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1526,7 +1526,7 @@ end
 
 -- Unit Frames
 do
-	local parent = ShestakUIOptionsPanel.unitframe
+	local parent = QulightUIOptionsPanel.unitframe
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_UF_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1602,7 +1602,7 @@ do
 	arena_on_right:SetPoint("LEFT", show_arena, "RIGHT", 248, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.unitframe2
+	local parent = QulightUIOptionsPanel.unitframe2
 
 	local icons_pvp = ns.CreateCheckBox(parent, "icons_pvp")
 	icons_pvp:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1670,7 +1670,7 @@ do
 	plugins_absorbs:SetPoint("TOPLEFT", plugins_power_prediction, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 3
-	local parent = ShestakUIOptionsPanel.unitframe3
+	local parent = QulightUIOptionsPanel.unitframe3
 
 	local subheader = ns.addSubCategory(parent, L.unitframe_subheader_player_width)
 	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1714,7 +1714,7 @@ end
 
 -- Unit Frames Class bar
 do
-	local parent = ShestakUIOptionsPanel.unitframe_class_bar
+	local parent = QulightUIOptionsPanel.unitframe_class_bar
 
 	local combo = ns.CreateCheckBox(parent, "combo", L_GUI_UF_PLUGINS_COMBO_BAR)
 	combo:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1759,7 +1759,7 @@ end
 
 -- Raid Frames
 do
-	local parent = ShestakUIOptionsPanel.raidframe
+	local parent = QulightUIOptionsPanel.raidframe
 
 	local layout = ns.CreateDropDown(parent, "layout", true, nil, RaidTable)
 	layout:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", -16, 0)
@@ -1848,7 +1848,7 @@ do
 	icons_phase:SetPoint("LEFT", icons_sumon, "RIGHT", 248, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.raidframe2
+	local parent = QulightUIOptionsPanel.raidframe2
 
 	local plugins_aura_watch = ns.CreateCheckBox(parent, "plugins_aura_watch")
 	plugins_aura_watch:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -1947,7 +1947,7 @@ end
 
 -- Auras/Buffs/Debuffs
 do
-	local parent = ShestakUIOptionsPanel.aura
+	local parent = QulightUIOptionsPanel.aura
 
 	local show_spiral = ns.CreateCheckBox(parent, "show_spiral", L_GUI_AURA_SHOW_SPIRAL)
 	show_spiral:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2017,7 +2017,7 @@ end
 
 -- ActionBar
 do
-	local parent = ShestakUIOptionsPanel.actionbar
+	local parent = QulightUIOptionsPanel.actionbar
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_ACTIONBAR_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2092,7 +2092,7 @@ do
 	micromenu.children = {micromenu_mouseover}
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.actionbar2
+	local parent = QulightUIOptionsPanel.actionbar2
 
 	local editor = ns.CreateCheckBox(parent, "editor")
 	editor:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2178,7 +2178,7 @@ do
 	bar5_mouseover:SetPoint("LEFT", bar5_size, "RIGHT", 130, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.actionbar3
+	local parent = QulightUIOptionsPanel.actionbar3
 
 	-- Bar 6
 	local subheader = ns.addSubCategory(parent, BINDING_HEADER_ACTIONBAR.." 6")
@@ -2237,7 +2237,7 @@ end
 
 -- Tooltip
 do
-	local parent = ShestakUIOptionsPanel.tooltip
+	local parent = QulightUIOptionsPanel.tooltip
 
 	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2313,7 +2313,7 @@ end
 
 -- Chat
 do
-	local parent = ShestakUIOptionsPanel.chat
+	local parent = QulightUIOptionsPanel.chat
 
 	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2385,7 +2385,7 @@ end
 
 -- Nameplate
 do
-	local parent = ShestakUIOptionsPanel.nameplate
+	local parent = QulightUIOptionsPanel.nameplate
 
 	local multScale = 768 / select(2, GetPhysicalScreenSize())
 
@@ -2502,7 +2502,7 @@ do
 	quests:SetPoint("TOPLEFT", only_name, "BOTTOMLEFT", 0, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.nameplate2
+	local parent = QulightUIOptionsPanel.nameplate2
 
 	local low_health_value = ns.CreateNumberSlider(parent, "low_health_value", nil, nil, 0.1, 1, 0.05, true)
 	low_health_value:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, -20)
@@ -2547,7 +2547,7 @@ end
 
 -- Combat text
 do
-	local parent = ShestakUIOptionsPanel.combattext
+	local parent = QulightUIOptionsPanel.combattext
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COMBATTEXT_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2642,7 +2642,7 @@ do
 	direction:SetPoint("TOPLEFT", merge_all, "BOTTOMLEFT", -20, 0)
 
 	-- Panel 2
-	local parent = ShestakUIOptionsPanel.combattext2
+	local parent = QulightUIOptionsPanel.combattext2
 
 	local dk_runes = ns.CreateCheckBox(parent, "dk_runes", L_GUI_COMBATTEXT_DK_RUNES)
 	dk_runes:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2668,7 +2668,7 @@ end
 
 -- Bag
 do
-	local parent = ShestakUIOptionsPanel.bag
+	local parent = QulightUIOptionsPanel.bag
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_BAGS_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2697,7 +2697,7 @@ end
 
 -- Minimap
 do
-	local parent = ShestakUIOptionsPanel.minimap
+	local parent = QulightUIOptionsPanel.minimap
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_MINIMAP_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2733,7 +2733,7 @@ end
 
 -- Loot
 do
-	local parent = ShestakUIOptionsPanel.loot
+	local parent = QulightUIOptionsPanel.loot
 
 	local lootframe = ns.CreateCheckBox(parent, "lootframe", L_GUI_LOOT_ENABLE)
 	lootframe:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2759,7 +2759,7 @@ end
 
 -- Filger
 do
-	local parent = ShestakUIOptionsPanel.filger
+	local parent = QulightUIOptionsPanel.filger
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_FILGER_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2850,7 +2850,7 @@ end
 
 -- Announcements
 do
-	local parent = ShestakUIOptionsPanel.announcements
+	local parent = QulightUIOptionsPanel.announcements
 
 	local interrupts = ns.CreateCheckBox(parent, "interrupts")
 	interrupts:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2930,7 +2930,7 @@ end
 
 -- Automation
 do
-	local parent = ShestakUIOptionsPanel.automation
+	local parent = QulightUIOptionsPanel.automation
 
 	local release = ns.CreateCheckBox(parent, "release")
 	release:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -2992,7 +2992,7 @@ end
 
 -- Reminder
 do
-	local parent = ShestakUIOptionsPanel.reminder
+	local parent = QulightUIOptionsPanel.reminder
 
 	local solo_buffs_enable = ns.CreateCheckBox(parent, "solo_buffs_enable", L_GUI_REMINDER_SOLO_ENABLE)
 	solo_buffs_enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3022,7 +3022,7 @@ end
 
 -- Raid cooldowns
 do
-	local parent = ShestakUIOptionsPanel.raidcooldown
+	local parent = QulightUIOptionsPanel.raidcooldown
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COOLDOWN_RAID_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3093,7 +3093,7 @@ end
 
 -- Enemy cooldowns
 do
-	local parent = ShestakUIOptionsPanel.enemycooldown
+	local parent = QulightUIOptionsPanel.enemycooldown
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COOLDOWN_ENEMY_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3158,7 +3158,7 @@ end
 
 -- Pulse cooldowns
 do
-	local parent = ShestakUIOptionsPanel.pulsecooldown
+	local parent = QulightUIOptionsPanel.pulsecooldown
 
 	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3204,7 +3204,7 @@ end
 
 -- Threat
 do
-	local parent = ShestakUIOptionsPanel.threat
+	local parent = QulightUIOptionsPanel.threat
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_THREAT_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3224,7 +3224,7 @@ end
 
 -- Top Panel
 do
-	local parent = ShestakUIOptionsPanel.toppanel
+	local parent = QulightUIOptionsPanel.toppanel
 
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_TOP_PANEL_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3241,7 +3241,7 @@ end
 
 -- Stats
 do
-	local parent = ShestakUIOptionsPanel.stats
+	local parent = QulightUIOptionsPanel.stats
 
 	local clock = ns.CreateCheckBox(parent, "clock", L_GUI_STATS_CLOCK)
 	clock:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3312,7 +3312,7 @@ end
 
 -- Trade
 do
-	local parent = ShestakUIOptionsPanel.trade
+	local parent = QulightUIOptionsPanel.trade
 
 	local profession_tabs = ns.CreateCheckBox(parent, "profession_tabs")
 	profession_tabs:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3338,7 +3338,7 @@ end
 
 -- Miscellaneous
 do
-	local parent = ShestakUIOptionsPanel.misc
+	local parent = QulightUIOptionsPanel.misc
 
 	local raid_tools = ns.CreateCheckBox(parent, "raid_tools")
 	raid_tools:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
@@ -3373,8 +3373,8 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
-	if not ShestakUI then return end
-	T, C = unpack(ShestakUI)
+	if not QulightUI then return end
+	T, C = unpack(QulightUI)
 
 	SpellList:StripTextures()
 	SpellList:CreateBackdrop("Transparent")
@@ -3402,16 +3402,16 @@ f:SetScript("OnEvent", function()
 
 	ProfileListPanel:CreateBackdrop("Overlay")
 
-	ShestakUIInfoFrame:SetTemplate("Overlay")
+	QulightUIInfoFrame:SetTemplate("Overlay")
 
-	ShestakUIProfileFrame:SetTemplate("Transparent")
-	T.SkinScrollBar(ShestakUIProfileFrameScroll.ScrollBar)
-	ShestakUIProfileFrameScroll:CreateBackdrop("Overlay")
-	ShestakUIProfileFrameScroll.backdrop:SetPoint("TOPLEFT", -4, 4)
-	ShestakUIProfileFrameScroll.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
+	QulightUIProfileFrame:SetTemplate("Transparent")
+	T.SkinScrollBar(QulightUIProfileFrameScroll.ScrollBar)
+	QulightUIProfileFrameScroll:CreateBackdrop("Overlay")
+	QulightUIProfileFrameScroll.backdrop:SetPoint("TOPLEFT", -4, 4)
+	QulightUIProfileFrameScroll.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
 
 	C_Timer.After(3, function()
-		local dropdown = ShestakUIOptionsPanelgeneralchoose_profileDropDown
+		local dropdown = QulightUIOptionsPanelgeneralchoose_profileDropDown
 		if dropdown then
 			T.SkinDropDownBox(dropdown)
 		end
@@ -3437,10 +3437,10 @@ do
 	SLASH_CONFIG3 = "/configui"
 
 	function SlashCmdList.RESETCONFIG()
-		if ShestakUIOptionsGlobal[realm][name] == true then
-			StaticPopup_Show("SHESTAKUI_RESET_PERCHAR")
+		if QulightUIOptionsGlobal[realm][name] == true then
+			StaticPopup_Show("QulightUI_RESET_PERCHAR")
 		else
-			StaticPopup_Show("SHESTAKUI_RESET")
+			StaticPopup_Show("QulightUI_RESET")
 		end
 	end
 	SLASH_RESETCONFIG1 = "/resetconfig"
@@ -3450,7 +3450,7 @@ end
 --	Button in GameMenuButton frame
 ----------------------------------------------------------------------------------------
 local menuButton = CreateFrame("Button", "GameMenuButtonSettingsUI", GameMenuFrame, "GameMenuButtonTemplate")
-menuButton:SetText("ShestakUI")
+menuButton:SetText("QulightUI")
 menuButton:SetPoint("TOP", GetLocale() ~= "koKR" and "GameMenuButtonAddons" or "GameMenuButtonRatings", "BOTTOM", 0, -1)
 
 GameMenuFrame:HookScript("OnShow", function(self)

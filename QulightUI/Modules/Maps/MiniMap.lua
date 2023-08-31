@@ -1,11 +1,11 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.minimap.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Minimap border
 ----------------------------------------------------------------------------------------
 local MinimapAnchor = CreateFrame("Frame", "MinimapAnchor", UIParent)
-MinimapAnchor:CreatePanel("Transparent", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
+MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
 
 -- Disable Minimap Cluster
 MinimapCluster:EnableMouse(false)
@@ -213,7 +213,7 @@ MinimapAnchor:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_TimeManager" then
 		TimeManagerClockButton:Kill()
 	elseif addon == "Blizzard_HybridMinimap" then
- 	        HybridMinimap:SetFrameStrata("BACKGROUND")
+		HybridMinimap:SetFrameStrata("BACKGROUND")
 		HybridMinimap:SetFrameLevel(100)
 		HybridMinimap.MapCanvas:SetUseMaskTexture(false)
 		HybridMinimap.CircleMask:SetTexture("Interface\\BUTTONS\\WHITE8X8")

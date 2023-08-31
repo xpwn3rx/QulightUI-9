@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 -- Spells lists initialization
 C.filger.buff_spells_list = {}

@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.reminder.raid_buffs_enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

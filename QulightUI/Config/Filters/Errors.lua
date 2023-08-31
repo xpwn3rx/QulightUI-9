@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.general.error_filter ~= "WHITELIST" and C.general.error_filter ~= "BLACKLIST" then return end
 
 ----------------------------------------------------------------------------------------

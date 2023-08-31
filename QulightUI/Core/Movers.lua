@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	Movement function(by Allez)
@@ -106,38 +106,30 @@ local placed = {
 }
 
 local function MergeOldPositions()	-- TODO delete after while
-	if ShestakUIOptionsGlobal[T.realm][T.name] then
-		if not ShestakUIPositionsPerChar then
-			ShestakUIPositionsPerChar = ShestakUIPositions
+	if QulightUIOptionsGlobal[T.realm][T.name] then
+		if not QulightUIPositionsPerChar then
+			QulightUIPositionsPerChar = QulightUIPositions
 		end
-		if not ShestakUIPositionsPerChar.merged then
-			local backup = ShestakUIPositions
-			ShestakUIPositionsPerChar = {}
-			ShestakUIPositionsPerChar["1"] = backup
-			ShestakUIPositionsPerChar.merged = true
-			ShestakUIPositionsPerChar["1"]["1"] = nil -- T.CurrentProfile calls early and create empty table so remove this
+		if not QulightUIPositionsPerChar.merged then
+			local backup = QulightUIPositions
+			QulightUIPositionsPerChar = {}
+			QulightUIPositionsPerChar["1"] = backup
+			QulightUIPositionsPerChar.merged = true
+			QulightUIPositionsPerChar["1"]["1"] = nil -- T.CurrentProfile calls early and create empty table so remove this
 		end
 	else
-		if not ShestakUIPositions.merged then
-			local backup = ShestakUIPositions
-			ShestakUIPositions = {}
-			ShestakUIPositions["1"] = backup
-			ShestakUIPositions.merged = true
-			ShestakUIPositions["1"]["1"] = nil
+		if not QulightUIPositions.merged then
+			local backup = QulightUIPositions
+			QulightUIPositions = {}
+			QulightUIPositions["1"] = backup
+			QulightUIPositions.merged = true
+			QulightUIPositions["1"]["1"] = nil
 		end
 	end
 end
 
 local SaveDefaultPosition = function(mover)
 	local ap, p, rp, x, y = mover.frame:GetPoint()
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-	QulightUIPositions.Default = QulightUIPositions.Default or {}
-	if not QulightUIPositions.Default[mover.frame:GetName()] then
-		if not p then
-			p = UIParent
-		end
-		QulightUIPositions.Default[mover.frame:GetName()] = {ap, p:GetName(), rp, x, y}
-=======
 	local positionTable = T.CurrentProfile()
 	positionTable.Default = positionTable.Default or {}
 	if not positionTable.Default[mover.frame:GetName()] then
@@ -145,7 +137,6 @@ local SaveDefaultPosition = function(mover)
 			p = UIParent
 		end
 		positionTable.Default[mover.frame:GetName()] = {ap, p:GetName(), rp, x, y}
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 	end
 end
 
@@ -153,12 +144,8 @@ local SetPosition = function(mover)
 	local x, y, ap = T.CalculateMoverPoints(mover)
 	mover.frame:ClearAllPoints()
 	mover.frame:SetPoint(ap, "UIParent", ap, x, y)
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-	QulightUIPositions[mover.frame:GetName()] = {ap, "UIParent", ap, x, y}
-=======
 	local positionTable = T.CurrentProfile()
 	positionTable[mover.frame:GetName()] = {ap, "UIParent", ap, x, y}
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 end
 
 -- Controls
@@ -166,7 +153,7 @@ local controls = CreateFrame("frame", nil, UIParent)
 controls:SetPoint("CENTER", UIParent)
 controls:SetSize(65, 25)
 controls:SetFrameStrata("TOOLTIP")
-controls:SetFrameLevel(100)
+controls:SetFrameLevel(200)
 controls:SetClampedToScreen(true)
 controls:Hide()
 controls:SetScript("OnLeave", function(self)
@@ -196,7 +183,7 @@ local function CreateArrow(moveX, moveY, callback)
 	button.tex:SetVertexColor(0.6, 0.6, 0.6)
 
 	button:SetScript("OnEnter", function(self)
-		self.tex:SetAlpha(1)
+		self.tex:SetVertexColor(1, 1, 1)
 	end)
 	button:SetScript("OnLeave", function(self)
 		self.tex:SetVertexColor(0.6, 0.6, 0.6)
@@ -218,12 +205,8 @@ local function CreateArrow(moveX, moveY, callback)
 		if not relativeTo then
 			relativeTo = UIParent
 		end
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-		QulightUIPositions[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
-=======
 		local positionTable = T.CurrentProfile()
 		positionTable[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 		frame:SetAllPoints(frame.frame)
 		controls.x:SetText(T.Round(xOfs))
 		controls.y:SetText(T.Round(yOfs))
@@ -266,7 +249,7 @@ controls.shadow = controls:CreateTexture(nil, "OVERLAY")
 controls.shadow:SetPoint("TOPLEFT", controls.x, "TOPLEFT", -5, 5)
 controls.shadow:SetPoint("BOTTOMRIGHT", controls.y, "BOTTOMRIGHT", 2, -5)
 controls.shadow:SetTexture(C.media.texture)
-controls.shadow:SetVertexColor(0.1, 0.1, 0.1, 0.8)
+controls.shadow:SetVertexColor(0.2, 0.2, 0.2, 0.8)
 
 local function GetQuadrant(frame)
 	local _, y = frame:GetCenter()
@@ -284,7 +267,7 @@ local function ShowControls(frame)
 	else
 		controls:SetPoint("BOTTOM", frame, "TOP", 0, 0)
 	end
-	local point, relativeTo, relativePoint, xOfs, yOfs = frame.frame:GetPoint()
+	local _, _, _, xOfs, yOfs = frame.frame:GetPoint()
 	controls.x:SetText(T.Round(xOfs))
 	controls.y:SetText(T.Round(yOfs))
 end
@@ -321,24 +304,15 @@ end
 
 local RestoreDefaults = function(self, button)
 	if button == "RightButton" then
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-		local data = QulightUIPositions.Default and QulightUIPositions.Default[self.frame:GetName()]
-=======
 		local positionTable = T.CurrentProfile()
 		local data = positionTable.Default and positionTable.Default[self.frame:GetName()]
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 		if data then
 			self.frame:ClearAllPoints()
 			self.frame:SetPoint(unpack(data))
 			self:ClearAllPoints()
 			self:SetAllPoints(self.frame)
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-			QulightUIPositions.Default[self.frame:GetName()] = nil
-			QulightUIPositions[self.frame:GetName()] = nil
-=======
 			positionTable.Default[self.frame:GetName()] = nil
 			positionTable[self.frame:GetName()] = nil
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 		end
 	elseif button == "MiddleButton" then
 		self:Hide()
@@ -357,12 +331,8 @@ local UpdatePosition = function(moveX, moveY)
 	if not relativeTo then
 		relativeTo = UIParent
 	end
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-	QulightUIPositions[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
-=======
 	local positionTable = T.CurrentProfile()
 	positionTable[frame.frame:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 	frame:SetAllPoints(frame.frame)
 	controls.x:SetText(T.Round(xOfs))
 	controls.y:SetText(T.Round(yOfs))
@@ -421,22 +391,32 @@ local CreateMover = function(frame, unit)
 	local mover = CreateFrame("Frame", nil, UIParent)
 	if unit then
 		mover:CreateBackdrop("Transparent")
-		mover.backdrop:SetBackdropBorderColor(1, 0, 0)
+		mover.backdrop:SetBackdropBorderColor(0, 0.6, 0.6)
 	else
 		mover:SetTemplate("Transparent")
-		mover:SetBackdropBorderColor(1, 0, 0)
+		mover:SetBackdropBorderColor(0, 0.6, 0.6)
 	end
 	mover.backdrop = mover.backdrop or mover
 	mover:SetAllPoints(frame)
 	mover:SetFrameStrata("TOOLTIP")
+	mover:SetFrameLevel(index)
 	mover:EnableMouse(true)
 	mover:SetMovable(true)
 	mover:SetClampedToScreen(true)
 	mover:RegisterForDrag("LeftButton")
 	mover:SetScript("OnDragStart", OnDragStart)
 	mover:SetScript("OnDragStop", OnDragStop)
-	mover:SetScript("OnEnter", function(self) self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color)) ShowControls(self) end)
-	mover:SetScript("OnLeave", function(self) self.backdrop:SetBackdropBorderColor(1, 0, 0) if not MouseIsOver(controls) then controls:Hide() end end)
+	mover:SetScript("OnEnter", function(self)
+		self.backdrop:SetBackdropColor(0.4, 0.4, 0.4, C.media.backdrop_alpha)
+		self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+		ShowControls(self)
+		title:SetText(mover.name:GetText())
+	end)
+	mover:SetScript("OnLeave", function(self)
+		self.backdrop:SetBackdropColor(C.media.backdrop_color[1], C.media.backdrop_color[2], C.media.backdrop_color[3], C.media.backdrop_alpha)
+		self.backdrop:SetBackdropBorderColor(0, 0.6, 0.6)
+		if not MouseIsOver(controls) then controls:Hide() end
+	end)
 	mover:SetScript("OnMouseUp", RestoreDefaults)
 	mover:SetScript("OnMouseWheel", OnMouseWheel)
 	mover.frame = frame
@@ -452,6 +432,7 @@ local CreateMover = function(frame, unit)
 	mover.name:SetText(text)
 	mover.name:SetWidth(frame:GetWidth() - 4)
 	movers[frame:GetName()] = mover
+	index = index - 2
 end
 
 local GetMover = function(frame, unit)
@@ -465,11 +446,7 @@ end
 local InitMove = function(msg)
 	if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 	if msg and (msg == "reset" or msg == "куыуе") then
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-		QulightUIPositions = {}
-=======
 		T.CurrentProfile(true)
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 		for _, v in pairs(placed) do
 			if _G[v] then
 				_G[v]:SetUserPlaced(false)
@@ -489,6 +466,7 @@ local InitMove = function(msg)
 		end
 		moving = true
 		SlashCmdList.GRIDONSCREEN()
+		chatInfo:Show()
 	else
 		for _, v in pairs(movers) do
 			v:Hide()
@@ -496,6 +474,7 @@ local InitMove = function(msg)
 		moving = false
 		SlashCmdList.GRIDONSCREEN("hide")
 		controls:Hide()
+		chatInfo:Hide()
 	end
 end
 
@@ -510,15 +489,10 @@ local RestoreUI = function(self)
 		end)
 		return
 	end
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-	if QulightUIPositions then
-		for frame_name, point in pairs(QulightUIPositions) do
-=======
 	MergeOldPositions()	-- TODO delete after while
 	local positionTable = T.CurrentProfile()
 	if positionTable then
 		for frame_name, point in pairs(positionTable) do
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 			if _G[frame_name] then
 				_G[frame_name]:ClearAllPoints()
 				_G[frame_name]:SetPoint(unpack(point))
@@ -548,11 +522,7 @@ StaticPopupDialogs.RESET_UF = {
 		local positionTable = T.CurrentProfile()
 		for _, frame in pairs(unitFrames) do
 			if frame:GetName() then
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-				QulightUIPositions[frame:GetName()] = nil
-=======
 				positionTable[frame:GetName()] = nil
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 			end
 		end
 		ReloadUI()
@@ -572,11 +542,7 @@ StaticPopupDialogs.MOVEUI_RESET = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else
-<<<<<<< HEAD:QulightUI/Core/Movers.lua
-		QulightUIPositions = {}
-=======
 		T.CurrentProfile(true)
->>>>>>> 3cde4a9e4 ([GUI] Added profiles for settings. Export and import available. Moves are now independent for the character when this option is enabled.):ShestakUI/Core/Movers.lua
 		for _, v in pairs(placed) do
 			if _G[v] then
 				_G[v]:SetUserPlaced(false)

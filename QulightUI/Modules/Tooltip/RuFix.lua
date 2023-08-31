@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.tooltip.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

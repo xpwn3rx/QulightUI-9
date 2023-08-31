@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.skins.nug_running ~= true then return end
 
 ----------------------------------------------------------------------------------------

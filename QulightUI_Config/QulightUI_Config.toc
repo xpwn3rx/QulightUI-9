@@ -1,13 +1,12 @@
-## Interface: 100100
+## Interface: 100105
 ## Title: |cff1784d1QulightUI Config|r
 ## Notes: In-game configuration for QulightUI
 ## Author: Shestak - Modified by PWn3R
 ## Version: 10.2.0
 ## RequiredDeps: QulightUI
-## Interface: 100100
 ## SavedVariables: QulightUIOptionsGlobal, QulightUIOptions
 ## SavedVariablesPerCharacter: QulightUIOptionsPerChar
-
+## IconTexture: Interface\AddOns\QulightUI\Media\Textures\Logo.tga
 ## X-Website: https://www.wowinterface.com/downloads/info16324-QulightUI.html
 ## X-Credits: Haleth, Solor, Qulight, Warrior, PWn3R
 ## X-Thanks: Tryllemann, Wetxius

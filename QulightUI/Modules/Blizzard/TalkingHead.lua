@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 ------------------------------------------------------------------------------------------
 --	Set custom position for TalkingHeadFrame

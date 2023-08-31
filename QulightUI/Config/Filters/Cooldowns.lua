@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -152,7 +152,7 @@ if C.pulsecooldown.enable == true then
 		if name then
 			return name
 		else
-			print("|cffff0000ShestakUI: Pulse cooldown spell ID ["..tostring(id).."] no longer exists!|r")
+			print("|cffff0000QulightUI: Pulse cooldown spell ID ["..tostring(id).."] no longer exists!|r")
 			return "Empty"
 		end
 	end

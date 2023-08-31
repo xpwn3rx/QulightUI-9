@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.automation.skip_cinematic ~= true then return end
 
 ----------------------------------------------------------------------------------------

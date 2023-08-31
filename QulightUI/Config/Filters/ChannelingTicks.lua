@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.unitframe.enable ~= true or C.unitframe.castbar_ticks ~= true then return end
 
 ----------------------------------------------------------------------------------------

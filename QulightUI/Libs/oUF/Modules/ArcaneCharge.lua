@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.unitframe.enable ~= true or T.class ~= "MAGE" then return end
 
 local _, ns = ...

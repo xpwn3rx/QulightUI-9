@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.skins.my_role_play ~= true or not IsAddOnLoaded("MyRolePlay") then return end
 
 ----------------------------------------------------------------------------------------

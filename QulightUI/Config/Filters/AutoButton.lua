@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.misc.quest_auto_button ~= true then return end
 
 ----------------------------------------------------------------------------------------

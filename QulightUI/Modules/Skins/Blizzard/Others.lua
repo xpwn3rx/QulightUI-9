@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	Reskin Blizzard windows(by Tukz and Co)
@@ -9,7 +9,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
 	-- Stuff not in Blizzard load-on-demand
-	if addon == "ShestakUI" then
+	if addon == "QulightUI" then
 		-- Skin checkButtons
 		local checkButtons = {
 			"LFDRoleCheckPopupRoleButtonTank",

@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.skins.postal ~= true then return end
 
 ----------------------------------------------------------------------------------------

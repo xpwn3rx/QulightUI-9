@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 
 local Mult = T.mult
 if T.screenHeight > 1200 then

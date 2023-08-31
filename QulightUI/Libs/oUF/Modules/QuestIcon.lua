@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.nameplate.enable ~= true or C.nameplate.quests ~= true then return end
 
 ----------------------------------------------------------------------------------------

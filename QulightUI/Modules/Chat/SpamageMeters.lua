@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(ShestakUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.chat.enable ~= true or C.chat.damage_meter_spam ~= true then return end
 
 ----------------------------------------------------------------------------------------
