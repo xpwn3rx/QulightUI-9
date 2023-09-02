@@ -77,6 +77,10 @@ local function CreateBorder(f, i, o)
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
 		f.oborder = border
 	end
+	f.shadow = CreateFrame("Frame", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.shadow:SetOutside(f, 4, 4)
+	f.shadow:SetBackdrop({edgeFile = C.media.glow, edgeSize = (T.mult * floor(5 / T.mult + .5))})
+	f.shadow:SetBackdropBorderColor(0, 0, 0, 1)
 end
 
 local function GetTemplate(t)
@@ -170,6 +174,7 @@ local StripTexturesBlizzFrames = {
 	"NineSlice",
 	"BG",
 	"Bg",
+	"bg",
 	"border",
 	"Border",
 	"BorderFrame",
@@ -231,7 +236,7 @@ local function StyleButton(button, t, size, setBackdrop)
 	if not size then size = 2 end
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture()
-		hover:SetColorTexture(1, 1, 1, 0.3)
+		hover:SetColorTexture(0, 0, 0, 0.6)
 		if setBackdrop then
 			hover:SetInside(button.backdrop)
 		else
@@ -291,7 +296,7 @@ end
 T.SetOriginalBackdrop = function(self)
 	self:SetBackdropBorderColor(unpack(C.media.border_color))
 	if self.overlay then
-		self.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
+		self.overlay:SetVertexColor(0, 0, 0, .6)
 	end
 end
 
@@ -370,11 +375,17 @@ end
 --	Fade in/out functions
 ----------------------------------------------------------------------------------------
 local function FadeIn(f)
-	UIFrameFadeIn(f, 0.4, f:GetAlpha(), 1)
+	if f:IsForbidden() then return end
+	if(f and f:GetAlpha()) then
+		UIFrameFadeIn(f, 0.4, f:GetAlpha(), 1)
+	end
 end
 
 local function FadeOut(f)
-	UIFrameFadeOut(f, 0.8, f:GetAlpha(), 0)
+	if f:IsForbidden() then return end
+	if(f and f:GetAlpha()) then
+		UIFrameFadeOut(f, 0.8, f:GetAlpha(), 0)
+	end
 end
 
 local function addAPI(object)

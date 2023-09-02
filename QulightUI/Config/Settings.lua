@@ -24,9 +24,9 @@ C["media"] = {
 	["warning_sound"] = [[Interface\AddOns\QulightUI\Media\Sounds\Warning.ogg]],		-- Sound for warning
 	["proc_sound"] = [[Interface\AddOns\QulightUI\Media\Sounds\Proc.ogg]],			-- Sound for procs
 	["classborder_color"] = {T.color.r, T.color.g, T.color.b, 1},				-- Color for class borders
-	["border_color"] = {0., 0, 0, 1},							-- Color for borders
-	["backdrop_color"] = {0.08, 0.08, 0.08, .9},						-- Color for borders backdrop
-	["backdrop_alpha"] = 0.9,								-- Alpha for transparent backdrop
+	["border_color"] = {0, 0, 0, 1},							-- Color for borders
+	["backdrop_color"] = {0, 0, 0, .6},						-- Color for borders backdrop
+	["backdrop_alpha"] = 0.6,								-- Alpha for transparent backdrop
 }
 
 ----------------------------------------------------------------------------------------
@@ -95,8 +95,8 @@ C["unitframe"] = {
 	-- Main
 	["enable"] = true,							-- Enable unit frames
 	["own_color"] = false,						-- Set your color for health bars
-	["uf_color"] = {0.09, 0.09, 0.09},			-- Color for health bars if ["own_color"] = true
-	["uf_color_bg"] = {0.5, 0.5, 0.5},			-- Color for background
+	["uf_color"] = {0, 0, 0},			-- Color for health bars if ["own_color"] = true
+	["uf_color_bg"] = {0, 0, 0},			-- Color for background
 	["enemy_health_color"] = false,				-- If enable, enemy target color is red
 	["show_total_value"] = false,				-- Display of info text on player and target with XXXX/Total
 	["color_value"] = false,					-- Health/mana value is colored
