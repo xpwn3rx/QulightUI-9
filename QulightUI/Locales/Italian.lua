@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Locales/Italian.lua
-﻿local T, C, L = unpack(QulightUI)
-=======
-﻿local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/Italian.lua
+﻿﻿local T, C, L = unpack(QulightUI)
 if T.client ~= "itIT" then return end
 
 ----------------------------------------------------------------------------------------

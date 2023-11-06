@@ -1,9 +1,5 @@
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Config/Settings.lua
-
+DevTools_Dump(T.class)
 ----------------------------------------------------------------------------------------
 --	QulightUI main configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!
@@ -64,7 +60,6 @@ C["skins"] = {
 	["minimap_buttons"] = true,					-- Skin addons icons on minimap
 	["minimap_buttons_mouseover"] = true,		-- Addons icons on mouseover
 	-- Addons
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["ace3"] = true,							-- Ace3 options elements skin
 	["atlasloot"] = true,						-- AtlasLoot skin
 	["bigwigs"] = true,							-- BigWigs skin
@@ -91,35 +86,6 @@ C["skins"] = {
 	["tiny_dps"] = true,						-- TinyDPS skin
 	["vanaskos"] = true,						-- VanasKoS skin
 	["weak_auras"] = true,						-- WeakAuras skin
-=======
-	["ace3"] = false,							-- Ace3 options elements skin
-	["atlasloot"] = false,						-- AtlasLoot skin
-	["bigwigs"] = false,						-- BigWigs skin
-	["blood_shield_tracker"] = false,			-- BloodShieldTracker skin
-	["capping"] = false,						-- Capping skin
-	["clique"] = false,							-- Clique skin
-	["cool_line"] = false,						-- CoolLine skin
-	["dbm"] = false,							-- DBM skin
-	["details"] = false,						-- Details skin
-	["dominos"] = false,						-- Dominos skin
-	["flyout_button"] = false,					-- FlyoutButtonCustom skin
-	["ls_toasts"] = false,						-- Is: Toasts skin
-	["mage_nuggets"] = false,					-- MageNuggets skin
-	["my_role_play"] = false,					-- MyRolePlay skin
-	["npcscan"] = false,						-- NPCScan skin
-	["nug_running"] = false,					-- NugRunning skin
-	["omen"] = false,							-- Omen skin
-	["opie"] = false,							-- OPie skin
-	["ovale"] = false,							-- OvaleSpellPriority skin
-	["plater"] = false,							-- Plater skin
-	["postal"] = false,							-- Postal skin
-	["recount"] = false,						-- Recount skin
-	["rematch"] = false,						-- Rematch skin
-	["skada"] = false,							-- Skada skin
-	["tiny_dps"] = false,						-- TinyDPS skin
-	["vanaskos"] = false,						-- VanasKoS skin
-	["weak_auras"] = false,						-- WeakAuras skin
->>>>>>> cc162b39f ([Skins] Added base skin for Plater.):ShestakUI/Config/Settings.lua
 }
 
 ----------------------------------------------------------------------------------------
@@ -129,15 +95,9 @@ C["unitframe"] = {
 	-- Main
 	["enable"] = true,							-- Enable unit frames
 	["own_color"] = false,						-- Set your color for health bars
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["uf_color"] = {0, 0, 0},			-- Color for health bars if ["own_color"] = true
 	["uf_color_bg"] = {0, 0, 0},			-- Color for background
 	["enemy_health_color"] = false,				-- If enable, enemy target color is red
-=======
-	["uf_color"] = {0.4, 0.4, 0.4},				-- Color of health bars if ["own_color"] = true
-	["uf_color_bg"] = {0.1, 0.1, 0.1},			-- Color of health background
-	["enemy_health_color"] = true,				-- If enable, enemy target healthbar color is red
->>>>>>> a777bdd55 (Description correction.):ShestakUI/Config/Settings.lua
 	["show_total_value"] = false,				-- Display of info text on player and target with XXXX/Total
 	["color_value"] = false,					-- Health/mana value is colored
 	["bar_color_value"] = false,				-- Health bar color by current health remaining
@@ -146,11 +106,7 @@ C["unitframe"] = {
 	["unit_castbar"] = true,					-- Show castbars
 	["castbar_icon"] = true,					-- Show castbar icons
 	["castbar_latency"] = true,					-- Castbar latency
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["castbar_ticks"] = true,					-- Castbar ticks
-=======
-	["castbar_ticks"] = false,					-- Castbar ticks
->>>>>>> 3ff1580eb ([GUI} Added new option "Icon for focus castbar". Possible variants: icon, icon with bar, hide icon.):ShestakUI/Config/Settings.lua
 	["castbar_focus_type"] = "ICON",			-- Icon for focus castbar (ICON, BAR, NONE)
 	-- Frames
 	["show_pet"] = true,						-- Show pet frame
@@ -388,11 +344,7 @@ C["tooltip"] = {
 	["realm"] = true,							-- Player realm name in tooltip
 	["rank"] = true,							-- Player guild-rank in tooltip
 	["target"] = true,							-- Target player in tooltip
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["average_lvl"] = true,					-- Average items level
-=======
-	["average_lvl"] = false,					-- Average items level
->>>>>>> c119f456c ([Tooltip] Removed Talents option. Now available by Blizzard.):ShestakUI/Config/Settings.lua
 	["show_shift"] = true,						-- Show items level and spec when Shift is pushed
 	["raid_icon"] = false,						-- Raid icon
 	["unit_role"] = false,						-- Unit role in tooltip
@@ -542,13 +494,8 @@ C["minimap"] = {
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,						-- Enable loot frame
-<<<<<<< HEAD:QulightUI/Config/Settings.lua
 	["rolllootframe"] = true,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
 	["icon_size"] = 32,							-- Icon size
-=======
-	["rolllootframe"] = true,					-- Enable group roll frame
-	["icon_size"] = 22,							-- Icon size
->>>>>>> 42cb4b83b (Added support transmog roll in GroupLoot.):ShestakUI/Config/Settings.lua
 	["width"] = 221,							-- Loot window width
 	["auto_greed"] = false,						-- Push "greed" or "disenchant" button for green item roll at max level
 	["auto_confirm_de"] = true,					-- Auto confirm disenchant and take BoP loot
@@ -754,4 +701,5 @@ C["misc"] = {
 	["click_cast"] = false,						-- Simple click2cast spell binder
 	["click_cast_filter"] = false,				-- Ignore Player and Target frames for click2cast
 	["chars_currency"] = false,					-- Tracks your currency tokens across multiple characters
+	["hide_raid_button"] = false,				-- Button to hide raid frames in DPS layout (top left mouseover)
 }

@@ -589,18 +589,8 @@ L.pulsecooldown_anim_scale = "動畫縮放"
 L.pulsecooldown_hold_time = "持續時間"
 L.pulsecooldown_threshold = "持續時間最小閾值"
 L.pulsecooldown_threshold_desc = "持續時間最小閾值"
-<<<<<<< HEAD:QulightUI_Config/Locales/Taiwan.lua
-<<<<<<< HEAD:QulightUI_Config/Locales/Taiwan.lua
 L.pulsecooldown_subheader_whitelist = "過濾列表"
 L.pulsecooldown_whitelist = "用白名單代替過濾列表"
-=======
-L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
-L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
->>>>>>> 33122aa5c ([PulseCD] Allow to add ignore spell in GUI and added new option to change ignore list to whitelist.):ShestakUI_Config/Locales/Taiwan.lua
-=======
-L.pulsecooldown_subheader_whitelist = "過濾列表"
-L.pulsecooldown_whitelist = "用白名單代替過濾列表"
->>>>>>> 0d74669f6 (Updated Chinese and Taiwan locales.):ShestakUI_Config/Locales/Taiwan.lua
 
 -- Threat options
 L_GUI_THREAT = "仇恨欄"
@@ -668,8 +658,4 @@ L.misc_click_cast = "簡單的點擊施法綁定"
 L.misc_click_cast_desc = "開啟後法術書有滑鼠綁定界面可以進行設置"
 L.misc_click_cast_filter = "忽略玩家/目標框架點擊施法"
 L.misc_chars_currency = "追蹤所有角色的兌換通貨"
-<<<<<<< HEAD:QulightUI_Config/Locales/Taiwan.lua
 L.misc_chars_currency_desc = "在兌換通貨界面中追蹤所有角色的兌換通貨"
-=======
-L.misc_chars_currency_desc = "在兌換通貨界面中追蹤所有角色的兌換通貨"
->>>>>>> 12e5defb6 (Removed option "Button to hide raid frames in DPS layout"):ShestakUI_Config/Locales/Taiwan.lua

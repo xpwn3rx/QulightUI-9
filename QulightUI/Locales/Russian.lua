@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Locales/Russian.lua
-﻿local T, C, L = unpack(QulightUI)
-=======
-﻿local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/Russian.lua
+﻿﻿local T, C, L = unpack(QulightUI)
 if T.client ~= "ruRU" then return end
 
 ----------------------------------------------------------------------------------------

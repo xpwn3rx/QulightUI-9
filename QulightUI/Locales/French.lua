@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Locales/French.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/French.lua
 if T.client ~= "frFR" then return end
 
 ----------------------------------------------------------------------------------------

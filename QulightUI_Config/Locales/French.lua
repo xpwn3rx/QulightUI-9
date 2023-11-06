@@ -658,8 +658,4 @@ L.misc_click_cast = "Simple addon d'assignation de sorts : click2cast"
 L.misc_click_cast_desc = "Vous permet d’assigner des sorts aux boutons de la souris. Configuration dans le livre de sorts"
 L.misc_click_cast_filter = "Ignore les cadres Joueur et Cible pour l'addon click2cast"
 L.misc_chars_currency = "Affiche les jetons et autres monnaies de vos différents personnages"
-<<<<<<< HEAD:QulightUI_Config/Locales/French.lua
 L.misc_chars_currency_desc = "Passez la souris sur l’icône de la devise requise dans la fenêtre de caractères pour afficher des informations dans l’infobulle"
-=======
-L.misc_chars_currency_desc = "Passez la souris sur l’icône de la devise requise dans la fenêtre de caractères pour afficher des informations dans l’infobulle"
->>>>>>> 12e5defb6 (Removed option "Button to hide raid frames in DPS layout"):ShestakUI_Config/Locales/French.lua

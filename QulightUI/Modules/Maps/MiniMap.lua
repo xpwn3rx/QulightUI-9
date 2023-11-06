@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.minimap.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ frame:SetScript("OnEvent", function(self, event)
 			self:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
 		end
 	end)
-	MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+	MiniMapMailIcon:SetTexture("Interface\\AddOns\\QulightUI\\Media\\Textures\\Mail.tga")
 	MiniMapMailIcon:SetSize(16, 16)
 
 	-- Move crafting order icon

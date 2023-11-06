@@ -257,7 +257,7 @@ SpellList.makeSpellsList = function(_, db, double)
 				bf:SetScript("OnEnter", function(self)
 					bf.delete:GetNormalTexture():SetVertexColor(1, 0, 0)
 					self:SetBackdrop({bgFile = "Interface\\Buttons\\WHITE8x8"})
-					self:SetBackdropColor(0, 0, 0, 0.6)
+					self:SetBackdropColor(0, 0, 0, 0, 0.6)
 					GameTooltip:SetOwner(bf, "ANCHOR_TOP", 5, 5)
 					GameTooltip:SetHyperlink(format("spell:%s", sp))
 				end)
@@ -1196,6 +1196,14 @@ do
 		else
 			local i = tostring(QulightUIOptionsGlobal["Current_Profile"])
 			text = QulightUIOptions[i] and QulightUIOptions[i]["general"] and QulightUIOptions[i]["general"]["profile_name"]
+		end
+		text = text or value
+		UIDropDownMenu_SetText(choose_profile, text)
+	end)
+end
+
+-- Font
+do
 	local parent = QulightUIOptionsPanel.font
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_unit)
@@ -2504,6 +2512,7 @@ do
 
 	local low_health = ns.CreateCheckBox(parent, "low_health")
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
+	low_health.Text:SetWidth(250)
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)

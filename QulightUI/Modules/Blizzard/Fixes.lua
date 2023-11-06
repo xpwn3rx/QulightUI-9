@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Blizzard/Fixes.lua
 
 ----------------------------------------------------------------------------------------
 --	Fix blank tooltip
@@ -53,36 +49,8 @@ end
 _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
 
 ----------------------------------------------------------------------------------------
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
-<<<<<<< HEAD:QulightUI/Modules/Blizzard/Fixes.lua
 -- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
-=======
---	Collect garbage
-----------------------------------------------------------------------------------------
-local eventcount = 0
-local Garbage = CreateFrame("Frame")
-Garbage:RegisterAllEvents()
-Garbage:SetScript("OnEvent", function(self, event)
-	eventcount = eventcount + 1
-
-	if not InCombatLockdown() then
-		if eventcount > 10000 or event == "PLAYER_ENTERING_WORLD" then
-			collectgarbage("collect")
-			eventcount = 0
-		end
-	end
-end)
-
-------------------------------------------------------------------------
--- !!NoTaint2, first-aid addon for Dragon Flight action bars taint.
--- Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui
--------------------------------------------------------------------------
->>>>>>> 4d1623dea (Return old Collect garbage code.):ShestakUI/Modules/Blizzard/Fixes.lua
-=======
--- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
-----------------------------------------------------------------------------------------
->>>>>>> be3e70647 (Revert garbage cleaning.):ShestakUI/Modules/Blizzard/Fixes.lua
 if IsAddOnLoaded("!!NoTaint2") then return end
 if not NoTaint2_Proc_ResetActionButtonAction then
     NoTaint2_Proc_ResetActionButtonAction = 1

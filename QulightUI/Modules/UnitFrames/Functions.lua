@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/UnitFrames/Functions.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/UnitFrames/Functions.lua
 if C.unitframe.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -541,12 +537,9 @@ T.PostCastStart = function(Castbar, unit)
 				Castbar.bg:SetVertexColor(unpack(C.unitframe.uf_color_bg))
 			end
 		end
-<<<<<<< HEAD:QulightUI/Modules/UnitFrames/Functions.lua
 		--Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		Castbar.Overlay:SetBackdropBorderColor(0,0,0,.2)
-=======
-		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
->>>>>>> 3ff1580eb ([GUI} Added new option "Icon for focus castbar". Possible variants: icon, icon with bar, hide icon.):ShestakUI/Modules/UnitFrames/Functions.lua
+
 		if (C.unitframe.castbar_icon == true and unit == "target") or (unit == "focus" and C.unitframe.castbar_focus_type ~= "NONE") then
 			Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 		end

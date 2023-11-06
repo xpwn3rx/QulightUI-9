@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Inspect.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Skins/Blizzard/Inspect.lua
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------

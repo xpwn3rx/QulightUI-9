@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Locales/Taiwan.lua
-﻿local T, C, L = unpack(QulightUI)
-=======
-﻿local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Locales/Taiwan.lua
+﻿﻿local T, C, L = unpack(QulightUI)
 if T.client ~= "zhTW" then return end
 
 ----------------------------------------------------------------------------------------

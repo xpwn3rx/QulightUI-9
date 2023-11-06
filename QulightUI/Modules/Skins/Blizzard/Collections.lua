@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Collections.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Skins/Blizzard/Collections.lua
 
 ----------------------------------------------------------------------------------------
 --	Collections skin

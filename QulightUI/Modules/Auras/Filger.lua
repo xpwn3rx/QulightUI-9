@@ -524,11 +524,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				end
 			end
 			if not name and not data[j].slotID then
-<<<<<<< HEAD:QulightUI/Modules/Auras/Filger.lua
 				print("|cffff0000QulightUI: Filger spell ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists!|r")
-=======
-				print("|cffff0000ShestakUI: Filger spell ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists!|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Auras/Filger.lua
 				table.insert(jdx, j)
 			end
 		end
@@ -541,11 +537,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 		table.insert(SpellGroups, i, group)
 
 		if #data == 0 then
-<<<<<<< HEAD:QulightUI/Modules/Auras/Filger.lua
 			-- print("|cffff0000QulightUI: Filger section ["..data.Name.."] is empty! Report this to Qulight.|r")
-=======
-			-- print("|cffff0000ShestakUI: Filger section ["..data.Name.."] is empty! Report this to Shestak.|r")
->>>>>>> 9c91beaff (Change debug message when spell id incorrect.):ShestakUI/Modules/Auras/Filger.lua
 			table.insert(idx, i)
 		end
 	end

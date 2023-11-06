@@ -1,8 +1,4 @@
-<<<<<<< HEAD:QulightUI/Modules/Skins/Blizzard/Bubbles.lua
 local T, C, L = unpack(QulightUI)
-=======
-local T, C, L = unpack(ShestakUI)
->>>>>>> 1957c7e2f (Cleanup.):ShestakUI/Modules/Skins/Blizzard/Bubbles.lua
 if C.skins.bubbles ~= true then return end
 
 ----------------------------------------------------------------------------------------

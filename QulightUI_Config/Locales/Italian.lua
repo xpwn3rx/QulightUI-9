@@ -589,16 +589,8 @@ L.pulsecooldown_anim_scale = "Regolazione dell'animazione"
 L.pulsecooldown_hold_time = "Opacità del tempo d'attesa massimo"
 L.pulsecooldown_threshold = "Threshold time" -- Need review
 L.pulsecooldown_threshold_desc = "Soglia di tempo minimo"
-<<<<<<< HEAD:QulightUI_Config/Locales/Italian.lua
-<<<<<<< HEAD:QulightUI_Config/Locales/Italian.lua
 L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
 L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
-=======
->>>>>>> bddb2f11b (Cleanup.):ShestakUI_Config/Locales/Italian.lua
-=======
-L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
-L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
->>>>>>> 33122aa5c ([PulseCD] Allow to add ignore spell in GUI and added new option to change ignore list to whitelist.):ShestakUI_Config/Locales/Italian.lua
 
 -- Threat options
 L_GUI_THREAT = "Barre di minaccia"
