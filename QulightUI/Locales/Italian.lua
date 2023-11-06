@@ -1,4 +1,4 @@
-﻿﻿local T, C, L = unpack(QulightUI)
+﻿local T, C, L = unpack(QulightUI)
 if T.client ~= "itIT" then return end
 
 ----------------------------------------------------------------------------------------

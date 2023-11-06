@@ -1,4 +1,4 @@
-﻿﻿local T, C, L = unpack(QulightUI)
+﻿local T, C, L = unpack(QulightUI)
 if C.unitframe.enable ~= true or C.unitframe.show_arena ~= true or C.unitframe.plugins_diminishing ~= true then return end
 
 ----------------------------------------------------------------------------------------

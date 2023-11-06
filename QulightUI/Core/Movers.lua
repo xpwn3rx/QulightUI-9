@@ -1,4 +1,4 @@
-﻿﻿local T, C, L = unpack(QulightUI)
+﻿local T, C, L = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	Movement function(by Allez)

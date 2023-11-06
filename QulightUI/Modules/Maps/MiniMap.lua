@@ -5,7 +5,7 @@ if C.minimap.enable ~= true then return end
 --	Minimap border
 ----------------------------------------------------------------------------------------
 local MinimapAnchor = CreateFrame("Frame", "MinimapAnchor", UIParent)
-MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
+MinimapAnchor:CreatePanel("Default", C.minimap.size, C.minimap.size, unpack(C.position.minimap))
 
 -- Disable Minimap Cluster
 MinimapCluster:EnableMouse(false)
@@ -410,7 +410,7 @@ if C.minimap.tracking_icon then
 		Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
 	end)
 
-	MinimapCluster.Tracking:CreateBackdrop("ClassColor")
+	MinimapCluster.Tracking:CreateBackdrop("Default")
 	MinimapCluster.Tracking.backdrop:SetPoint("TOPLEFT", MinimapCluster.Tracking.Button, -2, 2)
 	MinimapCluster.Tracking.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.Tracking.Button, 2, -2)
 else

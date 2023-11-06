@@ -259,6 +259,7 @@ function Stuffing:SlotUpdate(b)
 					b.frame.text:SetText(b.itemlevel)
 				end
 			end
+		end
 		if not b.name then	-- Keystone bug
 			b.name = clink:match("%[(.-)%]") or ""
 		end

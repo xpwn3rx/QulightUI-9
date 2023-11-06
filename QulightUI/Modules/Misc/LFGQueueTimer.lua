@@ -1,4 +1,4 @@
-﻿﻿local T, C, L = unpack(QulightUI)
+﻿local T, C, L = unpack(QulightUI)
 if IsAddOnLoaded("DBM-Core") or IsAddOnLoaded("BigWigs") then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(QulightuiUI)
+﻿local T, C, L = unpack(QulightUI)
 
 if IsAddOnLoaded("yClassColor") then return end
 

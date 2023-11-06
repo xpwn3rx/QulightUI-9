@@ -1,5 +1,4 @@
 local T, C, L = unpack(QulightUI)
-DevTools_Dump(T.class)
 ----------------------------------------------------------------------------------------
 --	QulightUI main configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!

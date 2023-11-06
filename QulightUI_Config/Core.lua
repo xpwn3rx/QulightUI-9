@@ -996,10 +996,8 @@ init:SetScript("OnEvent", function()
 	for _, picker in pairs(colourpickers) do
 		local value = C[picker.group][picker.option]
 		picker:SetTemplate("Transparent")
-		if value then
-			picker:SetBackdropBorderColor(unpack(value))
-			picker:SetBackdropColor(value[1], value[2], value[3], 0.3)
-		end
+		picker:SetBackdropBorderColor(unpack(value))
+		picker:SetBackdropColor(value[1], value[2], value[3], 0.3)
 	end
 
 	for _, editbox in pairs(editboxes) do

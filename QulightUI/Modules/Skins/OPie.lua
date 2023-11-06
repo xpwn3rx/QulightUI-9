@@ -214,4 +214,4 @@ local function CreateIndicator(name, parent, size, ghost)
 	return button
 end
 
-OPie.UI:RegisterIndicatorConstructor("OpieMasque", {CreateIndicator=CreateIndicator, name="OpieMasque", apiLevel=1})
+OPie.UI:RegisterIndicatorConstructor("OpieMasque", {CreateIndicator=CreateIndicator, name="OpieMasque", apiLevel=3})
