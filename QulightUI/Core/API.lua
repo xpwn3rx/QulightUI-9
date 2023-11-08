@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(QulightUI)
 
 local backdropr, backdropg, backdropb, backdropa = unpack(C.media.backdrop_color)
 local borderr, borderg, borderb, bordera = unpack(C.media.border_color)
@@ -174,7 +174,6 @@ local StripTexturesBlizzFrames = {
 	"NineSlice",
 	"BG",
 	"Bg",
-	"bg",
 	"border",
 	"Border",
 	"BorderFrame",
@@ -375,17 +374,11 @@ end
 --	Fade in/out functions
 ----------------------------------------------------------------------------------------
 local function FadeIn(f)
-	if f:IsForbidden() then return end
-	if(f and f:GetAlpha()) then
 		UIFrameFadeIn(f, 0.4, f:GetAlpha(), 1)
-	end
 end
 
 local function FadeOut(f)
-	if f:IsForbidden() then return end
-	if(f and f:GetAlpha()) then
 		UIFrameFadeOut(f, 0.8, f:GetAlpha(), 0)
-	end
 end
 
 local function addAPI(object)
@@ -943,6 +936,11 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 		if texture then
 			button.Icon:SetTexture(texture)
 		end
+	end
+
+	local dropdown = frame.BorderBox.IconTypeDropDown and frame.BorderBox.IconTypeDropDown.DropDownMenu
+	if dropdown then
+		T.SkinDropDownBox(dropdown)
 	end
 end
 

@@ -539,7 +539,6 @@ T.PostCastStart = function(Castbar, unit)
 		end
 		--Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		Castbar.Overlay:SetBackdropBorderColor(0,0,0,.2)
-
 		if (C.unitframe.castbar_icon == true and unit == "target") or (unit == "focus" and C.unitframe.castbar_focus_type ~= "NONE") then
 			Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
