@@ -50,8 +50,8 @@ local function LoadSkin()
 			end
 			option.OptionText:SetTextColor(1, 1, 1)
 
-			option.Background:SetShown(not hasArtwork)
-			if IsAnima then
+			if option.Background then option.Background:SetShown(not hasArtwork) end
+			if IsAnima and option.Background then
 				option.Background:Show()
 			end
 
