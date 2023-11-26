@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(QulightUI)
 
 ----------------------------------------------------------------------------------------
 --	QulightUI personal configuration file
@@ -203,6 +203,7 @@ if IsWetxius then
 	C["aura"].cast_by = true
 	C["actionbar"].toggle_mode = false
 	C["actionbar"].bottombars = 3
+	C["actionbar"].stancebar_mouseover_alpha = 0.3
 	C["tooltip"].hide_combat = true
 	C["tooltip"].rank = false
 	C["tooltip"].spell_id = true
@@ -268,6 +269,9 @@ if IsWetxius then
 	C["position"].unitframes.arena = {"BOTTOMRIGHT", UIParent, "RIGHT", -55, -70}
 	C["position"].stance_bar = {"TOPRIGHT", "ActionBarAnchor", "TOPLEFT", -3, 0}
 
+	local anchor = _G["oUF_Player"] or ChatFrame1
+	C["position"].auto_button = {"BOTTOMLEFT", anchor, "TOPRIGHT", 33, 83}
+	
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:SetScript("OnEvent", function()
