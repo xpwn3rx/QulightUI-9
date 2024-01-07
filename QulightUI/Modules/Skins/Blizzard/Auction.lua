@@ -270,6 +270,8 @@ local function LoadSkin()
 			T.SkinTab(AuctionatorTabs_Auctionator)
 
 			local frames = {
+				list.ListsContainer,
+				list.RecentsContainer,
 				list.ScrollListRecents,
 				list.ScrollListShoppingList,
 				list.ShoppingResultsInset,
@@ -278,7 +280,9 @@ local function LoadSkin()
 				selling.BagInset,
 				selling.BagListing.ScrollFrame,
 				cancelling.HistoricalPriceInset,
-				AuctionatorConfigFrame
+				AuctionatorConfigFrame,
+				AuctionatorBuyCommodityFrame.Inset,
+				AuctionatorBuyItemFrame.Inset,
 			}
 
 			for i = 1, #frames do
@@ -294,12 +298,19 @@ local function LoadSkin()
 				list.Export,
 				list.Import,
 				list.ExportCSV,
-				list.OneItemSearch.SearchButton,
-				list.OneItemSearch.ExtendedButton,
+				list.SearchOptions.SearchButton,
+				list.SearchOptions.MoreButton,
+				list.SearchOptions.AddToListButton,
+				list.NewListButton,
+				list.ImportButton,
+				list.ExportButton,
+				AuctionatorBuyItemFrame.BackButton,
 				selling.SaleItemFrame.MaxButton,
 				selling.SaleItemFrame.PostButton,
 				config.OptionsButton,
-				config.ScanButton
+				config.ScanButton,
+				AuctionatorBuyCommodityFrame.DetailsContainer.BuyButton,
+				AuctionatorBuyCommodityFrame.BackButton,
 			}
 
 			for i = 1, #buttons do
@@ -308,17 +319,17 @@ local function LoadSkin()
 				end
 			end
 
-			list.ManualSearch:SetPoint("TOPRIGHT", list.ScrollListShoppingList, "BOTTOMRIGHT", -7, -4)
-
 			local scrollbars = {
-				list.ScrollListShoppingList.ScrollBar,
-				list.ScrollListRecents.ScrollBar,
+				list.RecentsContainer.ScrollBar,
+				list.ListsContainer.ScrollBar,
 				list.ResultsListing.ScrollArea.ScrollBar,
 				selling.CurrentPricesListing.ScrollArea.ScrollBar,
 				selling.HistoricalPriceListing.ScrollArea.ScrollBar,
-				selling.BagListing.ScrollBar,
+				selling.BagListing.View.ScrollBar,
 				selling.ResultsListing.ScrollArea.ScrollBar,
-				cancelling.ResultsListing.ScrollArea.ScrollBar
+				cancelling.ResultsListing.ScrollArea.ScrollBar,
+				AuctionatorBuyItemFrame.ResultsListing.ScrollArea.ScrollBar,
+				AuctionatorBuyCommodityFrame.ResultsListing.ScrollArea.ScrollBar
 			}
 
 			for i = 1, #scrollbars do
@@ -338,11 +349,12 @@ local function LoadSkin()
 			end
 
 			local editboxes = {
-				list.OneItemSearch.SearchBox,
+				list.SearchOptions.SearchString,
 				selling.SaleItemFrame.Quantity.InputBox,
 				config.DiscordLink.InputBox,
 				config.BugReportLink.InputBox,
-				cancelling.SearchFilter
+				cancelling.SearchFilter,
+				AuctionatorBuyCommodityFrame.DetailsContainer.Quantity,
 			}
 
 			for i = 1, #editboxes do
@@ -372,19 +384,18 @@ local function LoadSkin()
 				cancelling.ResultsListing.HeaderContainer,
 				selling.CurrentPricesListing.HeaderContainer,
 				selling.HistoricalPriceListing.HeaderContainer,
-				selling.ResultsListing.HeaderContainer
+				selling.ResultsListing.HeaderContainer,
+				AuctionatorBuyCommodityFrame.ResultsListing.HeaderContainer,
+				AuctionatorBuyItemFrame.ResultsListing.HeaderContainer
 			}
 
 			for i = 1, #headers do
 				SkinHeaders(headers[i])
 			end
 
-			T.SkinDropDownBox(list.ListDropdown, 230)
-			list.OneItemSearch.SearchButton:SetPoint("TOPLEFT", list.OneItemSearch.SearchBox, "TOPRIGHT", 5, 1)
-
 			local tabs = {
-				list.RecentsTabsContainer.ListTab,
-				list.RecentsTabsContainer.RecentsTab,
+				list.ContainerTabs.ListsTab,
+				list.ContainerTabs.RecentsTab,
 				selling.PricesTabsContainer.CurrentPricesTab,
 				selling.PricesTabsContainer.PriceHistoryTab,
 				selling.PricesTabsContainer.YourHistoryTab,
@@ -408,6 +419,9 @@ local function LoadSkin()
 
 			AuctionatorSellingFrame.AuctionatorSaleItem.Icon.Icon:SkinIcon(true)
 			AuctionatorSellingFrame.AuctionatorSaleItem.Icon.EmptySlot:Hide()
+
+			AuctionatorBuyCommodityFrame.IconAndName.Icon:SkinIcon(true)
+			AuctionatorBuyItemFrame.IconAndName.Icon:SkinIcon(true)
 
 			for _, duration in ipairs(selling.AuctionatorSaleItem.Duration.radioButtons) do
 				if duration.RadioButton then
