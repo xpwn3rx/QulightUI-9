@@ -202,6 +202,7 @@ C["raidframe"] = {
 	["icons_sumon"] = true,						-- Summon icons on frames
 	["icons_phase"] = true,						-- Phase icons on frames
 	-- Plugins
+	["plugins_debuffhighlight"] = true,			-- Show texture for dispellable debuff
 	["plugins_aura_watch"] = true,				-- Raid debuff icons (from the list)
 	["plugins_aura_watch_timer"] = false,		-- Timer on raid debuff icons
 	["plugins_debuffhighlight_icon"] = true,	-- Show dispellable debuff icon (texture will be shown anyway)
