@@ -366,6 +366,7 @@ C["chat"] = {
 	["enable"] = true,							-- Enable chat
 	["width"] = 440,							-- Chat width
 	["height"] = 172,							-- Chat height
+	["second_frame"] = true,					-- Enable second frame on right side
 	["background"] = true,						-- Enable background for chat
 	["background_alpha"] = 0.7,					-- Background alpha
 	["filter"] = true,							-- Removing some systems spam ("Player1" won duel "Player2")
