@@ -841,7 +841,7 @@ C["filger_spells"] = {
 			-- Hunter's Mark
 			{spellID = 257284, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Caltrops
-			{spellID = 194279, unitID = "target", caster = "player", filter = "DEBUFF"},
+			--FIXME {spellID = 194279, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Warp Time (Warp Stalker)
 			{spellID = 35346, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Ankle Crack (Crocolisk)
@@ -2607,7 +2607,7 @@ C["filger_spells"] = {
 			-- Psychic Scream
 			{spellID = 8122, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Mind Bomb
-			{spellID = 205369, unitID = "player", caster = "all", filter = "DEBUFF"},
+			--FIXME {spellID = 205369, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Sin and Punishment
 			{spellID = 87204, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Holy Word: Chastise
@@ -2761,7 +2761,7 @@ C["filger_spells"] = {
 			-- Frozen Ammo
 			{spellID = 162546, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Caltrops
-			{spellID = 194279, unitID = "player", caster = "all", filter = "DEBUFF"},
+			--FIXME {spellID = 194279, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Pistol Shot
 			{spellID = 185763, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Warp Time (Warp Stalker)
@@ -3039,7 +3039,7 @@ C["filger_spells"] = {
 			-- Psychic Scream
 			{spellID = 8122, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Mind Bomb
-			{spellID = 205369, unitID = "target", caster = "all", filter = "DEBUFF"},
+			--FIXME {spellID = 205369, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Silence
 			{spellID = 15487, unitID = "target", caster = "all", filter = "DEBUFF"},
 
