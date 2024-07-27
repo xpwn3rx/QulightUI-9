@@ -909,7 +909,6 @@ end
 
 function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
 	local frameName = frameNameOverride or frame:GetName()
-	-- local scrollFrame = frame.ScrollFrame or _G[frameName.."ScrollFrame"]
 	local editBox = frame.BorderBox.IconSelectorEditBox
 	local okayButton = frame.OkayButton or frame.BorderBox.OkayButton or _G[frameName.."Okay"]
 	local cancelButton = frame.CancelButton or frame.BorderBox.CancelButton or _G[frameName.."Cancel"]
@@ -962,7 +961,7 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 		end
 	end
 
-	local dropdown = frame.BorderBox.IconTypeDropDown and frame.BorderBox.IconTypeDropDown.DropDownMenu
+	local dropdown = frame.BorderBox.IconTypeDropdown
 	if dropdown then
 		T.SkinDropDownBox(dropdown)
 	end
