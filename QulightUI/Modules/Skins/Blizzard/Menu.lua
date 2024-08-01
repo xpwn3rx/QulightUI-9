@@ -1,4 +1,4 @@
-local T, C, L = unpack(ShestakUI)
+local T, C, L = unpack(QulightUI)
 if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -29,4 +29,4 @@ local function LoadSkin()
 	hooksecurefunc(manager, "OpenContextMenu", OpenMenu)
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+tinsert(T.SkinFuncs["QulightUI"], LoadSkin)

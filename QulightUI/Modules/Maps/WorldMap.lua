@@ -138,7 +138,7 @@ function MapFrame.Menu(self, level)
 
 	info.isTitle = true
 	info.notCheckable = true
-	info.text = "QulightUI"
+	info.text = "ShestakUI"
 
 	UIDropDownMenu_AddButton(info)
 	info.text = nil
@@ -149,41 +149,41 @@ function MapFrame.Menu(self, level)
 	info.isNotRadio = true
 	info.keepShownOnClick = true
 
-	-- info.text = L_MAP_COORDS
-	-- info.checked = function()
-		-- return QulightUISettingsPerChar.Coords == true
-	-- end
+	info.text = L_MAP_COORDS
+	info.checked = function()
+		return ShestakUISettingsPerChar.Coords == true
+	end
 
-	-- info.func = function()
-		-- if QulightUISettingsPerChar.Coords == true then
-			-- QulightUISettingsPerChar.Coords = false
-			-- coords:SetAlpha(0)
-		-- else
-			-- QulightUISettingsPerChar.Coords = true
-			-- coords:SetAlpha(1)
-		-- end
-	-- end
-	-- UIDropDownMenu_AddButton(info)
+	info.func = function()
+		if ShestakUISettingsPerChar.Coords == true then
+			ShestakUISettingsPerChar.Coords = false
+			coords:SetAlpha(0)
+		else
+			ShestakUISettingsPerChar.Coords = true
+			coords:SetAlpha(1)
+		end
+	end
+	UIDropDownMenu_AddButton(info)
 
-	-- if C.minimap.fog_of_war == true then
-		-- info.text = L_MAP_FOG
-		-- info.checked = function()
-			-- return QulightUISettingsPerChar.FogOfWar == true
-		-- end
+	if C.minimap.fog_of_war == true then
+		info.text = L_MAP_FOG
+		info.checked = function()
+			return ShestakUISettingsPerChar.FogOfWar == true
+		end
 
-		-- info.func = function()
-			-- if QulightUISettingsPerChar.FogOfWar == true then
-				-- QulightUISettingsPerChar.FogOfWar = false
-				-- for i = 1, #T.overlayTextures do
-					-- T.overlayTextures[i]:Hide()
-				-- end
-			-- else
-				-- QulightUISettingsPerChar.FogOfWar = true
-				-- for i = 1, #T.overlayTextures do
-					-- T.overlayTextures[i]:Show()
-				-- end
-			-- end
-		-- end
-		-- UIDropDownMenu_AddButton(info)
-	-- end
--- end)
+		info.func = function()
+			if ShestakUISettingsPerChar.FogOfWar == true then
+				ShestakUISettingsPerChar.FogOfWar = false
+				for i = 1, #T.overlayTextures do
+					T.overlayTextures[i]:Hide()
+				end
+			else
+				ShestakUISettingsPerChar.FogOfWar = true
+				for i = 1, #T.overlayTextures do
+					T.overlayTextures[i]:Show()
+				end
+			end
+		end
+		UIDropDownMenu_AddButton(info)
+	end
+end
