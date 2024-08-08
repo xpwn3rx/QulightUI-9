@@ -2,7 +2,7 @@
 ## Title: |cff1784d1QulightUI Config|r
 ## Notes: In-game configuration for QulightUI
 ## Author: Shestak - Modified by PWn3R
-## Version: 10.2.0
+## Version: 11.0
 ## RequiredDeps: QulightUI
 ## SavedVariables: QulightUIOptionsGlobal, QulightUIOptions
 ## SavedVariablesPerCharacter: QulightUIOptionsPerChar
