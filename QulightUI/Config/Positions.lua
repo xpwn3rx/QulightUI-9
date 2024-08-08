@@ -10,6 +10,7 @@ C["position"] = {
 	["minimap"] = {"TOPRIGHT", UIParent, "TOPRIGHT", -4, -4},									-- Minimap
 	["map"] = {"BOTTOM", UIParent, "BOTTOM", 0, 320},											-- Map
 	["chat"] = {"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 6, 25},									-- Chat
+	["chat_right"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -25, 23},							-- Chat on right side
 	["bag"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -6, 23},									-- Bag
 	["bank"] = {"LEFT", UIParent, "LEFT", 23, 150},												-- Bank
 	["bn_popup"] = {"BOTTOMLEFT", ChatFrame1, "TOPLEFT", -3, 27},								-- Battle.net popup

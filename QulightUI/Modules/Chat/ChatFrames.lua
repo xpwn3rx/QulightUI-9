@@ -144,7 +144,7 @@ local function SetChatStyle(frame)
 			local chanName = chanTarget and GetChannelName(chanTarget)
 			if chanName and chatType == "CHANNEL" then
 				if chanName == 0 then
-					colorize(unpack(C.media.border_color))
+					--colorize(unpack(C.media.border_color))
 				else
 					colorize(ChatTypeInfo[chatType..chanName].r, ChatTypeInfo[chatType..chanName].g, ChatTypeInfo[chatType..chanName].b)
 				end

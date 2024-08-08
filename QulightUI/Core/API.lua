@@ -84,13 +84,13 @@ local function CreateBorder(f, i, o)
 end
 
 local function GetTemplate(t)
-	if t == "ClassColor" then
-		borderr, borderg, borderb, bordera = unpack(C.media.classborder_color)
-		backdropr, backdropg, backdropb, backdropa = unpack(C.media.backdrop_color)
-	else
+	--if t == "ClassColor" then
+		--borderr, borderg, borderb, bordera = unpack(C.media.classborder_color)
+		--backdropr, backdropg, backdropb, backdropa = unpack(C.media.backdrop_color)
+	--else
 		borderr, borderg, borderb, bordera = unpack(C.media.border_color)
 		backdropr, backdropg, backdropb, backdropa = unpack(C.media.backdrop_color)
-	end
+	--end
 end
 
 local function SetTemplate(f, t)
@@ -113,7 +113,8 @@ local function SetTemplate(f, t)
 	end
 
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
-	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	--f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	f:SetBackdropBorderColor(0, 0, 0, 1)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
@@ -144,7 +145,8 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	end
 
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
-	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	--f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	f:SetBackdropBorderColor(0, 0, 0, 1)
 end
 
 local function CreateBackdrop(f, t)
@@ -288,7 +290,8 @@ T.SetModifiedBackdrop = function(self)
 	if self:IsEnabled() then
 		self:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		if self.overlay then
-			self.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+			--self.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+			self.overlay:SetVertexColor(0, 0, 0, 1)
 		end
 	end
 end
@@ -1095,7 +1098,8 @@ function T.SkinExpandOrCollapse(f)
 	f:HookScript("OnEnter", function(self)
 		self.bg:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		if self.bg.overlay then
-			self.bg.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+			--self.bg.overlay:SetVertexColor(C.media.classborder_color[1] * 0.3, C.media.classborder_color[2] * 0.3, C.media.classborder_color[3] * 0.3, 1)
+			self.bg.overlay:SetVertexColor(0, 0, 0, 1)
 		end
 	end)
 
